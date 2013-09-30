@@ -1,0 +1,11 @@
+; $Id: collapsiblock.info,v 1.2 2007/06/18 22:53:47 dww Exp $
+name =  Collapsiblock
+description = Makes blocks collapsible.
+package = Javascript tools
+dependencies = jstools
+
+; Information added by drupal.org packaging script on 2007-08-15
+version = "5.x-0.8"
+project = "jstools"
+datestamp = "1187136011"
+

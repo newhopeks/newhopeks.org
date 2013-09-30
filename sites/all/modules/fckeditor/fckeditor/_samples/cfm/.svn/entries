@@ -1,0 +1,52 @@
+8
+
+dir
+101
+http://svn.newhopeks.org/svn/newhopeks.org/branches/www.newhopeks.org/sites/all/modules/fckeditor/fckeditor/_samples/cfm
+http://svn.newhopeks.org/svn
+
+
+
+2007-04-28T20:09:23.414836Z
+82
+sterling
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+a0a4708c-a523-0410-9930-e46ec6e2aefa
+
+sample01.cfm
+file
+
+
+
+
+2008-02-18T04:36:20.000000Z
+95ccd1b6a5d2f417366e8eed9bb92f1f
+2007-04-28T20:09:23.414836Z
+82
+sterling
+
+sample02_mx.cfm
+file
+
+
+
+
+2008-02-18T04:36:20.000000Z
+6500f5bc904aa4146647c5090a2d1022
+2007-04-28T20:09:23.414836Z
+82
+sterling
+

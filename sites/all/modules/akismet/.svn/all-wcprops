@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/62/newhopeks.org/branches/www.newhopeks.org/sites/all/modules/akismet
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/62/newhopeks.org/branches/www.newhopeks.org/sites/all/modules/akismet/LICENSE.txt
+END
+akismet.gif
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/62/newhopeks.org/branches/www.newhopeks.org/sites/all/modules/akismet/akismet.gif
+END
+akismet.module
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/105/newhopeks.org/branches/www.newhopeks.org/sites/all/modules/akismet/akismet.module
+END
+akismet.install
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/62/newhopeks.org/branches/www.newhopeks.org/sites/all/modules/akismet/akismet.install
+END
+INSTALL.txt
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/62/newhopeks.org/branches/www.newhopeks.org/sites/all/modules/akismet/INSTALL.txt
+END
+CHANGELOG.txt
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/62/newhopeks.org/branches/www.newhopeks.org/sites/all/modules/akismet/CHANGELOG.txt
+END
+akismet_cron.inc
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/62/newhopeks.org/branches/www.newhopeks.org/sites/all/modules/akismet/akismet_cron.inc
+END
+akismet.info
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/105/newhopeks.org/branches/www.newhopeks.org/sites/all/modules/akismet/akismet.info
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/62/newhopeks.org/branches/www.newhopeks.org/sites/all/modules/akismet/README.txt
+END
+akismet_admin.inc
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/105/newhopeks.org/branches/www.newhopeks.org/sites/all/modules/akismet/akismet_admin.inc
+END

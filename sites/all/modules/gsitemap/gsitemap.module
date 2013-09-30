@@ -1,0 +1,613 @@
+<?php
+// $Id: gsitemap.module,v 1.56.2.8 2007/03/18 22:06:20 darrenoh Exp $
+
+/**
+ * @file
+ * Creates a sitemap compatible with the Google Sitemap schema.
+ */
+
+/**
+ * Implementation of hook_help().
+ */
+function gsitemap_help($section) {
+  switch ($section) {
+    case 'admin/settings/gsitemap':
+      return t('The following options allow you to alter the behavior of the Google Sitemap module. Your sitemap can be found at <a href="@url">@url</a>.', array('@url' => url('gsitemap', NULL, NULL, TRUE)));
+  }
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function gsitemap_perm() {
+  return array('override node priority');
+}
+
+
+/**
+ * Implementation of hook_menu().
+ */
+function gsitemap_menu($may_cache) {
+  $items = array();
+
+  if ($may_cache) {
+    $items[] = array(
+      'path' => 'admin/settings/gsitemap',
+      'title' => t('Google Sitemap'),
+      'description' => t('Adjust the settings used to generate your Google Sitemap.'),
+      'callback' => 'drupal_get_form',
+      'callback arguments' => array('gsitemap_admin_settings'),
+      'access' => user_access('administer site configuration'),
+    );
+
+    $items[] = array(
+      'path' => 'gsitemap',
+      'title' => t('gsitemap'),
+      'callback' => 'gsitemap_output',
+      'type' => MENU_CALLBACK,
+      'access' => user_access('access content'),
+    );
+
+    if ($verify = variable_get('gsitemap_verify', '')) {
+      $items[] = array(
+        'path' => $verify,
+        'title' => t('gsitemap verification page'),
+        'callback' => 'gsitemap_verify',
+        'type' => MENU_CALLBACK,
+        'access' => user_access('access content'),
+      );
+    }
+  }
+
+  return $items;
+}
+
+function gsitemap_form_alter($form_id, &$form) {
+  if (user_access('override node priority') && isset($form['type']) && $form['type']['#value'] .'_node_form' == $form_id) {
+    $node = $form['#node'];
+    $form['gsitemap_settings'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('gsitemap Settings'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+    );
+    $form['gsitemap_settings']['priority_override'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Priority override'),
+      '#default_value' => $node->priority_override,
+      '#size' => 10,
+      '#maxlength' => 5,
+      '#description' => t('Optionally specify a value for the priority in the Google Sitemap, or -1 to prevent it from appearing in the sitemap.'),
+    );
+  }
+}
+
+/**
+ * Implmentation of hook_nodeapi().
+ */
+function gsitemap_nodeapi(&$node, $op, $teaser = NULL, $page = NULL) {
+  switch($op) {
+    case 'fields':
+      return array('priority_override');
+
+    case 'insert':
+      if (!(strlen($node->priority_override) > 0 && is_numeric($node->priority_override) && user_access('override node priority'))) {
+        $node->priority_override = 0.0;
+      }
+      db_query("INSERT INTO {gsitemap} (nid, last_changed, priority_override) VALUES (%d, %d, %f)", $node->nid, $node->changed, $node->priority_override);
+      if (variable_get('gsitemap_submit', 0) && $node->status) {
+        _gsitemap_submit_on_exit();
+      }
+      break;
+    case 'load':
+      if ($node->nid && user_access('override node priority')) {
+        $result = db_query("SELECT priority_override FROM {gsitemap} WHERE nid = %d", $node->nid);
+        if ($nd = db_result($result)) {
+          $node->priority_override = $nd;
+        }
+      }
+      break;
+    case 'update':
+      if (!(strlen($node->priority_override) > 0 && is_numeric($node->priority_override))) {
+        $node->priority_override = 0.0;
+      }
+      $result = db_query("SELECT * FROM {gsitemap} LEFT JOIN {node} USING (nid) WHERE {gsitemap}.nid = %d", $node->nid);
+      if (!($oldnode = db_fetch_object($result))) {
+        db_query("INSERT INTO {gsitemap} (nid, last_changed, priority_override) VALUES (%d, %d, %f)", $node->nid, $node->changed, $node->priority_override);
+      }
+      else {
+        if (!isset($oldnode->last_changed)) {
+          $node->last_changed = NULL;
+        }
+        if (user_access('override node priority')) {
+          db_query("UPDATE {gsitemap} SET last_changed = %d, previously_changed = %d, priority_override = %f WHERE nid = %d", $node->changed, $oldnode->last_changed, $node->priority_override, $node->nid);
+        }
+        else {
+          db_query("UPDATE {gsitemap} SET last_changed = %d, previously_changed = %d WHERE nid = %d", $node->changed, $oldnode->last_changed, $node->nid);
+        }
+      }
+      if (variable_get('gsitemap_submit', 0) && ($node->status || $oldnode->status)) {
+        _gsitemap_submit_on_exit();
+      }
+      break;
+    case 'delete':
+      db_query("DELETE FROM {gsitemap} WHERE nid = %d", $node->nid);
+      if (variable_get('gsitemap_submit', 0) && $node->status) {
+        _gsitemap_submit_on_exit();
+      }
+      break;
+    case 'validate':
+      if (strlen($node->priority_override) > 0) {
+        if (!is_numeric($node->priority_override) || (($node->priority_override > 1) || ($node->priority_override < 0 && $node->priority_override != -1))) {
+          form_set_error('priority_override', t('Priority must be a number between 0.0 and 1.0, inclusive, or -1 to prevent this node from appearing in the sitemap.'));
+        }
+      }
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_comment().
+ */
+function gsitemap_comment($op, $comment) {
+  if (is_array($comment)) {
+    if ($op == 'insert' || $op == 'update' || $op == 'moderate' || $op == 'delete') {
+      $result = db_query("SELECT * FROM {gsitemap} WHERE nid = %d", $comment[nid]);
+      if (!($node = db_fetch_object($result))) {
+        $node = db_fetch_object(db_query("SELECT nid, changed FROM {node} WHERE nid = %d", $comment[nid]));
+        db_query("INSERT INTO {gsitemap} (nid, last_changed, last_comment) VALUES (%d, %d, %d)", $node->nid, $node->changed, $comment[timestamp]);
+      }
+      else {
+        if (!isset($node->last_comment)) {
+          $node->last_comment = NULL;
+        }
+        db_query("UPDATE {gsitemap} SET last_comment = %d, previous_comment = %d WHERE nid = %d", $comment[timestamp], $node->last_comment, $node->nid);
+      }
+      if (variable_get('gsitemap_submit', 0)) {
+        _gsitemap_submit_on_exit();
+      }
+    }
+  }
+  elseif (is_object($comment)) {
+    if ($op == 'insert' || $op == 'update' || $op == 'moderate' || $op == 'delete') {
+      $result = db_query("SELECT * FROM {gsitemap} WHERE nid = %d", $comment->nid);
+      if (!($node = db_fetch_object($result))) {
+        $node = db_fetch_object(db_query("SELECT nid, changed FROM {node} WHERE nid = %d", $comment->nid));
+        db_query("INSERT INTO {gsitemap} (nid, last_changed, last_comment) VALUES (%d, %d, %d)", $node->nid, $node->changed, $comment->timestamp);
+      }
+      else {
+        if (!isset($node->last_comment)) {
+          $node->last_comment = NULL;
+        }
+        db_query("UPDATE {gsitemap} SET last_comment = %d, previous_comment = %d WHERE nid = %d", $comment->timestamp, $node->last_comment, $node->nid);
+      }
+      if (variable_get('gsitemap_submit', 0)) {
+        _gsitemap_submit_on_exit();
+      }
+    }
+  }
+}
+
+/**
+ * Settings form
+ */
+function gsitemap_admin_settings() {
+  $form['priority_settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Priority Settings'),
+    '#collapsible' => TRUE,
+  );
+  $form['priority_settings']['gsitemap_chunk_size'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Chunk size'),
+    '#default_value' => variable_get('gsitemap_chunk_size', 10000),
+    '#size' => 10,
+    '#maxlength' => 5,
+    '#description' => t('This is the number of links to send at one time.  Values can range between 1 and 50,000.'),
+  );
+  $form['priority_settings']['gsitemap_frontpage'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Front page priority'),
+    '#default_value' => variable_get('gsitemap_frontpage', '1.0'),
+    '#size' => 10,
+    '#maxlength' => 5,
+    '#description' => t('This is the absolute priority for the front page.  Values can range between 0.0 and 1.0.'),
+  );
+  $form['priority_settings']['gsitemap_promotewt'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Promotion adjustment'),
+    '#default_value' => variable_get('gsitemap_promotewt', '0.3'),
+    '#size' => 10,
+    '#maxlength' => 5,
+    '#description' => t('This number will be added to the priority of each node that is promoted to the front page.'),
+  );
+  $form['priority_settings']['gsitemap_commentwt'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Comment ratio weight'),
+    '#default_value' => variable_get('gsitemap_commentwt', '0.5'),
+    '#size' => 10,
+    '#maxlength' => 5,
+    '#description' => t('This number will be multiplied with the ratio of the number of comments on the node over the number of comments on the node with the most comments, i.e., this number will be added to the priority of the node with the most comments.'),
+  );
+
+  // markup
+  $form['priority_settings']['note'] = array(
+    '#type' => 'markup',
+    '#value' => t('You can enter -1 in any of the following fields to prevent nodes of that type from appearing in the sitemap.'),
+  );
+
+  foreach (node_get_types('names') as $type => $name) {
+    $form['priority_settings']['gsitemap_'. $type .'wt'] =  array(
+      '#type' => 'textfield',
+      '#title' => t('%name adjustment', array('%name' => ucfirst($name))),
+      '#default_value' => variable_get('gsitemap_'. $type .'wt', '0.1'),
+      '#size' => 10,
+      '#maxlength' => 5,
+      '#description' => t('This number will be added to the priority of nodes of type %name.', array('%name' => $name)),
+    );
+  }
+
+  $form['other_settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Other Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['other_settings']['gsitemap_verify'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Verification link'),
+    '#return value' => '',
+    '#default_value' => variable_get('gsitemap_verify', ''),
+    '#description' => t('In order to view stats, Google will ask you to verify that you control this site by creating a page with a certain name.  Enter that name here and the gsitemap module will hook that filename.  Note that this will only work if you have clean URLs enabled.'),
+  );
+  $form['other_settings']['gsitemap_countcom'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Count comments in change date and frequency'),
+    '#return_value' => 1,
+    '#default_value' => variable_get('gsitemap_countcom', 1),
+    '#description' => t('If enabled, the frequency of comments on a node will affect its change frequency and last modification date.'),
+  );
+  $form['other_settings']['gsitemap_showterms'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Include links to taxonomy term pages'),
+    '#return_value' => 1,
+    '#default_value' => variable_get('gsitemap_showterms', 0),
+    '#description' => t('If enabled, links to taxonomy term pages will be included in the sitemap.'),
+  );
+  $form['other_settings']['gsitemap_showusers'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Include links to user profile pages'),
+    '#return_value' => 1,
+    '#default_value' => variable_get('gsitemap_showusers', 0),
+    '#description' => t('If enabled, links to user profile pages will be included in the sitemap (requires requestor to have "access user profiles" permission).'),
+  );
+  $form['other_settings']['gsitemap_submit'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Submit sitemap to Google when updated'),
+    '#return_value' => 1,
+    '#default_value' => variable_get('gsitemap_submit', 0),
+    '#description' => t('If enabled, the sitemap will be submitted to Google via HTTP request each time it is updated.  If you have submitted your sitemap using a Google Account, this is probably unnecessary.'),
+  );
+  $form['other_settings']['gsitemap_cron_submit'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Submit sitemap to Google on cron run'),
+    '#return_value' => 1,
+    '#default_value' => variable_get('gsitemap_cron_submit', 0),
+    '#description' => t('If enabled, the sitemap will be submitted to Google via HTTP request each time the cron job is run.  If you have submitted your sitemap using a Google Account, this is probably unnecessary.'),
+  );
+  $form['other_settings']['gsitemap_logacc'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Log accesses'),
+    '#return_value' => 1,
+    '#default_value' => variable_get('gsitemap_logacc', 0),
+    '#description' => t('If enabled, an watchdog entry will be made each time the sitemap is accessed, containing information about the requestor.'),
+  );
+
+  menu_rebuild(); // Needed for verification link
+
+  return system_settings_form($form);
+}
+
+function gsitemap_admin_settings_validate($form_id, $form_values) {
+  if ($form_values['gsitemap_chunk_size'] > 50000) {
+    form_set_error('priority_settings][gsitemap_chunk_size', t('Cannot send more than 50,000 links at one time.'));
+  }
+}
+
+function gsitemap_cron() {
+  if (variable_get('gsitemap_cron_submit', 0)) {
+    _gsitemap_submit();
+  }
+}
+
+function gsitemap_output($chunk = NULL) {
+  if (!isset($chunk)) {
+    gsitemap_output_index();
+    $type = 'Sitemap index';
+  }
+  else {
+    gsitemap_output_chunk($chunk);
+    $type = "Sitemap chunk $chunk";
+  }
+
+  if(variable_get('gsitemap_logacc',0)) {
+    if(strpos(getenv('HTTP_USER_AGENT'),'Googlebot')) {
+      watchdog('gsitemap', $type .' downloaded by Google.');
+    }
+    else {
+      watchdog('gsitemap', $type .' downloaded by '. getenv('HTTP_USER_AGENT') .' at '. getenv('REMOTE_ADDR') .'.');
+    }
+  }
+}
+
+function gsitemap_get_chunk_range($chunk) {
+  $range->low = $chunk * variable_get('gsitemap_chunk_size', 10000);
+  $range->high = ($chunk + 1) * variable_get('gsitemap_chunk_size', 10000);
+  return $range;
+}
+
+function gsitemap_output_index() {
+  global $base_url;
+  $countcom = variable_get('gsitemap_countcom', 1);
+
+  header('Content-type: text/xml');
+  print '<?xml version="1.0" encoding="UTF-8"?>';
+  print '<?xml-stylesheet type="text/xsl" href="'. $base_url .'/'. drupal_get_path('module', 'gsitemap') .'/gss.xsl"?>';
+
+  $max_nid = db_result(db_query("SELECT MAX(nid) as max FROM {node}"));
+
+  print '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd">';
+  for ($i = 0; $i < $max_nid / variable_get('gsitemap_chunk_size', 10000); $i++) {
+    print '<sitemap>';
+    print '<loc>'. url('gsitemap/'. $i, NULL, NULL, TRUE) .'</loc>';
+
+    $range = gsitemap_get_chunk_range($i);
+    $last_changed_node = db_result(db_query("SELECT MAX(changed) as changed from {node} WHERE nid >= %d AND nid < %d", $range->low, $range->high));
+
+    if ($countcom) {
+      $last_changed_comment = db_result(db_query("SELECT MAX(timestamp) as timestamp from {comments} WHERE nid >= %d AND nid < %d", $range->low, $range->high));
+    }
+    else {
+      $last_changed_comment = 0;
+    }
+
+    print '<lastmod>'. gmdate('Y-m-d\TH:i:s+00:00', max($last_changed_node, $last_changed_comment)) .'</lastmod>';
+    print '</sitemap>';
+  }
+  print '</sitemapindex>';
+}
+
+function gsitemap_output_chunk($chunk) {
+  global $base_url;
+  if (!ini_get('safe_mode')) {
+    set_time_limit(240);
+  }
+  $range = gsitemap_get_chunk_range($chunk);
+  $countcom = variable_get('gsitemap_countcom', 1);
+  $excluded_types = array();
+  foreach (node_get_types() as $type => $name) {
+    if (variable_get('gsitemap_'. $type .'wt', 0) < 0) {
+      $excluded_types[] = $type;
+    }
+  }
+  $excludes = implode(',', $excluded_types);
+  drupal_set_header('Content-type: text/xml; charset=utf-8');
+  print '<?xml version="1.0" encoding="UTF-8"?>';
+  print '<?xml-stylesheet type="text/xsl" href="'. $base_url .'/'. drupal_get_path('module', 'gsitemap') .'/gss.xsl"?>';
+  print '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">';
+  print '<url><loc>'. $base_url .'</loc><changefreq>always</changefreq><priority>'. variable_get('gsitemap_frontpage', '1.0') .'</priority></url>';
+  $count = array();
+  $count[0] = db_result(db_query("SELECT COUNT(*) AS count FROM {node} WHERE nid >= %d AND nid < %d", $range->low, $range->high));
+  $count[1] = db_result(db_query("SELECT COUNT(*) AS count FROM {gsitemap} WHERE nid >= %d AND nid < %d", $range->low, $range->high));
+  if (module_exists('comment')) {
+    if ($count[0]->count != $count[1]->count) {
+      $result = db_query("SELECT {node}.nid, changed FROM {node} LEFT JOIN {gsitemap} USING (nid) WHERE {gsitemap}.nid IS NULL AND {node}.nid >= %d AND {node}.nid < %d", $range->low, $range->high);
+      while($node = db_fetch_object($result)) {
+        db_query("INSERT INTO {gsitemap} (nid, last_changed) VALUES (%d, %d)", $node->nid, $node->changed);
+      }
+      $result = db_query("SELECT * FROM {node_comment_statistics}");
+      while($node = db_fetch_object($result)) {
+        db_query("UPDATE {gsitemap} SET last_comment = %d WHERE nid = %d", $node->last_comment_timestamp, $node->nid);
+      }
+    }
+    $maxcomments = db_result(db_query("SELECT MAX(comment_count) AS max_comments FROM {node_comment_statistics}"));
+    $result = db_query(db_rewrite_sql("
+      SELECT n.nid, n.type, n.status, n.promote, s.comment_count, n.changed, g.previously_changed, s.last_comment_timestamp, g.previous_comment, g.priority_override
+      FROM {node} n
+      LEFT JOIN {node_comment_statistics} s
+      ON n.nid = s.nid
+      LEFT JOIN {gsitemap} g
+      ON n.nid = g.nid
+      LEFT JOIN {url_alias} u
+      ON src = CONCAT('node/', n.nid)
+      WHERE n.status > 0
+      AND (g.priority_override >= 0 OR g.priority_override IS NULL)
+      AND n.type NOT IN ('%s')
+      AND n.nid >= %d
+      AND n.nid < %d
+    "), $excludes, $range->low, $range->high);
+  }
+  else {
+    if ($count[0]->count != $count[1]->count) {
+      $result = db_query("SELECT {node}.nid, changed FROM {node} LEFT JOIN {gsitemap} USING (nid) WHERE {gsitemap}.nid IS NULL");
+      while($node = db_fetch_object($result)) {
+        db_query("INSERT INTO {gsitemap} (nid, last_changed) VALUES (%d, %d)", $node->nid, $node->changed);
+      }
+    }
+    $result = db_query(db_rewrite_sql("SELECT n.nid, n.type, n.status, n.promote, n.changed, g.previously_changed, g.priority_override FROM {node} n LEFT JOIN {gsitemap} g ON n.nid = g.nid LEFT JOIN {url_alias} u ON src = CONCAT('node/',n.nid) WHERE n.status > 0 AND (g.priority_override >= 0 OR g.priority_override IS NULL) AND n.type NOT IN ('%s') AND n.nid >= %d AND n.nid < %d"), $excludes, $range->low, $range->high);
+    $maxcomments = 0;
+  }
+  while($node = db_fetch_object($result)) {
+    $pri = _gsitemap_calc_priority($node, $maxcomments);
+    if ($pri < 0) {
+      continue;
+    }
+    print '<url>';
+    if (isset($node->dst)) {
+      print '<loc>'. url($node->dst, NULL, NULL, TRUE) .'</loc>';
+    }
+    else {
+      print '<loc>'. url('node/'. $node->nid, NULL, NULL, TRUE) .'</loc>';
+    }
+
+    print '<lastmod>'. gmdate('Y-m-d\TH:i:s+00:00', max($node->changed, $node->last_comment_timestamp * $countcom)) .'</lastmod>';
+
+    print "<priority>$pri</priority>";
+    $age = time() - max($node->changed, $node->last_comment_timestamp * $countcom);
+    if ($countcom) {
+      if (isset($node->previously_changed) && isset($node->previous_comment)) {
+        $interval = min($node->changed, $node->last_comment_timestamp) - max($node->previously_changed, $node->previous_comment);
+      }
+      elseif (isset($node->previously_changed)) {
+        $interval = min($node->changed, $node->last_comment_timestamp) - $node->previously_changed;
+      }
+      elseif (isset($node->previous_comment)) {
+        $interval = min($node->changed, $node->last_comment_timestamp) - $node->previous_comment;
+      }
+      else {
+        $interval = 0;
+      }
+    }
+    else {
+      if (isset($node->previously_changed)) {
+        $interval = $node->changed - $node->previously_changed;
+      }
+      else {
+        $interval = 0;
+      }
+    }
+    if (max($age, $interval) < 3600) {
+      print '<changefreq>always</changefreq>';
+    }
+    elseif (max($age, $interval) < 86400) {
+      print '<changefreq>hourly</changefreq>';
+    }
+    elseif (max($age, $interval) < 604800) {
+      print '<changefreq>daily</changefreq>';
+    }
+    elseif (max($age, $interval) < 2419200) {
+      print '<changefreq>weekly</changefreq>';
+    }
+    elseif (max($age, $interval) < 29030400) {
+      print '<changefreq>monthly</changefreq>';
+    }
+    elseif (max($age, $interval) < 100000000) {
+      print '<changefreq>yearly</changefreq>';
+    }
+    else {
+      print '<changefreq>never</changefreq>';
+    }
+    print '</url>';
+  }
+  if (variable_get('gsitemap_showterms', 0)) {
+    foreach (taxonomy_get_vocabularies() as $vocab) {
+      foreach (taxonomy_get_tree($vocab->vid) as $term) {
+        print '<url><loc>'. url(taxonomy_term_path($term), NULL, NULL, TRUE) .'</loc><changefreq>always</changefreq></url>';
+      }
+    }
+  }
+  if(variable_get('gsitemap_showusers', 0)) {
+    foreach(user_search() as $user) {
+      /* The user module passes the link through url(), which returns a URL
+       * relative to the server.  We need an absolute URL, so we employ this
+       * wonderful hack to get it.
+       */
+      print '<url><loc>'. url(strstr($user[link], 'user/'), NULL, NULL, TRUE) .'</loc><changefreq>always</changefreq></url>';
+    }
+  }
+  $additional = module_invoke_all('gsitemap');
+  foreach ($additional as $entry) {
+    print '<url>';
+    if ($entry['#loc']) {
+      print '<loc>'. $entry['#loc'] .'</loc>';
+    }
+    if ($entry['#lastmod']) {
+      print '<lastmod>'. $entry['#lastmod'] .'</lastmod>';
+    }
+    if ($entry['#changefreq']) {
+      print '<changefreq>'. $entry['#changefreq'] .'</changefreq>';
+    }
+    if ($entry['#priority']) {
+      print '<priority>'. $entry['#priority'] .'</priority>';
+    }
+    print '</url>';
+  }
+  print '</urlset>';
+  if (variable_get('gsitemap_logacc', 0)) {
+    if (strpos($_SERVER['HTTP_USER_AGENT'], 'Googlebot')) {
+      watchdog('gsitemap', t('Sitemap downloaded by Google.'));
+    }
+    else {
+      watchdog('gsitemap', t('Sitemap downloaded by @user-agent at @address.', array('@user-agent' => $_SERVER['HTTP_USER_AGENT'], '@address' => $_SERVER['REMOTE_ADDR'])));
+    }
+  }
+}
+
+function gsitemap_verify() {
+  print 'Hello, Google!';
+}
+
+function _gsitemap_calc_priority($node, $maxcomments) {
+  if (!isset($node->priority_override)) {
+    $pri = 0.0; // Default priority
+    $pri += variable_get('gsitemap_'. $node->type .'wt', 0.1);
+    if ($node->promote) {
+      $pri += variable_get('gsitemap_promotewt', 0.3);
+    }
+    if ($maxcomments != 0) {
+      $pri += $node->comment_count / $maxcomments * variable_get('gsitemap_commentwt', 0.5);
+    }
+
+    /*
+     * According to the Google Sitemap schema, we can only have one decimal of
+     * precision.
+     */
+    $pri = round($pri, 1);
+    /*
+     * We want to make sure that the front page has the highest priority, so we
+     * cap priority at 0.9.
+     */
+    $pri = min($pri, 0.9);
+  }
+  else {
+    $pri = $node->priority_override >= 0 ? $node->priority_override : -1;
+  }
+  return $pri;
+}
+
+/**
+ * Schedule a call to _gsitemap_submit() to be run on exit. Use this function
+ * instead of _gsitemap_submit() to avoid a delay for outputting the page to
+ * the user.
+ *
+ * @return If the function has not been called previously, FALSE. Otherwise,
+ * TRUE.
+ */
+function _gsitemap_submit_on_exit() {
+  static $called = FALSE;
+
+  $return = $called;
+  $called = TRUE;
+  return $return;
+}
+
+/**
+ * Implementation of hook_exit() which is used to call _gsitemap_submit() if
+ * _gsitemap_submit_on_exit() was called.
+ */
+function gsitemap_exit() {
+  if (_gsitemap_submit_on_exit()) {
+    _gsitemap_submit();
+  }
+}
+
+function _gsitemap_submit() {
+  $result = drupal_http_request('http://www.google.com/webmasters/tools/ping?sitemap='. url('gsitemap', NULL, NULL, TRUE));
+  if ($result->code == 200) {
+    watchdog('gsitemap', t('Sitemap successfully submitted to Google.'));
+  }
+  else {
+    watchdog('gsitemap', t('Error occurred submitting sitemap to Google: @code', array('@code' => $result->code)), WATCHDOG_ERROR);
+  }
+}
+

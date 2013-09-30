@@ -1,0 +1,419 @@
+/* 	Initial Site Styling - Jay Risner ... jay at icglink.net 
+	Drupal additions - Eric Benson, Andrew Hanenkamp */
+	
+html,body	{margin:0;padding:10px 0 0 0;background-color:#633209;}
+body	{font: 85%/1.5em "Trebuchet MS", "Lucida Grande", Verdana, Helvetica, sans-serif;color:#444;text-align:center;background-color:#633209;}
+a:link	{color:#425C05;}
+a:visited	{color:#633209;}
+a:hover	{color:#5C2A00;}
+a:active	{color:#5C3E24;}
+
+div#holder	{width:100%;}
+div#container	{text-align:left;width:773px;margin:0 auto;background: #633209 url('bg.jpg') repeat-y;}
+div#header	{height:116px;width:568px;margin:0;padding:20px 0px 0px 205px;background: #633209 url('bnr.jpg') no-repeat;}
+
+div#admin {width:10%;float:left;font-size:0.85em;color:white;line-height: 1.2em;}
+div#admin a {color:white;}
+
+div#ministries {background-color:#633209;}
+div#ministries ul#topnav	{}
+div#ministries ul#topnav li	{display:inline;}
+div#ministries ul#topnav li a	{background-color:#633209;padding:0.2em 1em;float:left;border-right:1px solid #fff;}
+
+div#leftstuff {float:right;width:568px;}
+
+div#gizmobar {height:20px;margin:0 0 0 0;padding:3px 0 3px 0;background:transparent url('loginbar.jpg') no-repeat;color: #204058;padding:5px 10px 5px 20px;text-align:right;font-size:0.9em;}
+div#gizmobar input {font-size:0.9em;}
+
+/* Make the gizmo-bar login look good */
+
+div#gizmobar div, div#gizmobar label, div#gizmobar input, div#gizmobar form {
+    display: inline;
+    margin: 0;
+    font-weight: normal;
+}
+
+div#gizmobar li, div #gizmobar ul {
+    list-style: none;
+    display: inline;
+    margin: 0;
+    text-align: right;
+}
+
+div#gizmobar li a {
+    padding: 0 3px;
+}
+
+div#gizmobar input.form-text {
+    font-size: 0.9em;
+    width: 6em;
+}
+
+div#main	{width:525px;margin:0 0 0 23px;padding:5px 20px 30px 0;line-height:1.5;}
+div#main h1	{color:#4D6126;font-size:140%;background: transparent url('h1.jpg') no-repeat;padding:5px 0 0 15px;}
+div#main h1	a {color:#4D6126;text-decoration:none;}
+div#main h2	{color:#633209;font-size:130%;padding:10px 0 0 0;border-bottom:1px solid #869B57;}
+div#main h2	a {color:#633209;text-decoration:none;}
+div#main h3	{color:#666;font-size:130%;padding:10px 0 0 0;border-bottom:1px solid #B9C795;}
+div#main h3	a {color:#666;text-decoration:none;}
+
+div#footer	{clear:both;color:#555;font-size:8.5pt;line-height:1.3em;height:50px;margin:0px;padding:0 0 0 228px;background: #633209 url('ftr.jpg') no-repeat; }
+
+div#nav	{float:left;width:193px;margin:0 0 0 3px;padding:20px 0 0 1px;background:transparent url('navbg.jpg') no-repeat 0 -5px; overflow:hidden;}
+html > body div#nav	{margin-left:7px;padding:20px 0 0 0;background-position:-1px -5px;}
+#nav ul	{ margin:0;padding:0; text-align:left; list-style-type:none;}
+#nav li	{margin:0;padding:0 0 5px 0;}
+#nav a:link, #nav a:visited	{width:183px;display:block;font-size:13px;line-height:1.3em;font-weight:bold;color:#fff;text-decoration:none;padding:5px 0 4px 10px;border-top:1px solid #EBFFB8;border-bottom:1px solid #EBFFB8;background:#869B58 url('linkbg.jpg') repeat-x;}
+#nav a:hover	{color:#EBFFB8;background-position:0 -70px;}
+#nav a:active	{color:#CEDCAB;background-position:0 -140px;}
+div#main #nav h2 {font: bold 85%/1.5em "Trebuchet MS", "Lucida Grande", Verdana, Helvetica, sans-serif;}
+
+div#extra	{float:right;width:500px}
+p#src a:link, p#src a:visited, p#src a:hover, p#src a:active	{text-decoration:none;color:#aaa;font-size:10px;}
+
+div#infoarea {padding:10px 0 0 0;clear:both;}
+div.infopanel {float:left;width:31%;padding:0 1% 0 1%;}
+div.infofooter {clear:both;}
+
+div.block dt {font-weight:bold;}
+div.block dd {font-size:0.85em;margin-left:1em;}
+
+p#totop	{padding:10px 0 0 0;margin-top:10px;border-top:1px solid #B9C795;}
+p#totop a:link, p#totop a:visited	{text-decoration:none;color:#425C05;font-size:11px;font-weight:bold;border-left:3px solid #ccc;padding-left:10px;}
+p#totop a:hover, p#totop a:active	{text-decoration:none;color:#333333;font-size:11px;font-weight:bold;border-left:3px solid #ccc;padding-left:10px;}
+
+/* Fancy JS banner starting state */
+
+#slider.slider-down {
+	display: none;
+}
+
+#slider.slider-up {
+	display: block;
+}
+
+/*	Drupal Specific Additions	*/
+
+#nav .block h2	{
+  display: none;
+  color: #204058;
+  line-height: 19px;
+  font-size: 1.1em;
+  margin: 0px 0px 3px;
+  padding: 0px 5px;
+}
+
+#nav form#search-block-form {
+	margin-bottom: 0.5em;
+}
+
+#nav input#edit-search-block-form-keys {
+  margin-left: 2px;
+  width: 9em;
+}
+
+#nav input.form-text, #gizmobar input.form-text {
+	border: 1px solid #204058;
+	background-color: #ffedc9;
+}
+
+#nav input.form-submit, #gizmobar input.form-submit {
+	border: 1px solid #204058;
+	background-color: #204058;
+	color: white;
+}
+
+/* Fix a few internal page elements of Drupal */
+
+#mission {
+	background-color: #ffedc9;
+	padding: 0 1em;
+	border: 1px dotted #633209;
+	font-style: italic;
+	line-height: 1em;
+	font-size: 1.2em;
+	margin-left: 1em;
+	margin-right: 1em;
+}
+
+#content .block div.view-field {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#content .block div.view-item {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#content .block li {
+	list-style: none;	
+	margin: 0;
+}
+
+#content .block ul {
+	padding-left: 0;
+}
+
+#content .block div.item-list {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#content .block div.view-content {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#content .block div.view {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#content .block div.content {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+/* Fix admin sidebar blocks */
+
+#admin .block h2.title {
+	text-align: left;
+}
+
+#admin .block div.content {
+	text-align: left;
+}
+
+#admin #og-search-form {
+	display: none;
+}
+
+/* Fix the OG stuff in the left sidebar */
+
+#nav div.block-og {
+	margin-top: 1em;
+}
+
+#nav div.block-og h2.title {
+	display: block;
+}
+
+#nav div.block-og div.picture {
+	display: none;
+}
+
+#nav div#block-og-5 a {
+	display: inline;
+	background: inherit;
+	border: none;
+	padding: 0;
+	margin: 0;
+	color: #204058;
+	text-decoration: underline;
+	font-size: 1em;
+}
+
+#nav div#block-og-5 div.content {
+	margin: 0 0.5em;
+	font-size: 0.9em;
+	line-height: 1em;
+}
+
+/* Fix the node view */
+
+div.node div.picture {
+	float: right;
+}
+
+div.node span.submitted {
+	margin-left: 1em;
+	font-size: 0.85em;
+}
+
+/* Pretty dates! */
+
+div.field-field-start-date div.field-label {
+	display: none;
+}
+
+div.field-field-event-date div.field-label {
+	display: none;
+}
+
+div.date-display-pretty {
+	background-color: #204058;
+	color: white;
+	float: left;
+	cursor: default;
+	margin: 0.5em;
+	font-size: 1.2em;
+}
+
+div.date-display-pretty div.pretty-date {
+	background-color: #ffedc9;
+	color: #633209;
+	border: 2px solid #633209;
+	float: left;
+	line-height: 0.95;
+	margin: 0.5em;
+	padding: 0.2em 0.8em;
+	text-align: center; 
+	width: 2em;
+}
+
+div.date-display-pretty div.start, div.date-display-pretty div.end {
+	float: left;
+	margin: 0.5em;
+}
+
+div.pretty-date span.month {
+	display: block;
+}
+
+div.pretty-date span.month span.abbr {
+	display: none;
+}
+
+div.pretty-date span.day {
+	display: block;
+	text-align: center;
+	font-size: 2em;
+}
+
+div.pretty-date span.year {
+	display: block;
+	text-align: center;
+}
+
+div.date-display-pretty div.tween {
+	float: left;
+	font-size: 1.3em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	padding-top: 1em;
+	padding-bottom: 1em;
+}
+
+div.pretty-time {
+	float: left;
+	font-size: 1.7em;
+	padding: 1em 0.5em;
+}
+
+div.pretty-date span:hover {
+    color: #4D6126;
+}
+
+div.pretty-time span:hover {
+	color: #ebffb8;
+}
+
+/* Make the audio fields pretty */
+
+div.field-field-audio {
+	background: #204058;
+	color: white;
+	font-size: 1.2em;
+	float: left;
+	margin: 0.5em;
+	margin-right: 3em;
+	padding: 1em;
+	text-align: center;
+	vertical-align: middle;
+}
+
+div.field-field-audio p {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+div.field-field-audio a {
+	color: white;
+}
+
+div.field-field-audio div.field-label {
+	display: none;
+}
+
+div.field-field-audio div.field-items {
+	width: 320px;
+	height: 3.5em;
+	vertical-align: middle;
+	float: left;
+	clear: right;
+}
+
+div.field-field-audio p.audio-download {
+	font-size: 0.9em;
+}
+
+/* Pretty movies */
+
+div.field-movie-url {
+	background: #204058;
+	color: white;
+	padding: 20px;
+	text-align: center;
+	vertical-align: middle;
+	width: 320px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div.field-movie-url p {
+	margin: 0;
+	padding: 0;
+}
+
+div.field-download-url {
+	border: 3px solid #204058;
+	padding: 0.1em;
+	font-size: 1.2em;
+	width: 350px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div.field-download-url p.download-movie {
+	text-align: center;
+}
+
+div.field-download-url p.download-movie a {
+	color: #204058;
+}
+
+/* Pretty drop shadows */
+
+div.shadowwrap, div.shadowwrap > div, div.shadowwrap > div > div {
+	display: inline-table;
+	/* \*/display:block;/**/
+}
+
+div.shadowwrap {
+	float: left;
+	background: url(shadow.gif) right bottom no-repeat;
+}
+
+div.shadowwrap > div {
+	background: url(shadow_corner_bl.gif) -4px 100% no-repeat;
+}
+
+div.shadowwrap > div > div {
+	padding: 0 16px 16px 0;
+	background: url(shadow_corner_tr.gif) 100% -4px no-repeat;
+}
+
+/* Make the administration dashboard look good */
+
+div.dashboard-panel-head {background-color:transparent;color:#633209;font-size:130%;padding:10px 0 0 0;border-bottom:1px solid #869B57;}
+div.dashboard-panel-head span.controls {color:#444;font-size:0.5em;margin-right:0;}
+div.dashboard-panel-head span.controls a {color:#444;}
+div.dashboard-panel-body {background-color:transparent;}
+div.dashboard-panel-body a:link	{color:#425C05;}
+div.dashboard-panel-body a:visited	{color:#633209;}
+div.dashboard-panel-body a:hover	{color:#5C2A00;}
+div.dashboard-panel-body a:active	{color:#5C3E24;}
+div.dashboard-panel-desc {color:#444;border-bottom:1px solid #869B57;}
+div.tabs {font-size:0.75em;}
+

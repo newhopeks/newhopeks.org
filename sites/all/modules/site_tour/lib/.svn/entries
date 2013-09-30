@@ -1,0 +1,56 @@
+8
+
+dir
+101
+http://svn.newhopeks.org/svn/newhopeks.org/branches/www.newhopeks.org/sites/all/modules/site_tour/lib
+http://svn.newhopeks.org/svn
+
+
+
+2007-04-27T03:03:07.678834Z
+64
+sterling
+
+
+svn:special svn:externals svn:needs-lock
+
+amberjack.png
+file
+
+
+
+
+2006-11-19T14:33:35.000000Z
+8894ef9d47474b2e83dc36e49610d02d
+2007-04-27T03:03:07.678834Z
+64
+sterling
+has-props
+
+skin
+dir
+
+amberjack.pack.js
+file
+
+
+
+
+2006-11-24T23:58:55.000000Z
+ffe31fd53c559b14f5fc0924bddfe6ea
+2007-04-27T03:03:07.678834Z
+64
+sterling
+
+amberjack.js
+file
+
+
+
+
+2006-11-24T23:58:55.000000Z
+3e8f2e8f28331e83534b3cfa19740986
+2007-04-27T03:03:07.678834Z
+64
+sterling
+

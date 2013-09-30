@@ -1,0 +1,20 @@
+pics=4&delay=3&loops=4&checked=yes&done=done
+
+// --------------------------
+
+NOTES:
+
+pics:
+	How many pics are there available to show? 
+	A random number will be selected based on this value and the appropriate pic selected.
+		Name pics this way: pic_1.jpg, pic_2.jpg, pic_3.jpg, etc.
+	
+delay:
+	How many seconds do images display before being rotated (how long is an image displayed before it's replaced with the next one)?
+	
+loops:
+	How many images does the Flash movie cycle through?
+	eg: If you load a page, the Flash movie shows 1 pic and stops, or it keeps playing and shows 3 pics then stops, etc. 
+
+
+// --------------------------
