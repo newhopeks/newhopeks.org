@@ -1,0 +1,12 @@
+$Id: INSTALL.txt,v 1.1.6.2 2007/03/16 13:26:00 darrenoh Exp $
+Google Sitemap Module
+
+Installation Instructions:
+
+1. Place the gsitemap directory in sites/all/modules.
+
+2. Enable this module at Administer->Site building->Modules.
+
+4. The sitemap is now operational at q=gsitemap. Configure advanced options
+   at Administer -> Site configuration -> XML Sitemap.
+

@@ -1,0 +1,91 @@
+8
+
+dir
+101
+http://svn.newhopeks.org/svn/newhopeks.org/branches/www.newhopeks.org/sites/all/modules
+http://svn.newhopeks.org/svn
+
+
+
+2007-05-13T20:43:20.686554Z
+84
+sterling
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+a0a4708c-a523-0410-9930-e46ec6e2aefa
+
+panels
+dir
+
+google_analytics
+dir
+
+custom_breadcrumbs
+dir
+
+mediafield
+dir
+
+feedback
+dir
+
+pathauto
+dir
+
+front
+dir
+
+find_path
+dir
+
+views
+dir
+
+akismet
+dir
+
+jstools
+dir
+
+cck
+dir
+
+taxonomy_menu
+dir
+
+og
+dir
+
+notify
+dir
+
+newhope_podcast_hack
+dir
+
+gsitemap
+dir
+
+calendar
+dir
+
+fckeditor
+dir
+
+date
+dir
+
+site_tour
+dir
+
