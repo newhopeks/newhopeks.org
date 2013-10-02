@@ -1,0 +1,98 @@
+# $Id: de.po,v 1.1.2.1 2007/05/05 01:10:47 hass Exp $
+#
+# LANGUAGE translation of Drupal (find_path.module)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from file:
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: German translation for find_path 5.x\n"
+"POT-Creation-Date: 2007-05-05 02:26+0200\n"
+"PO-Revision-Date: 2007-05-05 02:52+0100\n"
+"Last-Translator: Alexander Hass\n"
+"Language-Team: Alexander Hass\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: find_path.module:9
+msgid "Adds a \"Find alias\" tab to \"URL alias admin\" page."
+msgstr "Fügt einen „Alias suchen“ Tabulator in die „URL-Aliase“ Seite ein."
+
+#: find_path.module:23
+msgid "Find alias"
+msgstr "Alias suchen"
+
+#: find_path.module:37
+msgid "Aliased path (you can use % as a wildcard)"
+msgstr "Pfad-Alias (% kann als Platzhalter verwendet werden)"
+
+#: find_path.module:42
+msgid "Exact Match?"
+msgstr "genaue Übereinstimmung?"
+
+#: find_path.module:46
+msgid "Find All"
+msgstr "Alle suchen"
+
+#: find_path.module:81
+msgid "Looking for alias: %path"
+msgstr "Suche nach Alias: %path"
+
+#: find_path.module:102
+msgid "Alias of @url"
+msgstr "Alias von @url"
+
+#: find_path.module:104
+msgid "Edit Alias"
+msgstr "Alias bearbeiten"
+
+#: find_path.module:105
+msgid "Delete Alias"
+msgstr "Alias löschen"
+
+#: find_path.module:112
+msgid "View Node"
+msgstr "Beitrag anzeigen"
+
+#: find_path.module:113
+msgid "Edit Node"
+msgstr "Beitrag bearbeiten"
+
+#: find_path.module:129
+msgid "View Panel"
+msgstr "Panel anzeigen"
+
+#: find_path.module:130
+msgid "Edit Panel"
+msgstr "Panel bearbeiten"
+
+#: find_path.module:143
+msgid "View View"
+msgstr "Ansicht anzeigen"
+
+#: find_path.module:144
+msgid "Edit View"
+msgstr "Ansicht bearbeiten"
+
+#: find_path.module:161
+msgid "Alias not found."
+msgstr "Alias wurde nicht gefunden."
+
+#: find_path.module:0
+#: find_path.info:0
+msgid "find_path"
+msgstr "find_path"
+
+#: find_path.info:0
+msgid "Find URL Alias"
+msgstr "URL Alias suchen"
+
+#: find_path.info:0
+msgid "Small utility to make finding aliased nodes easier"
+msgstr "Kleines Utility um Beiträge mit Aliasen leichter zu finden"
+

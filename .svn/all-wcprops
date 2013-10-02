@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/87/newhopeks.org/branches/www.newhopeks.org
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/62/newhopeks.org/branches/www.newhopeks.org/LICENSE.txt
+END
+INSTALL.txt
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/105/newhopeks.org/branches/www.newhopeks.org/INSTALL.txt
+END
+UPGRADE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/62/newhopeks.org/branches/www.newhopeks.org/UPGRADE.txt
+END
+CHANGELOG.txt
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/105/newhopeks.org/branches/www.newhopeks.org/CHANGELOG.txt
+END
+robots.txt
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/105/newhopeks.org/branches/www.newhopeks.org/robots.txt
+END
+cron.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/62/newhopeks.org/branches/www.newhopeks.org/cron.php
+END
+INSTALL.mysql.txt
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/62/newhopeks.org/branches/www.newhopeks.org/INSTALL.mysql.txt
+END
+MAINTAINERS.txt
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/62/newhopeks.org/branches/www.newhopeks.org/MAINTAINERS.txt
+END
+update.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/105/newhopeks.org/branches/www.newhopeks.org/update.php
+END
+INSTALL.pgsql.txt
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/62/newhopeks.org/branches/www.newhopeks.org/INSTALL.pgsql.txt
+END
+xmlrpc.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/62/newhopeks.org/branches/www.newhopeks.org/xmlrpc.php
+END
+.htaccess
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/87/newhopeks.org/branches/www.newhopeks.org/.htaccess
+END
+install.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/105/newhopeks.org/branches/www.newhopeks.org/install.php
+END
+index.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/62/newhopeks.org/branches/www.newhopeks.org/index.php
+END

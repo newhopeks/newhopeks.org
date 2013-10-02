@@ -1,0 +1,22 @@
+<?php
+
+function newhope_podcast_hack_nodeapi(&$node, $op, $teaser, $page) {
+  global $base_url;
+  switch ($op) {
+    case 'rss item':
+      if ($node->type == 'message') {
+        return array(
+	  array(
+	    'key' => 'enclosure',
+	    'attributes' => array(
+	      'url' => $base_url . '/' . $node->field_audio[0]['filepath'],
+	      'type' => $node->field_audio[0]['filemime'],
+	    ),
+	  ),
+	);
+      }
+      break;
+  }
+}
+
+?>

@@ -1,0 +1,11 @@
+; $Id: audiofield.info,v 1.1.2.1 2007/02/10 15:18:04 duke Exp $
+name = Audio Field
+description = Defines audio field type for CCK content.
+version = VERSION
+dependencies = content
+package = CCK
+
+; Information added by drupal.org packaging script on 2007-02-16
+version = "5.x-1.0"
+project = "mediafield"
+

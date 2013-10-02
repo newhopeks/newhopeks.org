@@ -1,0 +1,14 @@
+; $Id: front_page.info,v 1.12 2007/06/18 22:53:44 dww Exp $ 
+name = Front Page
+description = Allows site admins setup custom front pages for the site.
+package = Administration
+
+; Information added by drupal.org packaging script on 2007-01-20
+project = "front"
+
+
+; Information added by drupal.org packaging script on 2007-07-06
+version = "5.x-1.9"
+project = "front"
+datestamp = "1183716905"
+
