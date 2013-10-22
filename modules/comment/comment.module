@@ -1,5 +1,5 @@
 <?php
-// $Id: comment.module,v 1.520.2.12 2007/11/07 08:03:30 drumm Exp $
+// $Id: comment.module,v 1.520.2.15 2010/08/11 20:37:49 drumm Exp $
 
 /**
  * @file
@@ -575,7 +575,7 @@ function comment_access($op, $comment) {
   global $user;
 
   if ($op == 'edit') {
-    return ($user->uid && $user->uid == $comment->uid && comment_num_replies($comment->cid) == 0) || user_access('administer comments');
+    return ($user->uid && $user->uid == $comment->uid && comment_num_replies($comment->cid) == 0 && $comment->status == COMMENT_PUBLISHED) || user_access('administer comments');
   }
 }
 
@@ -1656,7 +1656,7 @@ function _comment_form_submit($form_values) {
     // 2) Strip out all HTML tags
     // 3) Convert entities back to plain-text.
     // Note: format is checked by check_markup().
-    $form_values['subject'] = trim(truncate_utf8(decode_entities(strip_tags(check_markup($form_values['comment'], $form_values['format']))), 29, TRUE));
+    $form_values['subject'] = truncate_utf8(trim(decode_entities(strip_tags(check_markup($form_values['comment'], $form_values['format'])))), 29, TRUE);
     // Edge cases where the comment body is populated only by HTML tags will
     // require a default subject.
     if ($form_values['subject'] == '') {
@@ -1809,23 +1809,33 @@ function theme_comment_thread_expanded($comment) {
 
 function theme_comment_post_forbidden($nid) {
   global $user;
-  if ($user->uid) {
-    return t("you can't post comments");
-  }
-  else {
-    // we cannot use drupal_get_destination() because these links sometimes appear on /node and taxo listing pages
-    if (variable_get('comment_form_location', COMMENT_FORM_SEPARATE_PAGE) == COMMENT_FORM_SEPARATE_PAGE) {
-      $destination = "destination=". drupal_urlencode("comment/reply/$nid#comment-form");
-    }
-    else {
-      $destination = "destination=". drupal_urlencode("node/$nid#comment-form");
+  static $authenticated_post_comments;
+
+  if (!$user->uid) {
+    if (!isset($authenticated_post_comments)) {
+      // We only output any link if we are certain, that users get permission
+      // to post comments by logging in. We also locally cache this information.
+      $authenticated_post_comments = array_key_exists(DRUPAL_AUTHENTICATED_RID, user_roles(TRUE, 'post comments') + user_roles(TRUE, 'post comments without approval'));
     }
 
-    if (variable_get('user_register', 1)) {
-      return t('<a href="@login">Login</a> or <a href="@register">register</a> to post comments', array('@login' => url('user/login', $destination), '@register' => url('user/register', $destination)));
-    }
-    else {
-      return t('<a href="@login">Login</a> to post comments', array('@login' => url('user/login', $destination)));
+    if ($authenticated_post_comments) {
+      // We cannot use drupal_get_destination() because these links
+      // sometimes appear on /node and taxonomy listing pages.
+      if (variable_get('comment_form_location', COMMENT_FORM_SEPARATE_PAGE) == COMMENT_FORM_SEPARATE_PAGE) {
+        $destination = 'destination='. drupal_urlencode("comment/reply/$nid#comment-form");
+      }
+      else {
+        $destination = 'destination='. drupal_urlencode("node/$nid#comment-form");
+      }
+
+      if (variable_get('user_register', 1)) {
+        // Users can register themselves.
+        return t('<a href="@login">Login</a> or <a href="@register">register</a> to post comments', array('@login' => url('user/login', $destination), '@register' => url('user/register', $destination)));
+      }
+      else {
+        // Only admins can add new users, no public registration.
+        return t('<a href="@login">Login</a> to post comments', array('@login' => url('user/login', $destination)));
+      }
     }
   }
 }
