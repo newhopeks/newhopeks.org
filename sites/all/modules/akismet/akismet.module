@@ -1,5 +1,5 @@
 <?php
-// $Id: akismet.module,v 1.10.4.5 2007/06/01 22:31:07 drewish Exp $
+// $Id: akismet.module,v 1.10.4.9 2008/03/18 23:09:56 drewish Exp $
 
 /**
  * Akismet Drupal and Module versions.
@@ -27,7 +27,6 @@ define('AKISMET_API_RESULT_IS_HAM', 2);
  * Implementation of hook_help().
  */
 function akismet_help($section) {
-  $output = '';
   switch ($section) {
     case 'admin/help#akismet':
       $output = t('<p>In order to use the <a href="!akismet">Akismet Service</a>, you need a <a href="!wpapikey">WordPress.com API key</a>. If you don\'t have one already, you can get it by simply signing up for a free account at <a href="!wordpress-com">wordpress.com</a>. Please, consult the <a href="!akismet-faq">Akismet FAQ</a> for further information.</p>
@@ -44,7 +43,7 @@ function akismet_help($section) {
           '!access-control' => url('admin/access'),
           '%no-check-perm' => t('post with no akismet checking')
         ));
-      break;
+      return $output;
     case 'admin/help/akismet':
     case 'admin/settings/akismet':
       $output = t('<p>The <a href="!akismet-module-home">akismet module</a> for <a href="!drupal">Drupal</a> allows you to use the <a href="!akismet">Akismet Service</a> to protect your site from being spammed.</p>',
@@ -54,7 +53,7 @@ function akismet_help($section) {
           '!akismet' => url('http://akismet.com')
         ));
       $output .= t('<p>Akismet has caught <strong>@count spam</strong> for you since %since.</p>', array('@count' => akismet_get_spam_counter(), '%since' => akismet_get_counting_since()));
-      break;
+      return $output;
     default:
       if (arg(0) == 'admin' && arg(1) == 'content '&& arg(2) == 'akismet' && !isset($_POST)) {
         if (arg(3) == 'nodes') {
@@ -83,11 +82,11 @@ function akismet_help($section) {
         }
         if (!empty($output)) {
           $output .= '<br />'. t('<strong>Note:</strong> To interact fully with the <a href="!akismet">Akismet Service</a> you really should try putting data back into the system as well as just taking it out. If it is at all possible, please use the submit <em>ham</em> operation rather than simply publishing content that was identified as spam (false positives). This is necessary in order to let Akismet learn from its mistakes. Thank you.', array('!akismet' => url('http://akismet.com')));
+          return $output;
         }
       }
       break;
   }
-  return $output;
 }
 
 /**
@@ -141,7 +140,7 @@ function akismet_menu($may_cache) {
     $moderator_types_count = count($moderator_types);
     if ($moderator_types_count > 0) {
       $items[] = array('path' => 'admin/content/akismet', 'title' => t('Akismet moderation queue'),
-        'description' => t('Manage the Akismet spam queue, appropving or deleting content in need of moderation.'),
+        'description' => t('Manage the Akismet spam queue, approving or deleting content in need of moderation.'),
         'callback' => 'akismet_callback_queue',
         'access' => ($moderator_types_count > 0 ? TRUE : FALSE));
       $items[] = array('path' => 'admin/content/akismet/overview', 'title' => t('Overview'),
@@ -226,36 +225,36 @@ function akismet_link($type, $content = 0, $main = 0) {
   if ($type == 'node' && akismet_is_spam_moderator($content->type)) {
     if (variable_get('akismet_node_publish_links', 0)) {
       if ($content->status) {
-        $links[] = array('title' => t('unpublish'), 'href' => 'akismet/node/'. $content->nid .'/unpublish');
+        $links['akismet_node_unpublish'] = array('title' => t('unpublish'), 'href' => 'akismet/node/'. $content->nid .'/unpublish');
       }
       else {
-        $links[] = array('title' => t('publish'), 'href' => 'akismet/node/'. $content->nid .'/publish');
+        $links['akismet_node_publish'] = array('title' => t('publish'), 'href' => 'akismet/node/'. $content->nid .'/publish');
       }
     }
     if (variable_get('akismet_node_spam_links', 0)) {
       if (akismet_content_is_spam('node', $content->nid)) {
-        $links[] = array('title' => (variable_get('akismet_connection_enabled', 1) ? t('submit ham') : t('mark as ham')), 'href' => 'akismet/node/'. $content->nid .'/submit-ham');
+        $links['akismet_node_ham'] = array('title' => (variable_get('akismet_connection_enabled', 1) ? t('submit ham') : t('mark as ham')), 'href' => 'akismet/node/'. $content->nid .'/submit-ham');
       }
       else {
-        $links[] = array('title' => (variable_get('akismet_connection_enabled', 1) ? t('submit spam') : t('mark as spam')), 'href' => 'akismet/node/'. $content->nid .'/submit-spam');
+        $links['akismet_node_spam'] = array('title' => (variable_get('akismet_connection_enabled', 1) ? t('submit spam') : t('mark as spam')), 'href' => 'akismet/node/'. $content->nid .'/submit-spam');
       }
     }
   }
   else if ($type == 'comment' && akismet_is_spam_moderator('comments')) {
     if (variable_get('akismet_comment_publish_links', 1)) {
       if ($content->status == COMMENT_PUBLISHED) {
-        $links[] = array('title' => t('unpublish'), 'href' => 'akismet/comment/'. $content->cid .'/unpublish');
+        $links['akismet_comment_unpublish'] = array('title' => t('unpublish'), 'href' => 'akismet/comment/'. $content->cid .'/unpublish');
       }
       else if ($content->status == COMMENT_NOT_PUBLISHED) {
-        $links[] = array('title' => t('publish'), 'href' => 'akismet/comment/'. $content->cid .'/publish');
+        $links['akismet_comment_publish'] = array('title' => t('publish'), 'href' => 'akismet/comment/'. $content->cid .'/publish');
       }
     }
     if (variable_get('akismet_comment_spam_links', 1)) {
       if (akismet_content_is_spam('comment', $content->cid)) {
-        $links[] = array('title' => (variable_get('akismet_connection_enabled', 1) ? t('submit ham') : t('mark as ham')), 'href' => 'akismet/comment/'. $content->cid .'/submit-ham');
+        $links['akismet_comment_ham'] = array('title' => (variable_get('akismet_connection_enabled', 1) ? t('submit ham') : t('mark as ham')), 'href' => 'akismet/comment/'. $content->cid .'/submit-ham');
       }
       else {
-        $links[] = array('title' => (variable_get('akismet_connection_enabled', 1) ? t('submit spam') : t('mark as spam')), 'href' => 'akismet/comment/'. $content->cid .'/submit-spam');
+        $links['akismet_comment_spam'] = array('title' => (variable_get('akismet_connection_enabled', 1) ? t('submit spam') : t('mark as spam')), 'href' => 'akismet/comment/'. $content->cid .'/submit-spam');
       }
     }
   }
@@ -393,7 +392,7 @@ function akismet_nodeapi(&$node, $op, $teaser, $page) {
         }
 
         // Since users won't see their content published, show them a polite explanation on why.
-        $content_type_name = node_get_name($node);
+        $content_type_name = node_get_types('name', $node);
         drupal_set_message(t('Your %content-type-name has been queued for moderation by site administrators and will be published after approval.', array('%content-type-name' => $content_type_name)));
 
         // Record the event to watchdog.
@@ -1431,7 +1430,7 @@ function akismet_prepare_comment_data($content_type, $content) {
 \************************************************************/
 
 /**
- * Akismet API: Key Verification — rest.akismet.com/1.1/verify key
+ * Akismet API: Key Verification - rest.akismet.com/1.1/verify key
  *
  * @param string WordPress API Key.
  * @return integer See constants AKISMET_API_RESULT_xxx.
@@ -1446,7 +1445,7 @@ function akismet_api_cmd_verify_key($key) {
 }
 
 /**
- * Akismet API: Comment Check — api-key.rest.akismet.com/1.1/comment-check
+ * Akismet API: Comment Check - api-key.rest.akismet.com/1.1/comment-check
  *
  * @param array Comment data; see function akismet_prepare_comment_data().
  * @return integer See constants AKISMET_API_RESULT_xxx.
@@ -1469,7 +1468,7 @@ function akismet_api_cmd_comment_check($comment_data) {
 }
 
 /**
- * Akismet API: Submit Spam — api-key.rest.akismet.com/1.1/submit-spam
+ * Akismet API: Submit Spam - api-key.rest.akismet.com/1.1/submit-spam
  *
  * @param array Comment data; see function akismet_prepare_comment_data().
  * @return integer See constants AKISMET_API_RESULT_xxx.
@@ -1488,7 +1487,7 @@ function akismet_api_cmd_submit_spam($comment_data) {
 }
 
 /**
- * Akismet API: Submit Ham — api-key.rest.akismet.com/1.1/submit-ham
+ * Akismet API: Submit Ham - api-key.rest.akismet.com/1.1/submit-ham
  *
  * @param array Comment data; see function akismet_prepare_comment_data().
  * @return integer See constants AKISMET_API_RESULT_xxx.
