@@ -1,5 +1,5 @@
 <?php
-// $Id: content.module,v 1.90.2.44 2007/08/15 18:00:28 yched Exp $
+// $Id: content.module,v 1.90.2.60 2010/06/09 01:06:29 karens Exp $
 
 /**
  * @file
@@ -14,6 +14,22 @@ define('CONTENT_CALLBACK_DEFAULT', 0x0002);
 define('CONTENT_CALLBACK_CUSTOM', 0x0004);
 
 function content_help($section) {
+  switch ($section) {
+    case 'admin/help#content':
+      $output = '<p>'. t('The content module, a required component of the Content Construction Kit (CCK), allows administrators to associate custom fields with content types. In Drupal, content types are used to define the characteristics of a post, including the title and description of the fields displayed on its add and edit pages. Using the content module (and the other helper modules included in CCK), custom fields beyond the default "Title" and "Body" may be added. CCK features are accessible through tabs on the <a href="@content-types">content types administration page</a>. (See the <a href="@node-help">node module help page</a> for more information about content types.)', array('@content-types' => url('admin/content/types'), '@node-help' => url('admin/help/node'))) .'</p>';
+      $output .= '<p>'. t('When adding a custom field to a content type, you determine its type (whether it will contain text, numbers, or references to other objects) and how it will be displayed (either as a text field or area, a select box, checkbox, radio button, or autocompleting field). A field may have multiple values (i.e., a "person" may have multiple e-mail addresses) or a single value (i.e., an "employee" has a single employee identification number). As you add and edit fields, CCK automatically adjusts the structure of the database as necessary. CCK also provides a number of other features, including intelligent caching for your custom data, an import and export facility for content type definitions, and integration with other contributed modules.') .'</p>';
+      $output .= '<p>'. t('Custom field types are provided by a set of optional modules included with CCK (each module provides a different type). The <a href="@modules">modules page</a> allows you to enable or disable CCK components. A default installation of CCK includes:', array('@modules' => url('admin/build/modules'))) .'</p>';
+      $output .= '<ul>';
+      $output .= '<li>'. t('<em>number</em>, which adds numeric field types, in integer, decimal or floating point form. You may define a set of allowed inputs, or specify an allowable range of values. A variety of common formats for displaying numeric data are available.') .'</li>';
+      $output .= '<li>'. t("<em>text</em>, which adds text field types. A text field may contain plain text only, or optionally, may use Drupal's input format filters to securely manage rich text input. Text input fields may be either a single line (text field), multiple lines (text area), or for greater input control, a select box, checkbox, or radio buttons. If desired, CCK can validate the input to a set of allowed values.") .'</li>';
+      $output .= '<li>'. t('<em>nodereference</em>, which creates custom references between Drupal nodes. By adding a <em>nodereference</em> field and two different content types, for instance, you can easily create complex parent/child relationships between data (multiple "employee" nodes may contain a <em>nodereference</em> field linking to an "employer" node).') .'</li>';
+      $output .= '<li>'. t('<em>userreference</em>, which creates custom references to your sites\' user accounts. By adding a <em>userreference</em> field, you can create complex relationships between your site\'s users and posts. To track user involvement in a post beyond Drupal\'s standard <em>Authored by</em> field, for instance, add a <em>userreference</em> field named "Edited by" to a content type to store a link to an editor\'s user account page.') .'</li>';
+      $output .= '<li>'. t('<em>fieldgroup</em>, which creates collapsible fieldsets to hold a group of related fields. A fieldset may either be open or closed by default. The order of your fieldsets, and the order of fields within a fieldset, is managed via a drag-and-drop interface provided by content module.') .'</li>';
+      $output .= '</ul>';
+      $output .= '<p>'. t('For more information, see the online handbook entry for <a href="@handbook-cck">CCK</a> or the <a href="@project-cck">CCK project page</a>.', array('@handbook-cck' => 'http://drupal.org/handbook/modules/cck', '@project-cck' => 'http://drupal.org/project/cck')) .'</p>';
+      return $output;
+  }
+
   if (preg_match('!^admin/content/types/.*/display$!', $section)) {
     return t("Configure how this content type's fields and field labels should be displayed when it's viewed in teaser and full-page mode.");
   }
@@ -38,11 +54,21 @@ function content_init() {
     if (module_exists('views')) {
       include_once('./'. drupal_get_path('module', 'content') .'/content_views.inc');
     }
+    if (module_exists('panels')) {
+      include_once('./'. drupal_get_path('module', 'content') .'/content_panels.inc');
+    }
     // according to http://drupal.org/node/60526, this should not go in hook_menu
     if (module_exists('pathauto')) {
       include_once('./'. drupal_get_path('module', 'content') .'/content_pathauto.inc');
     }
   }
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function content_perm() {
+  return array('Use PHP input for field settings (dangerous - grant with care)');
 }
 
 /**
@@ -74,8 +100,7 @@ function content_menu($may_cache) {
     if (arg(0) == 'admin' && arg(1) == 'content' && arg(2) == 'types') {
 
       $content_type = content_types(arg(3));
-      $type = node_get_types('types', $content_type['type']);
-
+      $type = node_get_types('type', $content_type['type']);
 
       if (!empty($type) && arg(3) && arg(3) == $content_type['url_str']) {
         $items[] = array(
@@ -146,10 +171,14 @@ function content_menu($may_cache) {
  * its own loading. This can make for a number of queries in some cases, so we
  * cache the loaded object structure and invalidate it during the update process.
  */
-function content_load($node) {
+function content_load(&$node) {
   $cid = 'content:'. $node->nid .':'. $node->vid;
   if ($cached = cache_get($cid, 'cache_content')) {
-    return unserialize($cached->data);
+    $extra = unserialize($cached->data);
+    foreach ($extra as $key => $value) {
+      $node->$key = $value;
+    }
+    return $extra;
   }
   else {
     $default_additions = _content_field_invoke_default('load', $node);
@@ -246,7 +275,7 @@ function content_delete(&$node) {
   if (db_table_exists($table)) {
     db_query('DELETE FROM {'. $table .'} WHERE nid = %d', $node->nid);
   }
-  cache_clear_all('content:'. $node->nid, 'cache_content', TRUE);
+  cache_clear_all('content:'. $node->nid .':', 'cache_content', TRUE);
 }
 
 /**
@@ -296,6 +325,10 @@ function content_nodeapi(&$node, $op, $teaser, $page) {
       break;
 
     case 'insert':
+      if ($node->devel_generate) {
+        include_once('./'. drupal_get_path('module', 'content') .'/content.devel.inc');
+        content_generate_fields($node);
+      }
       content_insert($node);
       break;
 
@@ -312,6 +345,7 @@ function content_nodeapi(&$node, $op, $teaser, $page) {
       break;
 
     case 'view':
+    case 'print':
       content_view($node, $teaser, $page);
       break;
   }
@@ -584,6 +618,7 @@ function _content_field_view(&$node, $teaser = NULL, $page = NULL) {
         }
         else {
           foreach ($node_field as $delta => $item) {
+            $item['#delta'] = $delta;
             $node_field[$delta]['view'] = content_format($field, $item, $formatter, $node);
           }
           $value = theme('field', $node, $field, $node_field, $teaser, $page);
@@ -677,25 +712,23 @@ function content_types($type_name = NULL) {
  */
 function content_fields($field_name = NULL, $content_type_name = NULL) {
   $info = _content_type_info();
-  if (isset($field_name)) {
-    if (isset($info['fields'][$field_name])) {
-      if (isset($content_type_name)) {
-        if (isset($info['content types'][$content_type_name]['fields'][$field_name])) {
-          return $info['content types'][$content_type_name]['fields'][$field_name];
-        }
-        else {
-          return NULL;
-        }
-      }
-      else {
-        return $info['fields'][$field_name];
-      }
-    }
-    else {
-      return NULL;
-    }
+
+  // If there is no field name specified, return the entire fields array.
+  if (!isset($field_name)) {
+    return $info['fields'];
   }
-  return $info['fields'];
+  elseif (!isset($info['fields'][$field_name])) {
+    return NULL;
+  }
+  elseif (!isset($content_type_name)) {
+    return $info['fields'][$field_name];
+  }
+  elseif (isset($info['content types'][$content_type_name]['fields'][$field_name])) {
+    return $info['content types'][$content_type_name]['fields'][$field_name];
+  }
+
+  // If all else fails, return NULL.
+  return NULL;
 }
 
 /**
@@ -739,17 +772,24 @@ function _content_type_info($reset = FALSE) {
         $module_field_types = module_invoke($module, 'field_info');
         if ($module_field_types) {
           foreach ($module_field_types as $name => $field_info) {
-            $info['field types'][$name] = $field_info;
-            $info['field types'][$name]['module'] = $module;
-            $info['field types'][$name]['formatters'] = array();
+            // Truncate names to match the value that is stored in the database.
+            $db_name = substr($name, 0, 32);
+            $info['field types'][$db_name] = $field_info;
+            $info['field types'][$db_name]['module'] = $module;
+            $info['field types'][$db_name]['formatters'] = array();
           }
         }
 
         $module_widgets = module_invoke($module, 'widget_info');
         if ($module_widgets) {
           foreach ($module_widgets as $name => $widget_info) {
-            $info['widget types'][$name] = $widget_info;
-            $info['widget types'][$name]['module'] = $module;
+            // Truncate names to match the value that is stored in the database.
+            $db_name = substr($name, 0, 32);
+            $info['widget types'][$db_name] = $widget_info;
+            $info['widget types'][$db_name]['module'] = $module;
+            foreach ($widget_info['field types'] as $delta => $type) {
+              $info['widget types'][$db_name][$delta] = substr($type, 0, 32);
+            }
           }
         }
       }
@@ -758,8 +798,10 @@ function _content_type_info($reset = FALSE) {
         if ($module_formatters) {
           foreach ($module_formatters as $name => $formatter_info) {
             foreach ($formatter_info['field types'] as $field_type) {
-              $info['field types'][$field_type]['formatters'][$name] = $formatter_info;
-              $info['field types'][$field_type]['formatters'][$name]['module'] = $module;
+              // Truncate names to match the value that is stored in the database.
+              $db_name = substr($field_type, 0, 32);
+              $info['field types'][$db_name]['formatters'][$name] = $formatter_info;
+              $info['field types'][$db_name]['formatters'][$name]['module'] = $module;
             }
           }
         }
@@ -838,11 +880,17 @@ function content_node_type($op, $info) {
  * information is changed.
  */
 function content_clear_type_cache() {
-  cache_clear_all('content_type_info', 'cache_content');
+  // If type type cache needs to be cleared because type information has
+  // changed, the cached node values also need to be emptied so they
+  // don't carry stale values.
+  // TODO see if there is a less destructive way to do this.
+  cache_clear_all('*', 'cache_content', TRUE);
 
   _content_type_info(TRUE);
 
   if (module_exists('views')) {
+    // Needed because this can be called from .install files
+    include_once('./'. drupal_get_path('module', 'views') .'/views.module');
     views_invalidate_cache();
   }
 }
@@ -919,6 +967,31 @@ function content_transpose_array_rows_cols($array) {
 }
 
 /**
+ * Like filter_xss_admin(), but with a shorter list of allowed tags.
+ *
+ * Used for items entered by administrators, like field descriptions,
+ * allowed values, where some (mainly inline) mark-up may be desired
+ * (so check_plain() is not acceptable).
+ */
+function content_filter_xss($string) {
+  return filter_xss($string, _content_filter_xss_allowed_tags());
+}
+
+/**
+ * List of tags allowed by content_filter_xss().
+ */
+function _content_filter_xss_allowed_tags() {
+  return array('a', 'b', 'big',  'code', 'del', 'em', 'i', 'ins',  'pre', 'q', 'small', 'span', 'strong', 'sub', 'sup', 'tt', 'ol', 'ul', 'li', 'p', 'br', 'img');
+}
+
+/**
+ * Human-readable list of allowed tags, for display in help texts.
+ */
+function _content_filter_xss_display_allowed_tags() {
+  return '<'. implode('> <', _content_filter_xss_allowed_tags()) .'>';
+}
+
+/**
  * Format a field item for display.
  *
  * @param $field
@@ -942,7 +1015,7 @@ function content_format($field, $item, $formatter = 'default', $node = NULL) {
   $field_types = _content_field_types();
   $formatters = $field_types[$field['type']]['formatters'];
 
-  if (!isset($formatter, $formatters)) {
+  if (!isset($formatter, $formatters, $formatters[$formatter])) {
     $formatter = 'default';
   }
   return module_invoke($formatters[$formatter]['module'], 'field_formatter', $field, $item, $formatter, $node);
@@ -970,17 +1043,19 @@ function content_format($field, $item, $formatter = 'default', $node = NULL) {
  */
 function theme_field(&$node, &$field, &$items, $teaser, $page) {
   $label_display = isset($field['display_settings']['label']['format']) ? $field['display_settings']['label']['format'] : 'above';
-  $label = t($field['widget']['label']);
+  $label = check_plain(t($field['widget']['label']));
   $items_output = '';
 
+  $count = 1;
   foreach ($items as $delta => $item) {
     if (!empty($item['view']) || $item['view'] === "0") {
-      $items_output .= '<div class="field-item">';
+      $items_output .= '<div class="field-item '. ($count % 2 ? 'odd' : 'even') .'">';
       if ($label_display == 'inline') {
         $items_output .= '<div class="field-label-inline'. ($delta ? '' : '-first') .'">';
         $items_output .= $label .':&nbsp;</div>' ;
       }
       $items_output .= $item['view'] .'</div>';
+      $count++;
     }
   }
 

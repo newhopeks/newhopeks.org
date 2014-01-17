@@ -1,5 +1,5 @@
 <?php
-// $Id: nodereference.module,v 1.39.2.29 2007/08/15 19:05:53 yched Exp $
+// $Id: nodereference.module,v 1.39.2.46 2010/06/17 13:14:42 yched Exp $
 
 /**
  * @file
@@ -26,7 +26,7 @@ function nodereference_menu($may_cache) {
  */
 function nodereference_field_info() {
   return array(
-    'nodereference' => array('label' => 'Node Reference'),
+    'nodereference' => array('label' => t('Node Reference')),
   );
 }
 
@@ -42,7 +42,7 @@ function nodereference_field_settings($op, $field) {
         '#title' => t('Content types that can be referenced'),
         '#multiple' => TRUE,
         '#default_value' => isset($field['referenceable_types']) ? $field['referenceable_types'] : array(),
-        '#options' => node_get_types('names'),
+        '#options' => array_map('check_plain', node_get_types('names')),
       );
       if (module_exists('views')) {
         $views = array('--' => '--');
@@ -133,19 +133,19 @@ function nodereference_field($op, &$node, $field, &$items, $teaser, $page) {
 function nodereference_field_formatter_info() {
   return array(
     'default' => array(
-      'label' => 'Title (link)',
+      'label' => t('Title (link)'),
       'field types' => array('nodereference'),
     ),
     'plain' => array(
-      'label' => 'Title (no link)',
+      'label' => t('Title (no link)'),
       'field types' => array('nodereference'),
     ),
     'full' => array(
-      'label' => 'Full node',
+      'label' => t('Full node'),
       'field types' => array('nodereference'),
     ),
     'teaser' => array(
-      'label' => 'Teaser',
+      'label' => t('Teaser'),
       'field types' => array('nodereference'),
     ),
   );
@@ -177,8 +177,7 @@ function nodereference_field_formatter($field, $item, $formatter, $node) {
       // we fall back to 'default' (node title) formatter.
       $formatter = 'default';
     }
-    else {
-      $referenced_node = node_load($item['nid']);
+    elseif ($referenced_node = node_load($item['nid'])) {
       $referenced_node->referencing_node = $node;
       $referenced_node->referencing_field = $field;
       $titles[$item['nid']] = $referenced_node->title;
@@ -186,22 +185,25 @@ function nodereference_field_formatter($field, $item, $formatter, $node) {
   }
 
   if (!isset($titles[$item['nid']])) {
-    $title = db_result(db_query("SELECT title FROM {node} WHERE nid=%d", $item['nid']));
-    $titles[$item['nid']] = $title ? $title : '';
+    if ($title = db_result(db_query(db_rewrite_sql("SELECT title FROM {node} WHERE nid=%d"), $item['nid']))) {
+      $titles[$item['nid']] = $title ? $title : '';
+    }
   }
-
+  if (empty($titles[$item['nid']])) {
+    return '';
+  }
   switch ($formatter) {
     case 'full':
-      return node_view($referenced_node, FALSE);
+      return $referenced_node ? node_view($referenced_node, FALSE) : '';
 
     case 'teaser':
-      return node_view($referenced_node, TRUE);
+      return $referenced_node ? node_view($referenced_node, TRUE) : '';
 
     case 'plain':
       return check_plain($titles[$item['nid']]);
 
     default:
-      return l($titles[$item['nid']], 'node/'. $item['nid']);
+      return $titles[$item['nid']] ? l($titles[$item['nid']], 'node/'. $item['nid']) : '';
   }
 }
 
@@ -211,11 +213,11 @@ function nodereference_field_formatter($field, $item, $formatter, $node) {
 function nodereference_widget_info() {
   return array(
     'nodereference_select' => array(
-      'label' => 'Select List',
+      'label' => t('Select List'),
       'field types' => array('nodereference'),
     ),
     'nodereference_autocomplete' => array(
-      'label' => 'Autocomplete Text Field',
+      'label' => t('Autocomplete Text Field'),
       'field types' => array('nodereference'),
     ),
   );
@@ -237,7 +239,7 @@ function nodereference_widget($op, &$node, $field, &$items) {
 
         $options = _nodereference_potential_references($field, TRUE);
         foreach ($options as $key => $value) {
-          $options[$key] = _nodereference_item($field, $value);
+          $options[$key] = _nodereference_item($field, $value, FALSE);
         }
         if (!$field['required']) {
           $options = array(0 => t('<none>')) + $options;
@@ -252,7 +254,7 @@ function nodereference_widget($op, &$node, $field, &$items) {
           '#size' =>  $field['multiple'] ? min(count($options), 6) : 0,
           '#options' => $options,
           '#required' => $field['required'],
-          '#description' => t($field['widget']['description']),
+          '#description' => content_filter_xss(t($field['widget']['description'])),
         );
 
         return $form;
@@ -297,7 +299,7 @@ function nodereference_widget($op, &$node, $field, &$items) {
 
         if ($field['multiple']) {
           $form[$field['field_name']]['#type'] = 'fieldset';
-          $form[$field['field_name']]['#description'] = t($field['widget']['description']);
+          $form[$field['field_name']]['#description'] = content_filter_xss(t($field['widget']['description']));
           $delta = 0;
           foreach ($items as $item) {
             if ($item['nid']) {
@@ -328,7 +330,7 @@ function nodereference_widget($op, &$node, $field, &$items) {
             '#autocomplete_path' => 'nodereference/autocomplete/'. $field['field_name'],
             '#default_value' => $items[0]['default node_name'],
             '#required' => $field['required'],
-            '#description' => t($field['widget']['description']),
+            '#description' => content_filter_xss( t( $field['widget']['description'] )),
           );
         }
         return $form;
@@ -342,7 +344,21 @@ function nodereference_widget($op, &$node, $field, &$items) {
               // explicit nid
               list(, $title, $nid) = $matches;
               if (!empty($title) && ($n = node_load($nid)) && $title != $n->title) {
-                form_set_error($error_field, t('%name : Title mismatch. Please check your selection.'), array('%name' => t($field['widget']['label'])));
+                form_set_error($error_field, t('%name : Title mismatch. Please check your selection.', array('%name' => t($field['widget']['label']))));
+              }
+            }
+            else {
+              // no explicit nid
+              $nids = _nodereference_potential_references($field, FALSE, $item['node_name'], TRUE);
+              if (empty($nids)) {
+                form_set_error($error_field, t('%name: Found no valid post with that title.', array('%name' => t($field['widget']['label']))));
+              }
+              else {
+                // TODO:
+                // the best thing would be to present the user with an additional form,
+                // allowing the user to choose between valid candidates with the same title
+                // ATM, we pick the first matching candidate...
+                $nid = array_shift(array_keys($nids));
               }
             }
           }
@@ -443,7 +459,7 @@ function _nodereference_potential_references($field, $return_full_nodes = FALSE,
       return array();
     }
 
-    if (isset($string)) {
+    if ($string !== '') {
       $string_clause = $exact_string ? " AND n.title = '%s'" : " AND n.title LIKE '%%%s%'";
       $related_clause = "(". $related_clause .")". $string_clause;
       $args[] = $string;
@@ -479,13 +495,13 @@ function nodereference_autocomplete($field_name, $string = '') {
   $matches = array();
 
   foreach (_nodereference_potential_references($field, TRUE, $string) as $row) {
-    $matches[$row->node_title .' [nid:'. $row->nid .']'] = _nodereference_item($field, $row, TRUE);
+    $matches[$row->node_title .' [nid:'. $row->nid .']'] = _nodereference_item($field, $row);
   }
   print drupal_to_js($matches);
   exit();
 }
 
-function _nodereference_item($field, $item, $html = false) {
+function _nodereference_item($field, $item, $html = TRUE) {
   if (module_exists('views') && isset($field['advanced_view']) && $field['advanced_view'] != '--' && ($view = views_get_view($field['advanced_view']))) {
     $output = theme('nodereference_item_advanced', $item, $view);
     if (!$html) {
@@ -496,6 +512,7 @@ function _nodereference_item($field, $item, $html = false) {
   }
   else {
     $output = theme('nodereference_item_simple', $item);
+    $output = $html ? check_plain($output) : $output;
   }
   return $output;
 }
@@ -517,14 +534,68 @@ function theme_nodereference_item_advanced($item, $view) {
 }
 
 function theme_nodereference_item_simple($item) {
-  return check_plain($item->node_title);
+  return $item->node_title;
 }
 
 /**
- * Provide a list of users to filter on.
+ * Provide a list of nodes to filter on.
  */
 function _nodereference_filter_handler($op, $filterinfo) {
   $options = array(0 => t('<empty>'));
   $options = $options + _nodereference_potential_references($filterinfo['extra']['field']);
   return $options;
+}
+
+/**
+ * Implementation of hook_panels_relationships().
+ */
+function nodereference_panels_relationships() {
+  $args = array();
+  $args['node_from_noderef'] = array(
+    'title' => t('Node from reference'),
+    'keyword' => 'nodereference',
+    'description' => t('Adds a node from a node reference in a node context; if multiple nodes are referenced, this will get the first referenced node only.'),
+    'required context' => new panels_required_context(t('Node'), 'node'),
+    'context' => 'nodereference_node_from_noderef_context',
+    'settings form' => 'nodereference_node_from_noderef_settings_form',
+    'settings form validate' => 'nodereference_node_from_noderef_settings_form_validate',
+    );
+  return $args;
+}
+
+/**
+ * Return a new panels context based on an existing context
+ */
+function nodereference_node_from_noderef_context($context = NULL, $conf) {
+  // If unset it wants a generic, unfilled context, which is just NULL
+  if (empty($context->data)) {
+    return panels_context_create_empty('node', NULL);
+  }
+  if (isset($context->data->{$conf['field_name']}[0]['nid']) && ($nid = $context->data->{$conf['field_name']}[0]['nid'])) {
+    if ($node = node_load($nid)) {
+      return panels_context_create('node', $node);
+    }
+  }
+}
+
+/**
+ * Settings form for the panels relationship.
+ */
+function nodereference_node_from_noderef_settings_form($conf) {
+  $options = array();
+  foreach (content_fields() as $field) {
+    if ($field['type'] == 'nodereference') {
+      $options[$field['field_name']] = t($field['widget']['label']);
+    }
+  }
+  $form['field_name'] = array(
+    '#title' => t('Node reference field'),
+    '#type' => 'select',
+    '#options' => $options,
+    '#default_value' => $conf['field_name'],
+    '#prefix' => '<div class="clear-block">',
+    '#suffix' => '</div>',
+  );
+
+  return $form;
 }
