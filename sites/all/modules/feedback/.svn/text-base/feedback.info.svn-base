@@ -1,9 +1,0 @@
-; $Id: feedback.info,v 1.1 2006/12/26 23:23:07 kbahey Exp $
-name = Feedback
-description = Provides one or more site-wide feedback pages.
-version = "$Name: DRUPAL-5 $"
-
-; Information added by drupal.org packaging script on 2007-01-30
-version = "5.x-1.x-dev"
-project = "feedback"
-
