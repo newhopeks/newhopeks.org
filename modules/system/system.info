@@ -1,11 +1,19 @@
-; $Id: system.info,v 1.3 2006/11/21 20:55:35 dries Exp $
 name = System
 description = Handles general site configuration for administrators.
-package = Core - required
+package = Core
 version = VERSION
+core = 7.x
+files[] = system.archiver.inc
+files[] = system.mail.inc
+files[] = system.queue.inc
+files[] = system.tar.inc
+files[] = system.updater.inc
+files[] = system.test
+required = TRUE
+configure = admin/config/system
 
-; Information added by drupal.org packaging script on 2008-01-29
-version = "5.7"
+; Information added by Drupal.org packaging script on 2014-01-15
+version = "7.26"
 project = "drupal"
-datestamp = "1201565404"
+datestamp = "1389815930"
 

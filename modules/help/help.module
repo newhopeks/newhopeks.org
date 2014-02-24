@@ -1,5 +1,4 @@
 <?php
-// $Id: help.module,v 1.69.2.1 2007/10/16 06:57:22 drumm Exp $
 
 /**
  * @file
@@ -7,133 +6,58 @@
  */
 
 /**
- * Implementation of hook_menu().
+ * Implements hook_menu().
  */
-function help_menu($may_cache) {
-  $items = array();
+function help_menu() {
+  $items['admin/help'] = array(
+    'title' => 'Help',
+    'description' => 'Reference for usage, configuration, and modules.',
+    'page callback' => 'help_main',
+    'access arguments' => array('access administration pages'),
+    'weight' => 9,
+    'file' => 'help.admin.inc',
+  );
 
-  if ($may_cache) {
-    $admin_access = user_access('access administration pages');
-
-    $items[] = array('path' => 'admin/help', 'title' => t('Help'),
-      'callback' => 'help_main',
-      'access' => $admin_access,
-      'weight' => 9);
-
-    foreach (module_implements('help', TRUE) as $module) {
-      $items[] = array('path' => 'admin/help/' . $module,
-        'title' => t($module),
-        'callback' => 'help_page',
-        'type' => MENU_CALLBACK,
-        'access' => $admin_access);
-    }
+  foreach (module_implements('help', TRUE) as $module) {
+    $items['admin/help/' . $module] = array(
+      'title' => $module,
+      'page callback' => 'help_page',
+      'page arguments' => array(2),
+      'access arguments' => array('access administration pages'),
+      'type' => MENU_VISIBLE_IN_BREADCRUMB,
+      'file' => 'help.admin.inc',
+    );
   }
 
   return $items;
 }
 
 /**
- * Menu callback; prints a page listing a glossary of Drupal terminology.
+ * Implements hook_help().
  */
-function help_main() {
-  // Add CSS
-  drupal_add_css(drupal_get_path('module', 'help') .'/help.css', 'module', 'all', FALSE);
-
-  $output = t('
-  <h2>Help topics</h2>
-  <p>Help is available on the following items:</p>
-  !help_pages
-  <h2>Glossary of Drupal terminology</h2>
-  <dl>
-   <dt>Block</dt><dd>A small box containing information or content placed in a region of a web page (e.g. in a sidebar, below or above the content, or in any other region the current theme allows).</dd>
-   <dt>Comment</dt><dd>Text attached to a post intended to clarify, explain, criticize, or express an opinion on the original post.</dd>
-   <dt>Node</dt><dd>The basic unit of content in Drupal, often referred to as a "post". All content that can be created using the "create content" menu is a node. Keep in mind that comments, blocks, and users are <em>not</em> nodes.</dd>
-   <dt>Published</dt><dd>A post that is viewable by every visitor of the site, regardless of whether he is logged in (see also "Unpublished").</dd>
-   <dt>Role</dt><dd>A classification users are placed into for the purpose of setting users\' permissions. A user receives the combined permissions of all roles to which he or she is subscribed.</dd>
-   <dt>Taxonomy</dt><dd>A categorization system that allows the building of complex hierarchial or relational structures and tagging of content (see <a href="@taxonomy">taxonomy help</a>).</dd>
-   <dt>Unpublished</dt><dd>A post that is only viewable by administrators and moderators.</dd>
-   <dt>User</dt><dd>A person who has an account at your Drupal site, and is currently logged in with that account.</dd>
-   <dt>Visitor</dt><dd>A person who does not have an account at your Drupal site or a person who has an account at your Drupal site but is <em>not</em> currently logged in with that account. A visitor is also called an "anonymous user".</dd>
-  </dl>', array('!help_pages' => help_links_as_list(), '@taxonomy' => url('admin/help/taxonomy')));
-
-  return $output;
-}
-
-function help_links_as_list() {
-  $module_info = module_rebuild_cache();
-
-  $modules = array();
-  foreach (module_implements('help', TRUE) as $module) {
-    if (module_invoke($module, 'help', "admin/help#$module")) {
-      $modules[] = $module;
-    }
-  }
-  sort($modules);
-
-  // Output pretty four-column list
-  $break = ceil(count($modules) / 4);
-  $output = '<div class="clear-block"><div class="help-items"><ul>';
-  foreach ($modules as $i => $module) {
-    $output .= '<li>'. l($module_info[$module]->info['name'], 'admin/help/'. $module) .'</li>';
-    if (($i + 1) % $break == 0) {
-      $output .= '</ul></div><div class="help-items'. ($i + 1 == $break * 3 ? ' help-items-last' : '') .'"><ul>';
-    }
-  }
-  $output .= '</ul></div></div>';
-
-  return $output;
-}
-
-/**
- * Implementation of hook_help().
- */
-function help_help($section) {
-  switch ($section) {
+function help_help($path, $arg) {
+  switch ($path) {
     case 'admin/help':
-      $output = t('<p>This guide explains what the various modules in <a href="@Drupal">Drupal</a> do and how to configure them. Additionally, you will find a glossary of basic Drupal terminology to help get you started.</p>
-<p>It is not a substitute for the <a href="@handbook">Drupal handbook</a> available online and should be used in conjunction with it. The online reference handbook might be more up-to-date and has helpful user-contributed comments. It is your definitive reference point for all Drupal documentation.</p>
-', array('@Drupal' => 'http://drupal.org', '@handbook' => 'http://drupal.org/handbook'));
+      $output = '<p>' . t('Follow these steps to set up and start using your website:') . '</p>';
+      $output .= '<ol>';
+      $output .= '<li>' . t('<strong>Configure your website</strong> Once logged in, visit the <a href="@admin">administration section</a>, where you can <a href="@config">customize and configure</a> all aspects of your website.', array('@admin' => url('admin'), '@config' => url('admin/config'))) . '</li>';
+      $output .= '<li>' . t('<strong>Enable additional functionality</strong> Next, visit the <a href="@modules">module list</a> and enable features which suit your specific needs. You can find additional modules in the <a href="@download_modules">Drupal modules download section</a>.', array('@modules' => url('admin/modules'), '@download_modules' => 'http://drupal.org/project/modules')) . '</li>';
+      $output .= '<li>' . t('<strong>Customize your website design</strong> To change the "look and feel" of your website, visit the <a href="@themes">themes section</a>. You may choose from one of the included themes or download additional themes from the <a href="@download_themes">Drupal themes download section</a>.', array('@themes' => url('admin/appearance'), '@download_themes' => 'http://drupal.org/project/themes')) . '</li>';
+      $output .= '<li>' . t('<strong>Start posting content</strong> Finally, you can <a href="@content">add new content</a> for your website.', array('@content' => url('node/add'))) . '</li>';
+      $output .= '</ol>';
+      $output .= '<p>' . t('For more information, refer to the specific topics listed in the next section or to the <a href="@handbook">online Drupal handbooks</a>. You may also post at the <a href="@forum">Drupal forum</a> or view the wide range of <a href="@support">other support options</a> available.', array('@help' => url('admin/help'), '@handbook' => 'http://drupal.org/documentation', '@forum' => 'http://drupal.org/forum', '@support' => 'http://drupal.org/support')) . '</p>';
       return $output;
     case 'admin/help#help':
-      $output = '<p>'. t('The help module displays context sensitive help information. Users can learn how to use modules and accomplish tasks quicker with less errors by clicking on links in provided by the help module.') .'</p>';
-      $output .= t("<p>Modules can make documentation available to other modules with this module. All user help should be presented using this module. Some examples of help: </p>
-<ul>
-<li>The module's help text, displayed on the <a href=\"@help\">help page</a> and through the module's individual help link.</li>
-<li>More elaborate help text on sites a module defines.</li>
-<li>The help for a distributed authorization module (if applicable).</li>
-</ul>
-", array('@help' => url('admin/help')));
-      $output .= '<p>'. t('For more information please read the configuration and customization handbook <a href="@help">Help page</a>.', array('@help' => 'http://drupal.org/handbook/modules/help/')) .'</p>';
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('The Help module provides <a href="@help-page">Help reference pages</a> and context-sensitive advice to guide you through the use and configuration of modules. It is a starting point for the online <a href="@handbook">Drupal handbooks</a>. The handbooks contain more extensive and up-to-date information, are annotated with user-contributed comments, and serve as the definitive reference point for all Drupal documentation. For more information, see the online handbook entry for the <a href="@help">Help module</a>.', array('@help' => 'http://drupal.org/documentation/modules/help/', '@handbook' => 'http://drupal.org/documentation', '@help-page' => url('admin/help'))) . '</p>';
+      $output .= '<h3>' . t('Uses') . '</h3>';
+      $output .= '<dl>';
+      $output .= '<dt>' . t('Providing a help reference') . '</dt>';
+      $output .= '<dd>' . t('The Help module displays explanations for using each module listed on the main <a href="@help">Help reference page</a>.', array('@help' => url('admin/help'))) . '</dd>';
+      $output .= '<dt>' . t('Providing context-sensitive help') . '</dt>';
+      $output .= '<dd>' . t('The Help module displays context-sensitive advice and explanations on various pages.') . '</dd>';
+      $output .= '</dl>';
       return $output;
   }
-}
-
-/**
- * Menu callback; prints a page listing general help for all modules.
- */
-function help_page() {
-  $name = arg(2);
-  $output = '';
-  if (module_hook($name, 'help')) {
-    $module = _module_parse_info_file(drupal_get_path('module', $name).'/'. $name .'.info');
-    drupal_set_title($module['name']);
-
-    $temp = module_invoke($name, 'help', "admin/help#$name");
-    if (empty($temp)) {
-      $output .= t("No help is available for module %module.", array('%module' => $module['name']));
-    }
-    else {
-      $output .= $temp;
-    }
-
-    // Only print list of administration pages if the module in question has
-    // any such pages associated to it.
-    $admin_tasks = system_get_module_admin_tasks($name);
-    if (!empty($admin_tasks)) {
-      ksort($admin_tasks);
-      $output .= theme('item_list', $admin_tasks, t('@module administration pages', array('@module' => $module['name'])));
-    }
-
-  }
-  return $output;
 }
