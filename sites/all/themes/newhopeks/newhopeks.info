@@ -28,7 +28,7 @@ stylesheets[all][] = css/style.css
 
 ; JAVASCRIPT
 scripts[] = js/libs/bootstrap.min.js
-scripts[] = js/libs/slides.min.jquery.js
+; scripts[] = js/libs/slides.min.jquery.js
 ; scripts[] = js/libs/jquery.nivo.slider.pack.js
 ; scripts[] = js/facebook-like.js
 ; scripts[] = js/google-plusone.js
