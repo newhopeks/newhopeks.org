@@ -2,7 +2,6 @@
 name = New Hope Church
 description = The Drupal 7 theme for New Hope Church in Manhattan, Kansas.
 screenshot = screenshot.png
-version = 7.2
 core = 7.x
 engine = phptemplate
 
