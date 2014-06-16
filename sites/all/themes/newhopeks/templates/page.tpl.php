@@ -5,7 +5,7 @@
 				<div class="span12">
 					<h1>
 						<?php if (!$is_front) { echo '<a href="/">'; } ?>
-						<img src="/<?= path_to_theme(); ?>/img-src/logo.fw.png" alt="<?php print $site_name; ?>" />
+						<?php print $site_name; ?>
 						<?php if (!$is_front) { echo '</a>'; } ?>
 					</h1>
 				</div>
