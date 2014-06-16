@@ -56,7 +56,7 @@
 		</div> <!-- end .row -->
 	</div> <!-- end .container -->
 </div> <!-- end .content -->
-<?php if ($page['content_bottom']) : ?>
+<?php if ($page['content_below']) : ?>
 	<hr />
 	<div class="content-bottom">
 		<div class="container">
