@@ -1,13 +1,13 @@
 <?php
 
-function drupalsprout_html_head_alter(&$head_elements) {
-	
+function newhopeks_html_head_alter(&$head_elements) {
+
 	/* Remove content-type meta tag. The HTML5 version will be added in the theme. */
 	unset($head_elements['system_meta_content_type']);
-	
+
 	/* Remove the generator meta tag */
 	unset($head_elements['system_meta_generator']);
-	
+
 	/* Remove Drupal-generated RSS feed */
 	foreach ($head_elements as $key => $element) {
 		if (isset($element['#attributes']['type']) && $element['#attributes']['type'] == 'application/rss+xml') {
@@ -28,10 +28,10 @@ function drupalsprout_html_head_alter(&$head_elements) {
  * http://drupal.org/node/784996
  */
 
-function drupalsprout_preprocess_page(&$variables) {
+function newhopeks_preprocess_page(&$variables) {
 
 	/* Get variables for use in page.tpl.php */
-	
+
 	$variables['site_name'] = filter_xss_admin(variable_get('site_name', 'Drupal'));
 	$variables['main_menu'] = menu_main_menu();
 
@@ -39,14 +39,14 @@ function drupalsprout_preprocess_page(&$variables) {
 
 
 
-function drupalsprout_process_html(&$vars) {
+function newhopeks_process_html(&$vars) {
 
 	/* Minify HTML output. */
-	
+
 	$minify_html = FALSE;
-	
+
 	if ($minify_html) {
-	
+
 		$before = array(
 			"/>\s\s+/",
 			"/\s\s+</",
@@ -54,46 +54,46 @@ function drupalsprout_process_html(&$vars) {
 			"/\s\s+(?=\w)/",
 			"/(?<=\w)\s\s+/"
 		);
-		
+
 		$after = array('> ', ' <', '> <', ' ', ' ');
-		
+
 		// Page top.
 		$page_top = $vars['page_top'];
 		$page_top = preg_replace($before, $after, $page_top);
 		$vars['page_top'] = $page_top;
-		
+
 		// Page content.
 		if (!preg_match('/<pre|<textarea/', $vars['page'])) {
 			$page = $vars['page'];
 			$page = preg_replace($before, $after, $page);
 			$vars['page'] = $page;
 		}
-		
+
 		// Page bottom.
 		$page_bottom = $vars['page_bottom'];
 		$page_bottom = preg_replace($before, $after, $page_bottom);
 		$vars['page_bottom'] = $page_bottom . drupal_get_js('footer');
-	
+
 	}
-	
+
 }
 
 
 
-function drupalsprout_process_html_tag(&$vars) {
+function newhopeks_process_html_tag(&$vars) {
 
 	/* Purge needless XHTML stuff. */
 
 	$el = &$vars['element'];
-	
+
 	// Remove type="..." and CDATA prefix/suffix.
 	unset($el['#attributes']['type'], $el['#value_prefix'], $el['#value_suffix']);
-	
+
 	// Remove media="all" but leave others unaffected.
 	if (isset($el['#attributes']['media']) && $el['#attributes']['media'] === 'all') {
 		unset($el['#attributes']['media']);
 	}
-	
+
 }
 
 
@@ -105,10 +105,10 @@ function drupalsprout_process_html_tag(&$vars) {
  * http://api.drupal.org/api/drupal/includes%21menu.inc/function/theme_menu_local_tasks/7
  */
 
-function drupalsprout_menu_local_tasks(&$variables) {
-	
+function newhopeks_menu_local_tasks(&$variables) {
+
 	$output = '';
-	
+
 	if (!empty($variables['primary'])) {
 		$variables['primary']['#prefix'] = '<h2 class="element-invisible">' . t('Primary tabs') . '</h2>';
 		$variables['primary']['#prefix'] .= '<ul class="tabs primary">';
@@ -121,9 +121,9 @@ function drupalsprout_menu_local_tasks(&$variables) {
 		$variables['secondary']['#suffix'] = '</ul>';
 		$output .= drupal_render($variables['secondary']);
 	}
-	
+
 	return $output;
-	
+
 }
 
 
@@ -173,5 +173,5 @@ function get_section() {
 		default:
 			return 'section-default';
 	}
-	
+
 }
