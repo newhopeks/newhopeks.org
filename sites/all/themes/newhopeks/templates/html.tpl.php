@@ -23,7 +23,7 @@
 		<link rel="stylesheet" href="/<?= path_to_theme(); ?>/css/libs/ie6.1.1.css" media="screen, projection">
 		<![endif]-->
 
-		<script src="/<?= path_to_theme(); ?>/js/libs/modernizr-2.6.2.min.js"></script>
+		<script src="/<?= path_to_theme(); ?>/js/libs/modernizr.min.js"></script>
 
 		<script>
 			// save the theme path for use in Javascript
