@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="logo">
 			<div class="row">
-				<div class="span12">
+				<div class="col-xs-12">
 					<h1>
 						<?php if (!$is_front) { echo '<a href="/">'; } ?>
 						<?php print $site_name; ?>
@@ -14,7 +14,7 @@
 
 		<div class="nav">
 			<div class="row">
-				<div class="span12">
+				<div class="col-xs-12">
 					<?php if ($main_menu) : ?>
 						<nav role="navigation">
 							<?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('class' => 'links'))); ?>
@@ -39,7 +39,7 @@
 <div id="content" class="content">
 	<div class="container">
 		<div class="row">
-			<div role="main" class="<?php if ($is_front) : ?>span12<?php else : ?>span8<?php endif; ?> main">
+			<div role="main" class="col-xs-12 <?php if ($is_front) : ?>col-sm-12<?php else : ?>col-sm-8<?php endif; ?> main">
 				<?php if (!$is_front && $title) : ?>
 					<h1><?php print $title; ?></h1>
 				<?php endif; ?>
@@ -47,8 +47,9 @@
 				<?php if ($is_front) { unset($page['content']['system_main']); } ?>
 				<?php print render($page['content']); ?>
 			</div> <!-- end .main -->
+
 			<?php if (!$is_front) : ?>
-				<div class="span4 sidebar">
+				<div class="col-xs-12 col-sm-4 sidebar">
 					<?php print render($page['content_sidebar']); ?>
 				</div> <!-- end .sidebar -->
 			<?php endif; ?>
@@ -69,7 +70,7 @@
 <footer role="contentinfo" class="footer">
 	<div class="container">
 		<div class="row">
-			<div class="span12">
+			<div class="col-xs-12">
 				<?php print render($page['footer']); ?>
 			</div> <!-- end .grid_12 -->
 		</div> <!-- end .row -->
