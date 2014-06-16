@@ -11,11 +11,11 @@
 				</div>
 			</div> <!-- end .row -->
 		</div> <!-- end .logo -->
+
 		<div class="nav">
 			<div class="row">
 				<div class="span12">
 					<?php if ($main_menu) : ?>
-						<hr />
 						<nav role="navigation">
 							<?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('class' => 'links'))); ?>
 						</nav>
@@ -25,7 +25,7 @@
 		</div> <!-- end .nav -->
 	</div> <!-- end .container -->
 </header> <!-- end .header -->
-<hr />
+
 <?php if ($page['content_above']) : ?>
 	<div class="content-top">
 		<div class="container">
@@ -34,8 +34,8 @@
 			</div> <!-- end .row -->
 		</div> <!-- end .container -->
 	</div> <!-- end .content-top -->
-	<hr />
 <?php endif; ?>
+
 <div id="content" class="content">
 	<div class="container">
 		<div class="row">
@@ -48,7 +48,6 @@
 				<?php print render($page['content']); ?>
 			</div> <!-- end .main -->
 			<?php if (!$is_front) : ?>
-				<hr />
 				<div class="span4 sidebar">
 					<?php print render($page['content_sidebar']); ?>
 				</div> <!-- end .sidebar -->
@@ -56,8 +55,8 @@
 		</div> <!-- end .row -->
 	</div> <!-- end .container -->
 </div> <!-- end .content -->
+
 <?php if ($page['content_below']) : ?>
-	<hr />
 	<div class="content-bottom">
 		<div class="container">
 			<div class="row">
@@ -66,7 +65,7 @@
 		</div> <!-- end .container -->
 	</div> <!-- end .content-bottom -->
 <?php endif; ?>
-<hr />
+
 <footer role="contentinfo" class="footer">
 	<div class="container">
 		<div class="row">
