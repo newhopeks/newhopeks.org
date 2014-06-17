@@ -32,8 +32,9 @@ function newhopeks_preprocess_page(&$variables) {
 
 	/* Get variables for use in page.tpl.php */
 
-	$variables['site_name'] = filter_xss_admin(variable_get('site_name', 'Drupal'));
+	$variables['site_name'] = filter_xss_admin(variable_get('site_name', 'New Hope Church'));
 	$variables['main_menu'] = menu_main_menu();
+	$variables['secondary_menu'] = menu_navigation_links('menu-secondary-menu');
 
 }
 
