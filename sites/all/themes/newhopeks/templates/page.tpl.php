@@ -39,7 +39,7 @@
 <div id="content" class="content">
 	<div class="container">
 		<div class="row">
-			<div role="main" class="col-xs-12 <?php if ($is_front) : ?>col-sm-12<?php else : ?>col-sm-8<?php endif; ?> main">
+			<div role="main" class="main col-xs-12 <?php if ($is_front) : ?>col-sm-12<?php else : ?>col-sm-9 col-sm-push-3<?php endif; ?>">
 				<?php if (!$is_front && $title) : ?>
 					<h1><?php print $title; ?></h1>
 				<?php endif; ?>
@@ -49,7 +49,7 @@
 			</div> <!-- end .main -->
 
 			<?php if (!$is_front) : ?>
-				<div class="col-xs-12 col-sm-4 sidebar">
+				<div class="sidebar col-xs-12 col-sm-3 col-sm-pull-9">
 					<?php print render($page['content_sidebar']); ?>
 				</div> <!-- end .sidebar -->
 			<?php endif; ?>
