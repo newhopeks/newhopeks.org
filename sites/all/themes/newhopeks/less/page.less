@@ -8,13 +8,46 @@
 // --------------------------------------------------
 
 .header {
+    position: relative;
+    padding-top: 31rem; padding-top: 31px;
 
 	.logo {
 	}
-	
+
 	.nav {
 	}
-	
+
+	.secondary-menu {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 5rem 0; padding: 5px 0;
+        width: 100%;
+        background-color: @nh-brown;
+        .font-size(14);
+        line-height: 1.5;
+        text-align: right;
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                display: inline-block;
+                margin: 0 0 0 10px;
+                padding: 0;
+
+                a {
+                    color: white;
+                }
+
+            }
+
+        }
+
+	}
+
 }
 
 
@@ -22,20 +55,20 @@
 // Content
 // --------------------------------------------------
 
-.content-top {
+.content-above {
 }
 
 .content {
 
 	.main {
 	}
-	
+
 	.sidebar {
 	}
-	
+
 }
 
-.content-bottom {
+.content-below {
 }
 
 

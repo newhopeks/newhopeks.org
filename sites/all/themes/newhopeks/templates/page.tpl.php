@@ -23,17 +23,19 @@
 				</div>
 			</div> <!-- end .row -->
 		</div> <!-- end .nav -->
-
-		<div class="secondary-menu">
-			<div class="row">
-				<div class="col-xs-12">
-					<?php if ($secondary_menu) : ?>
-                        <?php print theme('links__menu_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('class' => 'links'))); ?>
-					<?php endif; ?>
-				</div>
-			</div> <!-- end .row -->
-		</div> <!-- end .secondary-menu -->
 	</div> <!-- end .container -->
+
+	<div class="secondary-menu">
+	    <div class="container">
+    		<div class="row">
+    			<div class="col-xs-12">
+    				<?php if ($secondary_menu) : ?>
+                        <?php print theme('links__menu_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('class' => 'links'))); ?>
+    				<?php endif; ?>
+    			</div>
+    		</div> <!-- end .row -->
+        </div> <!-- end .container -->
+	</div> <!-- end .secondary-menu -->
 </header> <!-- end .header -->
 
 <?php if ($page['content_above']) : ?>
