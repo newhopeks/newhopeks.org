@@ -5875,6 +5875,10 @@ table > tbody > tr:hover > th {
   padding-top: 31px;
   padding-top: 3.1rem;
 }
+.header .logo h1 {
+  margin: 20px 0;
+  padding: 0;
+}
 .header .secondary-menu {
   position: absolute;
   top: 0;
