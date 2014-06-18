@@ -2,7 +2,9 @@
 ====================================================================================================
 
 Title:		New Hope Church
-Author: 	D. Nathan Dillon, http://natedillon.com
+Authors: 	Kyle Beyer
+            D. Nathan Dillon, http://natedillon.com
+            Kyle Gach, http://kylegach.com
 Copyright:	(c) 2014 New Hope Church
 
 ====================================================================================================
