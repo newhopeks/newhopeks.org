@@ -5872,19 +5872,22 @@ table > tbody > tr:hover > th {
 }
 .header {
   position: relative;
-  padding-top: 31rem;
   padding-top: 31px;
+  padding-top: 3.1rem;
 }
 .header .secondary-menu {
   position: absolute;
   top: 0;
   left: 0;
-  padding: 5rem 0;
   padding: 5px 0;
+  padding: 0.5rem 0;
   width: 100%;
+  color: white;
   background-color: #635b4c;
-  font-size: 14px;
-  font-size: 1.4rem;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 13px;
+  font-size: 1.3rem;
+  font-style: italic;
   line-height: 1.5;
   text-align: right;
 }
@@ -5895,11 +5898,20 @@ table > tbody > tr:hover > th {
 }
 .header .secondary-menu ul li {
   display: inline-block;
-  margin: 0 0 0 10px;
+  margin: 0 0 0 5px;
   padding: 0;
 }
+.header .secondary-menu ul li:before {
+  content: "|";
+  margin-right: 5px;
+  color: rgba(255, 255, 255, 0.3);
+}
+.header .secondary-menu ul li.first:before {
+  content: none;
+  margin-right: 0;
+}
 .header .secondary-menu ul li a {
-  color: white;
+  color: inherit;
 }
 #toolbar a:link,
 #toolbar a:visited {
