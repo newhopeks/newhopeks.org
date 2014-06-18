@@ -9,47 +9,6 @@
 
 body
 {
-	background: #f3f0eb url(../images/NoisyTile.png) repeat left top;
-	overflow-x: hidden; /* Only necessary when using http://css-tricks.com/9443-full-browser-width-bars/ for the full-width .secondary & footer */
-}
-
-img
-{
-	max-width: 100%;
-}
-
-h1
-{
-	/*	color: #76934c;*/
-	color: #555;
-	margin: 0;
-	letter-spacing: .1em;
-	text-transform: uppercase;
-}
-
-.fontface h1
-{
-	font-family: 'LeagueGothicRegular';
-	font-size: 28px;
-	font-weight: normal;
-}
-
-h2
-{
-	color: #76934c;
-}
-
-h3
-{
-	color: #444;
-}
-
-h1 > a, h1 > a:visited, h1 > a:hover, h1 > a:focus, h1 > a:active,
-h2 > a, h2 > a:visited, h2 > a:hover, h2 > a:focus, h2 > a:active,
-h3 > a, h3 > a:visited, h3 > a:hover, h3 > a:focus, h3 > a:active
-{
-	color: inherit;
-	text-decoration: none;
 }
 
 time > abbr[title]
