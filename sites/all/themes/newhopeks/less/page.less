@@ -1,0 +1,109 @@
+//
+// Page
+// ====================================================================================================
+
+
+
+// Header
+// --------------------------------------------------
+
+.header {
+    position: relative;
+    padding-top: 31px; padding-top: 3.1rem;
+
+	.logo {
+
+	    h1 {
+	        margin: 20px 0;
+	        padding: 0;
+
+    	    a {}
+
+    	    img {}
+
+	    }
+
+	}
+
+	.nav {
+	}
+
+	.secondary-menu {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 5px 0; padding: 0.5rem 0;
+        width: 100%;
+        color: white;
+        background-color: @nh-brown;
+        font-family: @font-family-serif;
+        .font-size(13);
+        font-style: italic;
+        line-height: 1.5;
+        text-align: right;
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                display: inline-block;
+                margin: 0 0 0 5px;
+                padding: 0;
+
+                &:before {
+                    content: "|";
+                    margin-right: 5px;
+                    color: fade(white, 30%);
+                }
+
+                &.first {
+
+                    &:before {
+                        content: none;
+                        margin-right: 0;
+                    }
+
+                }
+
+                a {
+                    color: inherit;
+                }
+
+            }
+
+        }
+
+	}
+
+}
+
+
+
+// Content
+// --------------------------------------------------
+
+.content-above {
+}
+
+.content {
+
+	.main {
+	}
+
+	.sidebar {
+	}
+
+}
+
+.content-below {
+}
+
+
+
+// Footer
+// --------------------------------------------------
+
+.footer {
+}
