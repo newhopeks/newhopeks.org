@@ -5879,6 +5879,24 @@ table > tbody > tr:hover > th {
   margin: 20px 0;
   padding: 0;
 }
+.header .logo h1 a {
+  display: block;
+}
+.header .nav {
+  font-family: "League Gothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  font-size: 2.4rem;
+  text-transform: uppercase;
+}
+.header .nav ul {
+  list-style-type: none;
+  text-align: right;
+}
+.header .nav ul li {
+  display: inline-block;
+  margin: 0 0 0 20px;
+  padding: 0;
+}
 .header .secondary-menu {
   position: absolute;
   top: 0;

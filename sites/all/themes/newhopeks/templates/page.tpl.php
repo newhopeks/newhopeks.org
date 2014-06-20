@@ -1,28 +1,22 @@
 <header role="banner" class="header">
 	<div class="container">
-		<div class="logo">
-			<div class="row">
-				<div class="col-xs-12">
-					<h1>
-						<?php if (!$is_front) { echo '<a href="/">'; } ?>
-						<img src="/<?= path_to_theme(); ?>/img/logo.png" alt="<?php print $site_name; ?>" />
-						<?php if (!$is_front) { echo '</a>'; } ?>
-					</h1>
-				</div>
-			</div> <!-- end .row -->
-		</div> <!-- end .logo -->
+		<div class="row">
+			<div class="logo col-xs-12 col-sm-3">
+				<h1>
+					<?php if (!$is_front) { echo '<a href="/">'; } ?>
+					<img src="/<?= path_to_theme(); ?>/img/logo.png" alt="<?php print $site_name; ?>" />
+					<?php if (!$is_front) { echo '</a>'; } ?>
+				</h1>
+			</div> <!-- end .logo -->
 
-		<div class="nav">
-			<div class="row">
-				<div class="col-xs-12">
-					<?php if ($main_menu) : ?>
-						<nav role="navigation">
-							<?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('class' => 'links'))); ?>
-						</nav>
-					<?php endif; ?>
-				</div>
-			</div> <!-- end .row -->
-		</div> <!-- end .nav -->
+			<div class="nav col-xs-12 col-sm-9">
+				<?php if ($main_menu) : ?>
+					<nav role="navigation">
+						<?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('class' => 'links'))); ?>
+					</nav>
+				<?php endif; ?>
+			</div> <!-- end .nav -->
+		</div> <!-- end .row -->
 	</div> <!-- end .container -->
 
 	<div class="secondary-menu">

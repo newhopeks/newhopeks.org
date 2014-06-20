@@ -17,7 +17,9 @@
 	        margin: 20px 0;
 	        padding: 0;
 
-    	    a {}
+    	    a {
+        	    display: block;
+    	    }
 
     	    img {}
 
@@ -25,7 +27,24 @@
 
 	}
 
-	.nav {}
+	.nav {
+	    font-family: @LeagueGothic;
+	    .font-size(24);
+	    text-transform: uppercase;
+
+    	ul {
+    	    list-style-type: none;
+	        text-align: right;
+
+        	li {
+            	display: inline-block;
+            	margin: 0 0 0 20px;
+            	padding: 0;
+        	}
+
+    	}
+
+	}
 
 	.secondary-menu {
         position: absolute;
