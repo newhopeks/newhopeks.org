@@ -5876,6 +5876,7 @@ table > tbody > tr:hover > th {
 }
 .header {
   position: relative;
+  margin-bottom: 10px;
   padding-top: 51px;
   padding-top: 5.1rem;
 }
@@ -5959,6 +5960,11 @@ table > tbody > tr:hover > th {
 }
 .header .secondary-menu ul li a {
   color: inherit;
+}
+.content .main {
+  background-color: white;
+  border-top: 1px solid #cbe3e5;
+  border-bottom: 5px solid #cbe3e5;
 }
 #toolbar a:link,
 #toolbar a:visited {
