@@ -1,23 +1,28 @@
 <header role="banner" class="header">
-	<div class="container">
-		<div class="row">
-			<div class="logo col-xs-12 col-sm-3">
-				<h1>
-					<?php if (!$is_front) { echo '<a href="/">'; } ?>
-					<img src="/<?= path_to_theme(); ?>/img/logo.png" alt="<?php print $site_name; ?>" />
-					<?php if (!$is_front) { echo '</a>'; } ?>
-				</h1>
-			</div> <!-- end .logo -->
 
-			<div class="nav col-xs-12 col-sm-9">
-				<?php if ($main_menu) : ?>
-					<nav role="navigation">
-						<?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('class' => 'links'))); ?>
-					</nav>
-				<?php endif; ?>
-			</div> <!-- end .nav -->
-		</div> <!-- end .row -->
-	</div> <!-- end .container -->
+    <div class="container">
+        <div class="row">
+    		<div class="logo col-xs-12 col-sm-3">
+    			<h1>
+    				<?php if (!$is_front) { echo '<a href="/">'; } ?>
+    				    <img src="/<?= path_to_theme(); ?>/img/logo.png" alt="<?php print $site_name; ?>" />
+    				<?php if (!$is_front) { echo '</a>'; } ?>
+    			</h1>
+    		</div> <!-- end .logo -->
+
+            <nav role="navigation" class="navbar col-xs-12 col-sm-9">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+    	        <div class="navbar-collapse collapse" id="navbar-collapse">
+    	            <?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('class' => 'links'))); ?>
+    	        </div>
+            </nav>
+        </div>
+    </div>
 
 	<div class="secondary-menu">
 	    <div class="container">
@@ -30,6 +35,7 @@
     		</div> <!-- end .row -->
         </div> <!-- end .container -->
 	</div> <!-- end .secondary-menu -->
+
 </header> <!-- end .header -->
 
 <?php if ($page['content_above']) : ?>

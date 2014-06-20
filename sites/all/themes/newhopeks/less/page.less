@@ -9,16 +9,21 @@
 
 .header {
     position: relative;
-    margin-bottom: 10px;
-    padding-top: 51px; padding-top: 5.1rem;
+    padding-top: 10px;
+    border-top: 5px solid @nh-brown-dark;
 
-	.nav,
-	.logo h1 {
+	@media (min-width: @screen-sm) {
+        padding-top: 51px; padding-top: 5.1rem;
+	}
+
+	.logo h1,
+	.navbar {
 	    font-family: @LeagueGothic;
 	    text-transform: uppercase;
 	}
 
 	.logo {
+        margin-bottom: 10px;
 
 	    h1 {
 	        margin: 0;
@@ -33,96 +38,137 @@
     	    img {
         	    display: block;
     	    }
-
 	    }
-
 	}
 
-	.nav {
+	.navbar {
+	    position: static;
+	    min-height: 0;
+	    margin: 0;
+	    padding: 0;
+	    background-color: @nh-brown;
+	    border: none;
 	    .font-size(24);
 	    line-height: 1;
 
-    	ul {
-    	    margin: 0;
+	    .navbar-toggle {
+	        position: absolute;
+	        top: 15px;
+	        right: 15px;
+	        margin: 0;
+    	    border-color: @nh-brown-light;
+
+    	    .icon-bar {
+        	    background-color: @nh-brown;
+    	    }
+
+	    }
+
+    	.navbar-collapse {
     	    padding: 0;
-    	    list-style-type: none;
-	        text-align: right;
+    	    color: white;
+    	    border: none;
+    	    box-shadow: none;
 
-        	li {
-            	display: inline-block;
-            	margin: 0 0 0 20px;
-            	padding: 0;
+    	    ul {
+        	    margin: 0;
+        	    padding: 15px;
+        	    border-top: 1px solid @nh-brown-dark;
+        	    list-style-type: none;
 
-            	a {
-            	    display: inline-block;
-            	    padding-bottom: 2px;
-                	color: @text-color;
-                	border-bottom: 3px solid transparent;
-            	}
-
-            	&.active-trail {
+        	    li {
+        	        margin: 5px 0;
+                    padding: 0;
 
             	    a {
-                        border-bottom-color: @link-color;
-                    }
+                        color: inherit;
+            	    }
+        	    }
+    	    }
 
+    	    @media (min-width: @screen-sm) {
+
+            	ul {
+        	        text-align: right;
+
+                	li {
+                    	display: inline-block;
+                    	margin-left: 20px;
+
+                    	a {
+                    	    display: inline-block;
+                    	    padding-bottom: 2px;
+                        	color: @text-color;
+                        	border-bottom: 3px solid transparent;
+
+                        	&:hover,
+                        	&:active {
+                        	    color: @link-color;
+                                text-decoration: none;
+                        	}
+
+                    	}
+
+                    	&.active-trail {
+
+                    	    a {
+                                border-bottom-color: @link-color;
+                            }
+                    	}
+                	}
             	}
-
-        	}
-
-    	}
-
+            }
+        }
 	}
 
 	.secondary-menu {
-        position: absolute;
-        top: 0;
-        left: 0;
-        padding: 5px 0; padding: 0.5rem 0;
-        width: 100%;
-        color: white;
-        background-color: @nh-brown;
-        font-family: @font-family-serif;
-        .font-size(13);
-        font-style: italic;
-        line-height: 1.5;
-        text-align: right;
+	    display: none;
 
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
+	    @media (min-width: @screen-sm) {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 5px 0; padding: 0.5rem 0;
+            width: 100%;
+            color: white;
+            background-color: @nh-brown;
+            font-family: @font-family-serif;
+            .font-size(13);
+            font-style: italic;
+            line-height: 1.5;
+            text-align: right;
 
-            li {
-                display: inline-block;
-                margin: 0 0 0 5px;
+            ul {
+                list-style-type: none;
+                margin: 0;
                 padding: 0;
 
-                &:before {
-                    content: "|";
-                    margin-right: 5px;
-                    color: fade(white, 30%);
-                }
-
-                &.first {
+                li {
+                    display: inline-block;
+                    margin: 0 0 0 5px;
+                    padding: 0;
 
                     &:before {
-                        content: none;
-                        margin-right: 0;
+                        content: "|";
+                        margin-right: 5px;
+                        color: fade(white, 30%);
                     }
 
-                }
+                    &.first {
 
-                a {
-                    color: inherit;
-                }
+                        &:before {
+                            content: none;
+                            margin-right: 0;
+                        }
+                    }
 
+                    a {
+                        color: inherit;
+                    }
+                }
             }
-
-        }
-
-	}
-
+    	}
+    }
 }
 
 

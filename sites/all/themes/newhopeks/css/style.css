@@ -2391,8 +2391,8 @@ input[type="button"].btn-block {
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url('../fonts/glyphicons-halflings-regular.eot');
-  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  src: url('../fonts/libs/bootstrap/glyphicons-halflings-regular.eot');
+  src: url('../fonts/libs/bootstrap/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/libs/bootstrap/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/libs/bootstrap/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/libs/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .glyphicon {
   position: relative;
@@ -5803,10 +5803,6 @@ a {
   -webkit-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }
-a:hover,
-a:focus {
-  text-decoration: none;
-}
 h1 > a,
 h2 > a,
 h3 > a,
@@ -5876,14 +5872,22 @@ table > tbody > tr:hover > th {
 }
 .header {
   position: relative;
-  margin-bottom: 10px;
-  padding-top: 51px;
-  padding-top: 5.1rem;
+  padding-top: 10px;
+  border-top: 5px solid #292620;
 }
-.header .nav,
-.header .logo h1 {
+@media (min-width: 768px) {
+  .header {
+    padding-top: 51px;
+    padding-top: 5.1rem;
+  }
+}
+.header .logo h1,
+.header .navbar {
   font-family: "League Gothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
+}
+.header .logo {
+  margin-bottom: 10px;
 }
 .header .logo h1 {
   margin: 0;
@@ -5898,68 +5902,111 @@ table > tbody > tr:hover > th {
 .header .logo h1 img {
   display: block;
 }
-.header .nav {
+.header .navbar {
+  position: static;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  background-color: #635b4c;
+  border: none;
   font-size: 24px;
   font-size: 2.4rem;
   line-height: 1;
 }
-.header .nav ul {
+.header .navbar .navbar-toggle {
+  position: absolute;
+  top: 15px;
+  right: 15px;
   margin: 0;
+  border-color: #b0a898;
+}
+.header .navbar .navbar-toggle .icon-bar {
+  background-color: #635b4c;
+}
+.header .navbar .navbar-collapse {
   padding: 0;
+  color: white;
+  border: none;
+  box-shadow: none;
+}
+.header .navbar .navbar-collapse ul {
+  margin: 0;
+  padding: 15px;
+  border-top: 1px solid #292620;
   list-style-type: none;
-  text-align: right;
 }
-.header .nav ul li {
-  display: inline-block;
-  margin: 0 0 0 20px;
+.header .navbar .navbar-collapse ul li {
+  margin: 5px 0;
   padding: 0;
 }
-.header .nav ul li a {
-  display: inline-block;
-  padding-bottom: 2px;
-  color: #635b4c;
-  border-bottom: 3px solid transparent;
+.header .navbar .navbar-collapse ul li a {
+  color: inherit;
 }
-.header .nav ul li.active-trail a {
-  border-bottom-color: #66adb1;
+@media (min-width: 768px) {
+  .header .navbar .navbar-collapse ul {
+    text-align: right;
+  }
+  .header .navbar .navbar-collapse ul li {
+    display: inline-block;
+    margin-left: 20px;
+  }
+  .header .navbar .navbar-collapse ul li a {
+    display: inline-block;
+    padding-bottom: 2px;
+    color: #635b4c;
+    border-bottom: 3px solid transparent;
+  }
+  .header .navbar .navbar-collapse ul li a:hover,
+  .header .navbar .navbar-collapse ul li a:active {
+    color: #66adb1;
+    text-decoration: none;
+  }
+  .header .navbar .navbar-collapse ul li.active-trail a {
+    border-bottom-color: #66adb1;
+  }
 }
 .header .secondary-menu {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 5px 0;
-  padding: 0.5rem 0;
-  width: 100%;
-  color: white;
-  background-color: #635b4c;
-  font-family: Georgia, "Times New Roman", Times, serif;
-  font-size: 13px;
-  font-size: 1.3rem;
-  font-style: italic;
-  line-height: 1.5;
-  text-align: right;
+  display: none;
 }
-.header .secondary-menu ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-.header .secondary-menu ul li {
-  display: inline-block;
-  margin: 0 0 0 5px;
-  padding: 0;
-}
-.header .secondary-menu ul li:before {
-  content: "|";
-  margin-right: 5px;
-  color: rgba(255, 255, 255, 0.3);
-}
-.header .secondary-menu ul li.first:before {
-  content: none;
-  margin-right: 0;
-}
-.header .secondary-menu ul li a {
-  color: inherit;
+@media (min-width: 768px) {
+  .header .secondary-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px 0;
+    padding: 0.5rem 0;
+    width: 100%;
+    color: white;
+    background-color: #635b4c;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 13px;
+    font-size: 1.3rem;
+    font-style: italic;
+    line-height: 1.5;
+    text-align: right;
+  }
+  .header .secondary-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  .header .secondary-menu ul li {
+    display: inline-block;
+    margin: 0 0 0 5px;
+    padding: 0;
+  }
+  .header .secondary-menu ul li:before {
+    content: "|";
+    margin-right: 5px;
+    color: rgba(255, 255, 255, 0.3);
+  }
+  .header .secondary-menu ul li.first:before {
+    content: none;
+    margin-right: 0;
+  }
+  .header .secondary-menu ul li a {
+    color: inherit;
+  }
 }
 .content .main {
   background-color: white;
