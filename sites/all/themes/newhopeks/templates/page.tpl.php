@@ -37,13 +37,13 @@
 </header> <!-- end .header -->
 
 <?php if ($page['content_above']) : ?>
-	<div class="content-top">
+	<div class="content-above">
 		<div class="container">
 			<div class="row">
 				<?php print render($page['content_above']); ?>
 			</div> <!-- end .row -->
 		</div> <!-- end .container -->
-	</div> <!-- end .content-top -->
+	</div> <!-- end .content-above -->
 <?php endif; ?>
 
 <div id="content" class="content">
@@ -68,13 +68,13 @@
 </div> <!-- end .content -->
 
 <?php if ($page['content_below']) : ?>
-	<div class="content-bottom">
+	<div class="content-below">
 		<div class="container">
 			<div class="row">
 				<?php print render($page['content_below']); ?>
 			</div> <!-- end .row -->
 		</div> <!-- end .container -->
-	</div> <!-- end .content-bottom -->
+	</div> <!-- end .content-below -->
 <?php endif; ?>
 
 <footer role="contentinfo" class="footer">
