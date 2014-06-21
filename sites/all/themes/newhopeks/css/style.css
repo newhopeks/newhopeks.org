@@ -6097,3 +6097,6 @@ table > tbody > tr:hover > th {
   width: auto;
   height: auto;
 }
+.sidebar .subnav {
+  background-color: #78944a;
+}
