@@ -1,5 +1,4 @@
 <header role="banner" class="header">
-
     <div class="container">
         <div class="row">
     		<div class="logo col-xs-12 col-sm-3">
@@ -24,7 +23,7 @@
         </div>
     </div>
 
-	<div class="secondary-menu">
+	<div class="secondary-menu hidden-xs">
 	    <div class="container">
     		<div class="row">
     			<div class="col-xs-12">
@@ -35,7 +34,6 @@
     		</div> <!-- end .row -->
         </div> <!-- end .container -->
 	</div> <!-- end .secondary-menu -->
-
 </header> <!-- end .header -->
 
 <?php if ($page['content_above']) : ?>
