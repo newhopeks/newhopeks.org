@@ -6098,5 +6098,32 @@ table > tbody > tr:hover > th {
   height: auto;
 }
 .sidebar .subnav {
+  margin: 0 -15px;
+  padding: 15px;
+  color: white;
   background-color: #78944a;
+  border-top: 1px solid #415028;
+  border-bottom: 5px solid #415028;
+}
+.sidebar .subnav .block-title {
+  margin: 0 0 10px 0;
+  color: white;
+}
+.sidebar .subnav .block-title a {
+  color: inherit;
+}
+.sidebar .subnav ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.sidebar .subnav ul li {
+  margin: 0;
+  padding: 0;
+}
+.sidebar .subnav ul li a {
+  color: inherit;
+}
+.sidebar .subnav ul li ul {
+  margin-left: 20px;
 }

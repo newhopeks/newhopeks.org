@@ -49,19 +49,42 @@
 // Sub-navigation
 
 .sidebar .subnav {
+    margin: 0 -15px;
+    padding: 15px;
+    color: white;
     background-color: @nh-green;
+    border-top: 1px solid @nh-green-dark;
+    border-bottom: 5px solid @nh-green-dark;
 
-	.block-title {}
+	.block-title {
+	    margin: 0 0 10px 0;
+	    color: white;
+
+    	a {
+        	color: inherit;
+    	}
+
+	}
 
 	ul {
+	    margin: 0;
+	    padding: 0;
+	    list-style-type: none;
 
 		li {
+		    margin: 0;
+		    padding: 0;
 
 			a {
+			    color: inherit;
 
 				&:hover,
 				&:focus {}
 
+			}
+
+			ul {
+    			margin-left: 20px;
 			}
 
 		}
