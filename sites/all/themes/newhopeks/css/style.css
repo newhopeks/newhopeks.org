@@ -6126,7 +6126,8 @@ table > tbody > tr:hover > th {
   }
 }
 .sidebar .subnav {
-  color: white;
+  padding-bottom: 0;
+  color: rgba(255, 255, 255, 0.8);
   background-color: #78944a;
   border-top: 1px solid #415028;
   border-bottom: 5px solid #415028;
@@ -6138,17 +6139,35 @@ table > tbody > tr:hover > th {
   color: inherit;
 }
 .sidebar .subnav ul {
-  margin: 0;
+  margin: 0 -10px;
   padding: 0;
   list-style-type: none;
 }
 .sidebar .subnav ul li {
   margin: 0;
-  padding: 0;
+  padding: 5px 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 .sidebar .subnav ul li a {
   color: inherit;
 }
+.sidebar .subnav ul li a:hover,
+.sidebar .subnav ul li a:focus {
+  color: white;
+}
+.sidebar .subnav ul li.active-trail {
+  color: white;
+  background-color: rgba(65, 80, 40, 0.2);
+}
 .sidebar .subnav ul li ul {
-  margin-left: 20px;
+  padding-left: 10px;
+  font-size: 12px;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+.sidebar .subnav ul li ul li {
+  border: none;
+}
+.sidebar .subnav ul li ul li.active-trail {
+  background-color: transparent;
 }
