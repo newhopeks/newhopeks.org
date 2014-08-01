@@ -42,14 +42,19 @@
 
 .sidebar .block {
     padding: 10px;
+    background-color: darken(@html-bg, 10%);
 
 	.block-title {
 	    margin: 0 0 10px 0;
     	.font-size(24);
 	}
 
-	@media (max-width: @screen-xs) {
+	@media (max-width: @screen-sm) {
         margin: 0 -10px;
+	}
+
+	@media (min-width: @screen-sm) {
+        margin-bottom: 10px;
 	}
 
 }
