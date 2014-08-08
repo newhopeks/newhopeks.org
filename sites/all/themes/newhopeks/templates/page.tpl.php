@@ -10,30 +10,27 @@
     		</div> <!-- end .logo -->
 
             <nav role="navigation" class="navbar col-xs-12 col-sm-9">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-    	        <div class="navbar-collapse collapse" id="navbar-collapse">
-    	            <?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('class' => 'links'))); ?>
+    	        <div class="collapse navbar-collapse" id="main-navbar-collapse">
+    	            <?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('class' => 'nav navbar-nav main-menu'))); ?>
+    				<form class="navbar-form" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+    				<?php if ($secondary_menu) : ?>
+                        <?php print theme('links__menu_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('class' => 'nav navbar-nav secondary-menu'))); ?>
+    				<?php endif; ?>
     	        </div>
             </nav>
         </div>
     </div>
-
-	<div class="secondary-menu hidden-xs">
-	    <div class="container">
-    		<div class="row">
-    			<div class="col-xs-12">
-    				<?php if ($secondary_menu) : ?>
-                        <?php print theme('links__menu_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('class' => 'links'))); ?>
-    				<?php endif; ?>
-    			</div>
-    		</div> <!-- end .row -->
-        </div> <!-- end .container -->
-	</div> <!-- end .secondary-menu -->
 </header> <!-- end .header -->
 
 <?php if ($page['content_above']) : ?>
