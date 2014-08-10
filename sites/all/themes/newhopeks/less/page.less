@@ -17,7 +17,7 @@
 	}
 
 	.logo h1,
-	.navbar {
+	.main-menu {
 	    font-family: @LeagueGothic;
 	    text-transform: uppercase;
 	}
@@ -38,15 +38,20 @@
     	    img {
         	    display: block;
     	    }
+
 	    }
+
 	}
 
 	.navbar-main {
 	    position: static;
 	    min-height: 0;
 	    margin: 0;
+	    padding: 0;
 	    background-color: @nh-brown;
 	    border: none;
+	    .font-size(18);
+	    line-height: 1;
 
 	    .navbar-toggle {
 	        position: absolute;
@@ -64,37 +69,72 @@
     	.navbar-collapse {
 	        overflow: visible;
 	        max-height: none;
-    	}
-
-	}
-
-	.navbar-old {
-	    padding: 0;
-	    .font-size(36);
-	    line-height: 1;
-
-    	.navbar-collapse {
     	    padding: 0;
     	    color: white;
     	    border: none;
     	    box-shadow: none;
 
-    	    ul {
+	        .main-menu {
         	    margin: 0;
-        	    padding: 10px;
+        	    padding: 15px 0;
         	    border-top: 1px solid @nh-brown-dark;
-        	    list-style-type: none;
+                .font-size(36);
 
-        	    li {
-        	        margin: 5px 0;
+                li {
+        	        margin: 0;
                     padding: 0;
 
-            	    a {
+                    a {
+                        padding: 5px 10px;
                         color: inherit;
-            	    }
-        	    }
-    	    }
-        }
+                        line-height: inherit;
+
+                        &:hover,
+                        &:active {
+                            background-color: @nh-brown-dark;
+                        }
+
+                    }
+
+                }
+
+	        }
+
+	        .search {
+    	        margin: 0;
+	        }
+
+	        .secondary-menu {
+        	    margin: 0;
+        	    padding: 10px;
+
+                li {
+        	        margin: 10px 0;
+                    padding: 0;
+
+                    a {
+                        display: inline;
+                        padding: 0;
+                        color: inherit;
+                        line-height: inherit;
+
+                        &:hover,
+                        &:active {
+                            background-color: transparent;
+                            text-decoration: underline;
+                        }
+
+                    }
+
+                }
+
+	        }
+
+    	}
+
+	}
+
+	.navbar-old {
 
         @media (min-width: @screen-sm) {
 	        background-color: transparent;
@@ -138,7 +178,7 @@
         }
 	}
 
-	.secondary-menu {
+	.secondary-menu-old {
 
 	    @media (min-width: @screen-sm) {
             position: absolute;

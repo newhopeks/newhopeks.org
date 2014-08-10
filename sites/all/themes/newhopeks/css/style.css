@@ -5882,7 +5882,7 @@ table > tbody > tr:hover > th {
   }
 }
 .header .logo h1,
-.header .navbar {
+.header .main-menu {
   font-family: "League Gothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
 }
@@ -5906,8 +5906,12 @@ table > tbody > tr:hover > th {
   position: static;
   min-height: 0;
   margin: 0;
+  padding: 0;
   background-color: #635b4c;
   border: none;
+  font-size: 18px;
+  font-size: 1.8rem;
+  line-height: 1;
 }
 .header .navbar-main .navbar-toggle {
   position: absolute;
@@ -5922,31 +5926,52 @@ table > tbody > tr:hover > th {
 .header .navbar-main .navbar-collapse {
   overflow: visible;
   max-height: none;
-}
-.header .navbar-old {
-  padding: 0;
-  font-size: 36px;
-  font-size: 3.6rem;
-  line-height: 1;
-}
-.header .navbar-old .navbar-collapse {
   padding: 0;
   color: white;
   border: none;
   box-shadow: none;
 }
-.header .navbar-old .navbar-collapse ul {
+.header .navbar-main .navbar-collapse .main-menu {
   margin: 0;
-  padding: 10px;
+  padding: 15px 0;
   border-top: 1px solid #292620;
-  list-style-type: none;
+  font-size: 36px;
+  font-size: 3.6rem;
 }
-.header .navbar-old .navbar-collapse ul li {
-  margin: 5px 0;
+.header .navbar-main .navbar-collapse .main-menu li {
+  margin: 0;
   padding: 0;
 }
-.header .navbar-old .navbar-collapse ul li a {
+.header .navbar-main .navbar-collapse .main-menu li a {
+  padding: 5px 10px;
   color: inherit;
+  line-height: inherit;
+}
+.header .navbar-main .navbar-collapse .main-menu li a:hover,
+.header .navbar-main .navbar-collapse .main-menu li a:active {
+  background-color: #292620;
+}
+.header .navbar-main .navbar-collapse .search {
+  margin: 0;
+}
+.header .navbar-main .navbar-collapse .secondary-menu {
+  margin: 0;
+  padding: 10px;
+}
+.header .navbar-main .navbar-collapse .secondary-menu li {
+  margin: 10px 0;
+  padding: 0;
+}
+.header .navbar-main .navbar-collapse .secondary-menu li a {
+  display: inline;
+  padding: 0;
+  color: inherit;
+  line-height: inherit;
+}
+.header .navbar-main .navbar-collapse .secondary-menu li a:hover,
+.header .navbar-main .navbar-collapse .secondary-menu li a:active {
+  background-color: transparent;
+  text-decoration: underline;
 }
 @media (min-width: 768px) {
   .header .navbar-old {
@@ -5982,7 +6007,7 @@ table > tbody > tr:hover > th {
   }
 }
 @media (min-width: 768px) {
-  .header .secondary-menu {
+  .header .secondary-menu-old {
     position: absolute;
     top: 0;
     left: 0;
@@ -5998,26 +6023,26 @@ table > tbody > tr:hover > th {
     line-height: 1.5;
     text-align: right;
   }
-  .header .secondary-menu ul {
+  .header .secondary-menu-old ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
   }
-  .header .secondary-menu ul li {
+  .header .secondary-menu-old ul li {
     display: inline-block;
     margin: 0 0 0 5px;
     padding: 0;
   }
-  .header .secondary-menu ul li:before {
+  .header .secondary-menu-old ul li:before {
     content: "|";
     margin-right: 5px;
     color: rgba(255, 255, 255, 0.3);
   }
-  .header .secondary-menu ul li.first:before {
+  .header .secondary-menu-old ul li.first:before {
     content: none;
     margin-right: 0;
   }
-  .header .secondary-menu ul li a {
+  .header .secondary-menu-old ul li a {
     color: inherit;
   }
 }

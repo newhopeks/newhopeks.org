@@ -18,7 +18,7 @@
                 </button>
     	        <div class="collapse navbar-collapse" id="main-navbar-collapse">
     	            <?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('class' => 'nav navbar-nav main-menu'))); ?>
-    				<form class="navbar-form" role="search">
+    				<form class="navbar-form search" role="search">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Search">
                         </div>
