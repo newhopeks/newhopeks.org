@@ -5902,76 +5902,82 @@ table > tbody > tr:hover > th {
 .header .logo h1 img {
   display: block;
 }
-.header .navbar {
+.header .navbar-main {
   position: static;
   min-height: 0;
   margin: 0;
-  padding: 0;
   background-color: #635b4c;
   border: none;
-  font-size: 36px;
-  font-size: 3.6rem;
-  line-height: 1;
 }
-.header .navbar .navbar-toggle {
+.header .navbar-main .navbar-toggle {
   position: absolute;
   top: 10px;
   right: 10px;
   margin: 0;
   border-color: #b0a898;
 }
-.header .navbar .navbar-toggle .icon-bar {
+.header .navbar-main .navbar-toggle .icon-bar {
   background-color: #635b4c;
 }
-.header .navbar .navbar-collapse {
+.header .navbar-main .navbar-collapse {
+  overflow: visible;
+  max-height: none;
+}
+.header .navbar-old {
+  padding: 0;
+  font-size: 36px;
+  font-size: 3.6rem;
+  line-height: 1;
+}
+.header .navbar-old .navbar-collapse {
   padding: 0;
   color: white;
   border: none;
   box-shadow: none;
 }
-.header .navbar .navbar-collapse ul {
+.header .navbar-old .navbar-collapse ul {
   margin: 0;
   padding: 10px;
   border-top: 1px solid #292620;
   list-style-type: none;
 }
-.header .navbar .navbar-collapse ul li {
+.header .navbar-old .navbar-collapse ul li {
   margin: 5px 0;
   padding: 0;
 }
-.header .navbar .navbar-collapse ul li a {
+.header .navbar-old .navbar-collapse ul li a {
   color: inherit;
 }
 @media (min-width: 768px) {
-  .header .navbar {
+  .header .navbar-old {
     background-color: transparent;
     font-size: 24px;
     font-size: 2.4rem;
     line-height: 1;
   }
-  .header .navbar .navbar-collapse {
+  .header .navbar-old .navbar-collapse {
     color: #635b4c;
   }
-  .header .navbar .navbar-collapse ul {
+  .header .navbar-old .navbar-collapse ul {
     padding: 0;
     border: none;
     text-align: right;
   }
-  .header .navbar .navbar-collapse ul li {
+  .header .navbar-old .navbar-collapse ul li {
     display: inline-block;
     margin: 0 0 0 20px;
   }
-  .header .navbar .navbar-collapse ul li a {
+  .header .navbar-old .navbar-collapse ul li a {
     display: inline-block;
     padding-bottom: 2px;
     border-bottom: 3px solid transparent;
   }
-  .header .navbar .navbar-collapse ul li a:hover,
-  .header .navbar .navbar-collapse ul li a:active {
+  .header .navbar-old .navbar-collapse ul li a:hover,
+  .header .navbar-old .navbar-collapse ul li a:active {
     color: #66adb1;
     text-decoration: none;
   }
-  .header .navbar .navbar-collapse ul li.active-trail a {
+  .header .navbar-old .navbar-collapse ul li.active-trail a {
     border-bottom-color: #66adb1;
   }
 }

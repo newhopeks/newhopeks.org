@@ -9,7 +9,7 @@
     			</h1>
     		</div> <!-- end .logo -->
 
-            <nav role="navigation" class="navbar col-xs-12 col-sm-9">
+            <nav role="navigation" class="navbar navbar-main col-xs-12 col-sm-9">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
