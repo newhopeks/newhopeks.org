@@ -5949,10 +5949,14 @@ table > tbody > tr:hover > th {
 }
 .header .navbar-main .navbar-collapse .main-menu li a:hover,
 .header .navbar-main .navbar-collapse .main-menu li a:active {
-  background-color: #292620;
+  background-color: transparent;
 }
 .header .navbar-main .navbar-collapse .search {
-  margin: 0;
+  margin: 0 10px;
+  padding: 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: none;
 }
 .header .navbar-main .navbar-collapse .secondary-menu {
   margin: 0;
