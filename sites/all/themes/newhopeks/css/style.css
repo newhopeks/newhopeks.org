@@ -5924,7 +5924,6 @@ table > tbody > tr:hover > th {
   background-color: #635b4c;
 }
 .header .navbar-main .navbar-collapse {
-  overflow: visible;
   max-height: none;
   padding: 0;
   color: white;
