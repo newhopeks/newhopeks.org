@@ -5950,7 +5950,7 @@ table > tbody > tr:hover > th {
 .header .navbar-main .navbar-collapse .main-menu li a:active {
   background-color: transparent;
 }
-.header .navbar-main .navbar-collapse .search {
+.header .navbar-main .navbar-collapse .search-form {
   margin: 0 10px;
   padding: 20px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.2);

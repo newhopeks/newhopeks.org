@@ -18,12 +18,7 @@
                 </button>
     	        <div class="collapse navbar-collapse" id="main-navbar-collapse">
     	            <?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('class' => 'nav navbar-nav main-menu'))); ?>
-    				<form class="navbar-form search" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
-                        </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
+                    <?php print $search_box; ?>
     				<?php if ($secondary_menu) : ?>
                         <?php print theme('links__menu_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('class' => 'nav navbar-nav secondary-menu'))); ?>
     				<?php endif; ?>
