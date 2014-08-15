@@ -35,7 +35,62 @@ function newhopeks_preprocess_page(&$variables) {
 	$variables['site_name'] = filter_xss_admin(variable_get('site_name', 'New Hope Church'));
 	$variables['main_menu'] = menu_main_menu();
 	$variables['secondary_menu'] = menu_navigation_links('menu-secondary-menu');
-	$variables['search_box'] = drupal_render(drupal_get_form('search_form'));
+
+	//$search_form = drupal_get_form('search_form');
+	//$search_form['#attributes']['role'][] = 'form';
+	$variables['search_form'] = drupal_render(drupal_get_form('search_form'));
+
+}
+
+
+
+/**
+ * hook_form_FORM_ID_alter
+ */
+
+function newhopeks_form_search_form_alter(&$form, &$form_state, $form_id) {
+
+    $search_placeholder_text = t('Search');
+    $search_btn_text = t('Go');
+
+
+    $form['basic']['#attributes'] = array(
+        'class' => array(
+            'form-group',
+        ),
+    );
+
+    $form['basic']['keys'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Search',
+        '#theme' => 'textfield',
+        '#theme_wrappers' => array('custom_search_form_wrapper'),
+        '#attributes' => array(
+            'placeholder' => $search_placeholder_text,
+        ),
+    );
+
+    $form['basic']['submit'] = array(
+        '#type' => 'submit',
+        '#value' => $search_btn_text,
+        '#attributes' => array(
+            'class' => array(
+                'btn',
+            ),
+        ),
+    );
+
+    $form['basic']['keys']['#title_display'] = 'invisible';
+
+}
+
+function newhopeks_custom_search_form_wrapper($variables) {
+
+    $element = $variables['element'];
+
+    $output  = '<div class="test">';
+    $output .= $element['#children'];
+    $output .= '</div>';
 
 }
 

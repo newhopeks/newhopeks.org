@@ -5952,14 +5952,14 @@ table > tbody > tr:hover > th {
 }
 .header .navbar-main .navbar-collapse .search-form {
   margin: 0 10px;
-  padding: 20px 0;
+  padding: 20px 0 0 0;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: none;
 }
 .header .navbar-main .navbar-collapse .secondary-menu {
-  margin: 0;
-  padding: 10px;
+  margin: 10px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 .header .navbar-main .navbar-collapse .secondary-menu li {
   margin: 10px 0;
