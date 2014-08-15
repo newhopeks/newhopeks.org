@@ -5913,6 +5913,11 @@ table > tbody > tr:hover > th {
   font-size: 1.8rem;
   line-height: 1;
 }
+@media (min-width: 768px) {
+  .header .navbar-main {
+    background-color: transparent;
+  }
+}
 .header .navbar-main .navbar-toggle {
   position: absolute;
   top: 10px;
@@ -5929,6 +5934,11 @@ table > tbody > tr:hover > th {
   color: white;
   border: none;
   box-shadow: none;
+}
+@media (min-width: 768px) {
+  .header .navbar-main .navbar-collapse {
+    color: #635b4c;
+  }
 }
 .header .navbar-main .navbar-collapse .main-menu {
   margin: 0;
@@ -5950,39 +5960,7 @@ table > tbody > tr:hover > th {
 .header .navbar-main .navbar-collapse .main-menu li a:active {
   background-color: transparent;
 }
-.header .navbar-main .navbar-collapse .search-form {
-  margin: 0 10px;
-  padding: 20px 0 0 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: none;
-}
-.header .navbar-main .navbar-collapse .secondary-menu {
-  margin: 10px;
-  padding: 10px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-.header .navbar-main .navbar-collapse .secondary-menu li {
-  margin: 10px 0;
-  padding: 0;
-}
-.header .navbar-main .navbar-collapse .secondary-menu li a {
-  display: inline;
-  padding: 0;
-  color: inherit;
-  line-height: inherit;
-}
-.header .navbar-main .navbar-collapse .secondary-menu li a:hover,
-.header .navbar-main .navbar-collapse .secondary-menu li a:active {
-  background-color: transparent;
-  text-decoration: underline;
-}
 @media (min-width: 768px) {
-  .header .navbar-main {
-    background-color: transparent;
-  }
-  .header .navbar-main .navbar-collapse {
-    color: #635b4c;
-  }
   .header .navbar-main .navbar-collapse .main-menu {
     float: none;
     padding: 0;
@@ -6009,47 +5987,68 @@ table > tbody > tr:hover > th {
   .header .navbar-main .navbar-collapse .main-menu li.active-trail a {
     border-bottom-color: #66adb1;
   }
-  .header .navbar-main .navbar-collapse .secondary-menu {
-    display: none;
-  }
+}
+.header .navbar-main .navbar-collapse .search-form {
+  margin: 0 10px;
+  padding: 20px 0 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+}
+.header .navbar-main .navbar-collapse .secondary-menu {
+  margin: 10px;
+  padding: 10px 0 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-style: italic;
+}
+.header .navbar-main .navbar-collapse .secondary-menu li {
+  margin: 10px 0;
+  padding: 0;
+}
+.header .navbar-main .navbar-collapse .secondary-menu li a {
+  display: inline;
+  padding: 0;
+  color: inherit;
+  line-height: inherit;
+}
+.header .navbar-main .navbar-collapse .secondary-menu li a:hover,
+.header .navbar-main .navbar-collapse .secondary-menu li a:active {
+  background-color: transparent;
+  text-decoration: underline;
 }
 @media (min-width: 768px) {
-  .header .secondary-menu-old {
+  .header .navbar-main .navbar-collapse .secondary-menu {
     position: absolute;
     top: 0;
     left: 0;
-    padding: 5px 0;
-    padding: 0.5rem 0;
     width: 100%;
+    margin: 0;
+    padding: 5px 10px;
+    padding: 0.5rem 10px;
     color: white;
     background-color: #635b4c;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 13px;
-    font-size: 1.3rem;
-    font-style: italic;
+    border: none;
+    font-size: 14px;
+    font-size: 1.4rem;
     line-height: 1.5;
     text-align: right;
   }
-  .header .secondary-menu-old ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  .header .secondary-menu-old ul li {
+  .header .navbar-main .navbar-collapse .secondary-menu li {
+    float: none;
     display: inline-block;
     margin: 0 0 0 5px;
     padding: 0;
   }
-  .header .secondary-menu-old ul li:before {
+  .header .navbar-main .navbar-collapse .secondary-menu li:before {
     content: "|";
     margin-right: 5px;
     color: rgba(255, 255, 255, 0.3);
   }
-  .header .secondary-menu-old ul li.first:before {
+  .header .navbar-main .navbar-collapse .secondary-menu li.first:before {
     content: none;
     margin-right: 0;
   }
-  .header .secondary-menu-old ul li a {
+  .header .navbar-main .navbar-collapse .secondary-menu li a {
     color: inherit;
   }
 }
