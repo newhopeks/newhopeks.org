@@ -46,6 +46,10 @@ function newhopeks_preprocess_page(&$variables) {
 
 /**
  * hook_form_FORM_ID_alter
+ *
+ * Notes:
+ * - Form API Reference (https://api.drupal.org/api/drupal/developer!topics!forms_api_reference.html/7)
+ * - Altering Search Form - The Element Wrapper (https://www.drupal.org/node/2189521)
  */
 
 function newhopeks_form_search_form_alter(&$form, &$form_state, $form_id) {
