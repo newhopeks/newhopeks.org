@@ -5977,36 +5977,40 @@ table > tbody > tr:hover > th {
   text-decoration: underline;
 }
 @media (min-width: 768px) {
-  .header .navbar-old {
+  .header .navbar-main {
     background-color: transparent;
-    font-size: 24px;
-    font-size: 2.4rem;
-    line-height: 1;
   }
-  .header .navbar-old .navbar-collapse {
+  .header .navbar-main .navbar-collapse {
     color: #635b4c;
   }
-  .header .navbar-old .navbar-collapse ul {
+  .header .navbar-main .navbar-collapse .main-menu {
+    float: none;
     padding: 0;
     border: none;
+    font-size: 24px;
+    font-size: 2.4rem;
     text-align: right;
   }
-  .header .navbar-old .navbar-collapse ul li {
+  .header .navbar-main .navbar-collapse .main-menu li {
+    float: none;
     display: inline-block;
-    margin: 0 0 0 20px;
+    margin-left: 20px;
   }
-  .header .navbar-old .navbar-collapse ul li a {
+  .header .navbar-main .navbar-collapse .main-menu li a {
     display: inline-block;
-    padding-bottom: 2px;
+    padding: 0 0 2px 0;
     border-bottom: 3px solid transparent;
   }
-  .header .navbar-old .navbar-collapse ul li a:hover,
-  .header .navbar-old .navbar-collapse ul li a:active {
+  .header .navbar-main .navbar-collapse .main-menu li a:hover,
+  .header .navbar-main .navbar-collapse .main-menu li a:active {
     color: #66adb1;
-    text-decoration: none;
   }
-  .header .navbar-old .navbar-collapse ul li.active-trail a {
+  .header .navbar-main .navbar-collapse .main-menu li.active a,
+  .header .navbar-main .navbar-collapse .main-menu li.active-trail a {
     border-bottom-color: #66adb1;
+  }
+  .header .navbar-main .navbar-collapse .secondary-menu {
+    display: none;
   }
 }
 @media (min-width: 768px) {
