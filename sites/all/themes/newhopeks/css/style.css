@@ -5901,6 +5901,7 @@ table > tbody > tr:hover > th {
 }
 .header .logo h1 img {
   display: block;
+  max-width: 100%;
 }
 .header .navbar-main {
   position: static;
