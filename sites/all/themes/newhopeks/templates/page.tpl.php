@@ -4,7 +4,7 @@
     		<div class="logo col-xs-12 col-sm-3">
     			<h1>
     				<?php if (!$is_front) { echo '<a href="/">'; } ?>
-    				    <img src="/<?= path_to_theme(); ?>/img/logo.png" alt="<?php print $site_name; ?>" />
+    				    <img src="/<?= path_to_theme(); ?>/img/logo@2x.png" width="215" alt="<?php print $site_name; ?>" />
     				<?php if (!$is_front) { echo '</a>'; } ?>
     			</h1>
     		</div> <!-- end .logo -->
