@@ -1,57 +1,47 @@
 <header role="banner" class="header">
-	<div class="container">
-		<div class="logo">
-			<div class="row">
-				<div class="col-xs-12">
-					<h1>
-						<?php if (!$is_front) { echo '<a href="/">'; } ?>
-						<img src="/<?= path_to_theme(); ?>/img/logo.png" alt="<?php print $site_name; ?>" />
-						<?php if (!$is_front) { echo '</a>'; } ?>
-					</h1>
-				</div>
-			</div> <!-- end .row -->
-		</div> <!-- end .logo -->
+    <div class="container">
+        <div class="row">
+    		<div class="logo col-xs-12 col-sm-3">
+    			<h1>
+    				<?php if (!$is_front) { echo '<a href="/">'; } ?>
+    				    <img src="/<?= path_to_theme(); ?>/img/logo@2x.png" width="215" alt="<?php print $site_name; ?>" />
+    				<?php if (!$is_front) { echo '</a>'; } ?>
+    			</h1>
+    		</div> <!-- end .logo -->
 
-		<div class="nav">
-			<div class="row">
-				<div class="col-xs-12">
-					<?php if ($main_menu) : ?>
-						<nav role="navigation">
-							<?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('class' => 'links'))); ?>
-						</nav>
-					<?php endif; ?>
-				</div>
-			</div> <!-- end .row -->
-		</div> <!-- end .nav -->
-	</div> <!-- end .container -->
-
-	<div class="secondary-menu">
-	    <div class="container">
-    		<div class="row">
-    			<div class="col-xs-12">
+            <nav role="navigation" class="navbar navbar-main col-xs-12 col-sm-9">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+    	        <div class="collapse navbar-collapse" id="main-navbar-collapse">
+    	            <?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('class' => 'nav navbar-nav main-menu'))); ?>
+                    <?php // print $search_form; ?>
     				<?php if ($secondary_menu) : ?>
-                        <?php print theme('links__menu_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('class' => 'links'))); ?>
+                        <?php print theme('links__menu_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('class' => 'nav navbar-nav secondary-menu'))); ?>
     				<?php endif; ?>
-    			</div>
-    		</div> <!-- end .row -->
-        </div> <!-- end .container -->
-	</div> <!-- end .secondary-menu -->
+    	        </div>
+            </nav>
+        </div>
+    </div>
 </header> <!-- end .header -->
 
 <?php if ($page['content_above']) : ?>
-	<div class="content-top">
+	<div class="content-above">
 		<div class="container">
 			<div class="row">
 				<?php print render($page['content_above']); ?>
 			</div> <!-- end .row -->
 		</div> <!-- end .container -->
-	</div> <!-- end .content-top -->
+	</div> <!-- end .content-above -->
 <?php endif; ?>
 
 <div id="content" class="content">
 	<div class="container">
 		<div class="row">
-			<div role="main" class="main col-xs-12 <?php if ($is_front) : ?>col-sm-12<?php else : ?>col-sm-9 col-sm-push-3<?php endif; ?>">
+			<div role="main" class="main col-xs-12 <?php if ($is_front || !$page['content_sidebar']) : ?>col-sm-12<?php else : ?>col-sm-9 col-sm-push-3<?php endif; ?>">
 				<?php if (!$is_front && $title) : ?>
 					<h1><?php print $title; ?></h1>
 				<?php endif; ?>
@@ -60,7 +50,7 @@
 				<?php print render($page['content']); ?>
 			</div> <!-- end .main -->
 
-			<?php if (!$is_front) : ?>
+			<?php if (!$is_front && $page['content_sidebar']) : ?>
 				<div class="sidebar col-xs-12 col-sm-3 col-sm-pull-9">
 					<?php print render($page['content_sidebar']); ?>
 				</div> <!-- end .sidebar -->
@@ -70,13 +60,13 @@
 </div> <!-- end .content -->
 
 <?php if ($page['content_below']) : ?>
-	<div class="content-bottom">
+	<div class="content-below">
 		<div class="container">
 			<div class="row">
 				<?php print render($page['content_below']); ?>
 			</div> <!-- end .row -->
 		</div> <!-- end .container -->
-	</div> <!-- end .content-bottom -->
+	</div> <!-- end .content-below -->
 <?php endif; ?>
 
 <footer role="contentinfo" class="footer">

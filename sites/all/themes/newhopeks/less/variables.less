@@ -3,21 +3,46 @@
 // ====================================================================================================
 
 
-// Fonts
-@LeagueGothic: "League Gothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-
+//
 // Colors
+// -------------------------
+
 @nh-green: #78944A;
 @nh-green-dark: darken(#78944A, 20%);
 @nh-blue: #66ADB1;
+@nh-blue-light: lighten(@nh-blue, 30%);
 @nh-brown: #635B4C;
+@nh-brown-light: lighten(@nh-brown, 30%);
+@nh-brown-dark: darken(@nh-brown, 20%); // #292620
 
 
+//
 // Scaffolding
-@html-bg: #F3F0EB;
-@body-bg: none;
+// -------------------------
+
+@html-bg: #E6E3DF; // fade(black, 5%) on top of #F3F0EB
+@body-bg: #F3F0EB;
+@text-color: @nh-brown;
+@link-color: @nh-blue;
 
 
+//
 // Typography
+// -------------------------
+
+@LeagueGothic: "League Gothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
 @headings-font-family: @LeagueGothic;
+
+
+//
+// Iconography
+// -------------------------
+
+@icon-font-path: "../fonts/libs/bootstrap/";
+
+
+//
+// Grid system
+// -------------------------
+
+@grid-gutter-width: 20px;
