@@ -5880,14 +5880,16 @@ table > tbody > tr:hover > th {
     padding-top: 71px;
     padding-top: 7.1rem;
   }
+  .header .container {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(99, 91, 76, 0.2);
+  }
 }
 .header .logo h1,
 .header .main-menu {
   font-family: "League Gothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
-}
-.header .logo {
-  margin-bottom: 10px;
 }
 .header .logo h1 {
   margin: 0;
@@ -6053,15 +6055,15 @@ table > tbody > tr:hover > th {
     color: inherit;
   }
 }
-.content .main {
-  background-color: white;
-  border-top: 1px solid #cbe3e5;
-  border-bottom: 5px solid #cbe3e5;
-}
 @media (min-width: 768px) {
   .content {
     padding-bottom: 40px;
   }
+}
+.content .main {
+  background-color: white;
+  border-top: 1px solid #cbe3e5;
+  border-bottom: 5px solid #cbe3e5;
 }
 .footer {
   padding: 20px 0;
