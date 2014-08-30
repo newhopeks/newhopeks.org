@@ -42,11 +42,19 @@
 
 .sidebar .block {
     padding: 10px;
-    background-color: fade(white, 70%);
+    color: @sidebar-block-color;
+    background-color: @sidebar-block-bg;
+    border-top: 1px solid @sidebar-block-border-color;
+    border-bottom: 5px solid @sidebar-block-border-color;
 
 	.block-title {
 	    margin: 0 0 10px 0;
+	    color: @sidebar-block-color;
     	.font-size(24);
+	}
+
+	a {
+    	color: inherit;
 	}
 
 	@media (max-width: @screen-sm) {
@@ -65,8 +73,8 @@
     padding-bottom: 0;
     color: fade(white, 80%);
     background-color: @nh-green;
-    border-top: 1px solid @nh-green-dark;
-    border-bottom: 5px solid @nh-green-dark;
+    border-top-color: @nh-green-dark;
+    border-bottom-color: @nh-green-dark;
 
 	.block-title {
 	    color: white;
