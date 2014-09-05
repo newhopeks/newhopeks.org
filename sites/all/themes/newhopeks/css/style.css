@@ -6225,6 +6225,8 @@ table > tbody > tr:hover > th {
 .sidebar .subnav ul li ul li.active-trail {
   background-color: transparent;
 }
-.footer .copyright .login {
-  text-align: right;
+@media (min-width: 768px) {
+  .footer .copyright .login {
+    text-align: right;
+  }
 }
