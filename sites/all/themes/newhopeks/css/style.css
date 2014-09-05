@@ -6225,6 +6225,47 @@ table > tbody > tr:hover > th {
 .sidebar .subnav ul li ul li.active-trail {
   background-color: transparent;
 }
+.footer .copyright .login .btn {
+  color: #635b4c;
+  background-color: rgba(99, 91, 76, 0.2);
+  border-color: transparent;
+}
+.footer .copyright .login .btn:hover,
+.footer .copyright .login .btn:focus,
+.footer .copyright .login .btn:active,
+.footer .copyright .login .btn.active,
+.open .dropdown-toggle.footer .copyright .login .btn {
+  color: #635b4c;
+  background-color: rgba(76, 70, 58, 0.2);
+  border-color: rgba(0, 0, 0, 0);
+}
+.footer .copyright .login .btn:active,
+.footer .copyright .login .btn.active,
+.open .dropdown-toggle.footer .copyright .login .btn {
+  background-image: none;
+}
+.footer .copyright .login .btn.disabled,
+.footer .copyright .login .btn[disabled],
+fieldset[disabled] .footer .copyright .login .btn,
+.footer .copyright .login .btn.disabled:hover,
+.footer .copyright .login .btn[disabled]:hover,
+fieldset[disabled] .footer .copyright .login .btn:hover,
+.footer .copyright .login .btn.disabled:focus,
+.footer .copyright .login .btn[disabled]:focus,
+fieldset[disabled] .footer .copyright .login .btn:focus,
+.footer .copyright .login .btn.disabled:active,
+.footer .copyright .login .btn[disabled]:active,
+fieldset[disabled] .footer .copyright .login .btn:active,
+.footer .copyright .login .btn.disabled.active,
+.footer .copyright .login .btn[disabled].active,
+fieldset[disabled] .footer .copyright .login .btn.active {
+  background-color: rgba(99, 91, 76, 0.2);
+  border-color: transparent;
+}
+.footer .copyright .login .btn .badge {
+  color: rgba(99, 91, 76, 0.2);
+  background-color: #635b4c;
+}
 @media (min-width: 768px) {
   .footer .copyright .login {
     text-align: right;
