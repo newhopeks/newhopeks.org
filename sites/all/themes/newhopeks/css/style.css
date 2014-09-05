@@ -5880,7 +5880,7 @@ table > tbody > tr:hover > th {
     padding-top: 71px;
     padding-top: 7.1rem;
   }
-  .header .container {
+  .header .wrapper {
     margin-bottom: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid rgba(99, 91, 76, 0.2);
@@ -5909,7 +5909,6 @@ table > tbody > tr:hover > th {
   position: static;
   min-height: 0;
   margin: 0;
-  padding: 0;
   background-color: #635b4c;
   border: none;
   font-size: 18px;
@@ -6060,10 +6059,18 @@ table > tbody > tr:hover > th {
     padding-bottom: 40px;
   }
 }
-.content .main {
+.content .main .wrapper {
+  margin: 0 -10px;
+  padding: 10px;
   background-color: white;
   border-top: 1px solid #cbe3e5;
   border-bottom: 5px solid #cbe3e5;
+}
+@media (min-width: 768px) {
+  .content .main .wrapper {
+    margin: 0;
+    padding: 20px;
+  }
 }
 .footer {
   padding: 20px 0;
