@@ -2179,8 +2179,8 @@ fieldset[disabled] .btn-success.active {
 }
 .btn-info {
   color: #ffffff;
-  background-color: #5bc0de;
-  border-color: #46b8da;
+  background-color: #66adb1;
+  border-color: #56a4a8;
 }
 .btn-info:hover,
 .btn-info:focus,
@@ -2188,8 +2188,8 @@ fieldset[disabled] .btn-success.active {
 .btn-info.active,
 .open .dropdown-toggle.btn-info {
   color: #ffffff;
-  background-color: #39b3d7;
-  border-color: #269abc;
+  background-color: #509a9e;
+  border-color: #417c7f;
 }
 .btn-info:active,
 .btn-info.active,
@@ -2211,11 +2211,11 @@ fieldset[disabled] .btn-info:active,
 .btn-info.disabled.active,
 .btn-info[disabled].active,
 fieldset[disabled] .btn-info.active {
-  background-color: #5bc0de;
-  border-color: #46b8da;
+  background-color: #66adb1;
+  border-color: #56a4a8;
 }
 .btn-info .badge {
-  color: #5bc0de;
+  color: #66adb1;
   background-color: #ffffff;
 }
 .btn-warning {
@@ -4319,11 +4319,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   background-color: #5c7239;
 }
 .label-info {
-  background-color: #5bc0de;
+  background-color: #66adb1;
 }
 .label-info[href]:hover,
 .label-info[href]:focus {
-  background-color: #31b0d5;
+  background-color: #4d9397;
 }
 .label-warning {
   background-color: #f0ad4e;
@@ -4567,7 +4567,7 @@ a.thumbnail.active {
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 .progress-bar-info {
-  background-color: #5bc0de;
+  background-color: #66adb1;
 }
 .progress-striped .progress-bar-info {
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
@@ -6169,9 +6169,6 @@ table > tbody > tr:hover > th {
   font-size: 1.8rem;
   font-weight: bold;
   line-height: normal;
-}
-.sidebar .block a {
-  color: inherit;
 }
 @media (max-width: 768px) {
   .sidebar .block {
