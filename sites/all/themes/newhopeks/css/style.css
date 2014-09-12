@@ -6163,8 +6163,12 @@ table > tbody > tr:hover > th {
 .sidebar .block .block-title {
   margin: 0 0 10px 0;
   color: #635b4c;
-  font-size: 24px;
-  font-size: 2.4rem;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-style: italic;
+  font-size: 18px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  line-height: normal;
 }
 .sidebar .block a {
   color: inherit;
