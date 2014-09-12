@@ -6229,6 +6229,14 @@ table > tbody > tr:hover > th {
 .sidebar .subnav ul li ul li.active-trail {
   background-color: transparent;
 }
+.sidebar .giving {
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+.sidebar .giving .block-title {
+  display: none;
+}
 .footer .copyright .login .btn {
   color: #635b4c;
   background-color: rgba(99, 91, 76, 0.2);
