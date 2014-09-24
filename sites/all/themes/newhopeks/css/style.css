@@ -6153,14 +6153,16 @@ table > tbody > tr:hover > th {
   width: auto;
   height: auto;
 }
-.sidebar .block {
+.sidebar .block,
+.content-below .block section {
   padding: 10px;
   color: #635b4c;
   background-color: rgba(99, 91, 76, 0.1);
   border-top: 1px solid rgba(41, 38, 32, 0.1);
   border-bottom: 5px solid rgba(41, 38, 32, 0.1);
 }
-.sidebar .block .block-title {
+.sidebar .block .block-title,
+.content-below .block section .block-title {
   margin: 0 0 10px 0;
   color: #635b4c;
   font-family: Georgia, "Times New Roman", Times, serif;
@@ -6171,12 +6173,14 @@ table > tbody > tr:hover > th {
   line-height: normal;
 }
 @media (max-width: 768px) {
-  .sidebar .block {
+  .sidebar .block,
+  .content-below .block section {
     margin: 0 -10px;
   }
 }
 @media (min-width: 768px) {
-  .sidebar .block {
+  .sidebar .block,
+  .content-below .block section {
     margin-bottom: 20px;
   }
 }
