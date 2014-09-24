@@ -40,28 +40,31 @@
 	</div> <!-- end .content-above -->
 <?php endif; ?>
 
-<div id="content" class="content">
-	<div class="container">
-		<div class="row">
-			<div role="main" class="main col-xs-12 <?php if ($is_front || !$page['content_sidebar']) : ?>col-sm-12<?php else : ?>col-sm-9 col-sm-push-3<?php endif; ?>">
-			    <div class="wrapper">
-    				<?php if (!$is_front && $title) : ?>
-    					<h1><?php print $title; ?></h1>
-    				<?php endif; ?>
-    				<?php $tabs && print render($tabs); ?>
-    				<?php if ($is_front) { unset($page['content']['system_main']); } ?>
-    				<?php print render($page['content']); ?>
-			    </div> <!-- end .wrapper -->
-			</div> <!-- end .main -->
+<?php if ($is_front) : ?>
+    <?php unset($page['content']['system_main']); ?>
+<?php else : ?>
+    <div id="content" class="content">
+    	<div class="container">
+    		<div class="row">
+    			<div role="main" class="main col-xs-12 <?php if ($is_front || !$page['content_sidebar']) : ?>col-sm-12<?php else : ?>col-sm-9 col-sm-push-3<?php endif; ?>">
+    			    <div class="wrapper">
+        				<?php if (!$is_front && $title) : ?>
+        					<h1><?php print $title; ?></h1>
+        				<?php endif; ?>
+        				<?php $tabs && print render($tabs); ?>
+        				<?php print render($page['content']); ?>
+    			    </div> <!-- end .wrapper -->
+    			</div> <!-- end .main -->
 
-			<?php if (!$is_front && $page['content_sidebar']) : ?>
-				<div class="sidebar col-xs-12 col-sm-3 col-sm-pull-9">
-					<?php print render($page['content_sidebar']); ?>
-				</div> <!-- end .sidebar -->
-			<?php endif; ?>
-		</div> <!-- end .row -->
-	</div> <!-- end .container -->
-</div> <!-- end .content -->
+    			<?php if (!$is_front && $page['content_sidebar']) : ?>
+    				<div class="sidebar col-xs-12 col-sm-3 col-sm-pull-9">
+    					<?php print render($page['content_sidebar']); ?>
+    				</div> <!-- end .sidebar -->
+    			<?php endif; ?>
+    		</div> <!-- end .row -->
+    	</div> <!-- end .container -->
+    </div> <!-- end .content -->
+<?php endif; ?>
 
 <?php if ($page['content_below']) : ?>
 	<div class="content-below">
