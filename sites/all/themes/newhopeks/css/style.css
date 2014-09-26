@@ -6066,6 +6066,10 @@ table > tbody > tr:hover > th {
   border-top: 1px solid #cbe3e5;
   border-bottom: 5px solid #cbe3e5;
 }
+.content .main img {
+  max-width: 100%;
+  height: auto;
+}
 @media (min-width: 768px) {
   .content .main .wrapper {
     margin: 0;
@@ -6171,6 +6175,11 @@ table > tbody > tr:hover > th {
   font-size: 1.8rem;
   font-weight: bold;
   line-height: normal;
+}
+.sidebar .block img,
+.content-below .block section img {
+  max-width: 100%;
+  height: auto;
 }
 @media (max-width: 768px) {
   .sidebar .block,
