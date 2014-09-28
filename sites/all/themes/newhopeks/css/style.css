@@ -6246,11 +6246,45 @@ table > tbody > tr:hover > th {
 .content-below .block section {
   margin-bottom: 0;
 }
-.content-below .messages .messages-item .messages-item-title {
-  margin: 0;
+.content-below .messages .messages-series-image {
+  margin: 0 0 10px 0;
 }
-.content-below .messages .messages-item .messages-item-subtitle {
+.content-below .messages .messages-series-image img {
+  display: block;
+}
+.content-below .messages .messages-item-date {
+  margin: 0 0 3px 0;
+  color: rgba(99, 91, 76, 0.5);
+  font-size: 14px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  line-height: normal;
+}
+.content-below .messages .messages-item-title {
   margin: 0;
+  color: #635b4c;
+  font-size: 24px;
+  font-size: 2.4rem;
+  line-height: normal;
+}
+.content-below .messages .messages-item-subtitle {
+  margin: 0;
+  color: rgba(99, 91, 76, 0.9);
+  font-size: 14px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  line-height: normal;
+}
+.content-below .messages .messages-item-speaker {
+  margin: 5px 0;
+  font-size: 14px;
+  font-size: 1.4rem;
+  line-height: normal;
+}
+.content-below .messages .messages-item-series {
+  font-size: 12px;
+  font-size: 1.2rem;
+  line-height: normal;
 }
 .content-below .events .events-item {
   position: relative;

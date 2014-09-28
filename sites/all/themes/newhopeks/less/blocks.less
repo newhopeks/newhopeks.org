@@ -176,28 +176,51 @@
 .content-below .messages {
 
     .messages-series-image {
+        margin: 0 0 10px 0;
 
-        img {}
+        img {
+            display: block;
+        }
 
     }
 
-    .messages-item {
+    //.messages-item {
+
+        .messages-item-date {
+            margin: 0 0 3px 0;
+            color: fade(@text-color, 50%);
+            .font-size(14);
+            font-weight: bold;
+            line-height: normal;
+        }
 
         .messages-item-title {
             margin: 0;
+            color: @text-color;
+            .font-size(24);
+            line-height: normal;
         }
 
         .messages-item-subtitle {
             margin: 0;
+            color: fade(@text-color, 90%);
+            .font-size(14);
+            font-weight: bold;
+            line-height: normal;
         }
 
-        .messages-item-date {}
+        .messages-item-speaker {
+            margin: 5px 0;
+            .font-size(14);
+            line-height: normal;
+        }
 
-        .messages-item-speaker {}
+        .messages-item-series {
+            .font-size(12);
+            line-height: normal;
+        }
 
-        .messages-item-series {}
-
-    }
+    //}
 
     .messages-footer {}
 
