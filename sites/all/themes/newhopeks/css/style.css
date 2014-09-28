@@ -6259,7 +6259,7 @@ table > tbody > tr:hover > th {
   margin: 0 0 10px 0;
   line-height: 1;
 }
-.content-below .events .events-item .date {
+.content-below .events .events-item .events-item-date {
   position: absolute;
   top: 10px;
   left: 0;
@@ -6268,14 +6268,14 @@ table > tbody > tr:hover > th {
   font-family: "League Gothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: center;
 }
-.content-below .events .events-item .date .month {
+.content-below .events .events-item .events-item-date .events-item-date-month {
   display: block;
   text-transform: uppercase;
   font-size: 24px;
   font-size: 2.4rem;
   line-height: 1;
 }
-.content-below .events .events-item .date .day {
+.content-below .events .events-item .events-item-date .events-item-date-day {
   display: block;
   font-size: 36px;
   font-size: 3.6rem;
