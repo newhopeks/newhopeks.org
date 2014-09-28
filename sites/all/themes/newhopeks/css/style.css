@@ -6246,6 +6246,12 @@ table > tbody > tr:hover > th {
 .content-below .block section {
   margin-bottom: 0;
 }
+.content-below .messages .messages-item .messages-item-title {
+  margin: 0;
+}
+.content-below .messages .messages-item .messages-item-subtitle {
+  margin: 0;
+}
 .content-below .events .events-item {
   position: relative;
   min-height: 70px;
