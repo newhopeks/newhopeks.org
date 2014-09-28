@@ -6054,11 +6054,6 @@ table > tbody > tr:hover > th {
     color: inherit;
   }
 }
-@media (min-width: 768px) {
-  .content {
-    padding-bottom: 40px;
-  }
-}
 .content .main .wrapper {
   margin: 0 -10px;
   padding: 10px;
@@ -6077,6 +6072,7 @@ table > tbody > tr:hover > th {
   }
 }
 .footer {
+  margin-top: 40px;
   padding: 20px 0;
   background-color: #ebe8e3;
 }
@@ -6246,6 +6242,9 @@ table > tbody > tr:hover > th {
 }
 .sidebar .giving .block-title {
   display: none;
+}
+.content-below .block section {
+  margin-bottom: 0;
 }
 .content-below .events .events-item {
   position: relative;
