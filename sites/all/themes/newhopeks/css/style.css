@@ -6072,6 +6072,8 @@ table > tbody > tr:hover > th {
   }
 }
 .content .main .content-below .row {
+  margin-left: -20px;
+  margin-right: -20px;
   background: url(../img/content-below-bg.png) 33.33333333% 0 repeat-y, url(../img/content-below-bg.png) 66.66666666% 0 repeat-y;
 }
 .footer {
@@ -6240,6 +6242,10 @@ table > tbody > tr:hover > th {
 }
 .sidebar .giving .block-title {
   display: none;
+}
+.content-below .block {
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .content-below .block .block-title {
   margin: 0 0 10px 0;
