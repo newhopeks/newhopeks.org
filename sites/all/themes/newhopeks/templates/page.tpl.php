@@ -40,47 +40,39 @@
 	</div> <!-- end .content-above -->
 <?php endif; ?>
 
-<?php if ($is_front) : ?>
-    <?php unset($page['content']['system_main']); ?>
-<?php else : ?>
-    <div id="content" class="content">
-    	<div class="container">
-    		<div class="row">
-    			<div role="main" class="main col-xs-12 <?php if ($is_front || !$page['content_sidebar']) : ?>col-sm-12<?php else : ?>col-sm-9 col-sm-push-3<?php endif; ?>">
-    			    <div class="wrapper">
-        				<?php if (!$is_front && $title) : ?>
+<div id="content" class="content">
+	<div class="container">
+		<div class="row">
+			<div role="main" class="main col-xs-12 <?php if ($is_front || !$page['content_sidebar']) : ?>col-sm-12<?php else : ?>col-sm-9 col-sm-push-3<?php endif; ?>">
+			    <div class="wrapper">
+    				<?php if ($is_front) : ?>
+    				    <?php unset($page['content']['system_main']); ?>
+    				<?php else : ?>
+        				<?php if ($title) : ?>
         					<h1><?php print $title; ?></h1>
         				<?php endif; ?>
-        				<?php $tabs && print render($tabs); ?>
-        				<?php print render($page['content']); ?>
-    			    </div> <!-- end .wrapper -->
-    			</div> <!-- end .main -->
+                    <?php endif; ?>
+    				<?php $tabs && print render($tabs); ?>
+    				<?php print render($page['content']); ?>
 
-    			<?php if (!$is_front && $page['content_sidebar']) : ?>
-    				<div class="sidebar col-xs-12 col-sm-3 col-sm-pull-9">
-    					<?php print render($page['content_sidebar']); ?>
-    				</div> <!-- end .sidebar -->
-    			<?php endif; ?>
-    		</div> <!-- end .row -->
-    	</div> <!-- end .container -->
-    </div> <!-- end .content -->
-<?php endif; ?>
+                    <?php if ($page['content_below']) : ?>
+                    	<div class="content-below">
+                			<div class="row">
+                                <?php print render($page['content_below']); ?>
+                			</div> <!-- end .row -->
+                    	</div> <!-- end .content-below -->
+                    <?php endif; ?>
+			    </div> <!-- end .wrapper -->
+			</div> <!-- end .main -->
 
-<?php if ($page['content_below']) : ?>
-	<div class="content-below">
-		<div class="container">
-			<div class="row">
-			    <div class="main col-xs-12">
-    			    <div class="wrapper">
-    			        <div class="row">
-        				    <?php print render($page['content_below']); ?>
-    			        </div> <!-- end .row -->
-    			    </div> <!-- end .wrapper -->
-			    </div> <!-- end .main -->
-			</div> <!-- end .row -->
-		</div> <!-- end .container -->
-	</div> <!-- end .content-below -->
-<?php endif; ?>
+			<?php if (!$is_front && $page['content_sidebar']) : ?>
+				<div class="sidebar col-xs-12 col-sm-3 col-sm-pull-9">
+					<?php print render($page['content_sidebar']); ?>
+				</div> <!-- end .sidebar -->
+			<?php endif; ?>
+		</div> <!-- end .row -->
+	</div> <!-- end .container -->
+</div> <!-- end .content -->
 
 <footer role="contentinfo" class="footer">
 	<div class="container">

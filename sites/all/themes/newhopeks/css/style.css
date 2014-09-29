@@ -6071,19 +6071,6 @@ table > tbody > tr:hover > th {
     padding: 20px;
   }
 }
-.content-below .main .wrapper {
-  margin: 0 -10px;
-  padding: 10px;
-  background-color: white;
-  border-top: 1px solid #cbe3e5;
-  border-bottom: 5px solid #cbe3e5;
-}
-@media (min-width: 768px) {
-  .content-below .main .wrapper {
-    margin: 0;
-    padding: 20px;
-  }
-}
 .footer {
   margin-top: 40px;
   padding: 20px 0;
