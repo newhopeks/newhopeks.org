@@ -6071,6 +6071,19 @@ table > tbody > tr:hover > th {
     padding: 20px;
   }
 }
+.content-below .main .wrapper {
+  margin: 0 -10px;
+  padding: 10px;
+  background-color: white;
+  border-top: 1px solid #cbe3e5;
+  border-bottom: 5px solid #cbe3e5;
+}
+@media (min-width: 768px) {
+  .content-below .main .wrapper {
+    margin: 0;
+    padding: 20px;
+  }
+}
 .footer {
   margin-top: 40px;
   padding: 20px 0;
@@ -6153,16 +6166,14 @@ table > tbody > tr:hover > th {
   width: auto;
   height: auto;
 }
-.sidebar .block,
-.content-below .block section {
+.sidebar .block {
   padding: 10px;
   color: #635b4c;
   background-color: rgba(99, 91, 76, 0.1);
   border-top: 1px solid rgba(41, 38, 32, 0.1);
   border-bottom: 5px solid rgba(41, 38, 32, 0.1);
 }
-.sidebar .block .block-title,
-.content-below .block section .block-title {
+.sidebar .block .block-title {
   margin: 0 0 10px 0;
   color: #635b4c;
   font-family: Georgia, "Times New Roman", Times, serif;
@@ -6172,20 +6183,17 @@ table > tbody > tr:hover > th {
   font-weight: bold;
   line-height: normal;
 }
-.sidebar .block img,
-.content-below .block section img {
+.sidebar .block img {
   max-width: 100%;
   height: auto;
 }
 @media (max-width: 768px) {
-  .sidebar .block,
-  .content-below .block section {
+  .sidebar .block {
     margin: 0 -10px;
   }
 }
 @media (min-width: 768px) {
-  .sidebar .block,
-  .content-below .block section {
+  .sidebar .block {
     margin-bottom: 20px;
   }
 }
@@ -6251,6 +6259,8 @@ table > tbody > tr:hover > th {
 }
 .content-below .messages .messages-series-image img {
   display: block;
+  max-width: 100%;
+  height: auto;
 }
 .content-below .messages .messages-item-date {
   margin: 0 0 3px 0;

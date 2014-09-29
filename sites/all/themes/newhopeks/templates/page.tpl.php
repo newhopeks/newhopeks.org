@@ -70,7 +70,13 @@
 	<div class="content-below">
 		<div class="container">
 			<div class="row">
-				<?php print render($page['content_below']); ?>
+			    <div class="main col-xs-12">
+    			    <div class="wrapper">
+    			        <div class="row">
+        				    <?php print render($page['content_below']); ?>
+    			        </div> <!-- end .row -->
+    			    </div> <!-- end .wrapper -->
+			    </div> <!-- end .main -->
 			</div> <!-- end .row -->
 		</div> <!-- end .container -->
 	</div> <!-- end .content-below -->
