@@ -199,6 +199,9 @@
             color: @text-color;
             .font-size(24);
             line-height: normal;
+
+            a {}
+
         }
 
         .messages-item-subtitle {
@@ -209,20 +212,24 @@
             line-height: normal;
         }
 
-        .messages-item-speaker {
-            margin: 5px 0;
-            .font-size(14);
-            line-height: normal;
-        }
-
-        .messages-item-series {
+        .messages-item-info {
+            margin: 5px 0 0 0;
             .font-size(12);
             line-height: normal;
         }
 
     //}
 
-    .messages-footer {}
+    .messages-footer {
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid @sidebar-block-border-color;
+
+        p {
+            margin: 0;
+        }
+
+    }
 
 }
 
