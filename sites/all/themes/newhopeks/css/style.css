@@ -6071,6 +6071,9 @@ table > tbody > tr:hover > th {
     padding: 20px;
   }
 }
+.content .main .content-below .row {
+  background: url(../img/content-below-bg.png) 33.33333333% 0 repeat-y, url(../img/content-below-bg.png) 66.66666666% 0 repeat-y;
+}
 .footer {
   margin-top: 40px;
   padding: 20px 0;
@@ -6238,16 +6241,31 @@ table > tbody > tr:hover > th {
 .sidebar .giving .block-title {
   display: none;
 }
-.content-below .block section {
-  margin-bottom: 0;
+.content-below .block .block-title {
+  margin: 0 0 10px 0;
+  color: #635b4c;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-style: italic;
+  font-size: 18px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  line-height: normal;
+}
+.content-below .block img {
+  max-width: 100%;
+  height: auto;
+}
+@media (max-width: 768px) {
+  .content-below .block {
+    margin: 0 -10px;
+  }
 }
 .content-below .messages .messages-series-image {
   margin: 0 0 10px 0;
 }
 .content-below .messages .messages-series-image img {
   display: block;
-  max-width: 100%;
-  height: auto;
+  border: 1px solid rgba(41, 38, 32, 0.1);
 }
 .content-below .messages .messages-item-date {
   margin: 0 0 3px 0;
