@@ -255,12 +255,11 @@
     .events-item {
         position: relative;
         min-height: 70px; min-height: 7.0rem;
-        margin-bottom: 10px;
         padding: 10px 0 10px 50px; padding: 1.0rem 0 1.0rem 50px;
         border-top: 1px solid @sidebar-block-border-color;
 
         .events-item-title {
-            margin: 0 0 10px 0;
+            margin: 0 0 5px 0;
             line-height: 1;
         }
 
@@ -288,9 +287,29 @@
 
         }
 
+        .events-item-body {
+            margin: 0;
+            .font-size(13);
+            line-height: 1.5;
+        }
+
+        .events-item-more {
+            margin: 5px 0 0 0;
+            .font-size(13);
+            line-height: 1.5;
+        }
+
     }
 
-    .events-footer {}
+    .events-footer {
+        padding-top: 10px;
+        border-top: 1px solid @sidebar-block-border-color;
+
+        p {
+            margin: 0;
+        }
+
+    }
 
 }
 
