@@ -204,7 +204,7 @@
         .messages-item-date {
             margin: 0 0 3px 0;
             color: fade(@text-color, 50%);
-            .font-size(14);
+            .font-size(13);
             font-weight: bold;
             line-height: normal;
         }
@@ -212,8 +212,10 @@
         .messages-item-title {
             margin: 0;
             color: @text-color;
-            .font-size(24);
-            line-height: normal;
+            font-family: @font-family-base;
+            .font-size(16);
+            font-weight: 700;
+            line-height: 1;
 
             a {}
 
@@ -221,8 +223,8 @@
 
         .messages-item-subtitle {
             margin: 3px 0 0 0;
-            color: fade(@text-color, 90%);
-            .font-size(14);
+            color: fade(@text-color, 80%);
+            .font-size(13);
             font-weight: bold;
             line-height: normal;
         }
@@ -260,7 +262,10 @@
 
         .events-item-title {
             margin: 0 0 5px 0;
-            line-height: normal;
+            font-family: @font-family-base;
+            .font-size(16);
+            font-weight: 700;
+            line-height: 1;
         }
 
         .events-item-date {
@@ -323,13 +328,16 @@
 
         .news-item-title {
             margin: 0 0 3px 0;
-            line-height: normal;
+            font-family: @font-family-base;
+            .font-size(16);
+            font-weight: 700;
+            line-height: 1;
         }
 
         .news-item-date {
             margin: 0;
             color: fade(@text-color, 50%);
-            .font-size(14);
+            .font-size(13);
             font-weight: bold;
             line-height: normal;
         }
