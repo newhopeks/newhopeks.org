@@ -6273,22 +6273,22 @@ table > tbody > tr:hover > th {
   display: block;
   border: 1px solid rgba(41, 38, 32, 0.1);
 }
-.content-below .messages .messages-item-date {
-  margin: 0 0 3px 0;
+.content-below .messages .messages-item .messages-item-date {
+  margin: 0 0 5px 0;
   color: rgba(99, 91, 76, 0.5);
   font-size: 14px;
   font-size: 1.4rem;
   font-weight: bold;
   line-height: normal;
 }
-.content-below .messages .messages-item-title {
+.content-below .messages .messages-item .messages-item-title {
   margin: 0;
   color: #635b4c;
   font-size: 24px;
   font-size: 2.4rem;
-  line-height: normal;
+  line-height: 1;
 }
-.content-below .messages .messages-item-subtitle {
+.content-below .messages .messages-item .messages-item-subtitle {
   margin: 0;
   color: rgba(99, 91, 76, 0.9);
   font-size: 14px;
@@ -6296,11 +6296,11 @@ table > tbody > tr:hover > th {
   font-weight: bold;
   line-height: normal;
 }
-.content-below .messages .messages-item-info {
+.content-below .messages .messages-item .messages-item-info {
   margin: 5px 0 0 0;
-  font-size: 12px;
-  font-size: 1.2rem;
-  line-height: normal;
+  font-size: 13px;
+  font-size: 1.3rem;
+  line-height: 1.5;
 }
 .content-below .messages .messages-footer {
   margin-top: 10px;
@@ -6361,6 +6361,44 @@ table > tbody > tr:hover > th {
   border-top: 1px solid rgba(41, 38, 32, 0.1);
 }
 .content-below .events .events-footer p {
+  margin: 0;
+}
+.content-below .news .news-item {
+  padding: 10px 0;
+  border-top: 1px solid rgba(41, 38, 32, 0.1);
+}
+.content-below .news .news-item .news-item-title {
+  margin: 0 0 5px 0;
+  line-height: 1;
+}
+.content-below .news .news-item .news-item-date {
+  margin: 0 0 5px 0;
+  color: rgba(99, 91, 76, 0.5);
+  font-size: 14px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  line-height: normal;
+}
+.content-below .news .news-item .news-item-body {
+  margin: 0;
+  font-size: 13px;
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+.content-below .news .news-item .news-item-body p {
+  margin: 0;
+}
+.content-below .news .news-item .news-item-more {
+  margin: 5px 0 0 0;
+  font-size: 13px;
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+.content-below .news .news-footer {
+  padding-top: 10px;
+  border-top: 1px solid rgba(41, 38, 32, 0.1);
+}
+.content-below .news .news-footer p {
   margin: 0;
 }
 .footer .copyright .login .btn {
