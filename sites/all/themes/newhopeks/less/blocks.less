@@ -166,7 +166,7 @@
 
 	.block-title {
 	    margin: 0 0 10px 0;
-	    color: @sidebar-block-color;
+	    color: @nh-green;
 	    font-family: @font-family-serif;
 	    font-style: italic;
     	.font-size(18);
@@ -211,7 +211,7 @@
 
         .messages-item-title {
             margin: 0;
-            color: @text-color;
+            color: @nh-blue-dark;
             font-family: @font-family-base;
             .font-size(16);
             font-weight: 700;
@@ -224,12 +224,27 @@
         .messages-item-subtitle {
             margin: 3px 0 0 0;
             color: fade(@text-color, 80%);
-            .font-size(13);
+            .font-size(14);
             font-weight: bold;
             line-height: normal;
         }
 
         .messages-item-info {
+            margin: 0;
+            .font-size(13);
+            line-height: 1.5;
+
+            a {
+                color: @text-color;
+            }
+
+            dt {
+                margin-top: 5px;
+            }
+
+        }
+
+        .messages-item-more {
             margin: 5px 0 0 0;
             .font-size(13);
             line-height: 1.5;
@@ -242,8 +257,41 @@
         padding-top: 10px;
         border-top: 1px solid @sidebar-block-border-color;
 
-        p {
+        .messages-footer-links {
             margin: 0;
+            padding: 0;
+            .make-row;
+            list-style-type: none;
+            font-family: @font-family-serif;
+            .font-size(12);
+            line-height: 1.5;
+            font-style: italic;
+
+            li {
+                margin: 0;
+                padding: 0;
+
+                a {
+                    color: @nh-green;
+                }
+
+                &.browse {
+                    .make-sm-column(6);
+                    font-weight: 700;
+                }
+
+                &.feed {
+                    .make-sm-column(6);
+                    text-align: right;
+
+                    a {
+                        color: @nh-brown-light;
+                    }
+
+                }
+
+            }
+
         }
 
     }
@@ -262,6 +310,7 @@
 
         .events-item-title {
             margin: 0 0 5px 0;
+            color: @nh-blue-dark;
             font-family: @font-family-base;
             .font-size(16);
             font-weight: 700;
@@ -282,6 +331,10 @@
                 text-transform: uppercase;
                 .font-size(24);
                 line-height: normal;
+            }
+
+            .events-item-date-space {
+                display: none;
             }
 
             .events-item-date-day {
@@ -310,8 +363,41 @@
         padding-top: 10px;
         border-top: 1px solid @sidebar-block-border-color;
 
-        p {
+        .events-footer-links {
             margin: 0;
+            padding: 0;
+            .make-row;
+            list-style-type: none;
+            font-family: @font-family-serif;
+            .font-size(12);
+            line-height: 1.5;
+            font-style: italic;
+
+            li {
+                margin: 0;
+                padding: 0;
+
+                a {
+                    color: @nh-green;
+                }
+
+                &.browse {
+                    .make-sm-column(6);
+                    font-weight: 700;
+                }
+
+                &.feed {
+                    .make-sm-column(6);
+                    text-align: right;
+
+                    a {
+                        color: @nh-brown-light;
+                    }
+
+                }
+
+            }
+
         }
 
     }
@@ -328,6 +414,7 @@
 
         .news-item-title {
             margin: 0 0 3px 0;
+            color: @nh-blue-dark;
             font-family: @font-family-base;
             .font-size(16);
             font-weight: 700;
@@ -357,7 +444,7 @@
             margin: 5px 0 0 0;
             .font-size(13);
             line-height: 1.5;
-       }
+        }
 
     }
 
@@ -365,8 +452,41 @@
         padding-top: 10px;
         border-top: 1px solid @sidebar-block-border-color;
 
-        p {
+        .news-footer-links {
             margin: 0;
+            padding: 0;
+            .make-row;
+            list-style-type: none;
+            font-family: @font-family-serif;
+            .font-size(12);
+            line-height: 1.5;
+            font-style: italic;
+
+            li {
+                margin: 0;
+                padding: 0;
+
+                a {
+                    color: @nh-green;
+                }
+
+                &.browse {
+                    .make-sm-column(6);
+                    font-weight: 700;
+                }
+
+                &.feed {
+                    .make-sm-column(6);
+                    text-align: right;
+
+                    a {
+                        color: @nh-brown-light;
+                    }
+
+                }
+
+            }
+
         }
 
     }
