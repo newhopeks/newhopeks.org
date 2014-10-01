@@ -6282,6 +6282,7 @@ table > tbody > tr:hover > th {
 }
 .content-below .messages .messages-series-image img {
   display: block;
+  width: 100%;
   border: 1px solid rgba(41, 38, 32, 0.1);
 }
 .content-below .messages .messages-item .messages-item-date {
