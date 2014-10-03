@@ -6307,8 +6307,8 @@ table > tbody > tr:hover > th {
 .sidebar .block--events .block__item,
 .content-below .block--events .block__item {
   position: relative;
-  min-height: 70px;
-  min-height: 7.0rem;
+  min-height: 75px;
+  min-height: 7.5rem;
   padding: 10px 0 10px 50px;
   padding: 1.0rem 0 1.0rem 50px;
   border-top: 1px solid rgba(41, 38, 32, 0.1);
@@ -6319,8 +6319,10 @@ table > tbody > tr:hover > th {
   top: 10px;
   left: 0;
   width: 40px;
+  margin: 0;
   font-family: "League Gothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
+  line-height: 1;
   text-align: center;
 }
 .sidebar .block--events .block__item .block__item__date .block--events__item__date__month,
