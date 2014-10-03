@@ -256,20 +256,25 @@
 	        background-color: white;
     	    border-top: 1px solid @nh-blue-light;
     	    border-bottom: 5px solid @nh-blue-light;
+
+        	@media (min-width: @screen-sm) {
+    	        margin: 0;
+                padding: 20px;
+        	}
+
+    	}
+
+    	.page-title {
+    	    margin: 0 0 20px 0;
+        	font-family: @LeagueGothic;
+        	font-weight: normal;
+        	line-height: normal;
+        	text-transform: uppercase;
     	}
 
     	img {
         	max-width: 100%;
         	height: auto;
-    	}
-
-    	@media (min-width: @screen-sm) {
-
-    	    .wrapper {
-    	        margin: 0;
-                padding: 20px;
-    	    }
-
     	}
 
         .content-below {

@@ -380,8 +380,8 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "League Gothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 500;
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
   line-height: 1.1;
   color: inherit;
 }
@@ -5826,10 +5826,6 @@ h6 > a,
   color: inherit;
   text-decoration: none;
 }
-h1,
-.h1 {
-  text-transform: uppercase;
-}
 h2,
 .h2 {
   color: #78944a;
@@ -6069,15 +6065,22 @@ table > tbody > tr:hover > th {
   border-top: 1px solid #cbe3e5;
   border-bottom: 5px solid #cbe3e5;
 }
-.content .main img {
-  max-width: 100%;
-  height: auto;
-}
 @media (min-width: 768px) {
   .content .main .wrapper {
     margin: 0;
     padding: 20px;
   }
+}
+.content .main .page-title {
+  margin: 0 0 20px 0;
+  font-family: "League Gothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  line-height: normal;
+  text-transform: uppercase;
+}
+.content .main img {
+  max-width: 100%;
+  height: auto;
 }
 .content .main .content-below .row {
   margin-left: -20px;
