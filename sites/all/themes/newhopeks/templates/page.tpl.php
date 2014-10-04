@@ -49,6 +49,7 @@
     				    <?php unset($page['content']['system_main']); ?>
     				<?php else : ?>
         				<?php if ($title) : ?>
+        				    <?php print $breadcrumb; ?>
         					<h1 class="page-title"><?php print $title; ?></h1>
         				<?php endif; ?>
                     <?php endif; ?>

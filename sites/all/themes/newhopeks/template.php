@@ -44,6 +44,21 @@ function newhopeks_preprocess_page(&$variables) {
 
 
 
+function newhopeks_breadcrumb(&$variables) {
+    $breadcrumb = $variables['breadcrumb'];
+
+    if (!empty($breadcrumb)) {
+        $output  = '<nav class="breadcrumbs">';
+        $output .= '<p>';
+        $output .= implode(' » ', $breadcrumb);
+        $output .= '</p>';
+        $output .= '</nav>';
+        return $output;
+    }
+}
+
+
+
 /**
  * hook_form_FORM_ID_alter
  *
