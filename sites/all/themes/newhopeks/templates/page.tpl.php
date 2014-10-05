@@ -30,6 +30,20 @@
     </div> <!-- end .container -->
 </header> <!-- end .header -->
 
+<?php if ($breadcrumb) : ?>
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="wrapper">
+                <div class="row">
+    			    <nav class="col-xs-12">
+    			        <p><?php print $breadcrumb; ?> &raquo; <?php print $title; ?></p>
+    			    </nav>
+                </div> <!-- end .row -->
+            </div> <!-- end .wrapper -->
+        </div> <!-- end .container -->
+    </div>
+<?php endif; ?>
+
 <?php if ($page['content_above']) : ?>
 	<div class="content-above">
 		<div class="container">
@@ -43,15 +57,11 @@
 <div id="content" class="content">
 	<div class="container">
 		<div class="row">
-			<div role="main" class="main col-xs-12 <?php if ($is_front || !$page['content_sidebar']) : ?>col-sm-12<?php else : ?>col-sm-9 col-sm-push-3<?php endif; ?>">
+			<main role="main" class="main col-xs-12 <?php if ($is_front || !$page['content_sidebar']) : ?>col-sm-12<?php else : ?>col-sm-9 col-sm-push-3<?php endif; ?>">
 			    <div class="wrapper">
     				<?php if ($is_front) : ?>
     				    <?php unset($page['content']['system_main']); ?>
     				<?php else : ?>
-        				<?php if ($title) : ?>
-        				    <?php print $breadcrumb; ?>
-        					<h1 class="page-title"><?php print $title; ?></h1>
-        				<?php endif; ?>
                     <?php endif; ?>
     				<?php $tabs && print render($tabs); ?>
     				<?php print render($page['content']); ?>
@@ -64,7 +74,7 @@
                     	</div> <!-- end .content-below -->
                     <?php endif; ?>
 			    </div> <!-- end .wrapper -->
-			</div> <!-- end .main -->
+			</main> <!-- end .main -->
 
 			<?php if (!$is_front && $page['content_sidebar']) : ?>
 				<div class="sidebar col-xs-12 col-sm-3 col-sm-pull-9">

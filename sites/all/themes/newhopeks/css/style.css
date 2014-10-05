@@ -6058,6 +6058,22 @@ table > tbody > tr:hover > th {
     color: inherit;
   }
 }
+.breadcrumbs {
+  margin: -10px 0 20px 0;
+  font-size: 12px;
+  font-size: 1.2rem;
+  line-height: normal;
+}
+.breadcrumbs .wrapper {
+  padding: 0 0 10px 0;
+  border-bottom: 1px solid rgba(99, 91, 76, 0.2);
+}
+.breadcrumbs nav p {
+  margin: 0;
+}
+.breadcrumbs nav a {
+  white-space: nowrap;
+}
 .content .main .wrapper {
   margin: 0 -10px;
   padding: 10px;
@@ -6071,12 +6087,36 @@ table > tbody > tr:hover > th {
     padding: 20px;
   }
 }
-.content .main .page-title {
-  margin: 0 0 20px 0;
+.content .main .main__header {
+  margin-bottom: 20px;
+}
+.content .main .main__header .main__header__title {
+  margin: 0;
+  color: #5c7239;
   font-family: "League Gothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
-  line-height: normal;
+  line-height: 1;
   text-transform: uppercase;
+}
+.content .main .main__header .main__header__subtitle {
+  margin: 3px 0 0 0;
+  color: #78944a;
+  font-size: 16px;
+  font-size: 1.6rem;
+  line-height: 1;
+  font-family: "Droid Serif", Georgia, "Times New Roman", Times, serif;
+  font-style: italic;
+  font-weight: bold;
+}
+.content .main .main__header .main__header__date {
+  margin: 0;
+  color: #b0a898;
+  font-size: 14px;
+  font-size: 1.4rem;
+  line-height: normal;
+}
+.content .main .main__header .main__header__date--messages {
+  margin-bottom: 5px;
 }
 .content .main img {
   max-width: 100%;
@@ -6160,6 +6200,7 @@ table > tbody > tr:hover > th {
   position: relative;
   float: right;
   margin: 0 0 20px 20px;
+  border: 1px solid #b0a898;
 }
 .content .main .field-name-field-image a,
 .content .main .field-name-field-image img {
@@ -6281,10 +6322,12 @@ table > tbody > tr:hover > th {
 }
 .sidebar .block--messages .block__item .block__item__subtitle,
 .content-below .block--messages .block__item .block__item__subtitle {
-  margin: 3px 0 0 0;
+  margin: 5px 0 0 0;
   color: rgba(99, 91, 76, 0.8);
-  font-size: 14px;
-  font-size: 1.4rem;
+  font-family: "Droid Serif", Georgia, "Times New Roman", Times, serif;
+  font-size: 13px;
+  font-size: 1.3rem;
+  font-style: italic;
   font-weight: bold;
   line-height: normal;
 }
@@ -6395,8 +6438,8 @@ table > tbody > tr:hover > th {
   padding-bottom: 0;
   color: rgba(255, 255, 255, 0.8);
   background-color: #78944a;
-  border-top-color: #415028;
-  border-bottom-color: #415028;
+  border-top-color: #5c7239;
+  border-bottom-color: #5c7239;
 }
 .sidebar .subnav .block-title {
   color: white;
@@ -6423,7 +6466,7 @@ table > tbody > tr:hover > th {
 }
 .sidebar .subnav ul li.active-trail {
   color: white;
-  background-color: rgba(65, 80, 40, 0.2);
+  background-color: rgba(92, 114, 57, 0.2);
 }
 .sidebar .subnav ul li ul {
   padding-left: 10px;

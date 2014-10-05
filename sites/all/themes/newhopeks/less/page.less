@@ -240,6 +240,35 @@
 
 
 
+// Breadcrumbs
+// --------------------------------------------------
+
+.breadcrumbs {
+    margin: -10px 0 20px 0;
+    .font-size(12);
+    line-height: normal;
+
+    .wrapper {
+        padding: 0 0 10px 0;
+        border-bottom: 1px solid fade(@nh-brown, 20%);
+    }
+
+    nav {
+
+        p {
+    	    margin: 0;
+        }
+
+        a {
+            white-space: nowrap;
+        }
+
+    }
+
+}
+
+
+
 // Content
 // --------------------------------------------------
 
@@ -264,12 +293,39 @@
 
     	}
 
-    	.page-title {
-    	    margin: 0 0 20px 0;
-        	font-family: @LeagueGothic;
-        	font-weight: normal;
-        	line-height: normal;
-        	text-transform: uppercase;
+    	.main__header {
+    	    margin-bottom: 20px;
+
+        	.main__header__title {
+        	    margin: 0;
+        	    color: @nh-green-dark;
+            	font-family: @LeagueGothic;
+            	font-weight: normal;
+            	line-height: 1;
+            	text-transform: uppercase;
+        	}
+
+        	.main__header__subtitle {
+            	margin: 3px 0 0 0;
+        	    color: @nh-green;
+            	.font-size(16);
+            	line-height: 1;
+            	font-family: @font-family-serif;
+            	font-style: italic;
+            	font-weight: bold;
+        	}
+
+        	.main__header__date {
+            	margin: 0;
+            	color: @nh-brown-light;
+            	.font-size(14);
+            	line-height: normal;
+        	}
+
+        	.main__header__date--messages {
+            	margin-bottom: 5px;
+        	}
+
     	}
 
     	img {

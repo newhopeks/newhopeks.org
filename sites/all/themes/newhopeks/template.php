@@ -48,11 +48,7 @@ function newhopeks_breadcrumb(&$variables) {
     $breadcrumb = $variables['breadcrumb'];
 
     if (!empty($breadcrumb)) {
-        $output  = '<nav class="breadcrumbs">';
-        $output .= '<p>';
-        $output .= implode(' » ', $breadcrumb);
-        $output .= '</p>';
-        $output .= '</nav>';
+        $output = implode(' &raquo; ', $breadcrumb);
         return $output;
     }
 }
