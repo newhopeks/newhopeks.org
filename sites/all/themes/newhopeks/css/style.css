@@ -6216,6 +6216,45 @@ table > tbody > tr:hover > th {
   width: auto;
   height: auto;
 }
+.field-file-upload:before,
+.field-file-upload:after {
+  content: " ";
+  display: table;
+}
+.field-file-upload:after {
+  clear: both;
+}
+.field-file-upload:before,
+.field-file-upload:after {
+  content: " ";
+  display: table;
+}
+.field-file-upload:after {
+  clear: both;
+}
+.field-file-upload .field-file-upload__title {
+  margin-bottom: 0;
+  padding: 10px;
+  color: white;
+  background-color: #66adb1;
+  font-size: 16px;
+  font-size: 1.6rem;
+}
+.field-file-upload .field-file-upload__list {
+  padding: 0;
+  list-style-type: none;
+  border-bottom: 1px solid #66adb1;
+}
+.field-file-upload .field-file-upload__list .field-file-upload__list__item {
+  display: block;
+  margin: 0;
+  padding: 10px;
+  background-color: rgba(203, 227, 229, 0.5);
+  border-top: 1px solid white;
+}
+.field-file-upload .field-file-upload__list .field-file-upload__list__item:nth-child(even) {
+  background-color: rgba(203, 227, 229, 0.7);
+}
 .sidebar .block__item .block__item__title,
 .content-below .block__item .block__item__title {
   margin: 0 0 5px 0;

@@ -81,3 +81,38 @@
 	}
 
 }
+
+// File upload
+
+.field-file-upload {
+    .clearfix;
+
+    .field-file-upload__title {
+        margin-bottom: 0;
+        padding: 10px;
+        color: white;
+        background-color: @nh-blue;
+        .font-size(16);
+    }
+
+    .field-file-upload__list {
+        padding: 0;
+        list-style-type: none;
+        border-bottom: 1px solid @nh-blue;
+
+        .field-file-upload__list__item {
+            display: block;
+            margin: 0;
+            padding: 10px;
+            background-color: fade(@nh-blue-light, 50%);
+            border-top: 1px solid white;
+
+            &:nth-child(even) {
+                background-color: fade(@nh-blue-light, 70%);
+            }
+
+        }
+
+    }
+
+}
