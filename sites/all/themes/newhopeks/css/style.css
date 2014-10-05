@@ -6087,8 +6087,14 @@ table > tbody > tr:hover > th {
     padding: 20px;
   }
 }
+.content .main img {
+  max-width: 100%;
+  height: auto;
+}
 .content .main .main__header {
   margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(99, 91, 76, 0.2);
 }
 .content .main .main__header .main__header__title {
   margin: 0;
@@ -6118,9 +6124,13 @@ table > tbody > tr:hover > th {
 .content .main .main__header .main__header__date--messages {
   margin-bottom: 5px;
 }
-.content .main img {
-  max-width: 100%;
-  height: auto;
+.content .main .main__footer {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(99, 91, 76, 0.2);
+  font-size: 12px;
+  font-size: 1.2rem;
+  line-height: 1.5;
 }
 .content .main .content-below .row {
   margin-left: -20px;
