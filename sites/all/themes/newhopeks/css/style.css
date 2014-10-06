@@ -6100,6 +6100,8 @@ table > tbody > tr:hover > th {
   margin: 0;
   color: #5c7239;
   font-family: "League Gothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 42px;
+  font-size: 4.2rem;
   font-weight: normal;
   line-height: 1;
   text-transform: uppercase;
@@ -6253,6 +6255,36 @@ table > tbody > tr:hover > th {
 }
 .field-file-upload .field-file-upload__list .field-file-upload__list__item:nth-child(even) {
   background-color: rgba(203, 227, 229, 0.7);
+}
+.field-audio {
+  margin-bottom: 10px;
+}
+.field-audio .mediaelement-audio .mejs-container {
+  width: 100% !important;
+}
+.field-audio .mediaelement-audio .mejs-container .mejs-inner .mejs-controls {
+  background: #635b4c;
+}
+.field-audio .mediaelement-audio .mejs-container .mejs-inner .mejs-controls .mejs-time-rail .mejs-time-total {
+  background: #292620;
+}
+.field-audio .mediaelement-audio .mejs-container .mejs-inner .mejs-controls .mejs-time-rail .mejs-time-total .mejs-time-buffering {
+  background: rgba(255, 255, 255, 0.2);
+}
+.field-audio .mediaelement-audio .mejs-container .mejs-inner .mejs-controls .mejs-time-rail .mejs-time-total .mejs-time-loaded {
+  background: #66adb1;
+}
+.field-audio .mediaelement-audio .mejs-container .mejs-inner .mejs-controls .mejs-time-rail .mejs-time-total .mejs-time-current {
+  background: rgba(255, 255, 255, 0.8);
+}
+.field-audio .mediaelement-audio .mejs-container .mejs-inner .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-total {
+  background: #292620;
+}
+.field-audio .mediaelement-audio .mejs-container .mejs-inner .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-current {
+  background: rgba(255, 255, 255, 0.8);
+}
+.field-audio .mediaelement-audio .mediaelement-download-link {
+  margin-top: 3px;
 }
 .sidebar .block__item .block__item__title,
 .content-below .block__item .block__item__title {
