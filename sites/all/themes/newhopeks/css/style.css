@@ -6243,7 +6243,6 @@ table > tbody > tr:hover > th {
 .field-file-upload .field-file-upload__list {
   padding: 0;
   list-style-type: none;
-  border-bottom: 1px solid #66adb1;
 }
 .field-file-upload .field-file-upload__list .field-file-upload__list__item {
   display: block;
