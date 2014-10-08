@@ -59,11 +59,28 @@
 		<div class="row">
 			<main role="main" class="main col-xs-12 <?php if ($is_front || !$page['content_sidebar']) : ?>col-sm-12<?php else : ?>col-sm-9 col-sm-push-3<?php endif; ?>">
 			    <div class="wrapper">
+    				<?php $tabs && print render($tabs); ?>
+
     				<?php if ($is_front) : ?>
     				    <?php unset($page['content']['system_main']); ?>
     				<?php else : ?>
                     <?php endif; ?>
-    				<?php $tabs && print render($tabs); ?>
+
+                    <?php if ($title) : ?>
+                        <header class="main__header">
+                            <?php if ($node->type == 'message') : ?>
+                                <p class="main__header__date main__header__date--messages"><?php print $date; ?></p>
+                            <?php endif; ?>
+                            <h1 class="main__header__title"><?php print $title; ?></h1>
+                            <?php if ($field_subtitle) : ?>
+                                <p class="main__header__subtitle"><?php print $field_subtitle; ?></p>
+                            <?php endif; ?>
+                            <?php if ($node->type == 'news') : ?>
+                                <p class="main__header__date"><?php print $date; ?></p>
+                            <?php endif; ?>
+                        </header>
+                    <?php endif; ?>
+
     				<?php print render($page['content']); ?>
 
                     <?php if ($page['content_below']) : ?>

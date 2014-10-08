@@ -40,6 +40,20 @@ function newhopeks_preprocess_page(&$variables) {
 	//$search_form['#attributes']['role'][] = 'form';
 	$variables['search_form'] = drupal_render(drupal_get_form('search_form'));
 
+
+
+    // check to make sure this is a node
+    if (isset($variables['node'])) {
+        $node = $variables['node'];
+
+        // created date
+        $variables['date'] = format_date($node->created);
+
+        // subtitle field
+        $field_subtitle = field_get_items('node', $node, 'field_subtitle');
+        if ($field_subtitle) { $variables['field_subtitle'] = $field_subtitle[0]['value']; }
+    }
+
 }
 
 
