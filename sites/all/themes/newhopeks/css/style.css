@@ -6256,32 +6256,32 @@ table > tbody > tr:hover > th {
 .field-file-upload .field-file-upload__list .field-file-upload__list__item:nth-child(even) {
   background-color: rgba(203, 227, 229, 0.7);
 }
-.field-audio {
-  margin-bottom: 10px;
-}
-.field-audio .mediaelement-audio .mejs-container {
+.mejs-container {
   width: 100% !important;
 }
-.field-audio .mediaelement-audio .mejs-container .mejs-inner .mejs-controls {
+.mejs-container .mejs-inner .mejs-controls {
   background: #635b4c;
 }
-.field-audio .mediaelement-audio .mejs-container .mejs-inner .mejs-controls .mejs-time-rail .mejs-time-total {
+.mejs-container .mejs-inner .mejs-controls .mejs-time-rail .mejs-time-total {
   background: #292620;
 }
-.field-audio .mediaelement-audio .mejs-container .mejs-inner .mejs-controls .mejs-time-rail .mejs-time-total .mejs-time-buffering {
+.mejs-container .mejs-inner .mejs-controls .mejs-time-rail .mejs-time-total .mejs-time-buffering {
   background: rgba(255, 255, 255, 0.2);
 }
-.field-audio .mediaelement-audio .mejs-container .mejs-inner .mejs-controls .mejs-time-rail .mejs-time-total .mejs-time-loaded {
+.mejs-container .mejs-inner .mejs-controls .mejs-time-rail .mejs-time-total .mejs-time-loaded {
   background: #66adb1;
 }
-.field-audio .mediaelement-audio .mejs-container .mejs-inner .mejs-controls .mejs-time-rail .mejs-time-total .mejs-time-current {
+.mejs-container .mejs-inner .mejs-controls .mejs-time-rail .mejs-time-total .mejs-time-current {
   background: rgba(255, 255, 255, 0.8);
 }
-.field-audio .mediaelement-audio .mejs-container .mejs-inner .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-total {
+.mejs-container .mejs-inner .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-total {
   background: #292620;
 }
-.field-audio .mediaelement-audio .mejs-container .mejs-inner .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-current {
+.mejs-container .mejs-inner .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-current {
   background: rgba(255, 255, 255, 0.8);
+}
+.field-audio {
+  margin-bottom: 10px;
 }
 .field-audio .mediaelement-audio .mediaelement-download-link {
   margin-top: 3px;

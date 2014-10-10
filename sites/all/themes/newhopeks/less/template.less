@@ -118,136 +118,136 @@
 
 // Audio Field
 
-.field-audio {
-    margin-bottom: 10px;
+.mejs-container {
+    width: 100% !important;
 
-    .mediaelement-audio {
+    .mejs-inner {
 
-        .mejs-container {
-            width: 100% !important;
+        // audio element
+        .mejs-mediaelement {
 
-            .mejs-inner {
+            audio {}
 
-                // audio element
-                .mejs-mediaelement {
+        }
 
-                    audio {}
+        .mejs-layers {
 
-                }
+            .mejs-layer {}
 
-                .mejs-layers {
+            .mejs-poster {}
 
-                    .mejs-layer {}
+        }
 
-                    .mejs-poster {}
+        // player controls
+        .mejs-controls {
+            background: @nh-brown;
 
-                }
+            // generic button class (for playpause and mute)
+            .mejs-button {}
 
-                // player controls
-                .mejs-controls {
-                    background: @nh-brown;
+            // play/pause button
+            .mejs-playpause-button {
 
-                    // generic button class (for playpause and mute)
-                    .mejs-button {}
+                button {}
 
-                    // play/pause button
-                    .mejs-playpause-button {
+            }
 
-                        button {}
+            // play modifier
+            .mejs-play {}
 
+            // pause modifier
+            .mejs-pause {}
+
+            // generic timecode (for current time and total time)
+            .mejs-time {}
+
+            // current time
+            .mejs-currenttime-container {
+
+                .mejs-currenttime {}
+
+            }
+
+            // time rail
+            .mejs-time-rail {
+
+                .mejs-time-total {
+                    background: @nh-brown-dark;
+
+                    .mejs-time-buffering {
+                        background: fade(white, 20%);
                     }
 
-                    // play modifier
-                    .mejs-play {}
-
-                    // pause modifier
-                    .mejs-pause {}
-
-                    // generic timecode (for current time and total time)
-                    .mejs-time {}
-
-                    // current time
-                    .mejs-currenttime-container {
-
-                        .mejs-currenttime {}
-
+                    .mejs-time-loaded {
+                        background: @nh-blue;
                     }
 
-                    // time rail
-                    .mejs-time-rail {
-
-                        .mejs-time-total {
-                            background: @nh-brown-dark;
-
-                            .mejs-time-buffering {
-                                background: fade(white, 20%);
-                            }
-
-                            .mejs-time-loaded {
-                                background: @nh-blue;
-                            }
-
-                            .mejs-time-current {
-                                background: fade(white, 80%);
-                            }
-
-                            .mejs-time-handle {}
-
-                            .mejs-time-float {
-
-                                .mejs-time-float-current {}
-
-                                .mejs-time-float-corner {}
-
-                            }
-
-                        }
-
+                    .mejs-time-current {
+                        background: fade(white, 80%);
                     }
 
-                    // total time
-                    .mejs-time mejs-duration-container {
+                    .mejs-time-handle {}
 
-                        .mejs-duration {}
+                    .mejs-time-float {
 
-                    }
+                        .mejs-time-float-current {}
 
-                    // mute modifier (for volume button and volume slider)
-                    .mejs-mute {}
-
-                    // unmute modifier
-                    .mejs-unmute {}
-
-                    // volume button (button that mutes/unmutes on click)
-                    .mejs-volume-button {
-
-                        button {}
-
-                    }
-
-                    // volume slider
-                    .mejs-horizontal-volume-slider {
-
-                        .mejs-horizontal-volume-total {
-                            background: @nh-brown-dark;
-                        }
-
-                        .mejs-horizontal-volume-current {
-                            background: fade(white, 80%);
-                        }
-
-                        .mejs-horizontal-volume-handle {}
+                        .mejs-time-float-corner {}
 
                     }
 
                 }
 
-                // clear floats
-                .mejs-clear {}
+            }
+
+            // total time
+            .mejs-time mejs-duration-container {
+
+                .mejs-duration {}
+
+            }
+
+            // mute modifier (for volume button and volume slider)
+            .mejs-mute {}
+
+            // unmute modifier
+            .mejs-unmute {}
+
+            // volume button (button that mutes/unmutes on click)
+            .mejs-volume-button {
+
+                button {}
+
+            }
+
+            // volume slider
+            .mejs-horizontal-volume-slider {
+
+                .mejs-horizontal-volume-total {
+                    background: @nh-brown-dark;
+                }
+
+                .mejs-horizontal-volume-current {
+                    background: fade(white, 80%);
+                }
+
+                .mejs-horizontal-volume-handle {}
 
             }
 
         }
+
+        // clear floats
+        .mejs-clear {}
+
+    }
+
+}
+
+.field-audio {
+    margin-bottom: 10px;
+
+    .mediaelement-audio {
 
         // download link
         .mediaelement-download-link {
@@ -260,3 +260,5 @@
     }
 
 }
+
+
