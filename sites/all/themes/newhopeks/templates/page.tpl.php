@@ -72,7 +72,7 @@
                                 <p class="main__header__date main__header__date--messages"><?php print $date; ?></p>
                             <?php endif; ?>
                             <h1 class="main__header__title"><?php print $title; ?></h1>
-                            <?php if ($field_subtitle) : ?>
+                            <?php if (isset($field_subtitle)) : ?>
                                 <p class="main__header__subtitle"><?php print $field_subtitle; ?></p>
                             <?php endif; ?>
                             <?php if ($node->type == 'news') : ?>
