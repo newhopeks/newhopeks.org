@@ -5,7 +5,8 @@
 
 
 .sidebar,
-.content-below {
+.content-below,
+.view-id-messages {
 
     .block {}
 
@@ -20,7 +21,15 @@
             line-height: 1;
         }
 
-        .block__item__subtitle {}
+        .block__item__subtitle {
+            margin: 5px 0 0 0;
+            color: fade(@text-color, 80%);
+            font-family: @font-family-serif;
+            .font-size(13);
+            font-style: italic;
+            font-weight: bold;
+            line-height: normal;
+        }
 
         .block__item__date {
             color: @nh-brown-light;
@@ -32,6 +41,11 @@
             margin: 5px 0 0 0;
             .font-size(13);
             line-height: 1.5;
+
+            p {
+                margin: 0;
+            }
+
         }
 
         .block__item__more {
@@ -108,15 +122,7 @@
                 margin: 0;
             }
 
-            .block__item__subtitle {
-                margin: 5px 0 0 0;
-                color: fade(@text-color, 80%);
-                font-family: @font-family-serif;
-                .font-size(13);
-                font-style: italic;
-                font-weight: bold;
-                line-height: normal;
-            }
+            .block__item__subtitle {}
 
             .block--messages__item__info {
                 margin: 0;
@@ -201,13 +207,7 @@
                 margin: 0;
             }
 
-            .block__item__body {
-
-                p {
-                    margin: 0;
-                }
-
-            }
+            .block__item__body {}
 
             .block__item__more {}
 

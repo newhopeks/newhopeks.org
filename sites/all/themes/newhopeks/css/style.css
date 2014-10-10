@@ -5636,7 +5636,9 @@ button.close {
 .sidebar .block__footer .block__footer__links:before,
 .sidebar .block__footer .block__footer__links:after,
 .content-below .block__footer .block__footer__links:before,
-.content-below .block__footer .block__footer__links:after {
+.content-below .block__footer .block__footer__links:after,
+.view-id-messages .block__footer .block__footer__links:before,
+.view-id-messages .block__footer .block__footer__links:after {
   content: " ";
   display: table;
 }
@@ -5655,7 +5657,8 @@ button.close {
 .panel-body:after,
 .modal-footer:after,
 .sidebar .block__footer .block__footer__links:after,
-.content-below .block__footer .block__footer__links:after {
+.content-below .block__footer .block__footer__links:after,
+.view-id-messages .block__footer .block__footer__links:after {
   clear: both;
 }
 .center-block {
@@ -6287,7 +6290,8 @@ table > tbody > tr:hover > th {
   margin-top: 3px;
 }
 .sidebar .block__item .block__item__title,
-.content-below .block__item .block__item__title {
+.content-below .block__item .block__item__title,
+.view-id-messages .block__item .block__item__title {
   margin: 0 0 5px 0;
   color: #4d9397;
   font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -6296,34 +6300,56 @@ table > tbody > tr:hover > th {
   font-weight: 700;
   line-height: 1;
 }
+.sidebar .block__item .block__item__subtitle,
+.content-below .block__item .block__item__subtitle,
+.view-id-messages .block__item .block__item__subtitle {
+  margin: 5px 0 0 0;
+  color: rgba(99, 91, 76, 0.8);
+  font-family: "Droid Serif", Georgia, "Times New Roman", Times, serif;
+  font-size: 13px;
+  font-size: 1.3rem;
+  font-style: italic;
+  font-weight: bold;
+  line-height: normal;
+}
 .sidebar .block__item .block__item__date,
-.content-below .block__item .block__item__date {
+.content-below .block__item .block__item__date,
+.view-id-messages .block__item .block__item__date {
   color: #b0a898;
   font-size: 13px;
   font-size: 1.3rem;
   line-height: normal;
 }
 .sidebar .block__item .block__item__body,
-.content-below .block__item .block__item__body {
+.content-below .block__item .block__item__body,
+.view-id-messages .block__item .block__item__body {
   margin: 5px 0 0 0;
   font-size: 13px;
   font-size: 1.3rem;
   line-height: 1.5;
 }
+.sidebar .block__item .block__item__body p,
+.content-below .block__item .block__item__body p,
+.view-id-messages .block__item .block__item__body p {
+  margin: 0;
+}
 .sidebar .block__item .block__item__more,
-.content-below .block__item .block__item__more {
+.content-below .block__item .block__item__more,
+.view-id-messages .block__item .block__item__more {
   margin: 5px 0 0 0;
   font-size: 13px;
   font-size: 1.3rem;
   line-height: 1.5;
 }
 .sidebar .block__footer,
-.content-below .block__footer {
+.content-below .block__footer,
+.view-id-messages .block__footer {
   padding-top: 10px;
   border-top: 1px solid rgba(41, 38, 32, 0.1);
 }
 .sidebar .block__footer .block__footer__links,
-.content-below .block__footer .block__footer__links {
+.content-below .block__footer .block__footer__links,
+.view-id-messages .block__footer .block__footer__links {
   margin: 0;
   padding: 0;
   margin-left: -10px;
@@ -6336,16 +6362,19 @@ table > tbody > tr:hover > th {
   font-style: italic;
 }
 .sidebar .block__footer .block__footer__links li,
-.content-below .block__footer .block__footer__links li {
+.content-below .block__footer .block__footer__links li,
+.view-id-messages .block__footer .block__footer__links li {
   margin: 0;
   padding: 0;
 }
 .sidebar .block__footer .block__footer__links li a,
-.content-below .block__footer .block__footer__links li a {
+.content-below .block__footer .block__footer__links li a,
+.view-id-messages .block__footer .block__footer__links li a {
   color: #78944a;
 }
 .sidebar .block__footer .block__footer__links li.browse,
-.content-below .block__footer .block__footer__links li.browse {
+.content-below .block__footer .block__footer__links li.browse,
+.view-id-messages .block__footer .block__footer__links li.browse {
   position: relative;
   min-height: 1px;
   padding-left: 10px;
@@ -6354,13 +6383,15 @@ table > tbody > tr:hover > th {
 }
 @media (min-width: 768px) {
   .sidebar .block__footer .block__footer__links li.browse,
-  .content-below .block__footer .block__footer__links li.browse {
+  .content-below .block__footer .block__footer__links li.browse,
+  .view-id-messages .block__footer .block__footer__links li.browse {
     float: left;
     width: 50%;
   }
 }
 .sidebar .block__footer .block__footer__links li.feed,
-.content-below .block__footer .block__footer__links li.feed {
+.content-below .block__footer .block__footer__links li.feed,
+.view-id-messages .block__footer .block__footer__links li.feed {
   position: relative;
   min-height: 1px;
   padding-left: 10px;
@@ -6369,65 +6400,65 @@ table > tbody > tr:hover > th {
 }
 @media (min-width: 768px) {
   .sidebar .block__footer .block__footer__links li.feed,
-  .content-below .block__footer .block__footer__links li.feed {
+  .content-below .block__footer .block__footer__links li.feed,
+  .view-id-messages .block__footer .block__footer__links li.feed {
     float: left;
     width: 50%;
   }
 }
 .sidebar .block__footer .block__footer__links li.feed a,
-.content-below .block__footer .block__footer__links li.feed a {
+.content-below .block__footer .block__footer__links li.feed a,
+.view-id-messages .block__footer .block__footer__links li.feed a {
   color: #b0a898;
 }
 .sidebar .block--messages .block--messages__series-image,
-.content-below .block--messages .block--messages__series-image {
+.content-below .block--messages .block--messages__series-image,
+.view-id-messages .block--messages .block--messages__series-image {
   margin: 0 0 10px 0;
 }
 .sidebar .block--messages .block--messages__series-image img,
-.content-below .block--messages .block--messages__series-image img {
+.content-below .block--messages .block--messages__series-image img,
+.view-id-messages .block--messages .block--messages__series-image img {
   display: block;
   width: 100%;
   border: 1px solid rgba(41, 38, 32, 0.1);
 }
 .sidebar .block--messages .block__item .block__item__date,
-.content-below .block--messages .block__item .block__item__date {
+.content-below .block--messages .block__item .block__item__date,
+.view-id-messages .block--messages .block__item .block__item__date {
   margin: 0 0 3px 0;
 }
 .sidebar .block--messages .block__item .block__item__title,
-.content-below .block--messages .block__item .block__item__title {
+.content-below .block--messages .block__item .block__item__title,
+.view-id-messages .block--messages .block__item .block__item__title {
   margin: 0;
 }
-.sidebar .block--messages .block__item .block__item__subtitle,
-.content-below .block--messages .block__item .block__item__subtitle {
-  margin: 5px 0 0 0;
-  color: rgba(99, 91, 76, 0.8);
-  font-family: "Droid Serif", Georgia, "Times New Roman", Times, serif;
-  font-size: 13px;
-  font-size: 1.3rem;
-  font-style: italic;
-  font-weight: bold;
-  line-height: normal;
-}
 .sidebar .block--messages .block__item .block--messages__item__info,
-.content-below .block--messages .block__item .block--messages__item__info {
+.content-below .block--messages .block__item .block--messages__item__info,
+.view-id-messages .block--messages .block__item .block--messages__item__info {
   margin: 0;
   font-size: 13px;
   font-size: 1.3rem;
   line-height: 1.5;
 }
 .sidebar .block--messages .block__item .block--messages__item__info a,
-.content-below .block--messages .block__item .block--messages__item__info a {
+.content-below .block--messages .block__item .block--messages__item__info a,
+.view-id-messages .block--messages .block__item .block--messages__item__info a {
   color: #635b4c;
 }
 .sidebar .block--messages .block__item .block--messages__item__info dt,
-.content-below .block--messages .block__item .block--messages__item__info dt {
+.content-below .block--messages .block__item .block--messages__item__info dt,
+.view-id-messages .block--messages .block__item .block--messages__item__info dt {
   margin-top: 5px;
 }
 .sidebar .block--messages .block__footer,
-.content-below .block--messages .block__footer {
+.content-below .block--messages .block__footer,
+.view-id-messages .block--messages .block__footer {
   margin-top: 10px;
 }
 .sidebar .block--events .block__item,
-.content-below .block--events .block__item {
+.content-below .block--events .block__item,
+.view-id-messages .block--events .block__item {
   position: relative;
   min-height: 75px;
   min-height: 7.5rem;
@@ -6436,7 +6467,8 @@ table > tbody > tr:hover > th {
   border-top: 1px solid rgba(41, 38, 32, 0.1);
 }
 .sidebar .block--events .block__item .block__item__date,
-.content-below .block--events .block__item .block__item__date {
+.content-below .block--events .block__item .block__item__date,
+.view-id-messages .block--events .block__item .block__item__date {
   position: absolute;
   top: 10px;
   left: 0;
@@ -6448,7 +6480,8 @@ table > tbody > tr:hover > th {
   text-align: center;
 }
 .sidebar .block--events .block__item .block__item__date .block--events__item__date__month,
-.content-below .block--events .block__item .block__item__date .block--events__item__date__month {
+.content-below .block--events .block__item .block__item__date .block--events__item__date__month,
+.view-id-messages .block--events .block__item .block__item__date .block--events__item__date__month {
   display: block;
   text-transform: uppercase;
   font-size: 24px;
@@ -6456,27 +6489,27 @@ table > tbody > tr:hover > th {
   line-height: 1;
 }
 .sidebar .block--events .block__item .block__item__date .block--events__item__date__day,
-.content-below .block--events .block__item .block__item__date .block--events__item__date__day {
+.content-below .block--events .block__item .block__item__date .block--events__item__date__day,
+.view-id-messages .block--events .block__item .block__item__date .block--events__item__date__day {
   display: block;
   font-size: 36px;
   font-size: 3.6rem;
   line-height: 1;
 }
 .sidebar .block--news .block__item,
-.content-below .block--news .block__item {
+.content-below .block--news .block__item,
+.view-id-messages .block--news .block__item {
   padding: 10px 0;
   border-top: 1px solid rgba(41, 38, 32, 0.1);
 }
 .sidebar .block--news .block__item .block__item__title,
-.content-below .block--news .block__item .block__item__title {
+.content-below .block--news .block__item .block__item__title,
+.view-id-messages .block--news .block__item .block__item__title {
   margin-bottom: 3px;
 }
 .sidebar .block--news .block__item .block__item__date,
-.content-below .block--news .block__item .block__item__date {
-  margin: 0;
-}
-.sidebar .block--news .block__item .block__item__body p,
-.content-below .block--news .block__item .block__item__body p {
+.content-below .block--news .block__item .block__item__date,
+.view-id-messages .block--news .block__item .block__item__date {
   margin: 0;
 }
 .sidebar .block {

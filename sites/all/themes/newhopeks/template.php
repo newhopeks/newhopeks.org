@@ -69,6 +69,38 @@ function newhopeks_breadcrumb(&$variables) {
 
 
 
+function newhopeks_get_page_children($nid) {
+    $parentPath = 'node/' . $nid;
+    $parentID = db_query("SELECT mlid FROM {menu_links} WHERE link_path ='" . $parentPath . "'");
+
+    foreach ($parentID as $pid) {
+        $finalID = $pid->mlid;
+    }
+
+    $getChildren = db_query("SELECT link_path FROM {menu_links} WHERE plid='" . $finalID . "' ORDER BY weight");
+
+    foreach ($getChildren as $child) {
+        $nodeID = str_replace('node/', '', $child->link_path);
+        $children[] = $nodeID;
+    }
+
+    print_r($children);
+
+    if (isset($children)) {
+        foreach($children as $nid){
+            $node = node_load($nid);
+            if ($node->status ==1) { //check node is published
+                print '<h1>' . $node->title . '</h1>';
+                //print render(node_view($node, $view_mode = 'teaser'));
+            } else {
+                print '<h1>NOT A NODE</h1>';
+            }
+        }
+    }
+}
+
+
+
 /**
  * hook_form_FORM_ID_alter
  *
