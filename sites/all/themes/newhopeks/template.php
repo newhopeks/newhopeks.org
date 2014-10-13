@@ -70,6 +70,31 @@ function newhopeks_breadcrumb(&$variables) {
 
 
 function newhopeks_get_page_children($nid) {
+
+
+
+/*
+
+$menu_active_trail = menu_get_active_trail();
+
+$menu_name = $menu_active_trail[1]['menu_name'];
+
+$menu_items = menu_tree_page_data($menu_name);
+
+foreach($menu_items as $key => $m) {
+   if ($m['link']['in_active_trail'] && $menu_items[$key]['below']) {
+       $menu = render(menu_tree_output($menu_items[$key]['below']));
+   }
+}
+
+if ($menu) {
+    print $menu;
+}
+*/
+
+
+
+
     $parentPath = 'node/' . $nid;
     $parentID = db_query("SELECT mlid FROM {menu_links} WHERE link_path ='" . $parentPath . "'");
 
@@ -84,18 +109,25 @@ function newhopeks_get_page_children($nid) {
         $children[] = $nodeID;
     }
 
-    print_r($children);
-
     if (isset($children)) {
+        print '<ul class="media-list">';
+
         foreach($children as $nid){
+
             $node = node_load($nid);
-            if ($node->status ==1) { //check node is published
-                print '<h1>' . $node->title . '</h1>';
+
+            if ($node->status == 1) { //check node is published
+                //print '<h1>' . $node->title . '</h1>';
                 //print render(node_view($node, $view_mode = 'teaser'));
-            } else {
-                print '<h1>NOT A NODE</h1>';
+                print '<li class="media">';
+                print '<div class="media-body">';
+                print '<h2 class="media-heading"><a href="' . drupal_get_path_alias('node/' . $nid) . '">' . $node->title . '</a></h2>';
+                print '</div>';
+                print '</li>';
             }
         }
+
+        print '</ul>';
     }
 }
 
