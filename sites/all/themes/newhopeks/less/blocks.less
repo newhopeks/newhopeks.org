@@ -5,11 +5,15 @@
 
 
 .article-listing__item {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid @nh-brown-light;
 
-    .content .main & {
-        padding-bottom: 20px;
-        margin-bottom: 20px;
-        border-bottom: 1px solid @nh-brown-light;
+    .sidebar &,
+    .content-below & {
+        padding-bottom: 0;
+        margin-bottom: 0;
+        border-bottom: none;
     }
 
     .article-listing__item__title {

@@ -6283,10 +6283,16 @@ table > tbody > tr:hover > th {
 .field-audio .mediaelement-audio .mediaelement-download-link {
   margin-top: 3px;
 }
-.content .main .article-listing__item {
+.article-listing__item {
   padding-bottom: 20px;
   margin-bottom: 20px;
   border-bottom: 1px solid #b0a898;
+}
+.sidebar .article-listing__item,
+.content-below .article-listing__item {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: none;
 }
 .article-listing__item .article-listing__item__title {
   margin: 0 0 5px 0;
