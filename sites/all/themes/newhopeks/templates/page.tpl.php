@@ -75,7 +75,7 @@
                             <?php if (isset($field_subtitle)) : ?>
                                 <p class="main__header__subtitle"><?php print $field_subtitle; ?></p>
                             <?php endif; ?>
-                            <?php if ($node->type == 'news') : ?>
+                            <?php if (isset($node) && $node->type == 'news') : ?>
                                 <p class="main__header__date"><?php print $date; ?></p>
                             <?php endif; ?>
                         </header>
