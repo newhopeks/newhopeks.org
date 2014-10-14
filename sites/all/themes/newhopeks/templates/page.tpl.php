@@ -68,7 +68,7 @@
 
                     <?php if ($title) : ?>
                         <header class="main__header">
-                            <?php if ($node->type == 'message') : ?>
+                            <?php if (isset($node) && $node->type == 'message') : ?>
                                 <p class="main__header__date main__header__date--messages"><?php print $date; ?></p>
                             <?php endif; ?>
                             <h1 class="main__header__title"><?php print $title; ?></h1>
