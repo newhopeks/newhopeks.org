@@ -58,7 +58,7 @@
 	<div class="container">
 		<div class="row">
 			<main role="main" class="main col-xs-12 <?php if ($is_front || !$page['content_sidebar']) : ?>col-sm-12<?php else : ?>col-sm-9 col-sm-push-3<?php endif; ?>">
-			    <div class="wrapper">
+			    <div class="wrapper clearfix">
     				<?php $tabs && print render($tabs); ?>
 
     				<?php if ($is_front) : ?>
