@@ -5854,6 +5854,9 @@ h2,
 .h2 {
   color: #78944a;
 }
+cite {
+  font-style: italic;
+}
 table {
   width: 100%;
   margin-bottom: 20px;
