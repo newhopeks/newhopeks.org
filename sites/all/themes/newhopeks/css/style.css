@@ -6493,6 +6493,9 @@ table > tbody > tr:hover > th {
 .field-audio .mediaelement-audio .mediaelement-download-link {
   margin-top: 3px;
 }
+div.addressfield-container-inline:after {
+  clear: none;
+}
 .sidebar .block {
   padding: 10px;
   color: #635b4c;
