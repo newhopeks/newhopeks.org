@@ -10,8 +10,15 @@ h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
 
     > a {
-    	color: inherit;
+    	color: @nh-green;
     	text-decoration: none;
+
+    	&:hover,
+    	&:focus {
+        	color: @nh-green-dark;
+        	text-decoration: none;
+    	}
+
 	}
 
 }

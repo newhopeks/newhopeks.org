@@ -5820,7 +5820,34 @@ h6 > a,
 .h4 > a,
 .h5 > a,
 .h6 > a {
-  color: inherit;
+  color: #78944a;
+  text-decoration: none;
+}
+h1 > a:hover,
+h2 > a:hover,
+h3 > a:hover,
+h4 > a:hover,
+h5 > a:hover,
+h6 > a:hover,
+.h1 > a:hover,
+.h2 > a:hover,
+.h3 > a:hover,
+.h4 > a:hover,
+.h5 > a:hover,
+.h6 > a:hover,
+h1 > a:focus,
+h2 > a:focus,
+h3 > a:focus,
+h4 > a:focus,
+h5 > a:focus,
+h6 > a:focus,
+.h1 > a:focus,
+.h2 > a:focus,
+.h3 > a:focus,
+.h4 > a:focus,
+.h5 > a:focus,
+.h6 > a:focus {
+  color: #5c7239;
   text-decoration: none;
 }
 h2,
@@ -6196,7 +6223,7 @@ table > tbody > tr:hover > th {
 .article-listing__item {
   padding-bottom: 20px;
   margin-bottom: 20px;
-  border-bottom: 1px solid #b0a898;
+  border-bottom: 1px solid rgba(99, 91, 76, 0.2);
 }
 .sidebar .article-listing__item,
 .content-below .article-listing__item {
@@ -6208,13 +6235,12 @@ table > tbody > tr:hover > th {
   margin: 0 0 5px 0;
   font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
-  line-height: 1;
 }
 .content .sidebar .article-listing__item .article-listing__item__title,
 .content .content-below .article-listing__item .article-listing__item__title {
-  color: #4d9397;
   font-size: 16px;
   font-size: 1.6rem;
+  line-height: 1;
 }
 .article-listing__item .article-listing__item__subtitle {
   margin: 5px 0 0 0;
@@ -6473,7 +6499,7 @@ table > tbody > tr:hover > th {
 }
 .sidebar .block .block-title {
   margin: 0 0 10px 0;
-  color: #635b4c;
+  color: #5c7239;
   font-family: "Droid Serif", Georgia, "Times New Roman", Times, serif;
   font-style: italic;
   font-size: 18px;
@@ -6555,7 +6581,7 @@ table > tbody > tr:hover > th {
 }
 .content-below .block .block-title {
   margin: 0 0 10px 0;
-  color: #78944a;
+  color: #5c7239;
   font-family: "Droid Serif", Georgia, "Times New Roman", Times, serif;
   font-style: italic;
   font-size: 18px;

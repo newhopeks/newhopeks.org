@@ -32,7 +32,7 @@
 .article-listing__item {
     padding-bottom: 20px;
     margin-bottom: 20px;
-    border-bottom: 1px solid @nh-brown-light;
+    border-bottom: 1px solid fade(@nh-brown, 20%);
 
     .sidebar &,
     .content-below & {
@@ -45,12 +45,11 @@
         margin: 0 0 5px 0;
         font-family: @font-family-base;
         font-weight: 700;
-        line-height: 1;
 
         .content .sidebar &,
         .content .content-below & {
-            color: @nh-blue-dark;
             .font-size(16);
+            line-height: 1;
         }
 
     }
