@@ -6086,13 +6086,13 @@ table > tbody > tr:hover > th {
   }
 }
 .breadcrumbs {
-  margin: -10px 0 20px 0;
+  margin: -20px 0 20px 0;
   font-size: 12px;
   font-size: 1.2rem;
   line-height: normal;
 }
 .breadcrumbs .wrapper {
-  padding: 0 0 10px 0;
+  padding: 10px 0;
   border-bottom: 1px solid rgba(99, 91, 76, 0.2);
 }
 .breadcrumbs nav p {
