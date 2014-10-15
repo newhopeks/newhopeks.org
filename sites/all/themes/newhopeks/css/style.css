@@ -6415,7 +6415,6 @@ table > tbody > tr:hover > th {
   position: relative;
   float: right;
   margin: 0 0 20px 20px;
-  border: 1px solid #b0a898;
 }
 .content .main .field-name-field-image a,
 .content .main .field-name-field-image img {
