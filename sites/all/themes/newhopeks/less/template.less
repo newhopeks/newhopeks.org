@@ -36,8 +36,9 @@
 
     .sidebar &,
     .content-below & {
-        padding-bottom: 0;
+        padding: 10px 0;
         margin-bottom: 0;
+        border-top: 1px solid @sidebar-block-border-color;
         border-bottom: none;
     }
 
@@ -195,9 +196,7 @@
 
     }
 
-    .article-listing__footer {
-        margin-top: 10px;
-    }
+    .article-listing__footer {}
 
 }
 
@@ -207,7 +206,6 @@
         position: relative;
         min-height: 75px; min-height: 7.5rem;
         padding: 10px 0 10px 50px; padding: 1.0rem 0 1.0rem 50px;
-        border-top: 1px solid @sidebar-block-border-color;
 
         .article-listing__item__title {}
 
@@ -248,8 +246,6 @@
 .article-listing--news {
 
     .article-listing__item {
-        padding: 10px 0;
-        border-top: 1px solid @sidebar-block-border-color;
 
         .article-listing__item__title {
             margin-bottom: 3px;

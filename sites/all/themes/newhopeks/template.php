@@ -54,6 +54,10 @@ function newhopeks_preprocess_page(&$variables) {
         if ($field_subtitle) { $variables['field_subtitle'] = $field_subtitle[0]['value']; }
     }
 
+
+
+    $variables['hero'] = views_embed_view('hero', 'embed');
+
 }
 
 

@@ -44,11 +44,15 @@
     </div>
 <?php endif; ?>
 
-<?php if ($page['content_above']) : ?>
+<?php if (($is_front && isset($hero)) || $page['content_above']) : ?>
 	<div class="content-above">
 		<div class="container">
 			<div class="row">
-				<?php print render($page['content_above']); ?>
+			    <?php if ($is_front) : ?>
+			        <?php print $hero; ?>
+                <?php else : ?>
+    				<?php print render($page['content_above']); ?>
+                <?php endif; ?>
 			</div> <!-- end .row -->
 		</div> <!-- end .container -->
 	</div> <!-- end .content-above -->
@@ -63,7 +67,6 @@
 
     				<?php if ($is_front) : ?>
     				    <?php unset($page['content']['system_main']); ?>
-    				<?php else : ?>
                     <?php endif; ?>
 
                     <?php if ($title) : ?>

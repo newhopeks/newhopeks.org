@@ -273,6 +273,38 @@
 // --------------------------------------------------
 
 .content-above {
+
+    .hero {
+        .make-xs-column(12);
+
+        .hero__title {
+            display: none;
+        }
+
+        .hero__img {
+
+            a {
+                display: block;
+                margin: -(@grid-gutter-width + 1) 0 @grid-gutter-width 0;
+                background-color: white;
+                border: 1px solid fade(@nh-brown, 20%);
+
+                &:hover,
+                &:focus {
+                    border-color: @nh-brown;
+                }
+
+            }
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+
+        }
+
+    }
+
 }
 
 .content {
