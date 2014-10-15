@@ -6354,16 +6354,16 @@ table > tbody > tr:hover > th {
 .article-listing--messages .article-listing__item .article-listing__item__title {
   margin: 0;
 }
-.article-listing--messages .article-listing__item .article-listing--messages__item__info {
+.article-listing--messages .article-listing__item .article-listing__item__info {
   margin: 0;
   font-size: 13px;
   font-size: 1.3rem;
   line-height: 1.5;
 }
-.article-listing--messages .article-listing__item .article-listing--messages__item__info a {
+.article-listing--messages .article-listing__item .article-listing__item__info a {
   color: #635b4c;
 }
-.article-listing--messages .article-listing__item .article-listing--messages__item__info dt {
+.article-listing--messages .article-listing__item .article-listing__item__info dt {
   margin-top: 5px;
 }
 .article-listing--messages .article-listing__footer {
