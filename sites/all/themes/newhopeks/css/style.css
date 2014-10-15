@@ -6102,29 +6102,35 @@ table > tbody > tr:hover > th {
   white-space: nowrap;
 }
 .content-above .hero {
-  position: relative;
-  float: left;
-  width: 100%;
-  min-height: 1px;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-.content-above .hero .hero__title {
   display: none;
 }
-.content-above .hero .hero__img a {
-  display: block;
-  margin: -21px 0 20px 0;
-  background-color: white;
-  border: 1px solid rgba(99, 91, 76, 0.2);
-}
-.content-above .hero .hero__img a:hover,
-.content-above .hero .hero__img a:focus {
-  border-color: #635b4c;
-}
-.content-above .hero .hero__img img {
-  width: 100%;
-  height: auto;
+@media (min-width: 768px) {
+  .content-above .hero {
+    display: block;
+    position: relative;
+    float: left;
+    width: 100%;
+    min-height: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .content-above .hero .hero__title {
+    display: none;
+  }
+  .content-above .hero .hero__img a {
+    display: block;
+    margin: -21px 0 20px 0;
+    background-color: white;
+    border: 1px solid rgba(99, 91, 76, 0.2);
+  }
+  .content-above .hero .hero__img a:hover,
+  .content-above .hero .hero__img a:focus {
+    border-color: #635b4c;
+  }
+  .content-above .hero .hero__img img {
+    width: 100%;
+    height: auto;
+  }
 }
 .content .main .wrapper {
   margin: 0 -10px;
