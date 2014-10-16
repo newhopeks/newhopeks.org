@@ -95,10 +95,67 @@
 // Contextual Links
 // --------------------------------------------------
 
-.contextual-links-wrapper a {
-	.transition(none);
-}
+div.contextual-links-wrapper {
+	display: none !important; // hide by default
+	z-index: 49 !important;
+	text-shadow: none !important;
 
+	a.contextual-links-trigger {
+
+		&:link,
+		&:visited {
+			.transition(none);
+		}
+
+	}
+
+	ul.contextual-links {
+		position: absolute !important;
+		right: 0 !important;
+		top: 18px !important;
+		margin: 0px !important;
+		padding: 0.25em 0 !important;
+		list-style: none !important;
+		background: white !important;
+		border: 1px solid #ccc !important;
+		border-radius: 4px 0 4px 4px !important;
+		font-size: 14px !important;
+		text-align: left !important;
+		white-space: nowrap !important;
+
+		li {
+			display: list-item !important;
+			margin: 0 !important;
+			padding: 0 !important;
+			list-style: none !important;
+			list-style-image: none !important;
+			background: transparent !important;
+			font-size: 14px !important;
+			font-weight: normal !important;
+			line-height: 100% !important;
+
+			a {
+				display: block !important;
+				margin: 0.25em 0 !important;
+				padding: 0.25em 1em 0.25em 0.5em !important;
+				color: #333 !important;
+				background: transparent !important;
+				font-size: 14px !important;
+				font-weight: normal !important;
+				text-decoration: none !important;
+				text-transform: none !important;
+
+				&:hover {
+					background-color: #bfdcee !important;
+				}
+
+			}
+
+		}
+
+	}
+
+}
 
 
 // Pager
