@@ -6495,7 +6495,7 @@ table > tbody > tr:hover > th {
 }
 @media (min-width: 768px) {
   .content .main .field-name-field-image img {
-    width: auto;
+    max-width: 100%;
   }
 }
 .field-file-upload:before,
