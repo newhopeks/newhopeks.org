@@ -6134,13 +6134,16 @@ table > tbody > tr:hover > th {
     min-height: 1px;
     padding-left: 10px;
     padding-right: 10px;
+    margin: -21px 0 20px 0;
   }
   .content-above .hero .hero__title {
     display: none;
   }
+  .content-above .hero .hero__img {
+    margin: 0;
+  }
   .content-above .hero .hero__img a {
     display: block;
-    margin: -21px 0 20px 0;
     background-color: white;
     border: 1px solid rgba(99, 91, 76, 0.2);
   }
