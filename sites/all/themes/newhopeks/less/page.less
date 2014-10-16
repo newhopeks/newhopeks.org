@@ -31,6 +31,10 @@
 
 	.logo {
 
+	    @media (max-width: @screen-sm) {
+	        margin-bottom: @grid-gutter-width / 2;
+        }
+
 	    h1 {
 	        margin: 0;
 	        padding: 0;
@@ -53,13 +57,14 @@
 	.navbar-main {
 	    position: static;
 	    min-height: 0;
-	    margin: 0;
+	    margin: 0 0 (@grid-gutter-width / 2) 0;
         background-color: @nh-brown;
 	    border: none;
 	    .font-size(18);
 	    line-height: 1;
 
 	    @media (min-width: @screen-sm) {
+	        margin: 0;
 	        background-color: transparent;
         }
 
@@ -244,13 +249,24 @@
 // --------------------------------------------------
 
 .breadcrumbs {
-    margin: -@grid-gutter-width 0 @grid-gutter-width 0;
-    .font-size(12);
-    line-height: normal;
+
+    @media (min-width: @screen-sm) {
+        margin: -@grid-gutter-width 0 @grid-gutter-width 0;
+        .font-size(12);
+        line-height: normal;
+    }
 
     .wrapper {
-        padding: 10px 0;
-        border-bottom: 1px solid fade(@nh-brown, 20%);
+        padding: 10px (@grid-gutter-width / 2);
+        border-top: 1px solid fade(@nh-brown, 20%);
+
+        @media (min-width: @screen-sm) {
+            padding-left: 0;
+            padding-right: 0;
+            border-top: none;
+            border-bottom: 1px solid fade(@nh-brown, 20%);
+        }
+
     }
 
     nav {
@@ -261,6 +277,18 @@
 
         a {
             white-space: nowrap;
+        }
+
+        .current {
+
+            @media (max-width: @screen-sm) {
+                display: none;
+            }
+
+            .title {
+                white-space: nowrap;
+            }
+
         }
 
     }
@@ -318,10 +346,15 @@
 .content {
 
 	.main {
+	    margin-bottom: (@grid-gutter-width / 2);
+
+	    @media (min-width: @screen-sm) {
+	        margin-bottom: 0;
+	    }
 
     	.wrapper {
-    	    margin: 0 -10px;
     	    padding: 10px;
+            overflow: hidden;
 	        background-color: white;
     	    border-top: 1px solid @nh-blue-light;
     	    border-bottom: 5px solid @nh-blue-light;
@@ -387,11 +420,15 @@
         .content-below {
 
             .row {
-                margin-left: -20px;
-                margin-right: -20px;
-                background:
-                    url(../img/content-below-bg.png) 33.33333333% 0 repeat-y,
-                    url(../img/content-below-bg.png) 66.66666666% 0 repeat-y;
+
+                @media (min-width: @screen-sm) {
+                    margin-left: -20px;
+                    margin-right: -20px;
+                    background:
+                        url(../img/content-below-bg.png) 33.33333333% 0 repeat-y,
+                        url(../img/content-below-bg.png) 66.66666666% 0 repeat-y;
+                }
+
             }
 
         }
@@ -409,7 +446,11 @@
 // --------------------------------------------------
 
 .footer {
-    margin-top: 40px;
     padding: 20px 0;
     background-color: @html-bg;
+
+    @media (min-width: @screen-sm) {
+        margin-top: 40px;
+    }
+
 }

@@ -36,7 +36,7 @@
             <div class="wrapper">
                 <div class="row">
     			    <nav class="col-xs-12">
-    			        <p><?php print $breadcrumb; ?> &raquo; <?php print $title; ?></p>
+    			        <p><?php print $breadcrumb; ?><span class="current"> &raquo; <span class="title"><?php print $title; ?></span></span></p>
     			    </nav>
                 </div> <!-- end .row -->
             </div> <!-- end .wrapper -->

@@ -41,11 +41,16 @@
 // --------------------------------------------------
 
 .sidebar .block {
+    margin-bottom: (@grid-gutter-width / 2);
     padding: 10px;
     color: @sidebar-block-color;
     background-color: @sidebar-block-bg;
     border-top: 1px solid @sidebar-block-border-color;
     border-bottom: 5px solid @sidebar-block-border-color;
+
+	@media (min-width: @screen-sm) {
+        margin-bottom: @grid-gutter-width;
+	}
 
 	.block-title {
 	    margin: 0 0 10px 0;
@@ -60,14 +65,6 @@
 	img {
     	max-width: 100%;
     	height: auto;
-	}
-
-	@media (max-width: @screen-sm) {
-        margin: 0 -10px;
-	}
-
-	@media (min-width: @screen-sm) {
-        margin-bottom: @grid-gutter-width;
 	}
 
 }
@@ -161,8 +158,12 @@
 // --------------------------------------------------
 
 .content-below .block {
-    padding-left: 20px;
-    padding-right: 20px;
+    margin-bottom: @grid-gutter-width;
+
+	@media (min-width: @screen-sm) {
+	    margin-bottom: 0;
+        padding: 0 20px;
+	}
 
 	.block-title {
 	    margin: 0 0 10px 0;
@@ -180,96 +181,21 @@
     	height: auto;
 	}
 
-	@media (max-width: @screen-sm) {
-        margin: 0 -10px;
-	}
-
 }
 
 // Messages
 
-.content-below .messages {
-
-    .messages-series-image {
-
-        img {}
-
-    }
-
-    .messages-item {
-
-        .messages-item-date {}
-
-        .messages-item-title {}
-
-        .messages-item-subtitle {}
-
-        .messages-item-info {}
-
-        .messages-item-more {}
-
-    }
-
-    .messages-footer {
-
-        .messages-footer-links {}
-
-    }
-
+.content-below .block--messages {
 }
 
 // Events
 
-.content-below .events {
-
-    .events-item {
-
-        .events-item-title {}
-
-        .events-item-date {
-
-            .events-item-date-month {}
-
-            .events-item-date-day {}
-
-        }
-
-        .events-item-body {}
-
-        .events-item-more {}
-
-    }
-
-    .events-footer {
-
-        .events-footer-links {}
-
-    }
-
+.content-below .block--events {
 }
 
 // News
 
-.content-below .news {
-
-    .news-item {
-
-        .news-item-title {}
-
-        .news-item-date {}
-
-        .news-item-body {}
-
-        .news-item-more {}
-
-    }
-
-    .news-footer {
-
-        .news-footer-links {}
-
-    }
-
+.content-below .block--news {
 }
 
 

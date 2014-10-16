@@ -116,12 +116,19 @@
     .article-listing__footer__links {
         margin: 0;
         padding: 0;
-        .make-row;
         list-style-type: none;
         font-family: @font-family-serif;
         .font-size(12);
         line-height: 1.5;
         font-style: italic;
+
+        @media (min-width: @screen-sm) {
+
+            .content .content-below & {
+                .make-row;
+            }
+
+        }
 
         li {
             margin: 0;
@@ -132,13 +139,28 @@
             }
 
             &.browse {
-                .make-sm-column(6);
                 font-weight: 700;
+
+                @media (min-width: @screen-sm) {
+
+                    .content .content-below & {
+                        .make-sm-column(6);
+                    }
+
+                }
+
             }
 
             &.feed {
-                .make-sm-column(6);
-                text-align: right;
+
+                @media (min-width: @screen-sm) {
+
+                    .content .content-below & {
+                        .make-sm-column(6);
+                        text-align: right;
+                    }
+
+                }
 
                 a {
                     color: @nh-brown-light;
@@ -296,8 +318,13 @@
 	}
 
 	img {
-		width: auto;
+	    max-width: 100px;
 		height: auto;
+
+		@media (min-width: @screen-sm) {
+		    width: auto;
+		}
+
 	}
 
 }
