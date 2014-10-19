@@ -1,5 +1,9 @@
 <?php
-// $Id: update.php,v 1.211.2.2 2007/04/08 00:54:04 drumm Exp $
+
+/**
+ * Defines the root directory of the Drupal installation.
+ */
+define('DRUPAL_ROOT', getcwd());
 
 /**
  * @file
@@ -8,824 +12,500 @@
  * Point your browser to "http://www.example.com/update.php" and follow the
  * instructions.
  *
- * If you are not logged in as administrator, you will need to modify the access
- * check statement below. Change the TRUE to a FALSE to disable the access
- * check. After finishing the upgrade, be sure to open this file and change the
- * FALSE back to a TRUE!
+ * If you are not logged in using either the site maintenance account or an
+ * account with the "Administer software updates" permission, you will need to
+ * modify the access check statement inside your settings.php file. After
+ * finishing the upgrade, be sure to open settings.php again, and change it
+ * back to its original state!
  */
-
-// Enforce access checking?
-$access_check = TRUE;
-
-
-function update_sql($sql) {
-  $result = db_query($sql);
-  return array('success' => $result !== FALSE, 'query' => check_plain($sql));
-}
 
 /**
- * Add a column to a database using syntax appropriate for PostgreSQL.
- * Save result of SQL commands in $ret array.
+ * Global flag indicating that update.php is being run.
  *
- * Note: when you add a column with NOT NULL and you are not sure if there are
- * already rows in the table, you MUST also add DEFAULT. Otherwise PostgreSQL
- * won't work when the table is not empty, and db_add_column() will fail.
- * To have an empty string as the default, you must use: 'default' => "''"
- * in the $attributes array. If NOT NULL and DEFAULT are set the PostgreSQL
- * version will set values of the added column in old rows to the
- * DEFAULT value.
- *
- * @param $ret
- *   Array to which results will be added.
- * @param $table
- *   Name of the table, without {}
- * @param $column
- *   Name of the column
- * @param $type
- *   Type of column
- * @param $attributes
- *   Additional optional attributes. Recognized attributes:
- *     not null => TRUE|FALSE
- *     default  => NULL|FALSE|value (the value must be enclosed in '' marks)
- * @return
- *   nothing, but modifies $ret parameter.
+ * When this flag is set, various operations do not take place, such as invoking
+ * hook_init() and hook_exit(), css/js preprocessing, and translation.
  */
-function db_add_column(&$ret, $table, $column, $type, $attributes = array()) {
-  if (array_key_exists('not null', $attributes) and $attributes['not null']) {
-    $not_null = 'NOT NULL';
-  }
-  if (array_key_exists('default', $attributes)) {
-    if (is_null($attributes['default'])) {
-      $default_val = 'NULL';
-      $default = 'default NULL';
-    }
-    elseif ($attributes['default'] === FALSE) {
-      $default = '';
-    }
-    else {
-      $default_val = "$attributes[default]";
-      $default = "default $attributes[default]";
-    }
-  }
-
-  $ret[] = update_sql("ALTER TABLE {". $table ."} ADD $column $type");
-  if ($default) { $ret[] = update_sql("ALTER TABLE {". $table ."} ALTER $column SET $default"); }
-  if ($not_null) {
-    if ($default) { $ret[] = update_sql("UPDATE {". $table ."} SET $column = $default_val"); }
-    $ret[] = update_sql("ALTER TABLE {". $table ."} ALTER $column SET NOT NULL");
-  }
-}
+define('MAINTENANCE_MODE', 'update');
 
 /**
- * Change a column definition using syntax appropriate for PostgreSQL.
- * Save result of SQL commands in $ret array.
- *
- * Remember that changing a column definition involves adding a new column
- * and dropping an old one. This means that any indices, primary keys and
- * sequences from serial-type columns are dropped and might need to be
- * recreated.
- *
- * @param $ret
- *   Array to which results will be added.
- * @param $table
- *   Name of the table, without {}
- * @param $column
- *   Name of the column to change
- * @param $column_new
- *   New name for the column (set to the same as $column if you don't want to change the name)
- * @param $type
- *   Type of column
- * @param $attributes
- *   Additional optional attributes. Recognized attributes:
- *     not null => TRUE|FALSE
- *     default  => NULL|FALSE|value (with or without '', it won't be added)
- * @return
- *   nothing, but modifies $ret parameter.
+ * Renders a form with a list of available database updates.
  */
-function db_change_column(&$ret, $table, $column, $column_new, $type, $attributes = array()) {
-  if (array_key_exists('not null', $attributes) and $attributes['not null']) {
-    $not_null = 'NOT NULL';
-  }
-  if (array_key_exists('default', $attributes)) {
-    if (is_null($attributes['default'])) {
-      $default_val = 'NULL';
-      $default = 'default NULL';
-    }
-    elseif ($attributes['default'] === FALSE) {
-      $default = '';
-    }
-    else {
-      $default_val = "$attributes[default]";
-      $default = "default $attributes[default]";
-    }
-  }
-
-  $ret[] = update_sql("ALTER TABLE {". $table ."} RENAME $column TO ". $column ."_old");
-  $ret[] = update_sql("ALTER TABLE {". $table ."} ADD $column_new $type");
-  $ret[] = update_sql("UPDATE {". $table ."} SET $column_new = ". $column ."_old");
-  if ($default) { $ret[] = update_sql("ALTER TABLE {". $table ."} ALTER $column_new SET $default"); }
-  if ($not_null) { $ret[] = update_sql("ALTER TABLE {". $table ."} ALTER $column_new SET NOT NULL"); }
-  $ret[] = update_sql("ALTER TABLE {". $table ."} DROP ". $column ."_old");
-}
-
-/**
- * If the schema version for Drupal core is stored in the variables table
- * (4.6.x and earlier) move it to the schema_version column of the system
- * table.
- *
- * This function may be removed when update 156 is removed, which is the last
- * update in the 4.6 to 4.7 migration.
- */
-function update_fix_schema_version() {
-  if ($update_start = variable_get('update_start', FALSE)) {
-    // Some updates were made to the 4.6 branch and 4.7 branch. This sets
-    // temporary variables to prevent the updates from being executed twice and
-    // throwing errors.
-    switch ($update_start) {
-      case '2005-04-14':
-        variable_set('update_132_done', TRUE);
-        break;
-
-      case '2005-05-06':
-        variable_set('update_132_done', TRUE);
-        variable_set('update_135_done', TRUE);
-        break;
-
-      case '2005-05-07':
-        variable_set('update_132_done', TRUE);
-        variable_set('update_135_done', TRUE);
-        variable_set('update_137_done', TRUE);
-        break;
-
-    }
-    // The schema_version column (added below) was changed during 4.7beta.
-    // Update_170 is only for those beta users.
-    variable_set('update_170_done', TRUE);
-
-    $sql_updates = array(
-      '2004-10-31: first update since Drupal 4.5.0 release' => 110,
-      '2004-11-07' => 111, '2004-11-15' => 112, '2004-11-28' => 113,
-      '2004-12-05' => 114, '2005-01-07' => 115, '2005-01-14' => 116,
-      '2005-01-18' => 117, '2005-01-19' => 118, '2005-01-20' => 119,
-      '2005-01-25' => 120, '2005-01-26' => 121, '2005-01-27' => 122,
-      '2005-01-28' => 123, '2005-02-11' => 124, '2005-02-23' => 125,
-      '2005-03-03' => 126, '2005-03-18' => 127, '2005-03-21' => 128,
-      // The following three updates were made on the 4.6 branch
-      '2005-04-14' => 128, '2005-05-06' => 128, '2005-05-07' => 128,
-      '2005-04-08: first update since Drupal 4.6.0 release' => 129,
-      '2005-04-10' => 130, '2005-04-11' => 131, '2005-04-14' => 132,
-      '2005-04-24' => 133, '2005-04-30' => 134, '2005-05-06' => 135,
-      '2005-05-08' => 136, '2005-05-09' => 137, '2005-05-10' => 138,
-      '2005-05-11' => 139, '2005-05-12' => 140, '2005-05-22' => 141,
-      '2005-07-29' => 142, '2005-07-30' => 143, '2005-08-08' => 144,
-      '2005-08-15' => 145, '2005-08-25' => 146, '2005-09-07' => 147,
-      '2005-09-18' => 148, '2005-09-27' => 149, '2005-10-15' => 150,
-      '2005-10-23' => 151, '2005-10-28' => 152, '2005-11-03' => 153,
-      '2005-11-14' => 154, '2005-11-27' => 155, '2005-12-03' => 156,
-    );
-
-    // Add schema version column
-    switch ($GLOBALS['db_type']) {
-      case 'pgsql':
-        $ret = array();
-        db_add_column($ret, 'system', 'schema_version', 'smallint', array('not null' => TRUE, 'default' => -1));
-        break;
-
-      case 'mysql':
-      case 'mysqli':
-        db_query('ALTER TABLE {system} ADD schema_version smallint(3) not null default -1');
-        break;
-    }
-    // Set all enabled (contrib) modules to schema version 0 (installed)
-    db_query('UPDATE {system} SET schema_version = 0 WHERE status = 1');
-
-    // Set schema version for core
-    drupal_set_installed_schema_version('system', $sql_updates[$update_start]);
-    variable_del('update_start');
-  }
-}
-
-/**
- * System update 130 changes the sessions table, which breaks the update
- * script's ability to use session variables. This changes the table
- * appropriately.
- *
- * This code, including the 'update_sessions_fixed' variable, may be removed
- * when update 130 is removed. It is part of the Drupal 4.6 to 4.7 migration.
- */
-function update_fix_sessions() {
-  $ret = array();
-
-  if (drupal_get_installed_schema_version('system') < 130 && !variable_get('update_sessions_fixed', FALSE)) {
-    if ($GLOBALS['db_type'] == 'mysql') {
-      db_query("ALTER TABLE {sessions} ADD cache int(11) NOT NULL default '0' AFTER timestamp");
-    }
-    elseif ($GLOBALS['db_type'] == 'pgsql') {
-      db_add_column($ret, 'sessions', 'cache', 'int', array('default' => 0, 'not null' => TRUE));
-    }
-
-    variable_set('update_sessions_fixed', TRUE);
-  }
-}
-
-/**
- * System update 115 changes the watchdog table, which breaks the update
- * script's ability to use logging. This changes the table appropriately.
- *
- * This code, including the 'update_watchdog_115_fixed' variable, may be removed
- * when update 115 is removed. It is part of the Drupal 4.5 to 4.7 migration.
- */
-function update_fix_watchdog_115() {
-  if (drupal_get_installed_schema_version('system') < 115 && !variable_get('update_watchdog_115_fixed', FALSE)) {
-    if ($GLOBALS['db_type'] == 'mysql') {
-      $ret[] = update_sql("ALTER TABLE {watchdog} ADD severity tinyint(3) unsigned NOT NULL default '0'");
-    }
-    else if ($GLOBALS['db_type'] == 'pgsql') {
-      $ret[] = update_sql('ALTER TABLE {watchdog} ADD severity smallint');
-      $ret[] = update_sql('UPDATE {watchdog} SET severity = 0');
-      $ret[] = update_sql('ALTER TABLE {watchdog} ALTER COLUMN severity SET NOT NULL');
-      $ret[] = update_sql('ALTER TABLE {watchdog} ALTER COLUMN severity SET DEFAULT 0');
-    }
-
-    variable_set('update_watchdog_115_fixed', TRUE);
-  }
-}
-
-/**
- * System update 142 changes the watchdog table, which breaks the update
- * script's ability to use logging. This changes the table appropriately.
- *
- * This code, including the 'update_watchdog_fixed' variable, may be removed
- * when update 142 is removed. It is part of the Drupal 4.6 to 4.7 migration.
- */
-function update_fix_watchdog() {
-  if (drupal_get_installed_schema_version('system') < 142 && !variable_get('update_watchdog_fixed', FALSE)) {
-    switch ($GLOBALS['db_type']) {
-      case 'pgsql':
-        $ret = array();
-        db_add_column($ret, 'watchdog', 'referer', 'varchar(128)', array('not null' => TRUE, 'default' => "''"));
-        break;
-      case 'mysql':
-      case 'mysqli':
-        db_query("ALTER TABLE {watchdog} ADD COLUMN referer varchar(128) NOT NULL");
-        break;
-    }
-
-    variable_set('update_watchdog_fixed', TRUE);
-  }
-}
-
-/**
- * Perform one update and store the results which will later be displayed on
- * the finished page.
- *
- * @param $module
- *   The module whose update will be run.
- * @param $number
- *   The update number to run.
- *
- * @return
- *   TRUE if the update was finished. Otherwise, FALSE.
- */
-function update_data($module, $number) {
-  $ret = module_invoke($module, 'update_'. $number);
-  // Assume the update finished unless the update results indicate otherwise.
-  $finished = 1;
-  if (isset($ret['#finished'])) {
-    $finished = $ret['#finished'];
-    unset($ret['#finished']);
-  }
-
-  // Save the query and results for display by update_finished_page().
-  if (!isset($_SESSION['update_results'])) {
-    $_SESSION['update_results'] = array();
-  }
-  if (!isset($_SESSION['update_results'][$module])) {
-    $_SESSION['update_results'][$module] = array();
-  }
-  if (!isset($_SESSION['update_results'][$module][$number])) {
-    $_SESSION['update_results'][$module][$number] = array();
-  }
-  $_SESSION['update_results'][$module][$number] = array_merge($_SESSION['update_results'][$module][$number], $ret);
-
-  if ($finished == 1) {
-    // Update the installed version
-    drupal_set_installed_schema_version($module, $number);
-  }
-
-  return $finished;
-}
-
 function update_selection_page() {
-  $output = '<p>The version of Drupal you are updating from has been automatically detected. You can select a different version, but you should not need to.</p>';
-  $output .= '<p>Click Update to start the update process.</p>';
-
   drupal_set_title('Drupal database update');
-  // Prevent browser from using cached drupal.js or update.js
-  drupal_add_js('misc/update.js', 'core', 'header', FALSE, TRUE);
-  $output .= drupal_get_form('update_script_selection_form');
+  $elements = drupal_get_form('update_script_selection_form');
+  $output = drupal_render($elements);
+
+  update_task_list('select');
 
   return $output;
 }
 
-function update_script_selection_form() {
-  $form = array();
+/**
+ * Form constructor for the list of available database module updates.
+ */
+function update_script_selection_form($form, &$form_state) {
+  $count = 0;
+  $incompatible_count = 0;
   $form['start'] = array(
     '#tree' => TRUE,
     '#type' => 'fieldset',
-    '#title' => 'Select versions',
-    '#collapsible' => TRUE,
     '#collapsed' => TRUE,
+    '#collapsible' => TRUE,
   );
 
-  // Ensure system.module's updates appear first
+  // Ensure system.module's updates appear first.
   $form['start']['system'] = array();
 
-  foreach (module_list() as $module) {
-    $updates = drupal_get_schema_versions($module);
-    if ($updates !== FALSE) {
-      $updates = drupal_map_assoc($updates);
-      $updates[] = 'No updates available';
-      $default = drupal_get_installed_schema_version($module);
-      foreach (array_keys($updates) as $update) {
-        if ($update > $default) {
-          $default = $update;
-          break;
-        }
-      }
-
+  $updates = update_get_update_list();
+  $starting_updates = array();
+  $incompatible_updates_exist = FALSE;
+  foreach ($updates as $module => $update) {
+    if (!isset($update['start'])) {
       $form['start'][$module] = array(
-        '#type' => 'select',
+        '#type' => 'item',
         '#title' => $module . ' module',
-        '#default_value' => $default,
-        '#options' => $updates,
+        '#markup'  => $update['warning'],
+        '#prefix' => '<div class="messages warning">',
+        '#suffix' => '</div>',
       );
+      $incompatible_updates_exist = TRUE;
+      continue;
+    }
+    if (!empty($update['pending'])) {
+      $starting_updates[$module] = $update['start'];
+      $form['start'][$module] = array(
+        '#type' => 'hidden',
+        '#value' => $update['start'],
+      );
+      $form['start'][$module . '_updates'] = array(
+        '#theme' => 'item_list',
+        '#items' => $update['pending'],
+        '#title' => $module . ' module',
+      );
+    }
+    if (isset($update['pending'])) {
+      $count = $count + count($update['pending']);
     }
   }
 
-  $form['has_js'] = array(
-    '#type' => 'hidden',
-    '#default_value' => FALSE,
-    '#attributes' => array('id' => 'edit-has_js'),
-  );
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => 'Update',
-  );
+  // Find and label any incompatible updates.
+  foreach (update_resolve_dependencies($starting_updates) as $function => $data) {
+    if (!$data['allowed']) {
+      $incompatible_updates_exist = TRUE;
+      $incompatible_count++;
+      $module_update_key = $data['module'] . '_updates';
+      if (isset($form['start'][$module_update_key]['#items'][$data['number']])) {
+        $text = $data['missing_dependencies'] ? 'This update will been skipped due to the following missing dependencies: <em>' . implode(', ', $data['missing_dependencies']) . '</em>' : "This update will be skipped due to an error in the module's code.";
+        $form['start'][$module_update_key]['#items'][$data['number']] .= '<div class="warning">' . $text . '</div>';
+      }
+      // Move the module containing this update to the top of the list.
+      $form['start'] = array($module_update_key => $form['start'][$module_update_key]) + $form['start'];
+    }
+  }
+
+  // Warn the user if any updates were incompatible.
+  if ($incompatible_updates_exist) {
+    drupal_set_message('Some of the pending updates cannot be applied because their dependencies were not met.', 'warning');
+  }
+
+  if (empty($count)) {
+    drupal_set_message(t('No pending updates.'));
+    unset($form);
+    $form['links'] = array(
+      '#markup' => theme('item_list', array('items' => update_helpful_links())),
+    );
+
+    // No updates to run, so caches won't get flushed later.  Clear them now.
+    drupal_flush_all_caches();
+  }
+  else {
+    $form['help'] = array(
+      '#markup' => '<p>The version of Drupal you are updating from has been automatically detected.</p>',
+      '#weight' => -5,
+    );
+    if ($incompatible_count) {
+      $form['start']['#title'] = format_plural(
+        $count,
+        '1 pending update (@number_applied to be applied, @number_incompatible skipped)',
+        '@count pending updates (@number_applied to be applied, @number_incompatible skipped)',
+        array('@number_applied' => $count - $incompatible_count, '@number_incompatible' => $incompatible_count)
+      );
+    }
+    else {
+      $form['start']['#title'] = format_plural($count, '1 pending update', '@count pending updates');
+    }
+    $form['has_js'] = array(
+      '#type' => 'hidden',
+      '#default_value' => FALSE,
+    );
+    $form['actions'] = array('#type' => 'actions');
+    $form['actions']['submit'] = array(
+      '#type' => 'submit',
+      '#value' => 'Apply pending updates',
+    );
+  }
   return $form;
 }
 
-function update_update_page() {
-  // Set the installed version so updates start at the correct place.
-  foreach ($_POST['start'] as $module => $version) {
-    drupal_set_installed_schema_version($module, $version - 1);
-    $updates = drupal_get_schema_versions($module);
-    $max_version = max($updates);
-    if ($version <= $max_version) {
-      foreach ($updates as $update) {
-        if ($update >= $version) {
-          $_SESSION['update_remaining'][] = array('module' => $module, 'version' => $update);
+/**
+ * Provides links to the homepage and administration pages.
+ */
+function update_helpful_links() {
+  $links[] = '<a href="' . base_path() . '">Front page</a>';
+  if (user_access('access administration pages')) {
+    $links[] = '<a href="' . base_path() . '?q=admin">Administration pages</a>';
+  }
+  return $links;
+}
+
+/**
+ * Displays results of the update script with any accompanying errors.
+ */
+function update_results_page() {
+  drupal_set_title('Drupal database update');
+  $links = update_helpful_links();
+
+  update_task_list();
+  // Report end result.
+  if (module_exists('dblog') && user_access('access site reports')) {
+    $log_message = ' All errors have been <a href="' . base_path() . '?q=admin/reports/dblog">logged</a>.';
+  }
+  else {
+    $log_message = ' All errors have been logged.';
+  }
+
+  if ($_SESSION['update_success']) {
+    $output = '<p>Updates were attempted. If you see no failures below, you may proceed happily back to your <a href="' . base_path() . '">site</a>. Otherwise, you may need to update your database manually.' . $log_message . '</p>';
+  }
+  else {
+    $updates_remaining = reset($_SESSION['updates_remaining']);
+    list($module, $version) = array_pop($updates_remaining);
+    $output = '<p class="error">The update process was aborted prematurely while running <strong>update #' . $version . ' in ' . $module . '.module</strong>.' . $log_message;
+    if (module_exists('dblog')) {
+      $output .= ' You may need to check the <code>watchdog</code> database table manually.';
+    }
+    $output .= '</p>';
+  }
+
+  if (!empty($GLOBALS['update_free_access'])) {
+    $output .= "<p><strong>Reminder: don't forget to set the <code>\$update_free_access</code> value in your <code>settings.php</code> file back to <code>FALSE</code>.</strong></p>";
+  }
+
+  $output .= theme('item_list', array('items' => $links));
+
+  // Output a list of queries executed.
+  if (!empty($_SESSION['update_results'])) {
+    $all_messages = '';
+    foreach ($_SESSION['update_results'] as $module => $updates) {
+      if ($module != '#abort') {
+        $module_has_message = FALSE;
+        $query_messages = '';
+        foreach ($updates as $number => $queries) {
+          $messages = array();
+          foreach ($queries as $query) {
+            // If there is no message for this update, don't show anything.
+            if (empty($query['query'])) {
+              continue;
+            }
+
+            if ($query['success']) {
+              $messages[] = '<li class="success">' . $query['query'] . '</li>';
+            }
+            else {
+              $messages[] = '<li class="failure"><strong>Failed:</strong> ' . $query['query'] . '</li>';
+            }
+          }
+
+          if ($messages) {
+            $module_has_message = TRUE;
+            $query_messages .= '<h4>Update #' . $number . "</h4>\n";
+            $query_messages .= '<ul>' . implode("\n", $messages) . "</ul>\n";
+          }
+        }
+
+        // If there were any messages in the queries then prefix them with the
+        // module name and add it to the global message list.
+        if ($module_has_message) {
+          $all_messages .= '<h3>' . $module . " module</h3>\n" . $query_messages;
         }
       }
     }
+    if ($all_messages) {
+      $output .= '<div id="update-results"><h2>The following updates returned messages</h2>';
+      $output .= $all_messages;
+      $output .= '</div>';
+    }
   }
+  unset($_SESSION['update_results']);
+  unset($_SESSION['update_success']);
 
-  // Keep track of total number of updates
-  if (isset($_SESSION['update_remaining'])) {
-    $_SESSION['update_total'] = count($_SESSION['update_remaining']);
-  }
-
-  if ($_POST['has_js']) {
-    return update_progress_page();
-  }
-  else {
-    return update_progress_page_nojs();
-  }
-}
-
-function update_progress_page() {
-  // Prevent browser from using cached drupal.js or update.js
-  drupal_add_js('misc/progress.js', 'core', 'header', FALSE, TRUE);
-  drupal_add_js('misc/update.js', 'core', 'header', FALSE, TRUE);
-
-  drupal_set_title('Updating');
-  $output = '<div id="progress"></div>';
-  $output .= '<p id="wait">Please wait while your site is being updated.</p>';
   return $output;
 }
 
 /**
- * Perform updates for one second or until finished.
+ * Provides an overview of the Drupal database update.
+ *
+ * This page provides cautionary suggestions that should happen before
+ * proceeding with the update to ensure data integrity.
  *
  * @return
- *   An array indicating the status after doing updates. The first element is
- *   the overall percentage finished. The second element is a status message.
+ *   Rendered HTML form.
  */
-function update_do_updates() {
-  while (isset($_SESSION['update_remaining']) && ($update = reset($_SESSION['update_remaining']))) {
-    $update_finished = update_data($update['module'], $update['version']);
-    if ($update_finished == 1) {
-      // Dequeue the completed update.
-      unset($_SESSION['update_remaining'][key($_SESSION['update_remaining'])]);
-      $update_finished = 0; // Make sure this step isn't counted double
-    }
-    if (timer_read('page') > 1000) {
-      break;
-    }
-  }
-
-  if ($_SESSION['update_total']) {
-    $percentage = floor(($_SESSION['update_total'] - count($_SESSION['update_remaining']) + $update_finished) / $_SESSION['update_total'] * 100);
-  }
-  else {
-    $percentage = 100;
-  }
-
-  // When no updates remain, clear the caches in case the data has been updated.
-  if (!isset($update['module'])) {
-    cache_clear_all('*', 'cache', TRUE);
-    cache_clear_all('*', 'cache_page', TRUE);
-    cache_clear_all('*', 'cache_menu', TRUE);
-    cache_clear_all('*', 'cache_filter', TRUE);
-    drupal_clear_css_cache();
-  }
-
-  return array($percentage, isset($update['module']) ? 'Updating '. $update['module'] .' module' : 'Updating complete');
-}
-
-/**
- * Perform updates for the JS version and return progress.
- */
-function update_do_update_page() {
-  global $conf;
-
-  // HTTP Post required
-  if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-    drupal_set_message('HTTP Post is required.', 'error');
-    drupal_set_title('Error');
-    return '';
-  }
-
-  // Error handling: if PHP dies, the output will fail to parse as JSON, and
-  // the Javascript will tell the user to continue to the op=error page.
-  list($percentage, $message) = update_do_updates();
-  print drupal_to_js(array('status' => TRUE, 'percentage' => $percentage, 'message' => $message));
-}
-
-/**
- * Perform updates for the non-JS version and return the status page.
- */
-function update_progress_page_nojs() {
-  drupal_set_title('Updating');
-
-  $new_op = 'do_update_nojs';
-  if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    // Error handling: if PHP dies, it will output whatever is in the output
-    // buffer, followed by the error message.
-    ob_start();
-    $fallback = '<p class="error">An unrecoverable error has occurred. You can find the error message below. It is advised to copy it to the clipboard for reference. Please continue to the <a href="update.php?op=error">update summary</a>.</p>';
-    print theme('maintenance_page', $fallback, FALSE, TRUE);
-
-    list($percentage, $message) = update_do_updates();
-    if ($percentage == 100) {
-      $new_op = 'finished';
-    }
-
-    // Updates successful; remove fallback
-    ob_end_clean();
-  }
-  else {
-    // This is the first page so return some output immediately.
-    $percentage = 0;
-    $message = 'Starting updates';
-  }
-
-  drupal_set_html_head('<meta http-equiv="Refresh" content="0; URL=update.php?op='. $new_op .'">');
-  $output = theme('progress_bar', $percentage, $message);
-  $output .= '<p>Updating your site will take a few seconds.</p>';
-
-  // Note: do not output drupal_set_message()s until the summary page.
-  print theme('maintenance_page', $output, FALSE);
-  return NULL;
-}
-
-function update_finished_page($success) {
-  drupal_set_title('Drupal database update');
-  // NOTE: we can't use l() here because the URL would point to 'update.php?q=admin'.
-  $links[] = '<a href="'. base_path() .'">Main page</a>';
-  $links[] = '<a href="'. base_path() .'?q=admin">Administration pages</a>';
-
-  // Report end result
-  if ($success) {
-    $output = '<p>Updates were attempted. If you see no failures below, you may proceed happily to the <a href="index.php?q=admin">administration pages</a>. Otherwise, you may need to update your database manually. All errors have been <a href="index.php?q=admin/logs/watchdog">logged</a>.</p>';
-  }
-  else {
-    $update = reset($_SESSION['update_remaining']);
-    $output = '<p class="error">The update process was aborted prematurely while running <strong>update #'. $update['version'] .' in '. $update['module'] .'.module</strong>. All other errors have been <a href="index.php?q=admin/logs/watchdog">logged</a>. You may need to check the <code>watchdog</code> database table manually.</p>';
-  }
-
-  if ($GLOBALS['access_check'] == FALSE) {
-    $output .= "<p><strong>Reminder: don't forget to set the <code>\$access_check</code> value at the top of <code>update.php</code> back to <code>TRUE</code>.</strong></p>";
-  }
-
-  $output .= theme('item_list', $links);
-
-  // Output a list of queries executed
-  if (!empty($_SESSION['update_results'])) {
-    $output .= '<div id="update-results">';
-    $output .= '<h2>The following queries were executed</h2>';
-    foreach ($_SESSION['update_results'] as $module => $updates) {
-      $output .= '<h3>'. $module .' module</h3>';
-      foreach ($updates as $number => $queries) {
-        $output .= '<h4>Update #'. $number .'</h4>';
-        $output .= '<ul>';
-        foreach ($queries as $query) {
-          if ($query['success']) {
-            $output .= '<li class="success">'. $query['query'] .'</li>';
-          }
-          else {
-            $output .= '<li class="failure"><strong>Failed:</strong> '. $query['query'] .'</li>';
-          }
-        }
-        if (!count($queries)) {
-          $output .= '<li class="none">No queries</li>';
-        }
-        $output .= '</ul>';
-      }
-    }
-    $output .= '</div>';
-    unset($_SESSION['update_results']);
-  }
-
-  return $output;
-}
-
 function update_info_page() {
+  // Change query-strings on css/js files to enforce reload for all users.
+  _drupal_flush_css_js();
+  // Flush the cache of all data for the update status module.
+  if (db_table_exists('cache_update')) {
+    cache_clear_all('*', 'cache_update', TRUE);
+  }
+
+  update_task_list('info');
   drupal_set_title('Drupal database update');
-  $output = "<ol>\n";
-  $output .= "<li>Use this script to <strong>upgrade an existing Drupal installation</strong>. You don't need this script when installing Drupal from scratch.</li>";
-  $output .= "<li>Before doing anything, backup your database. This process will change your database and its values, and some things might get lost.</li>\n";
-  $output .= "<li>Update your Drupal sources, check the notes below and <a href=\"update.php?op=selection\">run the database upgrade script</a>. Don't upgrade your database twice as it may cause problems.</li>\n";
-  $output .= "<li>Go through the various administration pages to change the existing and new settings to your liking.</li>\n";
-  $output .= "</ol>";
-  $output .= '<p>For more help, see the <a href="http://drupal.org/node/258">Installation and upgrading handbook</a>. If you are unsure what these terms mean you should probably contact your hosting provider.</p>';
+  $token = drupal_get_token('update');
+  $output = '<p>Use this utility to update your database whenever a new release of Drupal or a module is installed.</p><p>For more detailed information, see the <a href="http://drupal.org/upgrade">upgrading handbook</a>. If you are unsure what these terms mean you should probably contact your hosting provider.</p>';
+  $output .= "<ol>\n";
+  $output .= "<li><strong>Back up your database</strong>. This process will change your database values and in case of emergency you may need to revert to a backup.</li>\n";
+  $output .= "<li><strong>Back up your code</strong>. Hint: when backing up module code, do not leave that backup in the 'modules' or 'sites/*/modules' directories as this may confuse Drupal's auto-discovery mechanism.</li>\n";
+  $output .= '<li>Put your site into <a href="' . base_path() . '?q=admin/config/development/maintenance">maintenance mode</a>.</li>' . "\n";
+  $output .= "<li>Install your new files in the appropriate location, as described in the handbook.</li>\n";
+  $output .= "</ol>\n";
+  $output .= "<p>When you have performed the steps above, you may proceed.</p>\n";
+  $form_action = check_url(drupal_current_script_url(array('op' => 'selection', 'token' => $token)));
+  $output .= '<form method="post" action="' . $form_action . '"><p><input type="submit" value="Continue" class="form-submit" /></p></form>';
+  $output .= "\n";
   return $output;
 }
 
+/**
+ * Renders a 403 access denied page for update.php.
+ *
+ * @return
+ *   Rendered HTML warning with 403 status.
+ */
 function update_access_denied_page() {
+  drupal_add_http_header('Status', '403 Forbidden');
+  watchdog('access denied', 'update.php', NULL, WATCHDOG_WARNING);
   drupal_set_title('Access denied');
-  return '<p>Access denied. You are not authorized to access this page. Please log in as the admin user (the first user you created). If you cannot log in, you will have to edit <code>update.php</code> to bypass this access check. To do this:</p>
+  return '<p>Access denied. You are not authorized to access this page. Log in using either an account with the <em>administer software updates</em> permission or the site maintenance account (the account you created during installation). If you cannot log in, you will have to edit <code>settings.php</code> to bypass this access check. To do this:</p>
 <ol>
- <li>With a text editor find the update.php file on your system. It should be in the main Drupal directory that you installed all the files into.</li>
- <li>There is a line near top of update.php that says <code>$access_check = TRUE;</code>. Change it to <code>$access_check = FALSE;</code>.</li>
- <li>As soon as the script is done, you must change the update.php script back to its original form to <code>$access_check = TRUE;</code>.</li>
- <li>To avoid having this problem in future, remember to log in to your website as the admin user (the user you first created) before you backup your database at the beginning of the update process.</li>
+ <li>With a text editor find the settings.php file on your system. From the main Drupal directory that you installed all the files into, go to <code>sites/your_site_name</code> if such directory exists, or else to <code>sites/default</code> which applies otherwise.</li>
+ <li>There is a line inside your settings.php file that says <code>$update_free_access = FALSE;</code>. Change it to <code>$update_free_access = TRUE;</code>.</li>
+ <li>As soon as the update.php script is done, you must change the settings.php file back to its original form with <code>$update_free_access = FALSE;</code>.</li>
+ <li>To avoid having this problem in the future, remember to log in to your website using either an account with the <em>administer software updates</em> permission or the site maintenance account (the account you created during installation) before you backup your database at the beginning of the update process.</li>
 </ol>';
 }
 
-// This code may be removed later. It is part of the Drupal 4.5 to 4.8 migration.
-function update_fix_system_table() {
-  drupal_bootstrap(DRUPAL_BOOTSTRAP_DATABASE);
-  $core_modules = array('aggregator', 'archive', 'block', 'blog', 'blogapi', 'book', 'comment', 'contact', 'drupal', 'filter', 'forum', 'help', 'legacy', 'locale', 'menu', 'node', 'page', 'path', 'ping', 'poll', 'profile', 'search', 'statistics', 'story', 'system', 'taxonomy', 'throttle', 'tracker', 'upload', 'user', 'watchdog');
-  foreach ($core_modules as $module) {
-    $old_path = "modules/$module.module";
-    $new_path = "modules/$module/$module.module";
-    db_query("UPDATE {system} SET filename = '%s' WHERE filename = '%s'", $new_path, $old_path);
-  }
-  $row = db_fetch_object(db_query_range('SELECT * FROM {system}', 0, 1));
-  if (!isset($row->weight)) {
-    $ret = array();
-    switch ($GLOBALS['db_type']) {
-      case 'pgsql':
-        db_add_column($ret, 'system', 'weight', 'smallint', array('not null' => TRUE, 'default' => 0));
-        $ret[] = update_sql('CREATE INDEX {system}_weight_idx ON {system} (weight)');
-        break;
-      case 'mysql':
-      case 'mysqli':
-        $ret[] = update_sql("ALTER TABLE {system} ADD weight tinyint(2) default '0' NOT NULL, ADD KEY (weight)");
-        break;
-    }
-  }
-}
+/**
+ * Determines if the current user is allowed to run update.php.
+ *
+ * @return
+ *   TRUE if the current user should be granted access, or FALSE otherwise.
+ */
+function update_access_allowed() {
+  global $update_free_access, $user;
 
-// This code may be removed later. It is part of the Drupal 4.6 to 4.7 migration.
-function update_fix_access_table() {
-  if (variable_get('update_access_fixed', FALSE)) {
-    return;
+  // Allow the global variable in settings.php to override the access check.
+  if (!empty($update_free_access)) {
+    return TRUE;
   }
-
-  switch ($GLOBALS['db_type']) {
-    // Only for MySQL 4.1+
-    case 'mysqli':
-      break;
-    case 'mysql':
-      if (version_compare(mysql_get_server_info($GLOBALS['active_db']), '4.1.0', '<')) {
-        return;
-      }
-      break;
-    case 'pgsql':
-      return;
+  // Calls to user_access() might fail during the Drupal 6 to 7 update process,
+  // so we fall back on requiring that the user be logged in as user #1.
+  try {
+    require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'user') . '/user.module';
+    return user_access('administer software updates');
   }
-
-  // Convert access table to UTF-8 if needed.
-  $result = db_fetch_array(db_query('SHOW CREATE TABLE {access}'));
-  if (!preg_match('/utf8/i', array_pop($result))) {
-    update_convert_table_utf8('access');
+  catch (Exception $e) {
+    return ($user->uid == 1);
   }
-
-  // Don't run again
-  variable_set('update_access_fixed', TRUE);
 }
 
 /**
- * Convert a single MySQL table to UTF-8.
- *
- * We change all text columns to their corresponding binary type,
- * then back to text, but with a UTF-8 character set.
- * See: http://dev.mysql.com/doc/refman/4.1/en/charset-conversion.html
+ * Adds the update task list to the current page.
  */
-function update_convert_table_utf8($table) {
-  $ret = array();
-  $types = array('char' => 'binary',
-                 'varchar' => 'varbinary',
-                 'tinytext' => 'tinyblob',
-                 'text' => 'blob',
-                 'mediumtext' => 'mediumblob',
-                 'longtext' => 'longblob');
+function update_task_list($active = NULL) {
+  // Default list of tasks.
+  $tasks = array(
+    'requirements' => 'Verify requirements',
+    'info' => 'Overview',
+    'select' => 'Review updates',
+    'run' => 'Run updates',
+    'finished' => 'Review log',
+  );
 
-  // Get next table in list
-  $convert_to_binary = array();
-  $convert_to_utf8 = array();
-
-  // Set table default charset
-  $ret[] = update_sql('ALTER TABLE {'. $table .'} DEFAULT CHARACTER SET utf8');
-
-  // Find out which columns need converting and build SQL statements
-  $result = db_query('SHOW FULL COLUMNS FROM {'. $table .'}');
-  while ($column = db_fetch_array($result)) {
-    list($type) = explode('(', $column['Type']);
-    if (isset($types[$type])) {
-      $names = 'CHANGE `'. $column['Field'] .'` `'. $column['Field'] .'` ';
-      $attributes = ' DEFAULT '. ($column['Default'] == 'NULL' ? 'NULL ' :
-                     "'". db_escape_string($column['Default']) ."' ") .
-                    ($column['Null'] == 'YES' ? 'NULL' : 'NOT NULL');
-
-      $convert_to_binary[] = $names . preg_replace('/'. $type .'/i', $types[$type], $column['Type']) . $attributes;
-      $convert_to_utf8[] = $names . $column['Type'] .' CHARACTER SET utf8'. $attributes;
-    }
-  }
-
-  if (count($convert_to_binary)) {
-    // Convert text columns to binary
-    $ret[] = update_sql('ALTER TABLE {'. $table .'} '. implode(', ', $convert_to_binary));
-    // Convert binary columns to UTF-8
-    $ret[] = update_sql('ALTER TABLE {'. $table .'} '. implode(', ', $convert_to_utf8));
-  }
-  return $ret;
+  drupal_add_region_content('sidebar_first', theme('task_list', array('items' => $tasks, 'active' => $active)));
 }
 
 /**
- * Create tables for the split cache.
- *
- * This is part of the Drupal 4.7.x to 5.x migration.
+ * Returns and stores extra requirements that apply during the update process.
  */
-function update_create_cache_tables() {
-
-  // If cache_filter exists, update is not necessary
-  if (db_table_exists('cache_filter')) {
-    return;
+function update_extra_requirements($requirements = NULL) {
+  static $extra_requirements = array();
+  if (isset($requirements)) {
+    $extra_requirements += $requirements;
   }
+  return $extra_requirements;
+}
 
-  $ret = array();
-  switch ($GLOBALS['db_type']) {
-    case 'mysql':
-    case 'mysqli':
-      $ret[] = update_sql("CREATE TABLE {cache_filter} (
-        cid varchar(255) NOT NULL default '',
-        data longblob,
-        expire int NOT NULL default '0',
-        created int NOT NULL default '0',
-        headers text,
-        PRIMARY KEY (cid),
-        INDEX expire (expire)
-      ) /*!40100 DEFAULT CHARACTER SET UTF8 */ ");
-      $ret[] = update_sql("CREATE TABLE {cache_menu} (
-        cid varchar(255) NOT NULL default '',
-        data longblob,
-        expire int NOT NULL default '0',
-        created int NOT NULL default '0',
-        headers text,
-        PRIMARY KEY (cid),
-        INDEX expire (expire)
-      ) /*!40100 DEFAULT CHARACTER SET UTF8 */ ");
-      $ret[] = update_sql("CREATE TABLE {cache_page} (
-        cid varchar(255) BINARY NOT NULL default '',
-        data longblob,
-        expire int NOT NULL default '0',
-         created int NOT NULL default '0',
-        headers text,
-        PRIMARY KEY (cid),
-        INDEX expire (expire)
-      ) /*!40100 DEFAULT CHARACTER SET UTF8 */ ");
-      break;
-    case 'pgsql':
-      $ret[] = update_sql("CREATE TABLE {cache_filter} (
-        cid varchar(255) NOT NULL default '',
-        data bytea,
-        expire int NOT NULL default '0',
-        created int NOT NULL default '0',
-        headers text,
-        PRIMARY KEY (cid)
-     )");
-     $ret[] = update_sql("CREATE TABLE {cache_menu} (
-       cid varchar(255) NOT NULL default '',
-       data bytea,
-       expire int NOT NULL default '0',
-       created int NOT NULL default '0',
-       headers text,
-       PRIMARY KEY (cid)
-     )");
-     $ret[] = update_sql("CREATE TABLE {cache_page} (
-       cid varchar(255) NOT NULL default '',
-       data bytea,
-       expire int NOT NULL default '0',
-       created int NOT NULL default '0',
-       headers text,
-       PRIMARY KEY (cid)
-     )");
-     $ret[] = update_sql("CREATE INDEX {cache_filter}_expire_idx ON {cache_filter} (expire)");
-     $ret[] = update_sql("CREATE INDEX {cache_menu}_expire_idx ON {cache_menu} (expire)");
-     $ret[] = update_sql("CREATE INDEX {cache_page}_expire_idx ON {cache_page} (expire)");
-     break;
+/**
+ * Checks update requirements and reports errors and (optionally) warnings.
+ *
+ * @param $skip_warnings
+ *   (optional) If set to TRUE, requirement warnings will be ignored, and a
+ *   report will only be issued if there are requirement errors. Defaults to
+ *   FALSE.
+ */
+function update_check_requirements($skip_warnings = FALSE) {
+  // Check requirements of all loaded modules.
+  $requirements = module_invoke_all('requirements', 'update');
+  $requirements += update_extra_requirements();
+  $severity = drupal_requirements_severity($requirements);
+
+  // If there are errors, always display them. If there are only warnings, skip
+  // them if the caller has indicated they should be skipped.
+  if ($severity == REQUIREMENT_ERROR || ($severity == REQUIREMENT_WARNING && !$skip_warnings)) {
+    update_task_list('requirements');
+    drupal_set_title('Requirements problem');
+    $status_report = theme('status_report', array('requirements' => $requirements));
+    $status_report .= 'Check the error messages and <a href="' . check_url(drupal_requirements_url($severity)) . '">try again</a>.';
+    print theme('update_page', array('content' => $status_report));
+    exit();
   }
-  return $ret;
 }
 
 // Some unavoidable errors happen because the database is not yet up-to-date.
 // Our custom error handler is not yet installed, so we just suppress them.
 ini_set('display_errors', FALSE);
 
-include_once './includes/bootstrap.inc';
-update_fix_system_table();
+// We prepare a minimal bootstrap for the update requirements check to avoid
+// reaching the PHP memory limit.
+require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
+require_once DRUPAL_ROOT . '/includes/update.inc';
+require_once DRUPAL_ROOT . '/includes/common.inc';
+require_once DRUPAL_ROOT . '/includes/file.inc';
+require_once DRUPAL_ROOT . '/includes/entity.inc';
+require_once DRUPAL_ROOT . '/includes/unicode.inc';
+update_prepare_d7_bootstrap();
+
+// Temporarily disable configurable timezones so the upgrade process uses the
+// site-wide timezone. This prevents a PHP notice during session initlization
+// and before offsets have been converted in user_update_7002().
+$configurable_timezones = variable_get('configurable_timezones', 1);
+$conf['configurable_timezones'] = 0;
+
+// Determine if the current user has access to run update.php.
+drupal_bootstrap(DRUPAL_BOOTSTRAP_SESSION);
+
+// Reset configurable timezones.
+$conf['configurable_timezones'] = $configurable_timezones;
+
+// Only allow the requirements check to proceed if the current user has access
+// to run updates (since it may expose sensitive information about the site's
+// configuration).
+$op = isset($_REQUEST['op']) ? $_REQUEST['op'] : '';
+if (empty($op) && update_access_allowed()) {
+  require_once DRUPAL_ROOT . '/includes/install.inc';
+  require_once DRUPAL_ROOT . '/modules/system/system.install';
+
+  // Load module basics.
+  include_once DRUPAL_ROOT . '/includes/module.inc';
+  $module_list['system']['filename'] = 'modules/system/system.module';
+  module_list(TRUE, FALSE, FALSE, $module_list);
+  drupal_load('module', 'system');
+
+  // Reset the module_implements() cache so that any new hook implementations
+  // in updated code are picked up.
+  module_implements('', FALSE, TRUE);
+
+  // Set up $language, since the installer components require it.
+  drupal_language_initialize();
+
+  // Set up theme system for the maintenance page.
+  drupal_maintenance_theme();
+
+  // Check the update requirements for Drupal. Only report on errors at this
+  // stage, since the real requirements check happens further down.
+  update_check_requirements(TRUE);
+
+  // Redirect to the update information page if all requirements were met.
+  install_goto('update.php?op=info');
+}
+
+// update_fix_d7_requirements() needs to run before bootstrapping beyond path.
+// So bootstrap to DRUPAL_BOOTSTRAP_LANGUAGE then include unicode.inc.
+
+drupal_bootstrap(DRUPAL_BOOTSTRAP_LANGUAGE);
+include_once DRUPAL_ROOT . '/includes/unicode.inc';
+
+update_fix_d7_requirements();
+
+// Now proceed with a full bootstrap.
 
 drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 drupal_maintenance_theme();
-
-// This must happen *after* drupal_bootstrap(), since it calls
-// variable_(get|set), which only works after a full bootstrap.
-update_fix_access_table();
-update_create_cache_tables();
 
 // Turn error reporting back on. From now on, only fatal errors (which are
 // not passed through the error handler) will cause a message to be printed.
 ini_set('display_errors', TRUE);
 
-// Access check:
-if (($access_check == FALSE) || ($user->uid == 1)) {
+// Only proceed with updates if the user is allowed to run them.
+if (update_access_allowed()) {
 
-  include_once './includes/install.inc';
+  include_once DRUPAL_ROOT . '/includes/install.inc';
+  include_once DRUPAL_ROOT . '/includes/batch.inc';
   drupal_load_updates();
 
-  update_fix_schema_version();
-  update_fix_watchdog_115();
-  update_fix_watchdog();
-  update_fix_sessions();
+  update_fix_compatibility();
+
+  // Check the update requirements for all modules. If there are warnings, but
+  // no errors, skip reporting them if the user has provided a URL parameter
+  // acknowledging the warnings and indicating a desire to continue anyway. See
+  // drupal_requirements_url().
+  $skip_warnings = !empty($_GET['continue']);
+  update_check_requirements($skip_warnings);
 
   $op = isset($_REQUEST['op']) ? $_REQUEST['op'] : '';
   switch ($op) {
-    case 'Update':
-      $output = update_update_page();
-      break;
-
-    case 'finished':
-      $output = update_finished_page(TRUE);
-      break;
-
-    case 'error':
-      $output = update_finished_page(FALSE);
-      break;
-
-    case 'do_update':
-      $output = update_do_update_page();
-      break;
-
-    case 'do_update_nojs':
-      $output = update_progress_page_nojs();
-      break;
+    // update.php ops.
 
     case 'selection':
-      $output = update_selection_page();
+      if (isset($_GET['token']) && drupal_valid_token($_GET['token'], 'update')) {
+        $output = update_selection_page();
+        break;
+      }
+
+    case 'Apply pending updates':
+      if (isset($_GET['token']) && drupal_valid_token($_GET['token'], 'update')) {
+        // Generate absolute URLs for the batch processing (using $base_root),
+        // since the batch API will pass them to url() which does not handle
+        // update.php correctly by default.
+        $batch_url = $base_root . drupal_current_script_url();
+        $redirect_url = $base_root . drupal_current_script_url(array('op' => 'results'));
+        update_batch($_POST['start'], $redirect_url, $batch_url);
+        break;
+      }
+
+    case 'info':
+      $output = update_info_page();
       break;
 
+    case 'results':
+      $output = update_results_page();
+      break;
+
+    // Regular batch ops : defer to batch processing API.
     default:
-      $output = update_info_page();
+      update_task_list('run');
+      $output = _batch_page();
       break;
   }
 }
 else {
   $output = update_access_denied_page();
 }
-
-if (isset($output)) {
-  print theme('maintenance_page', $output);
+if (isset($output) && $output) {
+  // Explicitly start a session so that the update.php token will be accepted.
+  drupal_session_start();
+  // We defer the display of messages until all updates are done.
+  $progress_page = ($batch = batch_get()) && isset($batch['running']);
+  print theme('update_page', array('content' => $output, 'show_messages' => !$progress_page));
 }
