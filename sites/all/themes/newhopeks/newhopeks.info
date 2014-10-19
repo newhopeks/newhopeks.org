@@ -1,0 +1,35 @@
+; BASIC SETTINGS
+name = New Hope Church
+description = The Drupal 7 theme for New Hope Church in Manhattan, Kansas.
+screenshot = screenshot.png
+core = 7.x
+engine = phptemplate
+
+; REGIONS
+regions[content_above] = Above the Content
+regions[content] = Content
+regions[content_sidebar] = Sidebar
+regions[content_below] = Below the Content
+regions[footer] = Footer
+
+; FEATURES (intentionally blank to disable all features)
+features[] =
+
+; CSS
+stylesheets[all][] = css/override/kill/ctools.css
+stylesheets[all][] = css/override/kill/field.css
+stylesheets[all][] = css/override/kill/node.css
+stylesheets[all][] = css/override/kill/system.menus.css
+stylesheets[all][] = css/override/kill/system.messages.css
+stylesheets[all][] = css/override/kill/user.css
+stylesheets[all][] = css/override/kill/views.css
+; stylesheets[all][] = css/libs/nivo-slider.css
+stylesheets[all][] = css/style.css
+
+; JAVASCRIPT
+scripts[] = js/libs/bootstrap.min.js
+; scripts[] = js/libs/slides.min.jquery.js
+; scripts[] = js/libs/jquery.nivo.slider.pack.js
+; scripts[] = js/facebook-like.js
+; scripts[] = js/google-plusone.js
+scripts[] = js/script.js

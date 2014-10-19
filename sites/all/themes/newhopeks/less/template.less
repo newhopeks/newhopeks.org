@@ -1,0 +1,580 @@
+//
+// Template
+// ====================================================================================================
+
+
+
+// Styles
+// --------------------------------------------------
+
+// Content Alignment
+
+.alignright {
+	position: relative;
+	float: right;
+	margin: 0 0 20px 20px;
+}
+
+.alignleft {
+	position: relative;
+	float: left;
+	margin: 0 20px 20px 0;
+}
+
+.aligncenter {
+	clear: both;
+	display: block;
+	margin: 20px auto;
+}
+
+// Article Listings
+
+.article-listing__item {
+    .clearfix;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid fade(@nh-brown, 20%);
+
+    .sidebar &,
+    .content-below & {
+        padding: 10px 0;
+        margin-bottom: 0;
+        border-top: 1px solid @sidebar-block-border-color;
+        border-bottom: none;
+    }
+
+    .article-listing__item__title {
+        margin: 0 0 5px 0;
+        font-family: @font-family-base;
+        font-weight: 700;
+
+        .content .sidebar &,
+        .content .content-below & {
+            .font-size(16);
+            line-height: 1;
+        }
+
+    }
+
+    .article-listing__item__subtitle {
+        margin: 5px 0 0 0;
+        color: fade(@text-color, 80%);
+        font-family: @font-family-serif;
+        font-style: italic;
+        font-weight: bold;
+        line-height: normal;
+
+        .content .sidebar &,
+        .content .content-below & {
+            .font-size(13);
+        }
+
+    }
+
+    .article-listing__item__date {
+        color: @nh-brown-light;
+        line-height: normal;
+
+        .content .sidebar &,
+        .content .content-below & {
+            .font-size(13);
+        }
+
+    }
+
+    .article-listing__item__body {
+        margin: 5px 0 0 0;
+
+        p {
+            margin: 0;
+        }
+
+        .content .sidebar &,
+        .content .content-below & {
+            .font-size(13);
+            line-height: 1.5;
+        }
+
+    }
+
+    .article-listing__item__more {
+        margin: 5px 0 0 0;
+
+        .content .sidebar &,
+        .content .content-below & {
+            .font-size(13);
+            line-height: 1.5;
+        }
+
+    }
+
+}
+
+.article-listing__footer {
+    padding-top: 10px;
+    border-top: 1px solid @sidebar-block-border-color;
+
+    .article-listing__footer__links {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        font-family: @font-family-serif;
+        .font-size(12);
+        line-height: 1.5;
+        font-style: italic;
+
+        @media (min-width: @screen-sm) {
+
+            .content .content-below & {
+                .make-row;
+            }
+
+        }
+
+        li {
+            margin: 0;
+            padding: 0;
+
+            a {
+                color: @nh-green;
+            }
+
+            &.browse {
+                font-weight: 700;
+
+                @media (min-width: @screen-sm) {
+
+                    .content .content-below & {
+                        .make-sm-column(6);
+                    }
+
+                }
+
+            }
+
+            &.feed {
+
+                @media (min-width: @screen-sm) {
+
+                    .content .content-below & {
+                        .make-sm-column(6);
+                        text-align: right;
+                    }
+
+                }
+
+                a {
+                    color: @nh-brown-light;
+                }
+
+            }
+
+        }
+
+    }
+
+}
+
+.article-listing--messages {
+
+    .article-listing--messages__series-image {
+        margin: 0 0 10px 0;
+
+        img {
+            display: block;
+            width: 100%;
+            border: 1px solid @sidebar-block-border-color;
+        }
+
+    }
+
+    .article-listing__item {
+
+        .article-listing__item__date {
+            margin: 0 0 3px 0;
+        }
+
+        .article-listing__item__title {
+            margin: 0;
+        }
+
+        .article-listing__item__subtitle {}
+
+        .article-listing__item__info {
+            margin: 0;
+            .font-size(13);
+            line-height: 1.5;
+
+            a {
+                color: @text-color;
+            }
+
+            dt {
+                margin-top: 5px;
+            }
+
+        }
+
+        .article-listing__item__more {}
+
+    }
+
+    .article-listing__footer {}
+
+}
+
+.article-listing--events {
+
+    .article-listing__item {
+        position: relative;
+        min-height: 75px; min-height: 7.5rem;
+        padding: 10px 0 10px 50px; padding: 1.0rem 0 1.0rem 50px;
+
+        .article-listing__item__title {}
+
+        .article-listing__item__date {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 40px;
+            margin: 0;
+            font-family: @LeagueGothic;
+            font-weight: normal;
+            line-height: 1;
+            text-align: center;
+
+            .article-listing--events__item__date__month {
+                display: block;
+                text-transform: uppercase;
+                .font-size(24);
+                line-height: 1;
+            }
+
+            .article-listing--events__item__date__day {
+                display: block;
+                .font-size(36);
+                line-height: 1;
+            }
+
+        }
+
+        .article-listing__item__body {}
+
+        .article-listing__item__more {}
+
+    }
+
+}
+
+.article-listing--news {
+
+    .article-listing__item {
+
+        .article-listing__item__title {
+            margin-bottom: 3px;
+        }
+
+        .article-listing__item__date {
+            margin: 0;
+        }
+
+        .article-listing__item__body {}
+
+        .article-listing__item__more {}
+
+    }
+
+}
+
+// Directory Listings
+
+.directory-listing {
+    .make-row();
+    padding: 0;
+    list-style-type: none;
+
+    li {
+        .make-sm-column(4);
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        @media (min-width: @screen-sm) {
+
+            &:nth-child(3n+4) {
+                clear: left;
+            }
+
+        }
+
+        a {
+            display: block;
+
+            img {
+                display: block;
+                max-width: 100%;
+                height: auto;
+                border: 1px solid fade(@nh-brown, 20%);
+                .transition(all 0.2s linear);
+            }
+
+            br {
+                display: none;
+            }
+
+            .directory-listing__item__title {
+                display: block;
+                margin-top: 5px;
+                font-weight: 700;
+            }
+
+            .directory-listing__item__subtitle {
+                display: block;
+                font-family: @font-family-serif;
+                .font-size(12);
+                line-height: 1.5;
+            }
+
+            &:hover,
+            &:focus {
+                text-decoration: none;
+
+                img {
+                    border-color: @link-hover-color;
+                }
+
+            }
+
+        }
+
+    }
+
+}
+
+
+
+// Page
+// --------------------------------------------------
+
+// Breadcrumbs
+
+.content .main .breadcrumb {}
+
+
+
+// Node
+// --------------------------------------------------
+
+// Publishing Information
+
+.node .submitted {
+
+	.node-date {}
+
+}
+
+// Image Field
+
+.content .main .field-name-field-image {
+	.alignright;
+
+	a,
+	img {
+		display: block;
+	}
+
+	img {
+	    max-width: 100px;
+		height: auto;
+
+		@media (min-width: @screen-sm) {
+		    max-width: 100%;
+		}
+
+	}
+
+}
+
+// File Upload Field
+
+.field-file-upload {
+    .clearfix;
+
+    .field-file-upload__title {
+        margin-bottom: 0;
+        padding: 10px;
+        color: white;
+        background-color: @nh-blue;
+        .font-size(16);
+    }
+
+    .field-file-upload__list {
+        padding: 0;
+        list-style-type: none;
+
+        .field-file-upload__list__item {
+            display: block;
+            margin: 0;
+            padding: 10px;
+            background-color: fade(@nh-blue-light, 50%);
+            border-top: 1px solid white;
+
+            &:nth-child(even) {
+                background-color: fade(@nh-blue-light, 70%);
+            }
+
+        }
+
+    }
+
+}
+
+// Audio Field
+
+.mejs-container {
+    width: 100% !important;
+
+    .mejs-inner {
+
+        // audio element
+        .mejs-mediaelement {
+
+            audio {}
+
+        }
+
+        .mejs-layers {
+
+            .mejs-layer {}
+
+            .mejs-poster {}
+
+        }
+
+        // player controls
+        .mejs-controls {
+            background: @nh-brown;
+
+            // generic button class (for playpause and mute)
+            .mejs-button {}
+
+            // play/pause button
+            .mejs-playpause-button {
+
+                button {}
+
+            }
+
+            // play modifier
+            .mejs-play {}
+
+            // pause modifier
+            .mejs-pause {}
+
+            // generic timecode (for current time and total time)
+            .mejs-time {}
+
+            // current time
+            .mejs-currenttime-container {
+
+                .mejs-currenttime {}
+
+            }
+
+            // time rail
+            .mejs-time-rail {
+
+                .mejs-time-total {
+                    background: @nh-brown-dark;
+
+                    .mejs-time-buffering {
+                        background: fade(white, 20%);
+                    }
+
+                    .mejs-time-loaded {
+                        background: @nh-blue;
+                    }
+
+                    .mejs-time-current {
+                        background: fade(white, 80%);
+                    }
+
+                    .mejs-time-handle {}
+
+                    .mejs-time-float {
+
+                        .mejs-time-float-current {}
+
+                        .mejs-time-float-corner {}
+
+                    }
+
+                }
+
+            }
+
+            // total time
+            .mejs-time mejs-duration-container {
+
+                .mejs-duration {}
+
+            }
+
+            // mute modifier (for volume button and volume slider)
+            .mejs-mute {}
+
+            // unmute modifier
+            .mejs-unmute {}
+
+            // volume button (button that mutes/unmutes on click)
+            .mejs-volume-button {
+
+                button {}
+
+            }
+
+            // volume slider
+            .mejs-horizontal-volume-slider {
+
+                .mejs-horizontal-volume-total {
+                    background: @nh-brown-dark;
+                }
+
+                .mejs-horizontal-volume-current {
+                    background: fade(white, 80%);
+                }
+
+                .mejs-horizontal-volume-handle {}
+
+            }
+
+        }
+
+        // clear floats
+        .mejs-clear {}
+
+    }
+
+}
+
+.field-audio {
+    margin-bottom: 10px;
+
+    .mediaelement-audio {
+
+        // download link
+        .mediaelement-download-link {
+            margin-top: 3px;
+
+            a {}
+
+        }
+
+    }
+
+}
+
+// Address Field
+
+div.addressfield-container-inline:after {
+    clear: none;
+}

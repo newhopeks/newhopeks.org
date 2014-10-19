@@ -1,7 +1,0 @@
-; $Id: site_tour.info,v 1.1 2006/11/19 14:33:36 stefano73 Exp $
-name = Site Tours
-description = Create site tours with Amberjack.
-; Information added by drupal.org packaging script on 2007-01-21
-version = "5.x-1.x-dev"
-project = "site_tour"
-

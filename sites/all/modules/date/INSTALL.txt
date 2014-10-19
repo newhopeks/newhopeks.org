@@ -1,29 +1,47 @@
-Installation instructions:
+================================================================================
+Date API Installation instructions:
+================================================================================
+1) If you have an earlier version of the Date module on your system, empty the
+   date folder out completely. The files in later versions have different names
+   and are located in different places.
 
-1) Install the cck files from http://drupal.org/project/date.
+2) Download the whole package of files from http://drupal.org/project/date.
 
-2) Upload the date files to a 'date' folder in the modules directory. You should end
-   up with a structure like: drupal/modules/date/date.module. You can also place it
-   inside the cck folder. Either location will work.
+3) Upload the date files to the modules directory. The package includes files
+   needed by the Date API, and optional modules to to create date fields.
 
-   * Optional * Download the adodb date library from 
-   http://phplens.com/phpeverywhere/adodb_date_library
-   and add it to the folder. If included, it will allow you to use dates from
-   the year 100 to the year 3000. Without it, most date handling is limited to
-   1970 to 2038.
-   
-3) Go to admin/modules and enable the date module. Be sure to submit the page
-   even if the date module is already selected. That will update the path to the files.
+4) Go to admin/modules and enable the needed modules from the Date/Time group.
 
-4) Go to admin/node/types to view cck content types. Add or select a content type.
+You should end up with a structure like:
 
-5) While viewing a cck content type, select the option to add a new field. Several
-   options for date fields should be visible.
-   
-6) If you already have date fields created from an earlier version, be sure to
-   edit each one and save your changes. There may be new options available that need to be set.
+   /drupal/sites/all/modules/date/date.info
+   /drupal/sites/all/modules/date/date.install
+   /drupal/sites/all/modules/date/date.module
+   ...
 
-Documentation is available at http://drupal.org/node/92460.
-   
-   
+   /drupal/sites/all/modules/date/date_api/date_api.info
+   /drupal/sites/all/modules/date/date_api/date_api.install
+   /drupal/sites/all/modules/date/date_api/date_api.module
+   ...
 
+================================================================================
+Install Date Fields:
+================================================================================
+
+1) The date field type is included in the Date files at
+   http://drupal.org/project/date.
+
+2) Go to admin/modules and enable the Date module. Be sure that the Date API
+   module, the Date Timezone module, and the core Field module are also enabled.
+
+3) Go to admin/structure/types to view content types and edit a content type.
+
+4) Make sure the default timezone name has been set at
+   admin/config/regional/settings.
+
+5) While viewing a content type, select the option to add a new field from the
+   tabs at the top of the page. Several options for date fields will be visible.
+
+================================================================================
+More documentation is available at http://drupal.org/node/92460.
+================================================================================

@@ -1,0 +1,245 @@
+//
+// Blocks
+// ====================================================================================================
+
+
+
+// Header
+// --------------------------------------------------
+
+.header .block {
+
+	.block-title {}
+
+}
+
+
+
+// Above the Content
+// --------------------------------------------------
+
+.content-above .block {
+
+	.block-title {}
+
+}
+
+
+
+// Content
+// --------------------------------------------------
+
+.content .main .block {
+
+	.block-title {}
+
+}
+
+
+
+// Sidebar
+// --------------------------------------------------
+
+.sidebar .block {
+    margin-bottom: (@grid-gutter-width / 2);
+    padding: 10px;
+    color: @sidebar-block-color;
+    background-color: @sidebar-block-bg;
+    border-top: 1px solid @sidebar-block-border-color;
+    border-bottom: 5px solid @sidebar-block-border-color;
+
+	@media (min-width: @screen-sm) {
+        margin-bottom: @grid-gutter-width;
+	}
+
+	.block-title {
+	    margin: 0 0 10px 0;
+	    color: @nh-green-dark;
+	    font-family: @font-family-serif;
+	    font-style: italic;
+    	.font-size(18);
+    	font-weight: bold;
+    	line-height: normal;
+	}
+
+	img {
+    	max-width: 100%;
+    	height: auto;
+	}
+
+}
+
+// Sub-navigation
+
+.sidebar .subnav {
+    padding-bottom: 0;
+    color: fade(white, 80%);
+    background-color: @nh-green;
+    border-top-color: @nh-green-dark;
+    border-bottom-color: @nh-green-dark;
+
+	.block-title {
+	    color: white;
+
+    	a {
+        	color: inherit;
+    	}
+
+	}
+
+	ul {
+	    margin: 0 -10px;
+	    padding: 0;
+	    list-style-type: none;
+
+		li {
+		    margin: 0;
+		    padding: 5px 10px;
+		    border-top: 1px solid fade(white, 20%);
+
+			a {
+			    color: inherit;
+
+				&:hover,
+				&:focus {
+    				color: white;
+				}
+
+			}
+
+		    &.active-trail {
+		        color: white;
+    		    background-color: fade(@nh-green-dark, 20%);
+		    }
+
+			ul {
+    			padding-left: 10px;
+    			.font-size(12);
+    			line-height: 1.5;
+
+    			li {
+    			    border: none;
+
+        			&.active-trail {
+            			background-color: transparent;
+        			}
+
+    			}
+
+			}
+
+		}
+
+	}
+
+}
+
+// Messages
+
+.sidebar .messages {
+}
+
+// Giving
+
+.sidebar .giving {
+    padding: 0;
+    background: transparent;
+    border: none;
+
+    .block-title {
+        display: none;
+    }
+
+}
+
+
+
+// Below the Content
+// --------------------------------------------------
+
+.content-below .block {
+    margin-bottom: @grid-gutter-width;
+
+	@media (min-width: @screen-sm) {
+	    margin-bottom: 0;
+        padding: 0 20px;
+	}
+
+	.block-title {
+	    margin: 0 0 10px 0;
+	    color: @nh-green-dark;
+	    font-family: @font-family-serif;
+	    font-style: italic;
+    	.font-size(18);
+    	line-height: normal;
+    	font-weight: bold;
+    	line-height: normal;
+	}
+
+	img {
+    	max-width: 100%;
+    	height: auto;
+	}
+
+}
+
+// Messages
+
+.content-below .block--messages {
+}
+
+// Events
+
+.content-below .block--events {
+}
+
+// News
+
+.content-below .block--news {
+}
+
+
+
+// Footer
+// --------------------------------------------------
+
+.footer .block {
+
+	.block-title {}
+
+}
+
+// Copyright
+
+.footer .copyright {
+
+    .login {
+
+        .btn {
+            .button-variant(@text-color; fade(@nh-brown, 20%); transparent);
+        }
+
+    }
+
+	@media (min-width: @screen-sm) {
+
+	    .login {
+            text-align: right;
+        }
+
+	}
+
+}
+
+// Credits
+
+.footer .credits {
+
+	a {
+
+		&:hover,
+		&:focus {}
+
+	}
+
+}

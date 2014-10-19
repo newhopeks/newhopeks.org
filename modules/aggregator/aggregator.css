@@ -1,4 +1,6 @@
-/* $Id: aggregator.css,v 1.1 2006/08/14 07:14:48 drumm Exp $ */
+/**
+ * Styles for theme in the Aggregator module.
+ */
 
 #aggregator .feed-source .feed-title {
   margin-top: 0;
@@ -7,7 +9,7 @@
   margin-bottom: 0.75em;
 }
 #aggregator .feed-source .feed-icon {
-  float: right;
+  float: right; /* LTR */
   display: block;
 }
 #aggregator .feed-item {
@@ -17,7 +19,8 @@
   margin-bottom: 0;
   font-size: 1.3em;
 }
-#aggregator .feed-item-meta, #aggregator .feed-item-body {
+#aggregator .feed-item-meta,
+#aggregator .feed-item-body {
   margin-bottom: 0.5em;
 }
 #aggregator .feed-item-categories {
