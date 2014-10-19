@@ -6117,11 +6117,6 @@ table > tbody > tr:hover > th {
 .breadcrumbs nav a {
   white-space: nowrap;
 }
-@media (max-width: 768px) {
-  .breadcrumbs nav .current {
-    display: none;
-  }
-}
 .breadcrumbs nav .current .title {
   white-space: nowrap;
 }
