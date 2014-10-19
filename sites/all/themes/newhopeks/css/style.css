@@ -6342,6 +6342,22 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
   margin-bottom: 20px;
   border-bottom: 1px solid rgba(99, 91, 76, 0.2);
 }
+.article-listing__item:before,
+.article-listing__item:after {
+  content: " ";
+  display: table;
+}
+.article-listing__item:after {
+  clear: both;
+}
+.article-listing__item:before,
+.article-listing__item:after {
+  content: " ";
+  display: table;
+}
+.article-listing__item:after {
+  clear: both;
+}
 .sidebar .article-listing__item,
 .content-below .article-listing__item {
   padding: 10px 0;
