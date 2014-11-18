@@ -5,6 +5,12 @@ apt-get update
 apt-get install -y apache2
 rm -rf /var/www
 ln -fs /vagrant /var/www
+# Enable mod_rewrite
+a2enmod rewrite
+# Restart apache
+service apache2 restart
+
+apt-get install -y libapache2-mod-php5
 
 # MySQL
 debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
