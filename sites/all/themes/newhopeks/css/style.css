@@ -6601,6 +6601,18 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
 .directory-listing li a:focus img {
   border-color: #448386;
 }
+.message-series-listing .item {
+  margin-bottom: 20px;
+}
+.message-series-listing .item:nth-child(odd) {
+  clear: left;
+}
+.message-series-listing .item .item__img {
+  margin-bottom: 5px;
+}
+.message-series-listing .item .item__title {
+  display: none;
+}
 .content .main .field-name-field-image {
   position: relative;
   float: right;
