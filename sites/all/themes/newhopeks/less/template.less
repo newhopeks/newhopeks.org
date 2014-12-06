@@ -361,12 +361,22 @@
 			clear: left;
 		}
 
+		a {
+			color: @link-color;
+		}
+
 		.item__img {
+			width: 100%;
+			height: auto;
 			margin-bottom: 5px;
+			border: 1px solid fade(@nh-brown, 20%);
 		}
 
 		.item__title {
-			display: none;
+			margin: 0;
+			color: inherit;
+			.font-size(14);
+			line-height: 1.5;
 		}
 
 	}

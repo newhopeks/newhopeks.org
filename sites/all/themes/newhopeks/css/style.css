@@ -6607,11 +6607,21 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
 .message-series-listing .item:nth-child(odd) {
   clear: left;
 }
+.message-series-listing .item a {
+  color: #66adb1;
+}
 .message-series-listing .item .item__img {
+  width: 100%;
+  height: auto;
   margin-bottom: 5px;
+  border: 1px solid rgba(99, 91, 76, 0.2);
 }
 .message-series-listing .item .item__title {
-  display: none;
+  margin: 0;
+  color: inherit;
+  font-size: 14px;
+  font-size: 1.4rem;
+  line-height: 1.5;
 }
 .content .main .field-name-field-image {
   position: relative;
