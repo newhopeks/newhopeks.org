@@ -6623,6 +6623,45 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
   font-size: 1.4rem;
   line-height: 1.5;
 }
+.bible-books-listing .bible-books-listing__title {
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1.1;
+  color: inherit;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 24px;
+  margin-top: 0;
+}
+.bible-books-listing .bible-books-listing__title small,
+.bible-books-listing .bible-books-listing__title .small {
+  font-weight: normal;
+  line-height: 1;
+  color: #f2f1ef;
+}
+.bible-books-listing .bible-books-listing__title small,
+.bible-books-listing .bible-books-listing__title .small {
+  font-size: 65%;
+}
+.bible-books-listing .bible-books-listing__title > a {
+  color: #78944a;
+  text-decoration: none;
+}
+.bible-books-listing .bible-books-listing__title > a:hover,
+.bible-books-listing .bible-books-listing__title > a:focus {
+  color: #5c7239;
+  text-decoration: none;
+}
+.bible-books-listing .bible-books-listing__list {
+  padding-left: 0;
+  list-style-type: none;
+  -moz-column-count: 2;
+  -moz-column-gap: 20px;
+  -webkit-column-count: 2;
+  -webkit-column-gap: 20px;
+  column-count: 2;
+  column-gap: 20px;
+}
 .content .main .field-name-field-image {
   position: relative;
   float: right;
