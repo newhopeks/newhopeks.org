@@ -350,6 +350,61 @@
 
 }
 
+// Message Series Listings
+
+.message-series-listing {
+
+	.item {
+		margin-bottom: @grid-gutter-width;
+
+		&:nth-child(odd) {
+			clear: left;
+		}
+
+		a {
+			color: @link-color;
+		}
+
+		.item__img {
+			width: 100%;
+			height: auto;
+			margin-bottom: 5px;
+			border: 1px solid fade(@nh-brown, 20%);
+		}
+
+		.item__title {
+			margin: 0;
+			color: inherit;
+			.font-size(14);
+			line-height: 1.5;
+		}
+
+	}
+
+}
+
+// Bible Books Listing
+
+.bible-books-listing {
+
+	.bible-books-listing__title {
+		.h3;
+		margin-top: 0;
+	}
+
+	.bible-books-listing__list {
+		padding-left: 0;
+		list-style-type: none;
+		-moz-column-count: 2;
+	    -moz-column-gap: 20px;
+	    -webkit-column-count: 2;
+	    -webkit-column-gap: 20px;
+	    column-count: 2;
+	    column-gap: 20px;
+	}
+
+}
+
 
 
 // Page
@@ -397,7 +452,7 @@
 // File Upload Field
 
 .field-file-upload {
-    .clearfix;
+	clear: both;
 
     .field-file-upload__title {
         margin-bottom: 0;
