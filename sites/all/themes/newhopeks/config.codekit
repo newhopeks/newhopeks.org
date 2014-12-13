@@ -169,17 +169,6 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
-	"\/img\/message-image-default.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 29070,
-		"inputAbbreviatedPath": "\/img\/message-image-default.png",
-		"outputAbbreviatedPath": "\/img\/message-image-default.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
 	"\/img\/NoisyTile.png": {
 		"fileType": 32768,
 		"ignore": 0,
