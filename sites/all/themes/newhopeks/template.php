@@ -261,7 +261,6 @@ function newhopeks_form_search_form_alter(&$form, &$form_state, $form_id) {
     $search_placeholder_text = t('Search');
     $search_btn_text = t('Go');
 
-
     $form['basic']['#attributes'] = array(
         'class' => array(
             'form-group',
@@ -272,9 +271,11 @@ function newhopeks_form_search_form_alter(&$form, &$form_state, $form_id) {
         '#type' => 'textfield',
         '#title' => 'Search',
         '#theme' => 'textfield',
-        '#theme_wrappers' => array('custom_search_form_wrapper'),
         '#attributes' => array(
             'placeholder' => $search_placeholder_text,
+            'class' => array(
+            	'form-control',
+            ),
         ),
     );
 
@@ -283,22 +284,12 @@ function newhopeks_form_search_form_alter(&$form, &$form_state, $form_id) {
         '#value' => $search_btn_text,
         '#attributes' => array(
             'class' => array(
-                'btn',
+                'btn btn-primary',
             ),
         ),
     );
 
     $form['basic']['keys']['#title_display'] = 'invisible';
-
-}
-
-function newhopeks_custom_search_form_wrapper($variables) {
-
-    $element = $variables['element'];
-
-    $output  = '<div class="test">';
-    $output .= $element['#children'];
-    $output .= '</div>';
 
 }
 
