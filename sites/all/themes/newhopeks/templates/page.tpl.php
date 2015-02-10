@@ -19,10 +19,12 @@
                     </button>
         	        <div class="collapse navbar-collapse" id="main-navbar-collapse">
         	            <?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('class' => 'nav navbar-nav main-menu'))); ?>
-                        <?php print $search_form; ?>
-        				<?php if ($secondary_menu) : ?>
-                            <?php print theme('links__menu_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('class' => 'nav navbar-nav secondary-menu'))); ?>
-        				<?php endif; ?>
+	        			<div class="top-bar">
+	        				<?php if ($secondary_menu) : ?>
+								<?php print theme('links__menu_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('class' => 'nav navbar-nav secondary-menu'))); ?>
+	        				<?php endif; ?>
+							<?php print $search_form; ?>
+	        			</div>
         	        </div>
                 </nav>
             </div> <!-- end .row -->
