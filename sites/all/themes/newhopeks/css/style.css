@@ -6663,22 +6663,26 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
   column-gap: 20px;
 }
 .content .main .field-name-field-image {
-  position: relative;
-  float: right;
-  margin: 0 0 20px 20px;
+  clear: both;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+}
+@media (min-width: 992px) {
+  .content .main .field-name-field-image {
+    position: relative;
+    float: right;
+    margin: 0 0 20px 20px;
+    max-width: 33%;
+  }
 }
 .content .main .field-name-field-image a,
 .content .main .field-name-field-image img {
-  display: block;
+  display: inline-block;
 }
 .content .main .field-name-field-image img {
-  max-width: 100px;
+  max-width: 100%;
   height: auto;
-}
-@media (min-width: 768px) {
-  .content .main .field-name-field-image img {
-    max-width: 100%;
-  }
 }
 .field-file-upload {
   clear: both;
@@ -6706,7 +6710,15 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
   background-color: rgba(203, 227, 229, 0.7);
 }
 .mejs-container {
+  clear: both;
   width: 100% !important;
+}
+@media (min-width: 992px) {
+  .mejs-container {
+    clear: none;
+    width: auto !important;
+    max-width: 63% !important;
+  }
 }
 .mejs-container .mejs-inner .mejs-controls {
   background: #635b4c;
