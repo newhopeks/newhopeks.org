@@ -430,21 +430,22 @@
 // Image Field
 
 .content .main .field-name-field-image {
-	.alignright;
+	.aligncenter;
+	text-align: center;
+
+	@media (min-width: @screen-md) {
+		.alignright;
+	    max-width: 33%;
+	}
 
 	a,
 	img {
-		display: block;
+		display: inline-block;
 	}
 
 	img {
-	    max-width: 100px;
+	    max-width: 100%;
 		height: auto;
-
-		@media (min-width: @screen-sm) {
-		    max-width: 100%;
-		}
-
 	}
 
 }
@@ -486,7 +487,14 @@
 // Audio Field
 
 .mejs-container {
+    clear: both;
     width: 100% !important;
+
+    @media (min-width: @screen-md) {
+	    clear: none;
+		width: auto !important;
+		max-width: 63% !important;
+    }
 
     .mejs-inner {
 
