@@ -18,7 +18,7 @@
 
 		<!--[if gt IE 7]><!-->
 		<?php print $styles; ?>
-		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 		<!--<![endif]-->
 
 		<!--[if lt IE 8]>
