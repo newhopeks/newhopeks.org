@@ -20,10 +20,12 @@
         	        <div class="collapse navbar-collapse" id="main-navbar-collapse">
         	            <?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('class' => 'nav navbar-nav main-menu'))); ?>
 	        			<div class="top-bar">
-	        				<?php if ($secondary_menu) : ?>
-								<?php print theme('links__menu_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('class' => 'nav navbar-nav secondary-menu'))); ?>
-	        				<?php endif; ?>
-							<?php print $search_form; ?>
+		        			<div class="container">
+		        				<?php if ($secondary_menu) : ?>
+									<?php print theme('links__menu_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('class' => 'nav navbar-nav secondary-menu'))); ?>
+		        				<?php endif; ?>
+								<?php print $search_form; ?>
+		        			</div>
 	        			</div>
         	        </div>
                 </nav>
