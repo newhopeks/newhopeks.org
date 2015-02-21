@@ -261,6 +261,7 @@ function newhopeks_form_search_form_alter(&$form, &$form_state, $form_id) {
     $search_placeholder_text = t('Search');
     $search_btn_text = t('Go');
 
+	// basic form attributes
 	$form['#attributes'] = array(
 		'class' => array(
 			'search-form',
@@ -268,15 +269,19 @@ function newhopeks_form_search_form_alter(&$form, &$form_state, $form_id) {
 	    ),
 	);
 
+    // input attributes (text field and submit button)
     /*
     $form['basic']['#attributes'] = array(
         'class' => array(
-            'form-group',
+	        'form-group',
         ),
     );
     */
 
+    // text field
     $form['basic']['keys'] = array(
+        //'#prefix' => '<div class="prefix-test">',
+        //'#suffix' => '</div>',
         '#type' => 'textfield',
         '#title' => 'Search',
         '#theme' => 'textfield',
@@ -288,6 +293,7 @@ function newhopeks_form_search_form_alter(&$form, &$form_state, $form_id) {
         ),
     );
 
+    // submit button
     $form['basic']['submit'] = array(
         '#type' => 'submit',
         '#value' => $search_btn_text,

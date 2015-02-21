@@ -6666,8 +6666,8 @@ table > tbody > tr:hover {
 }
 @media (min-width: 768px) {
   .header {
-    padding-top: 71px;
-    padding-top: 7.1rem;
+    padding-top: 77px;
+    padding-top: 7.7rem;
   }
   .header .wrapper {
     margin-bottom: 20px;
@@ -6807,8 +6807,8 @@ table > tbody > tr:hover {
     display: inline-block;
     width: 100%;
     margin: 0;
-    padding: 5px 0;
-    padding: 0.5rem 0;
+    padding: 8px 0;
+    padding: 0.8rem 0;
     border: none;
     font-size: 14px;
     font-size: 1.4rem;
@@ -6871,12 +6871,17 @@ table > tbody > tr:hover {
 @media (min-width: 768px) {
   .header .navbar-main .navbar-collapse .top-bar .search-form {
     border: none;
-    margin: 5px 0;
-    padding: 0;
+    margin: 0;
+    padding: 5px 0;
+    padding: 0.5rem 0;
     text-align: right;
   }
   .header .navbar-main .navbar-collapse .top-bar .search-form .form-text,
   .header .navbar-main .navbar-collapse .top-bar .search-form .form-submit {
+    height: auto;
+    padding: 3px 7px;
+    padding: 0.3rem 7px;
+    border: none;
     font-size: 14px;
     font-size: 1.4rem;
     line-height: 1.5;
