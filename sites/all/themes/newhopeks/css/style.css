@@ -6666,8 +6666,8 @@ table > tbody > tr:hover {
 }
 @media (min-width: 768px) {
   .header {
-    padding-top: 71px;
-    padding-top: 7.1rem;
+    padding-top: 77px;
+    padding-top: 7.7rem;
   }
   .header .wrapper {
     margin-bottom: 20px;
@@ -6785,68 +6785,106 @@ table > tbody > tr:hover {
     border-bottom-color: #66adb1;
   }
 }
-.header .navbar-main .navbar-collapse .search-form {
-  margin: 0 10px;
-  padding: 20px 0 0 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: none;
+@media (min-width: 768px) {
+  .header .navbar-main .navbar-collapse .top-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    background-color: #635b4c;
+  }
 }
-.header .navbar-main .navbar-collapse .secondary-menu {
-  margin: 10px;
+.header .navbar-main .navbar-collapse .top-bar .secondary-menu {
+  margin: 10px 0;
   padding: 10px 0 0 0;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   font-family: "Droid Serif", Georgia, "Times New Roman", Times, serif;
   font-style: italic;
 }
-.header .navbar-main .navbar-collapse .secondary-menu li {
-  margin: 10px 0;
-  padding: 0;
-}
-.header .navbar-main .navbar-collapse .secondary-menu li a {
-  display: inline;
-  padding: 0;
-  color: inherit;
-  line-height: inherit;
-}
-.header .navbar-main .navbar-collapse .secondary-menu li a:hover,
-.header .navbar-main .navbar-collapse .secondary-menu li a:active {
-  background-color: transparent;
-  text-decoration: underline;
-}
 @media (min-width: 768px) {
-  .header .navbar-main .navbar-collapse .secondary-menu {
-    position: absolute;
-    top: 0;
-    left: 0;
+  .header .navbar-main .navbar-collapse .top-bar .secondary-menu {
+    display: inline-block;
     width: 100%;
     margin: 0;
-    padding: 5px 10px;
-    padding: 0.5rem 10px;
-    color: white;
-    background-color: #635b4c;
+    padding: 8px 0;
+    padding: 0.8rem 0;
     border: none;
     font-size: 14px;
     font-size: 1.4rem;
     line-height: 1.5;
     text-align: right;
   }
-  .header .navbar-main .navbar-collapse .secondary-menu li {
+}
+.header .navbar-main .navbar-collapse .top-bar .secondary-menu li {
+  margin: 10px 0;
+  padding: 0;
+}
+.header .navbar-main .navbar-collapse .top-bar .secondary-menu li a {
+  display: inline;
+  padding: 0;
+  color: inherit;
+  line-height: inherit;
+}
+.header .navbar-main .navbar-collapse .top-bar .secondary-menu li a:hover,
+.header .navbar-main .navbar-collapse .top-bar .secondary-menu li a:active {
+  background-color: transparent;
+  text-decoration: underline;
+}
+@media (min-width: 768px) {
+  .header .navbar-main .navbar-collapse .top-bar .secondary-menu li {
     float: none;
     display: inline-block;
     margin: 0 0 0 5px;
     padding: 0;
   }
-  .header .navbar-main .navbar-collapse .secondary-menu li:before {
-    content: "|";
+  .header .navbar-main .navbar-collapse .top-bar .secondary-menu li:before {
+    content: "| ";
     margin-right: 5px;
     color: rgba(255, 255, 255, 0.3);
   }
-  .header .navbar-main .navbar-collapse .secondary-menu li.first:before {
+  .header .navbar-main .navbar-collapse .top-bar .secondary-menu li.first:before {
     content: none;
     margin-right: 0;
   }
-  .header .navbar-main .navbar-collapse .secondary-menu li a {
+  .header .navbar-main .navbar-collapse .top-bar .secondary-menu li a {
     color: inherit;
+  }
+}
+.header .navbar-main .navbar-collapse .top-bar .search-form {
+  display: inline-block;
+  margin: 10px 0;
+  padding: 10px 0 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+}
+.header .navbar-main .navbar-collapse .top-bar .search-form .form-text,
+.header .navbar-main .navbar-collapse .top-bar .search-form .form-submit {
+  display: inline-block;
+}
+.header .navbar-main .navbar-collapse .top-bar .search-form .form-text {
+  width: 75%;
+}
+.header .navbar-main .navbar-collapse .top-bar .search-form .form-submit {
+  width: 20%;
+}
+@media (min-width: 768px) {
+  .header .navbar-main .navbar-collapse .top-bar .search-form {
+    border: none;
+    margin: 0;
+    padding: 5px 0;
+    padding: 0.5rem 0;
+    text-align: right;
+  }
+  .header .navbar-main .navbar-collapse .top-bar .search-form .form-text,
+  .header .navbar-main .navbar-collapse .top-bar .search-form .form-submit {
+    height: auto;
+    padding: 3px 7px;
+    padding: 0.3rem 7px;
+    border: none;
+    font-size: 14px;
+    font-size: 1.4rem;
+    line-height: 1.5;
   }
 }
 @media (min-width: 768px) {
