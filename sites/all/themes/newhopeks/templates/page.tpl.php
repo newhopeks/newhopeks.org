@@ -21,10 +21,16 @@
         	            <?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('class' => 'nav navbar-nav main-menu'))); ?>
 	        			<div class="top-bar">
 		        			<div class="container">
-		        				<?php if ($secondary_menu) : ?>
-									<?php print theme('links__menu_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('class' => 'nav navbar-nav secondary-menu'))); ?>
-		        				<?php endif; ?>
-								<?php print $search_form; ?>
+			        			<div class="row">
+				        			<div class="col-sm-8">
+				        				<?php if ($secondary_menu) : ?>
+											<?php print theme('links__menu_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('class' => 'nav navbar-nav secondary-menu'))); ?>
+				        				<?php endif; ?>
+				        			</div>
+				        			<div class="col-sm-4">
+										<?php print $search_form; ?>
+				        			</div>
+			        			</div> <!-- end .row -->
 		        			</div>
 	        			</div>
         	        </div>

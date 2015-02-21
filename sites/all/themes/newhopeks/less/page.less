@@ -166,9 +166,7 @@
                     background-color: @nh-brown;
 				}
 
-				.container {
-					padding: 0;
-				}
+				.container {}
 
 		        .secondary-menu {
 	        	    margin: 10px;
@@ -179,11 +177,13 @@
 
 					@media (min-width: @screen-sm) {
 						display: inline-block;
+						width: 100%;
                     	margin: 0;
-						padding: 5px 10px; padding: 0.5rem 10px;
+						padding: 5px 0; padding: 0.5rem 0;
                     	border: none;
 	                    .font-size(14);
 	                    line-height: 1.5;
+	                    text-align: right;
 					}
 
 					li {
@@ -238,7 +238,7 @@
 
 		        }
 
-		        .search-form { display: none !important;
+		        .search-form {
 	    	        margin: 0 10px;
 	    	        padding: 20px 0 0 0;
 	    	        border-top: 1px solid fade(white, 20%);
@@ -247,15 +247,24 @@
 	    	        @media (min-width: @screen-sm) {
 		    	        display: inline-block;
 		    	        border: none;
-		    	        margin: 0;
+		    	        margin: 5px 0;
 		    	        padding: 0;
+		    	        text-align: right;
 
 		    	        .form-text,
 		    	        .form-submit {
-							padding: 5px 10px; padding: 0.5rem 10px;
-							border: none;
+							//padding: 5px 10px; padding: 0.5rem 10px;
+							//border: none;
 		                    .font-size(14);
 		                    line-height: 1.5;
+		    	        }
+
+		    	        .form-text {
+			    	        width: 75%;
+		    	        }
+
+		    	        .form-submit {
+							width: 20%;
 		    	        }
 
 	    	        }

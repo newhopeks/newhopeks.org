@@ -6795,9 +6795,6 @@ table > tbody > tr:hover {
     background-color: #635b4c;
   }
 }
-.header .navbar-main .navbar-collapse .top-bar .container {
-  padding: 0;
-}
 .header .navbar-main .navbar-collapse .top-bar .secondary-menu {
   margin: 10px;
   padding: 10px 0 0 0;
@@ -6808,13 +6805,15 @@ table > tbody > tr:hover {
 @media (min-width: 768px) {
   .header .navbar-main .navbar-collapse .top-bar .secondary-menu {
     display: inline-block;
+    width: 100%;
     margin: 0;
-    padding: 5px 10px;
-    padding: 0.5rem 10px;
+    padding: 5px 0;
+    padding: 0.5rem 0;
     border: none;
     font-size: 14px;
     font-size: 1.4rem;
     line-height: 1.5;
+    text-align: right;
   }
 }
 .header .navbar-main .navbar-collapse .top-bar .secondary-menu li {
@@ -6853,7 +6852,6 @@ table > tbody > tr:hover {
   }
 }
 .header .navbar-main .navbar-collapse .top-bar .search-form {
-  display: none !important;
   margin: 0 10px;
   padding: 20px 0 0 0;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -6863,17 +6861,21 @@ table > tbody > tr:hover {
   .header .navbar-main .navbar-collapse .top-bar .search-form {
     display: inline-block;
     border: none;
-    margin: 0;
+    margin: 5px 0;
     padding: 0;
+    text-align: right;
   }
   .header .navbar-main .navbar-collapse .top-bar .search-form .form-text,
   .header .navbar-main .navbar-collapse .top-bar .search-form .form-submit {
-    padding: 5px 10px;
-    padding: 0.5rem 10px;
-    border: none;
     font-size: 14px;
     font-size: 1.4rem;
     line-height: 1.5;
+  }
+  .header .navbar-main .navbar-collapse .top-bar .search-form .form-text {
+    width: 75%;
+  }
+  .header .navbar-main .navbar-collapse .top-bar .search-form .form-submit {
+    width: 20%;
   }
 }
 @media (min-width: 768px) {
