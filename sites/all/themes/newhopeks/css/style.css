@@ -7519,6 +7519,9 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
     max-width: 63% !important;
   }
 }
+.mejs-container .mejs-inner {
+  clear: both;
+}
 .mejs-container .mejs-inner .mejs-controls {
   background: #635b4c;
 }
