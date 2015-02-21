@@ -268,17 +268,18 @@ function newhopeks_form_search_form_alter(&$form, &$form_state, $form_id) {
 	    ),
 	);
 
+    /*
     $form['basic']['#attributes'] = array(
         'class' => array(
             'form-group',
         ),
     );
+    */
 
     $form['basic']['keys'] = array(
         '#type' => 'textfield',
         '#title' => 'Search',
         '#theme' => 'textfield',
-        '#theme_wrappers' => array(),
         '#attributes' => array(
             'placeholder' => $search_placeholder_text,
             'class' => array(
@@ -309,6 +310,8 @@ function newhopeks_custom_search_form_wrapper($variables) {
     $output  = '<div class="test">';
     $output .= $element['#children'];
     $output .= '</div>';
+
+    return $output;
 
 }
 
