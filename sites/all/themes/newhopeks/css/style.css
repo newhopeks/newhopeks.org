@@ -6796,7 +6796,7 @@ table > tbody > tr:hover {
   }
 }
 .header .navbar-main .navbar-collapse .top-bar .secondary-menu {
-  margin: 10px;
+  margin: 10px 0;
   padding: 10px 0 0 0;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   font-family: "Droid Serif", Georgia, "Times New Roman", Times, serif;
@@ -6852,14 +6852,24 @@ table > tbody > tr:hover {
   }
 }
 .header .navbar-main .navbar-collapse .top-bar .search-form {
-  margin: 0 10px;
-  padding: 20px 0 0 0;
+  display: inline-block;
+  margin: 10px 0;
+  padding: 10px 0 0 0;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: none;
 }
+.header .navbar-main .navbar-collapse .top-bar .search-form .form-text,
+.header .navbar-main .navbar-collapse .top-bar .search-form .form-submit {
+  display: inline-block;
+}
+.header .navbar-main .navbar-collapse .top-bar .search-form .form-text {
+  width: 75%;
+}
+.header .navbar-main .navbar-collapse .top-bar .search-form .form-submit {
+  width: 20%;
+}
 @media (min-width: 768px) {
   .header .navbar-main .navbar-collapse .top-bar .search-form {
-    display: inline-block;
     border: none;
     margin: 5px 0;
     padding: 0;
@@ -6870,12 +6880,6 @@ table > tbody > tr:hover {
     font-size: 14px;
     font-size: 1.4rem;
     line-height: 1.5;
-  }
-  .header .navbar-main .navbar-collapse .top-bar .search-form .form-text {
-    width: 75%;
-  }
-  .header .navbar-main .navbar-collapse .top-bar .search-form .form-submit {
-    width: 20%;
   }
 }
 @media (min-width: 768px) {
