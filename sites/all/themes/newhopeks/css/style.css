@@ -7145,11 +7145,13 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
 .alignright {
   position: relative;
   float: right;
+  max-width: 50%;
   margin: 0 0 20px 20px;
 }
 .alignleft {
   position: relative;
   float: left;
+  max-width: 50%;
   margin: 0 20px 20px 0;
 }
 .aligncenter {
@@ -7495,6 +7497,7 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
   .content .main .field-name-field-image {
     position: relative;
     float: right;
+    max-width: 50%;
     margin: 0 0 20px 20px;
     max-width: 33%;
   }
