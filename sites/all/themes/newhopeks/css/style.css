@@ -6754,7 +6754,7 @@ table > tbody > tr:hover {
   line-height: inherit;
 }
 .header .navbar-main .navbar-collapse .main-menu li a:hover,
-.header .navbar-main .navbar-collapse .main-menu li a:active {
+.header .navbar-main .navbar-collapse .main-menu li a:focus {
   background-color: transparent;
 }
 @media (min-width: 768px) {
@@ -6779,7 +6779,7 @@ table > tbody > tr:hover {
     border-bottom: 3px solid transparent;
   }
   .header .navbar-main .navbar-collapse .main-menu li a:hover,
-  .header .navbar-main .navbar-collapse .main-menu li a:active {
+  .header .navbar-main .navbar-collapse .main-menu li a:focus {
     color: #66adb1;
   }
   .header .navbar-main .navbar-collapse .main-menu li.active a,
