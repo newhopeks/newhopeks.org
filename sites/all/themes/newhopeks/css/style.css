@@ -6652,6 +6652,18 @@ table .table {
 table > tbody > tr:hover {
   background-color: #f5f5f5;
 }
+.well__title {
+  margin-top: 0;
+  color: inherit;
+  font-size: 21px;
+  font-size: 2.1rem;
+  line-height: 1.5;
+}
+.well > *:last-child,
+.well > *:last-child > *:last-child,
+.well > *:last-child > *:last-child > *:last-child {
+  margin-bottom: 0;
+}
 @font-face {
   font-family: 'League Gothic';
   src: url('../fonts/leaguegothic-regular-webfont.eot');
@@ -6685,17 +6697,17 @@ table > tbody > tr:hover {
     margin-bottom: 10px;
   }
 }
-.header .logo h1 {
+.header .logo__title {
   margin: 0;
   padding: 0;
   font-size: 36px;
   font-size: 3.6rem;
   line-height: 1;
 }
-.header .logo h1 a {
+.header .logo__title a {
   display: inline-block;
 }
-.header .logo h1 img {
+.header .logo__title img {
   display: block;
   max-width: 100%;
 }
@@ -6754,16 +6766,17 @@ table > tbody > tr:hover {
   line-height: inherit;
 }
 .header .navbar-main .navbar-collapse .main-menu li a:hover,
-.header .navbar-main .navbar-collapse .main-menu li a:active {
+.header .navbar-main .navbar-collapse .main-menu li a:focus {
   background-color: transparent;
 }
 @media (min-width: 768px) {
   .header .navbar-main .navbar-collapse .main-menu {
     float: none;
-    padding: 0;
+    padding: 24px 0 0 0;
     border: none;
     font-size: 24px;
     font-size: 2.4rem;
+    line-height: 1;
     text-align: right;
   }
   .header .navbar-main .navbar-collapse .main-menu li {
@@ -6773,16 +6786,27 @@ table > tbody > tr:hover {
   }
   .header .navbar-main .navbar-collapse .main-menu li a {
     display: inline-block;
+    margin-bottom: -5px;
     padding: 0 0 2px 0;
     border-bottom: 3px solid transparent;
   }
   .header .navbar-main .navbar-collapse .main-menu li a:hover,
-  .header .navbar-main .navbar-collapse .main-menu li a:active {
+  .header .navbar-main .navbar-collapse .main-menu li a:focus {
     color: #66adb1;
   }
   .header .navbar-main .navbar-collapse .main-menu li.active a,
   .header .navbar-main .navbar-collapse .main-menu li.active-trail a {
     border-bottom-color: #66adb1;
+  }
+}
+@media (min-width: 992px) {
+  .header .navbar-main .navbar-collapse .main-menu {
+    padding-top: 40px;
+  }
+}
+@media (min-width: 1200px) {
+  .header .navbar-main .navbar-collapse .main-menu {
+    padding-top: 55px;
   }
 }
 @media (min-width: 768px) {
@@ -7121,11 +7145,13 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
 .alignright {
   position: relative;
   float: right;
+  max-width: 50%;
   margin: 0 0 20px 20px;
 }
 .alignleft {
   position: relative;
   float: left;
+  max-width: 50%;
   margin: 0 20px 20px 0;
 }
 .aligncenter {
@@ -7471,6 +7497,7 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
   .content .main .field-name-field-image {
     position: relative;
     float: right;
+    max-width: 50%;
     margin: 0 0 20px 20px;
     max-width: 33%;
   }
