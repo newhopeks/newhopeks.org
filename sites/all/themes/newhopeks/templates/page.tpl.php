@@ -3,11 +3,9 @@
         <div class="wrapper">
             <div class="row">
         		<div class="logo col-xs-12 col-sm-3">
-        			<h1>
-        				<?php if (!$is_front) { echo '<a href="/">'; } ?>
-        				    <img src="/<?= path_to_theme(); ?>/img/logo@2x.png" width="215" alt="<?php print $site_name; ?>" />
-        				<?php if (!$is_front) { echo '</a>'; } ?>
-        			</h1>
+    				<?php if (!$is_front) { echo '<a href="/">'; } ?>
+        				<h1 class="logo__title"><img src="/<?= path_to_theme(); ?>/img/logo@2x.png" width="270" alt="<?php print $site_name; ?>" /></h1>
+    				<?php if (!$is_front) { echo '</a>'; } ?>
         		</div> <!-- end .logo -->
 
                 <nav role="navigation" class="navbar navbar-main col-xs-12 col-sm-9">
