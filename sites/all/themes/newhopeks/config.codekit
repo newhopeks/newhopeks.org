@@ -259,8 +259,8 @@
 		},
 	"\/js\/script.js": {
 		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
+		"ignore": 1,
+		"ignoreWasSetByUser": 1,
 		"inputAbbreviatedPath": "\/js\/script.js",
 		"outputAbbreviatedPath": "\/js\/min\/script-ck.js",
 		"outputPathIsOutsideProject": 0,
