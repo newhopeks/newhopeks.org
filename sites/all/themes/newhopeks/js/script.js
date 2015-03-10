@@ -19,6 +19,7 @@ Copyright:	(c) 2014 New Hope Church
  * -------------------------------------------------------------------------------------------------
  */
 
+/*
 // turn the slideshow on or off
 var showSlideshow = false;
 
@@ -27,7 +28,7 @@ var slideshowScript = 'slides';
 
 if (showSlideshow == true) {
 
-	if (typeof slideshowItems != 'undefined') {
+	if (typeof slideshowItems !== 'undefined') {
 
 		// get the images source code
 		var items = slideshowItems;
@@ -38,7 +39,7 @@ if (showSlideshow == true) {
 	}
 
 	// start the slideshow
-	if (slideshowScript == 'slides') {
+	if (slideshowScript === 'slides') {
 		$('.slideshow').slides({
 			container: 'slides-container',
 			pagination: false,
@@ -49,12 +50,12 @@ if (showSlideshow == true) {
 			play: 7000
 		});
 	}
-	if (slideshowScript == 'nivoSlider') {
+	if (slideshowScript === 'nivoSlider') {
 		$('.slideshow').nivoSlider();
 	}
 
 }
-
+*/
 
 
 /*
@@ -63,7 +64,7 @@ if (showSlideshow == true) {
  * -------------------------------------------------------------------------------------------------
  */
 
-if ($.browser.msie && 8 == parseInt($.browser.version)) {
+if ($.browser.msie && 8 === parseInt($.browser.version)) {
 	var head = document.getElementsByTagName('head')[0], style = document.createElement('style');
 	style.type = 'text/css';
 	style.styleSheet.cssText = ':before,:after{content:none !important';
