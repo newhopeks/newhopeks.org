@@ -6879,7 +6879,7 @@ table > tbody > tr:hover {
   line-height: inherit;
 }
 .header .navbar-main .navbar-collapse .top-bar .secondary-menu li a:hover,
-.header .navbar-main .navbar-collapse .top-bar .secondary-menu li a:active {
+.header .navbar-main .navbar-collapse .top-bar .secondary-menu li a:focus {
   background-color: transparent;
   text-decoration: underline;
 }
