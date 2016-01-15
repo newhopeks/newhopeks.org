@@ -66,7 +66,7 @@ function newhopeks_preprocess_page(&$variables) {
 
 	        $field_newsletter_author_output[] = '<a href="' . $field_newsletter_author_url . '">' . $field_newsletter_author_name . '</a>';
         }
-        $variables['field_newsletter_author'] = join(', and ', array_filter(array_merge(array(join(', ', array_slice($field_newsletter_author_output, 0, -1))), array_slice($field_newsletter_author_output, -1)), 'strlen'));
+        $variables['field_newsletter_author'] = join(' and ', array_filter(array_merge(array(join(', ', array_slice($field_newsletter_author_output, 0, -1))), array_slice($field_newsletter_author_output, -1)), 'strlen'));
 
     }
 
