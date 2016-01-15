@@ -7066,6 +7066,9 @@ table > tbody > tr:hover {
 .content .main .main__header .main__header__pre-title {
   margin-bottom: 5px;
 }
+.content .main .main__header .main__header__post-title {
+  margin-top: 5px;
+}
 .content .main .main__footer {
   margin-top: 20px;
   padding-top: 20px;
