@@ -52,6 +52,16 @@ function newhopeks_preprocess_page(&$variables) {
         // subtitle field
         $field_subtitle = field_get_items('node', $node, 'field_subtitle');
         if ($field_subtitle) { $variables['field_subtitle'] = $field_subtitle[0]['value']; }
+
+        // newsletter author field
+        //$field_newsletter_author_info = entity_load('field_collection_item', array($node->field_newsletter_author_info['und'][0]['value']));
+        //print_r(field_get_items('field_collection_item', $field_newsletter_author_info, 'field_newsletter_author'));
+
+        $collection = entity_metadata_wrapper('field_collection_item', $node->field_newsletter_author_info['und'][0]['value']);
+        $field_newsletter_author = $collection->field_newsletter_author->value();
+        $field_newsletter_author_url = url(taxonomy_term_uri($field_newsletter_author)['path']);
+        $field_newsletter_author_name = $field_newsletter_author->name;
+        $variables['field_newsletter_author'] = '<a href="' . $field_newsletter_author_url . '">' . $field_newsletter_author_name . '</a>';
     }
 
 
