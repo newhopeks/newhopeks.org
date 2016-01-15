@@ -89,14 +89,12 @@
                             <?php if (isset($field_subtitle)) : ?>
                                 <p class="main__header__subtitle"><?php print $field_subtitle; ?></p>
                             <?php endif; ?>
-                            <?php if (isset($node) && ($node->type == 'news' || $node->type == 'newsletter')) : ?>
+                            <?php if (isset($node) && ($node->type == 'news' || isset($field_newsletter_author))) : ?>
                                 <p class="main__header__post-title">
 	                                <?php if ($node->type == 'news') { print $date; } ?>
-	                                <?php if ($node->type == 'newsletter') : ?>
-		                                <?php if (isset($field_newsletter_author)) : ?>
-		                                	By <?php print $field_newsletter_author; ?>
-		                                <?php endif; ?>
-		                            <?php endif; ?>
+	                                <?php if (isset($field_newsletter_author)) : ?>
+	                                	By <?php print $field_newsletter_author; ?>
+	                                <?php endif; ?>
 	                            </p>
                             <?php endif; ?>
                         </header>
