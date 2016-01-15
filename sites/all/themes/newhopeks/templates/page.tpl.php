@@ -79,15 +79,18 @@
 
                     <?php if ($title) : ?>
                         <header class="main__header">
-                            <?php if (isset($node) && $node->type == 'message') : ?>
-                                <p class="main__header__date main__header__date--messages"><?php print $date; ?></p>
+                            <?php if (isset($node) && ($node->type == 'message' || $node->type == 'newsletter')) : ?>
+                                <p class="main__header__pre-title">
+	                                <?php if ($node->type == 'message') { print $date; } ?>
+	                                <?php if ($node->type == 'newsletter') { print 'Newsletter'; } ?>
+								</p>
                             <?php endif; ?>
                             <h1 class="main__header__title"><?php print $title; ?></h1>
                             <?php if (isset($field_subtitle)) : ?>
                                 <p class="main__header__subtitle"><?php print $field_subtitle; ?></p>
                             <?php endif; ?>
                             <?php if (isset($node) && $node->type == 'news') : ?>
-                                <p class="main__header__date"><?php print $date; ?></p>
+                                <p class="main__header__post-title"><?php print $date; ?></p>
                             <?php endif; ?>
                         </header>
                     <?php endif; ?>
