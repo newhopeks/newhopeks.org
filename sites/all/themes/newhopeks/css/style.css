@@ -7545,6 +7545,15 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
   max-width: 100%;
   height: auto;
 }
+.article-footer {
+  margin: 20px 0 0 0;
+  font-size: 13px;
+  font-size: 1.3rem;
+}
+.article-footer img {
+  float: right;
+  margin: 0 0 10px 10px;
+}
 .field-file-upload {
   clear: both;
 }
