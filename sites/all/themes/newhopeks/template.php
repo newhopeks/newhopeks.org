@@ -55,7 +55,7 @@ function newhopeks_preprocess_page(&$variables) {
 
 	    // newsletter fields
 	    if ($node->type == 'newsletter') {
-	        // author field
+	        // author
 	        if (!empty($node->field_newsletter_author_info)) {
 		        $field_newsletter_author_output = array();
 		        foreach ($node->field_newsletter_author_info['und'] as $id) {
@@ -67,6 +67,29 @@ function newhopeks_preprocess_page(&$variables) {
 		        }
 		        $variables['field_newsletter_author'] = join(' and ', array_filter(array_merge(array(join(', ', array_slice($field_newsletter_author_output, 0, -1))), array_slice($field_newsletter_author_output, -1)), 'strlen'));
 		    }
+
+		    // edition
+			if (!empty($node->field_newsletter_edition)) {
+				$edition = taxonomy_term_load($node->field_newsletter_edition['und'][0]['tid']);
+				$edition_name = $edition->name;
+				if (is_numeric($edition_name)) {
+					switch ((int) $edition_name) {
+						case 1:
+							$edition_name_suffix = 'st';
+							break;
+						case 2:
+							$edition_name_suffix = 'nd';
+							break;
+						case 3:
+							$edition_name_suffix = 'rd';
+							break;
+						default:
+							$edition_name_suffix = 'th';
+					}
+					$edition_name .= $edition_name_suffix;
+				}
+				$variables['field_newsletter_edition'] = $edition_name . ' Edition';
+			}
 		}
     }
 
