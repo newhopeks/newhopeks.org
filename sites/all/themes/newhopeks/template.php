@@ -72,8 +72,10 @@ function newhopeks_preprocess_page(&$variables) {
 			if (!empty($node->field_newsletter_edition)) {
 				$edition = taxonomy_term_load($node->field_newsletter_edition['und'][0]['tid']);
 				$edition_name = $edition->name;
+				$edition_link = url(taxonomy_term_uri($edition)['path']);
 				$edition_date = $edition->field_newsletter_date['und'][0]['value'];
 
+				// create the edition number suffix
 				if (is_numeric($edition_name)) {
 					switch ((int) $edition_name) {
 						case 1:
@@ -90,8 +92,9 @@ function newhopeks_preprocess_page(&$variables) {
 					}
 					$edition_name .= $edition_name_suffix;
 				}
-				$variables['field_newsletter_edition'] = $edition_name . ' Edition';
 
+				// format the template variables
+				$variables['field_newsletter_edition'] = '<a href="' . $edition_link . '">' . $edition_name . ' Edition</a>';
 				$variables['field_newsletter_date'] = date_format(date_create($edition_date), 'F j, Y');
 			}
 		}
