@@ -68,10 +68,12 @@ function newhopeks_preprocess_page(&$variables) {
 		        $variables['field_newsletter_author'] = join(' and ', array_filter(array_merge(array(join(', ', array_slice($field_newsletter_author_output, 0, -1))), array_slice($field_newsletter_author_output, -1)), 'strlen'));
 		    }
 
-		    // edition
+		    // edition and date
 			if (!empty($node->field_newsletter_edition)) {
 				$edition = taxonomy_term_load($node->field_newsletter_edition['und'][0]['tid']);
 				$edition_name = $edition->name;
+				$edition_date = $edition->field_newsletter_date['und'][0]['value'];
+
 				if (is_numeric($edition_name)) {
 					switch ((int) $edition_name) {
 						case 1:
@@ -89,6 +91,8 @@ function newhopeks_preprocess_page(&$variables) {
 					$edition_name .= $edition_name_suffix;
 				}
 				$variables['field_newsletter_edition'] = $edition_name . ' Edition';
+
+				$variables['field_newsletter_date'] = date_format(date_create($edition_date), 'F j, Y');
 			}
 		}
     }
