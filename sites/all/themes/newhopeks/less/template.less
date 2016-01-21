@@ -431,7 +431,7 @@
 
 // Image Field
 
-.content .main .field-name-field-image {
+.field-name-field-image {
 	.aligncenter;
 	text-align: center;
 
@@ -452,11 +452,35 @@
 
 }
 
+// Article Aside
+
+.article-aside--newsletter {
+
+	@media (min-width: @screen-md) {
+		.alignright;
+	    max-width: 33%;
+        .font-size(13);
+        line-height: 1.5;
+	}
+
+	.field-name-field-image {
+
+		@media (min-width: @screen-md) {
+			float: none;
+			max-width: 100%;
+			margin: 0 0 10px 0;
+		}
+
+	}
+
+}
+
 // Article Footer
 
 .article-footer {
 	margin: 20px 0 0 0;
 	.font-size(13);
+	line-height: 1.5;
 
 	img {
 		float: right;
@@ -476,6 +500,7 @@
         color: white;
         background-color: @nh-blue;
         .font-size(16);
+        line-height: 1.5;
     }
 
     .field-file-upload__list {

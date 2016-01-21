@@ -7522,14 +7522,14 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
   column-count: 2;
   column-gap: 20px;
 }
-.content .main .field-name-field-image {
+.field-name-field-image {
   clear: both;
   display: block;
   margin: 20px auto;
   text-align: center;
 }
 @media (min-width: 992px) {
-  .content .main .field-name-field-image {
+  .field-name-field-image {
     position: relative;
     float: right;
     max-width: 50%;
@@ -7537,18 +7537,38 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
     max-width: 33%;
   }
 }
-.content .main .field-name-field-image a,
-.content .main .field-name-field-image img {
+.field-name-field-image a,
+.field-name-field-image img {
   display: inline-block;
 }
-.content .main .field-name-field-image img {
+.field-name-field-image img {
   max-width: 100%;
   height: auto;
+}
+@media (min-width: 992px) {
+  .article-aside--newsletter {
+    position: relative;
+    float: right;
+    max-width: 50%;
+    margin: 0 0 20px 20px;
+    max-width: 33%;
+    font-size: 13px;
+    font-size: 1.3rem;
+    line-height: 1.5;
+  }
+}
+@media (min-width: 992px) {
+  .article-aside--newsletter .field-name-field-image {
+    float: none;
+    max-width: 100%;
+    margin: 0 0 10px 0;
+  }
 }
 .article-footer {
   margin: 20px 0 0 0;
   font-size: 13px;
   font-size: 1.3rem;
+  line-height: 1.5;
 }
 .article-footer img {
   float: right;
@@ -7564,6 +7584,7 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
   background-color: #66ADB1;
   font-size: 16px;
   font-size: 1.6rem;
+  line-height: 1.5;
 }
 .field-file-upload .field-file-upload__list {
   padding: 0;
