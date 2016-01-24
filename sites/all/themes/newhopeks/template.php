@@ -104,6 +104,37 @@ function newhopeks_preprocess_page(&$variables) {
 
     $variables['hero'] = views_embed_view('hero', 'embed');
 
+
+
+    $term = menu_get_object('taxonomy_term', 2);
+	if ($term) {
+		if ($term->vocabulary_machine_name == 'newsletters') {
+			$variables['title'] = newhopeks_format_newsletter_title($term->name);
+		}
+	}
+
+}
+
+
+
+function newhopeks_format_newsletter_title($term_name) {
+	if (is_numeric($term_name)) {
+		switch ((int) $term_name) {
+			case 1:
+				$term_name_suffix = 'st';
+				break;
+			case 2:
+				$term_name_suffix = 'nd';
+				break;
+			case 3:
+				$term_name_suffix = 'rd';
+				break;
+			default:
+				$term_name_suffix = 'th';
+		}
+		$term_name .= $term_name_suffix;
+	}
+	return $term_name;
 }
 
 
