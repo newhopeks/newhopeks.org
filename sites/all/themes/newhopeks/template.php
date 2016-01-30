@@ -19,6 +19,30 @@ function newhopeks_html_head_alter(&$head_elements) {
 
 
 
+function newhopeks_preprocess_html(&$variables) {
+	$is_newsletter_taxonomy_term_page = newhopeks_is_newsletter_taxonomy_term_page();
+
+	// Construct page title
+	if (drupal_get_title()) {
+		$head_title = array(
+			'title' => strip_tags(drupal_get_title()),
+			'name' => check_plain(variable_get('site_name', 'Drupal')),
+		);
+	} else {
+		$head_title = array('name' => check_plain(variable_get('site_name', 'Drupal')));
+		if (variable_get('site_slogan', '')) {
+			$head_title['slogan'] = filter_xss_admin(variable_get('site_slogan', ''));
+		}
+	}
+	if ($is_newsletter_taxonomy_term_page) {
+		$head_title['title'] = newhopeks_format_newsletter_title($head_title['title']);
+	}
+	$variables['head_title_array'] = $head_title;
+	$variables['head_title'] = implode(' | ', $head_title);
+}
+
+
+
 /**
  * template_preprocess_page
  * Preprocess variables for page.tpl.php
@@ -117,6 +141,16 @@ function newhopeks_preprocess_page(&$variables) {
 
 
 
+function newhopeks_is_newsletter_taxonomy_term_page() {
+    $term = menu_get_object('taxonomy_term', 2);
+	if ($term && $term->vocabulary_machine_name == 'newsletters') {
+		$is_newsletter_taxonomy_term_page = TRUE;
+	} else {
+		$is_newsletter_taxonomy_term_page = FALSE;
+	}
+	return $is_newsletter_taxonomy_term_page;
+}
+
 function newhopeks_format_newsletter_title($term_name) {
 	if (is_numeric($term_name)) {
 		switch ((int) $term_name) {
@@ -134,7 +168,7 @@ function newhopeks_format_newsletter_title($term_name) {
 		}
 		$term_name .= $term_name_suffix;
 	}
-	return $term_name;
+	return $term_name . ' Edition';
 }
 
 
