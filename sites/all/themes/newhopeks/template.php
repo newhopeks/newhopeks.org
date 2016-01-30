@@ -179,6 +179,20 @@ function newhopeks_preprocess_page(&$variables) {
 
 
 /**
+ * template_preprocess_node
+ * Processes variables for node.tpl.php
+ *
+ * https://api.drupal.org/api/drupal/modules%21node%21node.module/function/template_preprocess_node/7
+ */
+
+function newhopeks_preprocess_node(&$variables) {
+    // Subtitle field
+    $field_subtitle = field_get_items('node', $variables['node'], 'field_subtitle');
+    if ($field_subtitle) { $variables['field_subtitle'] = $field_subtitle[0]['value']; }
+}
+
+
+/**
  * theme_breadcrumb
  * Returns HTML for a breadcrumb trail
  *

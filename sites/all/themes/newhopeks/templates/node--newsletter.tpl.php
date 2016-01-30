@@ -3,7 +3,9 @@
 		<div class="field field-name-title">
 			<h2 class="article-listing__item__title"><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
 		</div>
-		<p class="article-listing__item__subtitle">Subtitle</p>
+		<?php if ($field_subtitle) : ?>
+			<p class="article-listing__item__subtitle"><?php print $field_subtitle; ?></p>
+		<?php endif; ?>
 		<div class="article-listing__item__body">
 			<?php
 				// We hide the comments and links now so that we can render them later.
