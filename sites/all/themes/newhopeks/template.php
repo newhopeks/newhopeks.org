@@ -1,27 +1,70 @@
 <?php
 
-function newhopeks_html_head_alter(&$head_elements) {
+/**
+ * Template helper functions
+ */
 
-	/* Remove content-type meta tag. The HTML5 version will be added in the theme. */
+/* Format a newletter taxonomy term page title. */
+function newhopeks_format_newsletter_title($term_name) {
+	// Check to see if the term name is a number
+	if (is_numeric($term_name)) {
+		// Create a suffix based on the number set as the term name
+		switch ((int) $term_name) {
+			case 1:
+				$term_name_suffix = 'st';
+				break;
+			case 2:
+				$term_name_suffix = 'nd';
+				break;
+			case 3:
+				$term_name_suffix = 'rd';
+				break;
+			default:
+				$term_name_suffix = 'th';
+		}
+
+		// Add suffix to the end of the term name
+		$term_name .= $term_name_suffix;
+	}
+
+	// Finish formatting the term name
+	$term_name .= ' Edition';
+
+	return $term_name;
+}
+
+
+/**
+ * hook_html_head_alter
+ * Alter XHTML HEAD tags before they are rendered by drupal_get_html_head()
+ *
+ * https://api.drupal.org/api/drupal/modules%21system%21system.api.php/function/hook_html_head_alter/7
+ */
+
+function newhopeks_html_head_alter(&$head_elements) {
+	// Remove content-type meta tag so the proper HTML version can be added in the theme
 	unset($head_elements['system_meta_content_type']);
 
-	/* Remove the generator meta tag */
+	// Remove the generator meta tag
 	unset($head_elements['system_meta_generator']);
 
-	/* Remove Drupal-generated RSS feed */
+	// Remove Drupal-generated RSS feed
 	foreach ($head_elements as $key => $element) {
 		if (isset($element['#attributes']['type']) && $element['#attributes']['type'] == 'application/rss+xml') {
 			unset($head_elements[$key]);
 		}
 	}
-
 }
 
 
+/**
+ * template_preprocess_html
+ * Preprocess variables for html.tpl.php
+ *
+ * https://api.drupal.org/api/drupal/includes%21theme.inc/function/template_preprocess_html/7
+ */
 
 function newhopeks_preprocess_html(&$variables) {
-	$is_newsletter_taxonomy_term_page = newhopeks_is_newsletter_taxonomy_term_page();
-
 	// Construct page title
 	if (drupal_get_title()) {
 		$head_title = array(
@@ -34,13 +77,18 @@ function newhopeks_preprocess_html(&$variables) {
 			$head_title['slogan'] = filter_xss_admin(variable_get('site_slogan', ''));
 		}
 	}
-	if ($is_newsletter_taxonomy_term_page) {
+
+	// Check to see if the current page is for a newsletter taxonomy term
+	$term = menu_get_object('taxonomy_term', 2);
+	if ($term && $term->vocabulary_machine_name == 'newsletters') {
+		// Set the head title as the formatted newsletter title
 		$head_title['title'] = newhopeks_format_newsletter_title($head_title['title']);
 	}
+
+	// Set the head title
 	$variables['head_title_array'] = $head_title;
 	$variables['head_title'] = implode(' | ', $head_title);
 }
-
 
 
 /**
@@ -53,33 +101,27 @@ function newhopeks_preprocess_html(&$variables) {
  */
 
 function newhopeks_preprocess_page(&$variables) {
-
-	/* Get variables for use in page.tpl.php */
-
+	// Get variables for use in page.tpl.php
 	$variables['site_name'] = filter_xss_admin(variable_get('site_name', 'New Hope Church'));
 	$variables['main_menu'] = menu_main_menu();
 	$variables['secondary_menu'] = menu_navigation_links('menu-secondary-menu');
-
-	//$search_form = drupal_get_form('search_form');
-	//$search_form['#attributes']['role'][] = 'form';
 	$variables['search_form'] = drupal_render(drupal_get_form('search_form'));
 
-
-
-    // check to make sure this is a node
+    // Check to make sure this is a node
     if (isset($variables['node'])) {
+        // Get the node variables
         $node = $variables['node'];
 
-        // created date
+        // Created date
         $variables['date'] = format_date($node->created);
 
-        // subtitle field
+        // Subtitle field
         $field_subtitle = field_get_items('node', $node, 'field_subtitle');
         if ($field_subtitle) { $variables['field_subtitle'] = $field_subtitle[0]['value']; }
 
-	    // newsletter fields
+	    // Newsletter fields
 	    if ($node->type == 'newsletter') {
-	        // author
+	        // Author
 	        if (!empty($node->field_newsletter_author_info)) {
 		        $field_newsletter_author_output = array();
 		        foreach ($node->field_newsletter_author_info['und'] as $id) {
@@ -92,14 +134,14 @@ function newhopeks_preprocess_page(&$variables) {
 		        $variables['field_newsletter_author'] = join(' and ', array_filter(array_merge(array(join(', ', array_slice($field_newsletter_author_output, 0, -1))), array_slice($field_newsletter_author_output, -1)), 'strlen'));
 		    }
 
-		    // edition and date
+		    // Edition and date
 			if (!empty($node->field_newsletter_edition)) {
 				$edition = taxonomy_term_load($node->field_newsletter_edition['und'][0]['tid']);
 				$edition_name = $edition->name;
 				$edition_link = url(taxonomy_term_uri($edition)['path']);
 				$edition_date = $edition->field_newsletter_date['und'][0]['value'];
 
-				// create the edition number suffix
+				// Create the edition number suffix
 				if (is_numeric($edition_name)) {
 					switch ((int) $edition_name) {
 						case 1:
@@ -117,65 +159,36 @@ function newhopeks_preprocess_page(&$variables) {
 					$edition_name .= $edition_name_suffix;
 				}
 
-				// format the template variables
+				// Format the template variables
 				$variables['field_newsletter_edition'] = '<a href="' . $edition_link . '">' . $edition_name . ' Edition</a>';
 				$variables['field_newsletter_date'] = date_format(date_create($edition_date), 'F j, Y');
 			}
 		}
     }
 
-
-
+	// Home page hero module
     $variables['hero'] = views_embed_view('hero', 'embed');
 
-
-
-    $term = menu_get_object('taxonomy_term', 2);
-	if ($term) {
-		if ($term->vocabulary_machine_name == 'newsletters') {
-			$variables['title'] = newhopeks_format_newsletter_title($term->name);
-		}
-	}
-
-}
-
-
-
-function newhopeks_is_newsletter_taxonomy_term_page() {
+	// Check to see if the current page is for a newsletter taxonomy term
     $term = menu_get_object('taxonomy_term', 2);
 	if ($term && $term->vocabulary_machine_name == 'newsletters') {
-		$is_newsletter_taxonomy_term_page = TRUE;
-	} else {
-		$is_newsletter_taxonomy_term_page = FALSE;
+		// Set the page title as the formatted newsletter title
+		$variables['title'] = newhopeks_format_newsletter_title($term->name);
 	}
-	return $is_newsletter_taxonomy_term_page;
-}
-
-function newhopeks_format_newsletter_title($term_name) {
-	if (is_numeric($term_name)) {
-		switch ((int) $term_name) {
-			case 1:
-				$term_name_suffix = 'st';
-				break;
-			case 2:
-				$term_name_suffix = 'nd';
-				break;
-			case 3:
-				$term_name_suffix = 'rd';
-				break;
-			default:
-				$term_name_suffix = 'th';
-		}
-		$term_name .= $term_name_suffix;
-	}
-	return $term_name . ' Edition';
 }
 
 
+/**
+ * theme_breadcrumb
+ * Returns HTML for a breadcrumb trail
+ *
+ * https://api.drupal.org/api/drupal/includes%21theme.inc/function/theme_breadcrumb/7
+ */
 
 function newhopeks_breadcrumb(&$variables) {
     $breadcrumb = $variables['breadcrumb'];
 
+    // Alter the breadcrumb divider
     if (!empty($breadcrumb)) {
         $output = implode(' &raquo; ', $breadcrumb);
         return $output;
@@ -183,6 +196,12 @@ function newhopeks_breadcrumb(&$variables) {
 }
 
 
+/**
+ * theme_pager
+ * Returns HTML for a query pager
+ *
+ * https://api.drupal.org/api/drupal/includes%21pager.inc/function/theme_pager/7
+ */
 
 function newhopeks_pager($variables) {
     $tags = $variables['tags'];
