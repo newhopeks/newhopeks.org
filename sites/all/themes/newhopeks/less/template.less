@@ -407,6 +407,75 @@
 
 }
 
+// Newsletter Listing
+
+.newsletter-listing {
+
+	.newsletter-listing-list {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		.make-row();
+
+		.newsletter-listing-item {
+			margin: 10px 0;
+			padding: 0;
+			.make-xs-column(3);
+
+			a {
+				display: inline-block;
+
+				.name,
+				.date {
+					display: inline-block;
+				}
+
+				.name {
+					width: 36px;
+					height: 36px;
+					margin-right: 5px;
+					padding: 10px;
+					color: white;
+					background-color: @nh-blue;
+					border-radius: 100%;
+					.font-size(16);
+					line-height: 1;
+					text-align: center;
+					.transition(all 0.2s linear);
+				}
+
+				.separator {
+					display: none;
+				}
+
+				.date {
+					padding: 10px 0;
+					.font-size(16);
+					line-height: 1;
+				}
+
+				.date-month {}
+
+				.date-year {}
+
+				&:hover,
+				&:focus {
+					text-decoration: none;
+
+					.name {
+						background-color: @nh-blue-dark;
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+
+}
+
 
 
 // Page

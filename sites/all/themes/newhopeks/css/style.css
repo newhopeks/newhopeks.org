@@ -6311,7 +6311,9 @@ button.close {
 .modal-footer:before,
 .modal-footer:after,
 .directory-listing:before,
-.directory-listing:after {
+.directory-listing:after,
+.newsletter-listing .newsletter-listing-list:before,
+.newsletter-listing .newsletter-listing-list:after {
   content: " ";
   display: table;
 }
@@ -6330,7 +6332,8 @@ button.close {
 .pager:after,
 .panel-body:after,
 .modal-footer:after,
-.directory-listing:after {
+.directory-listing:after,
+.newsletter-listing .newsletter-listing-list:after {
   clear: both;
 }
 .center-block {
@@ -7521,6 +7524,63 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
   -webkit-column-gap: 20px;
   column-count: 2;
   column-gap: 20px;
+}
+.newsletter-listing .newsletter-listing-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+.newsletter-listing .newsletter-listing-list .newsletter-listing-item {
+  margin: 10px 0;
+  padding: 0;
+  position: relative;
+  float: left;
+  width: 25%;
+  min-height: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.newsletter-listing .newsletter-listing-list .newsletter-listing-item a {
+  display: inline-block;
+}
+.newsletter-listing .newsletter-listing-list .newsletter-listing-item a .name,
+.newsletter-listing .newsletter-listing-list .newsletter-listing-item a .date {
+  display: inline-block;
+}
+.newsletter-listing .newsletter-listing-list .newsletter-listing-item a .name {
+  width: 36px;
+  height: 36px;
+  margin-right: 5px;
+  padding: 10px;
+  color: white;
+  background-color: #66ADB1;
+  border-radius: 100%;
+  font-size: 16px;
+  font-size: 1.6rem;
+  line-height: 1;
+  text-align: center;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+.newsletter-listing .newsletter-listing-list .newsletter-listing-item a .separator {
+  display: none;
+}
+.newsletter-listing .newsletter-listing-list .newsletter-listing-item a .date {
+  padding: 10px 0;
+  font-size: 16px;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+.newsletter-listing .newsletter-listing-list .newsletter-listing-item a:hover,
+.newsletter-listing .newsletter-listing-list .newsletter-listing-item a:focus {
+  text-decoration: none;
+}
+.newsletter-listing .newsletter-listing-list .newsletter-listing-item a:hover .name,
+.newsletter-listing .newsletter-listing-list .newsletter-listing-item a:focus .name {
+  background-color: #4d9397;
 }
 .field-name-field-image {
   clear: both;
