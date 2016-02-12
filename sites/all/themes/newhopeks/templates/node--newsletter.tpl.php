@@ -1,11 +1,14 @@
 <?php if ($teaser) : ?>
-	<div class="article-listing__item">
-		<div class="field field-name-title">
-			<h2 class="article-listing__item__title"><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
-		</div>
-		<?php if ($field_subtitle) : ?>
-			<p class="article-listing__item__subtitle"><?php print $field_subtitle; ?></p>
-		<?php endif; ?>
+	<article class="article-listing__item">
+		<header>
+			<div class="field field-name-title">
+				<h2 class="article-listing__item__title"><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
+			</div>
+			<?php if ($field_subtitle) : ?>
+				<p class="article-listing__item__subtitle"><?php print $field_subtitle; ?></p>
+			<?php endif; ?>
+		</header>
+
 		<div class="article-listing__item__body">
 			<?php
 				// We hide the comments and links now so that we can render them later.
@@ -14,10 +17,11 @@
 				print render($content);
 			?>
 		</div>
+
 		<div class="field field-name-node-link">
 			<p class="article-listing__item__more"><a href="<?php print $node_url; ?>">Read more »</a></p>
 		</div>
-	</div> <!-- end .article-listing__item -->
+	</article> <!-- end .article-listing__item -->
 <?php else : ?>
 	<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 

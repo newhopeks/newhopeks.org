@@ -161,7 +161,7 @@ function newhopeks_preprocess_page(&$variables) {
 
 				// Format the template variables
 				$variables['field_newsletter_edition'] = '<a href="' . $edition_link . '">' . $edition_name . ' Edition</a>';
-				$variables['field_newsletter_date'] = date_format(date_create($edition_date), 'F j, Y');
+				$variables['field_newsletter_date'] = date_format(date_create($edition_date), 'F Y');
 			}
 		}
     }
