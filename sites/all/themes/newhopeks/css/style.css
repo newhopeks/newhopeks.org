@@ -7428,7 +7428,7 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
     width: 33.33333333%;
   }
 }
-.article-listing--newsletter--home .article-listing__item:nth-child(3n+1) {
+.article-listing--newsletter--home .article-listing__item:nth-child(3n+2) {
   clear: left;
 }
 .article-listing--newsletter--home .article-listing__item .article-listing__item__title {
@@ -7464,11 +7464,11 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
     width: 100%;
   }
 }
-.article-listing--newsletter--home .article-listing__item--featured:first-child .article-listing__item__img {
-  float: left;
-  width: 66.66666666%;
-  margin-right: 10px;
-  padding-right: 10px;
+.article-listing--newsletter--home .article-listing__item--featured:first-child .field-name-field-image {
+  float: none;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 10px 0;
 }
 .directory-listing {
   margin-left: -10px;

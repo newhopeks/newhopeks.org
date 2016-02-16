@@ -1,6 +1,11 @@
-<?php if ($teaser) : ?>
-	<article class="article-listing__item">
+<?php if ($teaser || $view_mode == 'teaser_featured') : ?>
+	<article class="article-listing__item<?php if ($view_mode == 'teaser_featured') : ?> article-listing__item--featured<?php endif; ?>">
 		<header>
+			<?php
+				if ($content['field_image']) {
+					print render($content['field_image']);
+				}
+			?>
 			<div class="field field-name-title">
 				<h2 class="article-listing__item__title"><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
 			</div>
@@ -11,7 +16,7 @@
 
 		<div class="article-listing__item__body">
 			<?php
-				// We hide the comments and links now so that we can render them later.
+				hide($content['field_image']);
 				hide($content['comments']);
 				hide($content['links']);
 				print render($content);
