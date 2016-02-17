@@ -2,7 +2,7 @@
 	<article class="article-listing__item<?php if ($view_mode == 'teaser_featured') : ?> article-listing__item--featured<?php endif; ?>">
 		<header>
 			<?php
-				if ($content['field_image']) {
+				if (isset($content['field_image'])) {
 					print render($content['field_image']);
 				}
 			?>
