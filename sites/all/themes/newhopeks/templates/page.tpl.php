@@ -83,7 +83,7 @@
                                 <p class="main__header__pre-title">
 	                                <?php if ($node->type == 'message') { print $date; } ?>
 	                                <?php if ($node->type == 'newsletter') : ?>
-	                                	<?php print 'Newsletter / '; ?>
+	                                	<a href="/newsletter">Newsletter</a> /
 	                                	<a href="<?php print $field_newsletter_link; ?>"><?php print $field_newsletter_title . ', ' . $field_newsletter_date; ?></a>
 	                                <?php endif; ?>
 								</p>
