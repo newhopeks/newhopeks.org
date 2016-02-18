@@ -64,7 +64,7 @@ function newhopeks_preprocess_html(&$variables) {
 	$term = menu_get_object('taxonomy_term', 2);
 	if ($term && $term->vocabulary_machine_name == 'newsletters') {
 		// Set the head title as the formatted newsletter title
-		$head_title['title'] = newhopeks_format_newsletter_title($head_title['title']);
+		$head_title['title'] = newhopeks_format_newsletter_title($head_title['title']) . ', ' . date_format(date_create($term->field_newsletter_date['und'][0]['value']), 'F Y');
 	}
 
 	// Set the head title
