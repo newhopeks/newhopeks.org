@@ -8,27 +8,9 @@
 function newhopeks_format_newsletter_title($term_name) {
 	// Check to see if the term name is a number
 	if (is_numeric($term_name)) {
-		// Create a suffix based on the number set as the term name
-		switch ((int) $term_name) {
-			case 1:
-				$term_name_suffix = 'st';
-				break;
-			case 2:
-				$term_name_suffix = 'nd';
-				break;
-			case 3:
-				$term_name_suffix = 'rd';
-				break;
-			default:
-				$term_name_suffix = 'th';
-		}
-
-		// Add suffix to the end of the term name
-		$term_name .= $term_name_suffix;
+		// Add prefix to the beginning of the term name
+		$term_name = 'Issue ' . $term_name;
 	}
-
-	// Finish formatting the term name
-	$term_name .= ' Edition';
 
 	return $term_name;
 }
@@ -134,34 +116,13 @@ function newhopeks_preprocess_page(&$variables) {
 		        $variables['field_newsletter_author'] = join(' and ', array_filter(array_merge(array(join(', ', array_slice($field_newsletter_author_output, 0, -1))), array_slice($field_newsletter_author_output, -1)), 'strlen'));
 		    }
 
-		    // Edition and date
+			// Format the template variables
 			if (!empty($node->field_newsletter_edition)) {
-				$edition = taxonomy_term_load($node->field_newsletter_edition['und'][0]['tid']);
-				$edition_name = $edition->name;
-				$edition_link = url(taxonomy_term_uri($edition)['path']);
-				$edition_date = $edition->field_newsletter_date['und'][0]['value'];
+				$issue = taxonomy_term_load($node->field_newsletter_edition['und'][0]['tid']);
 
-				// Create the edition number suffix
-				if (is_numeric($edition_name)) {
-					switch ((int) $edition_name) {
-						case 1:
-							$edition_name_suffix = 'st';
-							break;
-						case 2:
-							$edition_name_suffix = 'nd';
-							break;
-						case 3:
-							$edition_name_suffix = 'rd';
-							break;
-						default:
-							$edition_name_suffix = 'th';
-					}
-					$edition_name .= $edition_name_suffix;
-				}
-
-				// Format the template variables
-				$variables['field_newsletter_edition'] = '<a href="' . $edition_link . '">' . $edition_name . ' Edition</a>';
-				$variables['field_newsletter_date'] = date_format(date_create($edition_date), 'F Y');
+				$variables['field_newsletter_title'] = newhopeks_format_newsletter_title($issue->name);
+				$variables['field_newsletter_date'] = date_format(date_create($issue->field_newsletter_date['und'][0]['value']), 'F Y');
+				$variables['field_newsletter_link'] = url(taxonomy_term_uri($issue)['path']);
 			}
 		}
     }
@@ -172,8 +133,8 @@ function newhopeks_preprocess_page(&$variables) {
 	// Check to see if the current page is for a newsletter taxonomy term
     $term = menu_get_object('taxonomy_term', 2);
 	if ($term && $term->vocabulary_machine_name == 'newsletters') {
-		// Set the page title as the formatted newsletter title
-		$variables['title'] = newhopeks_format_newsletter_title($term->name);
+		// Set the page title and the subtitle as the formatted newsletter title
+		$variables['title'] = 'Newsletter: ' . newhopeks_format_newsletter_title($term->name);
 	}
 }
 

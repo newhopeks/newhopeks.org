@@ -82,7 +82,10 @@
                             <?php if (isset($node) && ($node->type == 'message' || $node->type == 'newsletter')) : ?>
                                 <p class="main__header__pre-title">
 	                                <?php if ($node->type == 'message') { print $date; } ?>
-	                                <?php if ($node->type == 'newsletter') { print 'Newsletter: ' . $field_newsletter_edition . ', ' . $field_newsletter_date; } ?>
+	                                <?php if ($node->type == 'newsletter') : ?>
+	                                	<?php print 'Newsletter / '; ?>
+	                                	<a href="<?php print $field_newsletter_link; ?>"><?php print $field_newsletter_title . ', ' . $field_newsletter_date; ?></a>
+	                                <?php endif; ?>
 								</p>
                             <?php endif; ?>
                             <h1 class="main__header__title"><?php print $title; ?></h1>
