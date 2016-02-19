@@ -79,13 +79,14 @@
 
                     <?php if ($title) : ?>
                         <header class="main__header">
-                            <?php if (isset($node) && ($node->type == 'message' || $node->type == 'newsletter')) : ?>
+                            <?php if ((isset($node) && ($node->type == 'message' || $node->type == 'newsletter')) || isset($pre_title)) : ?>
                                 <p class="main__header__pre-title">
 	                                <?php if ($node->type == 'message') { print $date; } ?>
 	                                <?php if ($node->type == 'newsletter') : ?>
 	                                	<a href="/newsletter">Newsletter</a> /
 	                                	<a href="<?php print $field_newsletter_link; ?>"><?php print $field_newsletter_title . ', ' . $field_newsletter_date; ?></a>
 	                                <?php endif; ?>
+	                                <?php if (isset($pre_title)) { print $pre_title; } ?>
 								</p>
                             <?php endif; ?>
                             <h1 class="main__header__title"><?php print $title; ?></h1>
