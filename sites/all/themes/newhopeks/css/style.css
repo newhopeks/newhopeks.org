@@ -7662,6 +7662,21 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
     margin: 0 0 20px 20px;
     max-width: 33%;
   }
+  .field-name-field-image--left {
+    position: relative;
+    float: left;
+    max-width: 50%;
+    margin: 0 20px 20px 0;
+  }
+  .field-name-field-image--center,
+  .field-name-field-image--full {
+    float: none;
+    display: block;
+    width: 100%;
+    max-width: none;
+    margin: 0 0 20px 0;
+    text-align: center;
+  }
 }
 .field-name-field-image a,
 .field-name-field-image img {
@@ -7670,6 +7685,12 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
 .field-name-field-image img {
   max-width: 100%;
   height: auto;
+}
+.field-name-field-image .field-image-caption {
+  margin-top: 5px;
+  font-size: 12px;
+  font-size: 1.2rem;
+  text-align: left;
 }
 @media (min-width: 992px) {
   .article-aside--newsletter {

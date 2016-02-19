@@ -79,7 +79,7 @@
 
                     <?php if ($title) : ?>
                         <header class="main__header">
-                            <?php if ((isset($node) && ($node->type == 'message' || $node->type == 'newsletter')) || isset($pre_title)) : ?>
+                            <?php if ((!empty($node) && ($node->type == 'message' || $node->type == 'newsletter')) || !empty($pre_title)) : ?>
                                 <p class="main__header__pre-title">
 	                                <?php if ($node->type == 'message') { print $date; } ?>
 	                                <?php if ($node->type == 'newsletter') : ?>
@@ -96,8 +96,8 @@
                             <?php if (isset($node) && ($node->type == 'news' || isset($field_newsletter_author))) : ?>
                                 <p class="main__header__post-title">
 	                                <?php if ($node->type == 'news') { print $date; } ?>
-	                                <?php if (isset($field_newsletter_author)) : ?>
-	                                	By <?php print $field_newsletter_author; ?>
+	                                <?php if (!empty($field_newsletter_author)) : ?>
+										By <?php print $field_newsletter_author; ?>
 	                                <?php endif; ?>
 	                            </p>
                             <?php endif; ?>

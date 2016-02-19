@@ -559,6 +559,20 @@
 	@media (min-width: @screen-md) {
 		.alignright;
 	    max-width: 33%;
+
+	    &--left {
+			.alignleft;
+	    }
+
+	    &--center,
+	    &--full {
+		    float: none;
+		    display: block;
+		    width: 100%;
+		    max-width: none;
+		    margin: 0 0 20px 0;
+		    text-align: center;
+	    }
 	}
 
 	a,
@@ -569,6 +583,12 @@
 	img {
 	    max-width: 100%;
 		height: auto;
+	}
+
+	.field-image-caption {
+		margin-top: 5px;
+		.font-size(12);
+		text-align: left;
 	}
 
 }

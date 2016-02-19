@@ -173,6 +173,64 @@ function newhopeks_breadcrumb(&$variables) {
 
 
 /**
+ * theme_field
+ * Returns HTML for a field
+ *
+ * https://api.drupal.org/api/drupal/modules%21field%21field.module/function/theme_field/7
+ */
+
+// Image field
+function newhopeks_field__field_image($variables) {
+	if ($variables['element']['#view_mode'] == 'full') {
+		// Get image position
+		if ($field_image_position = field_get_items('node', $variables['element']['#object'], 'field_image_position')) {
+			$image_position = $field_image_position[0]['value'];
+		} else {
+			$image_position = 'right';
+		}
+		$variables['classes'] .= ' field-name-field-image--' . $image_position;
+
+		// Get image caption if it exists
+		if ($field_newsletter_image_caption = field_get_items('node', $variables['element']['#object'], 'field_newsletter_image_caption')) {
+			$image_caption = $field_newsletter_image_caption[0]['value'];
+			$variables['classes'] .= ' well well-sm';
+		}
+	}
+
+	$output = '';
+
+	// Render the items
+	$output .= '<div class="field-items"' . $variables['content_attributes'] . '>';
+	foreach ($variables['items'] as $delta => $item) {
+		if ($image_position == 'center') {
+			$item['#image_style'] = 'large';
+		} elseif ($image_position == 'full') {
+			$item['#image_style'] = 'full_width';
+		}
+
+		$classes = 'field-item';
+
+		$output .= '<div class="' . $classes . '"' . $variables['item_attributes'][$delta] . '>';
+		$output .= drupal_render($item);
+		$output .= '</div>';
+	}
+	$output .= '</div>';
+
+	// Add caption if one exists
+	if (!empty($image_caption) && $variables['element']['#view_mode'] == 'full') {
+		$output .= '<div class="field-image-caption">';
+		$output .= $image_caption;
+		$output .= '</div>';
+	}
+
+	// Render the top-level wrapper
+	$output = '<div class="' . $variables['classes'] . '"' . $variables['attributes'] . '>' . $output . '</div>';
+
+	return $output;
+}
+
+
+/**
  * theme_pager
  * Returns HTML for a query pager
  *
