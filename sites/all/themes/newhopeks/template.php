@@ -136,6 +136,13 @@ function newhopeks_preprocess_page(&$variables) {
 		// Set the page title
 		$variables['pre_title'] = '<a href="/newsletter">Newsletter</a>';
 		$variables['title'] = newhopeks_format_newsletter_title($term->name) . ', ' . date_format(date_create($term->field_newsletter_date['und'][0]['value']), 'F Y');
+
+		// Change the default message when there is no content associated with the newsletter
+		if(isset($variables['page']['content']['system_main']['no_content'])) {
+			$variables['page']['content']['system_main']['no_content']['#prefix'] = '<p class="alert alert-info">';
+			$variables['page']['content']['system_main']['no_content']['#markup'] = 'There are currently no articles published in this issue.';
+			$variables['page']['content']['system_main']['no_content']['#suffix'] = '</p>';
+		}
 	}
 }
 

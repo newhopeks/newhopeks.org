@@ -7200,6 +7200,19 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
   display: block;
   margin: 20px auto;
 }
+.term-listing-heading .vocabulary-newsletter-issues {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(99, 91, 76, 0.2);
+}
+.term-listing-heading .vocabulary-newsletter-issues * > :first-child {
+  margin-top: 0 !important;
+  margin-left: 0 !important;
+}
+.term-listing-heading .vocabulary-newsletter-issues * > :last-child {
+  margin-bottom: 0 !important;
+  margin-right: 0 !important;
+}
 .article-listing__item {
   padding-bottom: 20px;
   margin-bottom: 20px;
