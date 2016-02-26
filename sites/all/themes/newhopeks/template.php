@@ -202,10 +202,12 @@ function newhopeks_field__field_image($variables) {
 	// Render the items
 	$output .= '<div class="field-items"' . $variables['content_attributes'] . '>';
 	foreach ($variables['items'] as $delta => $item) {
-		if ($image_position == 'center') {
-			$item['#image_style'] = 'large';
-		} elseif ($image_position == 'full') {
-			$item['#image_style'] = 'full_width';
+		if (!empty($image_position)) {
+			if ($image_position == 'center') {
+				$item['#image_style'] = 'large';
+			} elseif ($image_position == 'full') {
+				$item['#image_style'] = 'full_width';
+			}
 		}
 
 		$classes = 'field-item';
