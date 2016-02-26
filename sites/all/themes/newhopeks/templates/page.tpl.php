@@ -83,8 +83,10 @@
                                 <p class="main__header__pre-title">
 	                                <?php if ($node->type == 'message') { print $date; } ?>
 	                                <?php if ($node->type == 'newsletter') : ?>
-	                                	<a href="/newsletter">Newsletter</a> /
-	                                	<a href="<?php print $field_newsletter_link; ?>"><?php print $field_newsletter_title . ', ' . $field_newsletter_date; ?></a>
+	                                	<a href="/newsletter">Newsletter</a>
+	                                	<?php if ($field_newsletter_title) : ?>
+		                                	/ <a href="<?php print $field_newsletter_link; ?>"><?php print $field_newsletter_title . ', ' . $field_newsletter_date; ?></a>
+										<?php endif; ?>
 	                                <?php endif; ?>
 	                                <?php if (isset($pre_title)) { print $pre_title; } ?>
 								</p>
@@ -93,11 +95,11 @@
                             <?php if (isset($field_subtitle)) : ?>
                                 <p class="main__header__subtitle"><?php print $field_subtitle; ?></p>
                             <?php endif; ?>
-                            <?php if (isset($node) && ($node->type == 'news' || isset($field_newsletter_author))) : ?>
+                            <?php if (isset($node) && ($node->type == 'news' || isset($field_author))) : ?>
                                 <p class="main__header__post-title">
 	                                <?php if ($node->type == 'news') { print $date; } ?>
-	                                <?php if (!empty($field_newsletter_author)) : ?>
-										By <?php print $field_newsletter_author; ?>
+	                                <?php if (!empty($field_author)) : ?>
+										By <?php print $field_author; ?>
 	                                <?php endif; ?>
 	                            </p>
                             <?php endif; ?>
