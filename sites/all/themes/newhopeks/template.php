@@ -104,21 +104,21 @@ function newhopeks_preprocess_page(&$variables) {
 	    // Newsletter fields
 	    if ($node->type == 'newsletter') {
 	        // Author
-	        if (!empty($node->field_newsletter_author_info)) {
+	        if (!empty($node->field_collection_author)) {
 		        $field_newsletter_author_output = array();
-		        foreach ($node->field_newsletter_author_info['und'] as $id) {
+		        foreach ($node->field_collection_author['und'] as $id) {
 			        $collection = entity_metadata_wrapper('field_collection_item', $id['value']);
-			        $field_newsletter_author = $collection->field_newsletter_author->value();
+			        $field_newsletter_author = $collection->field_author->value();
 			        $field_newsletter_author_url = url(taxonomy_term_uri($field_newsletter_author)['path']);
 			        $field_newsletter_author_name = $field_newsletter_author->name;
 			        $field_newsletter_author_output[] = '<a href="' . $field_newsletter_author_url . '">' . $field_newsletter_author_name . '</a>';
 		        }
-		        $variables['field_newsletter_author'] = join(' and ', array_filter(array_merge(array(join(', ', array_slice($field_newsletter_author_output, 0, -1))), array_slice($field_newsletter_author_output, -1)), 'strlen'));
+		        $variables['field_author'] = join(' and ', array_filter(array_merge(array(join(', ', array_slice($field_newsletter_author_output, 0, -1))), array_slice($field_newsletter_author_output, -1)), 'strlen'));
 		    }
 
 			// Format the template variables
-			if (!empty($node->field_newsletter_edition)) {
-				$issue = taxonomy_term_load($node->field_newsletter_edition['und'][0]['tid']);
+			if (!empty($node->field_newsletter_issue)) {
+				$issue = taxonomy_term_load($node->field_newsletter_issue['und'][0]['tid']);
 
 				$variables['field_newsletter_title'] = newhopeks_format_newsletter_title($issue->name);
 				$variables['field_newsletter_date'] = date_format(date_create($issue->field_newsletter_date['und'][0]['value']), 'F Y');
@@ -191,8 +191,8 @@ function newhopeks_field__field_image($variables) {
 		$variables['classes'] .= ' field-name-field-image--' . $image_position;
 
 		// Get image caption if it exists
-		if ($field_newsletter_image_caption = field_get_items('node', $variables['element']['#object'], 'field_newsletter_image_caption')) {
-			$image_caption = $field_newsletter_image_caption[0]['value'];
+		if ($field_image_caption = field_get_items('node', $variables['element']['#object'], 'field_image_caption')) {
+			$image_caption = $field_image_caption[0]['value'];
 			$variables['classes'] .= ' well well-sm';
 		}
 	}
