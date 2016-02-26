@@ -1993,11 +1993,11 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/templates\/field--field-file-upload--newsletters.tpl.php": {
+	"\/templates\/field--field-file-upload--newsletter-issues.tpl.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/templates\/field--field-file-upload--newsletters.tpl.php",
+		"inputAbbreviatedPath": "\/templates\/field--field-file-upload--newsletter-issues.tpl.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0

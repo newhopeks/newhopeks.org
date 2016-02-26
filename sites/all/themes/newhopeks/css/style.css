@@ -7723,6 +7723,7 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
 }
 .field-file-upload {
   clear: both;
+  margin: 20px 0;
 }
 .field-file-upload .field-file-upload__title {
   margin-bottom: 0;
