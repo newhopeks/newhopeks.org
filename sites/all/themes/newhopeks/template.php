@@ -62,7 +62,7 @@ function newhopeks_preprocess_html(&$variables) {
 
 	// Check to see if the current page is for a newsletter taxonomy term
 	$term = menu_get_object('taxonomy_term', 2);
-	if ($term && $term->vocabulary_machine_name == 'newsletters') {
+	if ($term && $term->vocabulary_machine_name == 'newsletter_issues') {
 		// Set the head title as the formatted newsletter title
 		$head_title['title'] = newhopeks_format_newsletter_title($head_title['title']) . ', ' . date_format(date_create($term->field_newsletter_date['und'][0]['value']), 'F Y');
 	}
@@ -132,7 +132,7 @@ function newhopeks_preprocess_page(&$variables) {
 
 	// Check to see if the current page is for a newsletter taxonomy term
     $term = menu_get_object('taxonomy_term', 2);
-	if ($term && $term->vocabulary_machine_name == 'newsletters') {
+	if ($term && $term->vocabulary_machine_name == 'newsletter_issues') {
 		// Set the page title
 		$variables['pre_title'] = '<a href="/newsletter">Newsletter</a>';
 		$variables['title'] = newhopeks_format_newsletter_title($term->name) . ', ' . date_format(date_create($term->field_newsletter_date['und'][0]['value']), 'F Y');
