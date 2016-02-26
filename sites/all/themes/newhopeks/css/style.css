@@ -7704,25 +7704,6 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
   font-size: 1.2rem;
   text-align: left;
 }
-@media (min-width: 992px) {
-  .article-aside--newsletter {
-    position: relative;
-    float: right;
-    max-width: 50%;
-    margin: 0 0 20px 20px;
-    max-width: 33%;
-    font-size: 13px;
-    font-size: 1.3rem;
-    line-height: 1.5;
-  }
-}
-@media (min-width: 992px) {
-  .article-aside--newsletter .field-name-field-image {
-    float: none;
-    max-width: 100%;
-    margin: 0 0 10px 0;
-  }
-}
 .article-footer {
   min-height: 20px;
   padding: 19px;
