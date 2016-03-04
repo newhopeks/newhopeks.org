@@ -79,15 +79,29 @@
 
                     <?php if ($title) : ?>
                         <header class="main__header">
-                            <?php if (isset($node) && $node->type == 'message') : ?>
-                                <p class="main__header__date main__header__date--messages"><?php print $date; ?></p>
+                            <?php if ((!empty($node) && ($node->type == 'message' || $node->type == 'newsletter')) || !empty($pre_title)) : ?>
+                                <p class="main__header__pre-title">
+	                                <?php if (!empty($node) && $node->type == 'message') { print $date; } ?>
+	                                <?php if (!empty($node) && $node->type == 'newsletter') : ?>
+	                                	<a href="/newsletter">Newsletter</a>
+	                                	<?php if (!empty($field_newsletter_title)) : ?>
+		                                	/ <a href="<?php print $field_newsletter_link; ?>"><?php print $field_newsletter_title . ', ' . $field_newsletter_date; ?></a>
+										<?php endif; ?>
+	                                <?php endif; ?>
+	                                <?php if (!empty($pre_title)) { print $pre_title; } ?>
+								</p>
                             <?php endif; ?>
                             <h1 class="main__header__title"><?php print $title; ?></h1>
                             <?php if (isset($field_subtitle)) : ?>
                                 <p class="main__header__subtitle"><?php print $field_subtitle; ?></p>
                             <?php endif; ?>
-                            <?php if (isset($node) && $node->type == 'news') : ?>
-                                <p class="main__header__date"><?php print $date; ?></p>
+                            <?php if (isset($node) && ($node->type == 'news' || isset($field_author))) : ?>
+                                <p class="main__header__post-title">
+	                                <?php if ($node->type == 'news') { print $date; } ?>
+	                                <?php if (!empty($field_author)) : ?>
+										By <?php print $field_author; ?>
+	                                <?php endif; ?>
+	                            </p>
                             <?php endif; ?>
                         </header>
                     <?php endif; ?>
