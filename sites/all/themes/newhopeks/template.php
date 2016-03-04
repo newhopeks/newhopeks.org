@@ -1,22 +1,76 @@
 <?php
 
-function newhopeks_html_head_alter(&$head_elements) {
+/**
+ * Template helper functions
+ */
 
-	/* Remove content-type meta tag. The HTML5 version will be added in the theme. */
+/* Format a newletter taxonomy term page title. */
+function newhopeks_format_newsletter_title($term_name) {
+	// Check to see if the term name is a number
+	if (is_numeric($term_name)) {
+		// Add prefix to the beginning of the term name
+		$term_name = 'Issue ' . $term_name;
+	}
+
+	return $term_name;
+}
+
+
+/**
+ * hook_html_head_alter
+ * Alter XHTML HEAD tags before they are rendered by drupal_get_html_head()
+ *
+ * https://api.drupal.org/api/drupal/modules%21system%21system.api.php/function/hook_html_head_alter/7
+ */
+
+function newhopeks_html_head_alter(&$head_elements) {
+	// Remove content-type meta tag so the proper HTML version can be added in the theme
 	unset($head_elements['system_meta_content_type']);
 
-	/* Remove the generator meta tag */
+	// Remove the generator meta tag
 	unset($head_elements['system_meta_generator']);
 
-	/* Remove Drupal-generated RSS feed */
+	// Remove Drupal-generated RSS feed
 	foreach ($head_elements as $key => $element) {
 		if (isset($element['#attributes']['type']) && $element['#attributes']['type'] == 'application/rss+xml') {
 			unset($head_elements[$key]);
 		}
 	}
-
 }
 
+
+/**
+ * template_preprocess_html
+ * Preprocess variables for html.tpl.php
+ *
+ * https://api.drupal.org/api/drupal/includes%21theme.inc/function/template_preprocess_html/7
+ */
+
+function newhopeks_preprocess_html(&$variables) {
+	// Construct page title
+	if (drupal_get_title()) {
+		$head_title = array(
+			'title' => strip_tags(drupal_get_title()),
+			'name' => check_plain(variable_get('site_name', 'Drupal')),
+		);
+	} else {
+		$head_title = array('name' => check_plain(variable_get('site_name', 'Drupal')));
+		if (variable_get('site_slogan', '')) {
+			$head_title['slogan'] = filter_xss_admin(variable_get('site_slogan', ''));
+		}
+	}
+
+	// Check to see if the current page is for a newsletter taxonomy term
+	$term = menu_get_object('taxonomy_term', 2);
+	if ($term && $term->vocabulary_machine_name == 'newsletter_issues') {
+		// Set the head title as the formatted newsletter title
+		$head_title['title'] = newhopeks_format_newsletter_title($head_title['title']) . ', ' . date_format(date_create($term->field_newsletter_date['und'][0]['value']), 'F Y');
+	}
+
+	// Set the head title
+	$variables['head_title_array'] = $head_title;
+	$variables['head_title'] = implode(' | ', $head_title);
+}
 
 
 /**
@@ -29,42 +83,95 @@ function newhopeks_html_head_alter(&$head_elements) {
  */
 
 function newhopeks_preprocess_page(&$variables) {
-
-	/* Get variables for use in page.tpl.php */
-
+	// Get variables for use in page.tpl.php
 	$variables['site_name'] = filter_xss_admin(variable_get('site_name', 'New Hope Church'));
 	$variables['main_menu'] = menu_main_menu();
 	$variables['secondary_menu'] = menu_navigation_links('menu-secondary-menu');
-
-	//$search_form = drupal_get_form('search_form');
-	//$search_form['#attributes']['role'][] = 'form';
 	$variables['search_form'] = drupal_render(drupal_get_form('search_form'));
 
-
-
-    // check to make sure this is a node
+    // Check to make sure this is a node
     if (isset($variables['node'])) {
+        // Get the node variables
         $node = $variables['node'];
 
-        // created date
+        // Created date
         $variables['date'] = format_date($node->created);
 
-        // subtitle field
+        // Subtitle field
         $field_subtitle = field_get_items('node', $node, 'field_subtitle');
         if ($field_subtitle) { $variables['field_subtitle'] = $field_subtitle[0]['value']; }
+
+	    // Newsletter fields
+	    if ($node->type == 'newsletter') {
+	        // Author
+	        if (!empty($node->field_collection_author)) {
+		        $field_newsletter_author_output = array();
+		        foreach ($node->field_collection_author['und'] as $id) {
+			        $collection = entity_metadata_wrapper('field_collection_item', $id['value']);
+			        $field_newsletter_author = $collection->field_author->value();
+			        $field_newsletter_author_url = url(taxonomy_term_uri($field_newsletter_author)['path']);
+			        $field_newsletter_author_name = $field_newsletter_author->name;
+			        $field_newsletter_author_output[] = '<a href="' . $field_newsletter_author_url . '">' . $field_newsletter_author_name . '</a>';
+		        }
+		        $variables['field_author'] = join(' and ', array_filter(array_merge(array(join(', ', array_slice($field_newsletter_author_output, 0, -1))), array_slice($field_newsletter_author_output, -1)), 'strlen'));
+		    }
+
+			// Format the template variables
+			if (!empty($node->field_newsletter_issue)) {
+				$issue = taxonomy_term_load($node->field_newsletter_issue['und'][0]['tid']);
+
+				$variables['field_newsletter_title'] = newhopeks_format_newsletter_title($issue->name);
+				$variables['field_newsletter_date'] = date_format(date_create($issue->field_newsletter_date['und'][0]['value']), 'F Y');
+				$variables['field_newsletter_link'] = url(taxonomy_term_uri($issue)['path']);
+			}
+		}
     }
 
-
-
+	// Home page hero module
     $variables['hero'] = views_embed_view('hero', 'embed');
 
+	// Check to see if the current page is for a newsletter taxonomy term
+    $term = menu_get_object('taxonomy_term', 2);
+	if ($term && $term->vocabulary_machine_name == 'newsletter_issues') {
+		// Set the page title
+		$variables['pre_title'] = '<a href="/newsletter">Newsletter</a>';
+		$variables['title'] = newhopeks_format_newsletter_title($term->name) . ', ' . date_format(date_create($term->field_newsletter_date['und'][0]['value']), 'F Y');
+
+		// Change the default message when there is no content associated with the newsletter
+		if(isset($variables['page']['content']['system_main']['no_content'])) {
+			$variables['page']['content']['system_main']['no_content']['#prefix'] = '<p class="alert alert-info">';
+			$variables['page']['content']['system_main']['no_content']['#markup'] = 'There are currently no articles published in this issue.';
+			$variables['page']['content']['system_main']['no_content']['#suffix'] = '</p>';
+		}
+	}
 }
 
 
+/**
+ * template_preprocess_node
+ * Processes variables for node.tpl.php
+ *
+ * https://api.drupal.org/api/drupal/modules%21node%21node.module/function/template_preprocess_node/7
+ */
+
+function newhopeks_preprocess_node(&$variables) {
+    // Subtitle field
+    $field_subtitle = field_get_items('node', $variables['node'], 'field_subtitle');
+    if ($field_subtitle) { $variables['field_subtitle'] = $field_subtitle[0]['value']; }
+}
+
+
+/**
+ * theme_breadcrumb
+ * Returns HTML for a breadcrumb trail
+ *
+ * https://api.drupal.org/api/drupal/includes%21theme.inc/function/theme_breadcrumb/7
+ */
 
 function newhopeks_breadcrumb(&$variables) {
     $breadcrumb = $variables['breadcrumb'];
 
+    // Alter the breadcrumb divider
     if (!empty($breadcrumb)) {
         $output = implode(' &raquo; ', $breadcrumb);
         return $output;
@@ -72,6 +179,72 @@ function newhopeks_breadcrumb(&$variables) {
 }
 
 
+/**
+ * theme_field
+ * Returns HTML for a field
+ *
+ * https://api.drupal.org/api/drupal/modules%21field%21field.module/function/theme_field/7
+ */
+
+// Image field
+function newhopeks_field__field_image($variables) {
+	if ($variables['element']['#view_mode'] == 'full') {
+		// Get image position
+		if ($field_image_position = field_get_items('node', $variables['element']['#object'], 'field_image_position')) {
+			$image_position = $field_image_position[0]['value'];
+		} else {
+			$image_position = 'right';
+		}
+		$variables['classes'] .= ' field-name-field-image--' . $image_position;
+
+		// Get image caption if it exists
+		if ($field_image_caption = field_get_items('node', $variables['element']['#object'], 'field_image_caption')) {
+			$image_caption = $field_image_caption[0]['value'];
+			$variables['classes'] .= ' well well-sm';
+		}
+	}
+
+	$output = '';
+
+	// Render the items
+	$output .= '<div class="field-items"' . $variables['content_attributes'] . '>';
+	foreach ($variables['items'] as $delta => $item) {
+		if (!empty($image_position)) {
+			if ($image_position == 'center') {
+				$item['#image_style'] = 'large';
+			} elseif ($image_position == 'full') {
+				$item['#image_style'] = 'full_width';
+			}
+		}
+
+		$classes = 'field-item';
+
+		$output .= '<div class="' . $classes . '"' . $variables['item_attributes'][$delta] . '>';
+		$output .= drupal_render($item);
+		$output .= '</div>';
+	}
+	$output .= '</div>';
+
+	// Add caption if one exists
+	if (!empty($image_caption) && $variables['element']['#view_mode'] == 'full') {
+		$output .= '<div class="field-image-caption">';
+		$output .= $image_caption;
+		$output .= '</div>';
+	}
+
+	// Render the top-level wrapper
+	$output = '<div class="' . $variables['classes'] . '"' . $variables['attributes'] . '>' . $output . '</div>';
+
+	return $output;
+}
+
+
+/**
+ * theme_pager
+ * Returns HTML for a query pager
+ *
+ * https://api.drupal.org/api/drupal/includes%21pager.inc/function/theme_pager/7
+ */
 
 function newhopeks_pager($variables) {
     $tags = $variables['tags'];

@@ -12,14 +12,14 @@
 .alignright {
 	position: relative;
 	float: right;
-	max-width: 50%;
+	max-width: 50% !important;
 	margin: 0 0 20px 20px;
 }
 
 .alignleft {
 	position: relative;
 	float: left;
-	max-width: 50%;
+	max-width: 50% !important;
 	margin: 0 20px 20px 0;
 }
 
@@ -27,6 +27,22 @@
 	clear: both;
 	display: block;
 	margin: 20px auto;
+}
+
+// Taxonomy term listings
+
+.term-listing-heading {
+
+	.vocabulary-newsletter-issues {
+	    padding-bottom: 20px;
+	    margin-bottom: 20px;
+	    border-bottom: 1px solid fade(@nh-brown, 20%);
+
+		* > :first-child { margin-top: 0 !important; margin-left: 0 !important; }
+		* > :last-child { margin-bottom: 0 !important; margin-right: 0 !important; }
+
+	}
+
 }
 
 // Article Listings
@@ -288,6 +304,58 @@
 
 }
 
+.article-listing--newsletter--home {
+	.make-row();
+
+	.article-listing__item {
+		.make-sm-column(4);
+		padding-bottom: 0;
+		border-bottom: none;
+		.font-size(13);
+		line-height: 1.5;
+
+		&:nth-child(3n+2) {
+			clear: left;
+		}
+
+		.article-listing__item__title {
+			margin-bottom: 0;
+			.font-size(18);
+			line-height: 1;
+		}
+
+		.article-listing__item__subtitle {
+			margin-top: 3px;
+			.font-size(12);
+			line-height: 1.5;
+		}
+
+		.article-listing__item__author {
+			margin: 3px 0 0 0;
+			.font-size(12);
+			line-height: 1.5;
+		}
+
+		.article-listing__item__body {
+			margin-top: 3px;
+		}
+
+	}
+
+	.article-listing__item--featured:first-child {
+		.make-sm-column(12);
+
+		.field-name-field-image {
+			float: none;
+			width: 100%;
+			max-width: 100%;
+			margin: 0 0 10px 0;
+		}
+
+	}
+
+}
+
 // Directory Listings
 
 .directory-listing {
@@ -407,6 +475,75 @@
 
 }
 
+// Newsletter Listing
+
+.newsletter-listing {
+
+	.newsletter-listing-list {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		.make-row();
+
+		.newsletter-listing-item {
+			margin: 10px 0;
+			padding: 0;
+			.make-xs-column(3);
+
+			a {
+				display: inline-block;
+
+				.name,
+				.date {
+					display: inline-block;
+				}
+
+				.name {
+					width: 36px;
+					height: 36px;
+					margin-right: 5px;
+					padding: 10px;
+					color: white;
+					background-color: @nh-blue;
+					border-radius: 100%;
+					.font-size(16);
+					line-height: 1;
+					text-align: center;
+					.transition(all 0.2s linear);
+				}
+
+				.separator {
+					display: none;
+				}
+
+				.date {
+					padding: 10px 0;
+					.font-size(16);
+					line-height: 1;
+				}
+
+				.date-month {}
+
+				.date-year {}
+
+				&:hover,
+				&:focus {
+					text-decoration: none;
+
+					.name {
+						background-color: @nh-blue-dark;
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+
+}
+
 
 
 // Page
@@ -431,13 +568,27 @@
 
 // Image Field
 
-.content .main .field-name-field-image {
+.field-name-field-image {
 	.aligncenter;
 	text-align: center;
 
 	@media (min-width: @screen-md) {
 		.alignright;
-	    max-width: 33%;
+	    max-width: 50%;
+
+	    &--left {
+			.alignleft;
+	    }
+
+	    &--center,
+	    &--full {
+		    float: none;
+		    display: block;
+		    width: 100%;
+		    max-width: none;
+		    margin: 0 0 20px 0;
+		    text-align: center;
+	    }
 	}
 
 	a,
@@ -450,12 +601,34 @@
 		height: auto;
 	}
 
+	.field-image-caption {
+		margin-top: 5px;
+		.font-size(12);
+		text-align: left;
+	}
+
+}
+
+// Article Footer
+
+.article-footer {
+	.well;
+	.clearfix;
+	margin: 20px 0 0 0;
+
+	img {
+		.alignright;
+		max-width: 33%;
+		margin-bottom: 10px;
+	}
+
 }
 
 // File Upload Field
 
 .field-file-upload {
 	clear: both;
+	margin: 20px 0;
 
     .field-file-upload__title {
         margin-bottom: 0;
@@ -463,6 +636,7 @@
         color: white;
         background-color: @nh-blue;
         .font-size(16);
+        line-height: 1.5;
     }
 
     .field-file-upload__list {
