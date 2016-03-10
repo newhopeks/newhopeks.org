@@ -7186,19 +7186,29 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
 .alignright {
   position: relative;
   float: right;
-  max-width: 50%;
+  max-width: 50% !important;
   margin: 0 0 20px 20px;
 }
 .alignleft {
   position: relative;
   float: left;
-  max-width: 50%;
+  max-width: 50% !important;
   margin: 0 20px 20px 0;
 }
 .aligncenter {
   clear: both;
   display: block;
   margin: 20px auto;
+}
+.figure {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.figure .figure-caption {
+  margin-top: 5px;
+  color: #9a8f7b;
+  font-size: 90%;
+  font-style: italic;
 }
 .term-listing-heading .vocabulary-newsletter-issues {
   padding-bottom: 20px;
@@ -7671,13 +7681,14 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
   .field-name-field-image {
     position: relative;
     float: right;
+    max-width: 50% !important;
     margin: 0 0 20px 20px;
     max-width: 50%;
   }
   .field-name-field-image--left {
     position: relative;
     float: left;
-    max-width: 50%;
+    max-width: 50% !important;
     margin: 0 20px 20px 0;
   }
   .field-name-field-image--center,
@@ -7750,7 +7761,7 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
 .article-footer img {
   position: relative;
   float: right;
-  max-width: 50%;
+  max-width: 50% !important;
   margin: 0 0 20px 20px;
   max-width: 33%;
   margin-bottom: 10px;
