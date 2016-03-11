@@ -7183,6 +7183,9 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
 .comment-wrapper .indented {
   margin-left: 20px;
 }
+.media img {
+  max-width: none !important;
+}
 .alignright {
   position: relative;
   float: right;
@@ -7199,6 +7202,7 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
   clear: both;
   display: block;
   margin: 20px auto;
+  text-align: center;
 }
 .figure {
   margin-top: 20px;
