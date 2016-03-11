@@ -7490,7 +7490,7 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
 .article-listing--newsletter--home .article-listing__item--featured:first-child .field-name-field-image {
   float: none;
   width: 100%;
-  max-width: 100%;
+  max-width: none !important;
   margin: 0 0 10px 0;
 }
 .directory-listing {
