@@ -7724,6 +7724,7 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  clear: both;
   margin: 20px 0 0 0;
 }
 .article-footer blockquote {
