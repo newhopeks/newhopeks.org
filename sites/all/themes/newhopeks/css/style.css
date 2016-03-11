@@ -7458,10 +7458,14 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
 .article-listing--newsletter--home .article-listing__item:nth-child(3n+2) {
   clear: left;
 }
+.article-listing--newsletter--home .article-listing__item .field-name-field-image {
+  max-width: 33% !important;
+  margin: 0 0 10px 10px;
+}
 .article-listing--newsletter--home .article-listing__item .article-listing__item__title {
   margin-bottom: 0;
-  font-size: 18px;
-  font-size: 1.8rem;
+  font-size: 16px;
+  font-size: 1.6rem;
   line-height: 1;
 }
 .article-listing--newsletter--home .article-listing__item .article-listing__item__subtitle {
