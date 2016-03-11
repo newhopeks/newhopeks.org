@@ -1,7 +1,7 @@
 <?php if ($rows && is_numeric($rows)) : ?>
 	<?php
 		$tid = $rows;
-		$term_nodes = taxonomy_select_nodes($tid);
+		$term_nodes = taxonomy_select_nodes($tid, FALSE);
 
 		// Latest newsletter title
 		$term = taxonomy_term_load($tid);
