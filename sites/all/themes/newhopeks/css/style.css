@@ -7183,6 +7183,9 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
 .comment-wrapper .indented {
   margin-left: 20px;
 }
+.media img {
+  max-width: none !important;
+}
 .alignright {
   position: relative;
   float: right;
