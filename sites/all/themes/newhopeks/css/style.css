@@ -7691,7 +7691,8 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
     float: right;
     max-width: 50% !important;
     margin: 0 0 20px 20px;
-    max-width: 50%;
+    max-width: 47%;
+    margin: 0 0 3% 3%;
   }
   .field-name-field-image--left {
     position: relative;
@@ -7810,7 +7811,7 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
   .mejs-container {
     clear: none;
     width: auto !important;
-    max-width: 63% !important;
+    max-width: 50% !important;
   }
 }
 .mejs-container .mejs-inner {
