@@ -7691,7 +7691,7 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
     float: right;
     max-width: 50% !important;
     margin: 0 0 20px 20px;
-    max-width: 47%;
+    max-width: 47% !important;
     margin: 0 0 3% 3%;
   }
   .field-name-field-image--left {
