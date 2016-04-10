@@ -6599,7 +6599,7 @@ button.close {
   }
   .header .logo .logo__title img {
     width: auto;
-    height: 1em;
+    max-height: 1em;
   }
   body.toolbar-drawer {
     padding-top: 0 !important;
