@@ -1,0 +1,54 @@
+//
+// Print
+// ====================================================================================================
+
+
+@media print {
+
+	// Hide elements
+	// --------------------------------------------------
+
+	.breadcrumbs,
+	#toolbar,
+	.content .main .tabs,
+	.content .sidebar,
+	.footer {
+		display: none;
+	}
+
+
+	// Remove URLs from printing next to links
+	// --------------------------------------------------
+
+	.header .logo {
+
+		a[href]:after {
+			content: "";
+		}
+
+	}
+
+
+	// Page
+	// --------------------------------------------------
+
+	.header {
+		padding-top: 0 !important;
+		border: none !important;
+
+		.logo .logo__title img {
+			width: auto;
+			height: 1em;
+		}
+
+	}
+
+
+	// Drupal toolbar
+	// --------------------------------------------------
+
+	body.toolbar-drawer {
+		padding-top: 0 !important;
+	}
+
+}
