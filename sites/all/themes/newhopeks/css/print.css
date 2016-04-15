@@ -1,0 +1,6 @@
+@media print {
+  #toolbar {
+    display: none;
+  }
+}
+/*# sourceMappingURL=print.css.map */
