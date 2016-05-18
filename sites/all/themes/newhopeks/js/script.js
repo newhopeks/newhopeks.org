@@ -73,6 +73,11 @@ if (showSlideshow == true) {
 */
 
 $('.hero').slick({
+	autoplay: true,
+	autoplaySpeed: 3000,
+	arrows: false,
+	dots: true,
+	dotsClass: 'hero__nav'
 });
 
 
