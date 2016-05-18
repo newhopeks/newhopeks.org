@@ -72,6 +72,9 @@ if (showSlideshow == true) {
 }
 */
 
+$('.hero').slick({
+});
+
 
 /*
  * Contact Form
