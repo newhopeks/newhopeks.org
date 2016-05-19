@@ -6998,12 +6998,18 @@ table > tbody > tr:hover {
   }
   .content-above .hero .hero__item {
     position: relative;
+    background-color: white;
+    border: 1px solid rgba(99, 91, 76, 0.2);
+    -webkit-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+  }
+  .content-above .hero .hero__item:hover,
+  .content-above .hero .hero__item:focus {
+    border-color: #448386;
   }
   .content-above .hero .hero__item a {
     display: block;
     color: rgba(255, 255, 255, 0.8);
-    background-color: white;
-    border: 1px solid rgba(99, 91, 76, 0.2);
   }
   .content-above .hero .hero__item a:hover,
   .content-above .hero .hero__item a:focus {
@@ -7027,6 +7033,7 @@ table > tbody > tr:hover {
     margin: 0;
     padding: 10px;
     background-color: rgba(0, 0, 0, 0.8);
+    font-style: italic;
   }
   .content-above .hero .hero__nav {
     display: block;
