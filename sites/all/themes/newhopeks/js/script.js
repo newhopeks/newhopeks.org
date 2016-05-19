@@ -12,21 +12,6 @@ Copyright:	(c) 2014 New Hope Church
 
 
 
-/*
- * Functions
- * -------------------------------------------------------------------------------------------------
- */
-
-// Get variables from the URL
-function getUrlVars() {
-	var vars = {};
-	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-		vars[key] = value;
-	});
-	return vars;
-}
-
-
 (function ($) { $(document).ready(function() {
 
 /*
@@ -72,26 +57,13 @@ if (showSlideshow == true) {
 }
 */
 
-
-/*
- * Contact Form
- * -------------------------------------------------------------------------------------------------
- */
-
-// Get the URL path
-var pathArray = window.location.pathname.split('/');
-
-// Check to see if we are on the Contact page
-if (pathArray[1] === 'contact') {
-
-	// Change contact form category if it is set as a URL value
-	if (getUrlVars().category === 'pastorsearch') {
-		$('#edit-submitted-category').val('pastorsearch');
-	} else if (getUrlVars().category === 'webmaster') {
-		$('#edit-submitted-category').val('webmaster');
-	}
-
-}
+$('.hero').slick({
+	autoplay: true,
+	autoplaySpeed: 6000,
+	arrows: false,
+	dots: true,
+	dotsClass: 'hero__nav'
+});
 
 
 /*
