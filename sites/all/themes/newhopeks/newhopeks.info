@@ -24,6 +24,7 @@ stylesheets[all][] = css/override/kill/system.messages.css
 stylesheets[all][] = css/override/kill/user.css
 stylesheets[all][] = css/override/kill/views.css
 ; stylesheets[all][] = css/libs/nivo-slider.css
+stylesheets[all][] = css/libs/slick.css
 stylesheets[all][] = css/style.css
 
 ; JAVASCRIPT
@@ -32,4 +33,5 @@ scripts[] = js/libs/bootstrap.min.js
 ; scripts[] = js/libs/jquery.nivo.slider.pack.js
 ; scripts[] = js/facebook-like.js
 ; scripts[] = js/google-plusone.js
+scripts[] = js/libs/slick.min.js
 scripts[] = js/script.js
