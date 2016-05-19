@@ -395,6 +395,15 @@
 		            border-color: @link-hover-color;
 	            }
 
+	            .no-js & {
+		            display: none;
+
+		            &:first-child {
+			            display: block;
+		            }
+
+	            }
+
 	            a {
 					display: block;
 					color: fade(white, 80%);

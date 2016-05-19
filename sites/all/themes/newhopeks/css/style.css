@@ -7007,6 +7007,12 @@ table > tbody > tr:hover {
   .content-above .hero .hero__item:focus {
     border-color: #448386;
   }
+  .no-js .content-above .hero .hero__item {
+    display: none;
+  }
+  .no-js .content-above .hero .hero__item:first-child {
+    display: block;
+  }
   .content-above .hero .hero__item a {
     display: block;
     color: rgba(255, 255, 255, 0.8);
