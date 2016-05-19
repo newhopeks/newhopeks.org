@@ -7050,12 +7050,15 @@ table > tbody > tr:hover {
     margin: 0;
     padding: 10px 0 0;
     overflow: hidden;
-    background-color: #635B4C;
+    background-color: #b0a898;
     border: none;
     border-radius: 10px;
   }
   .content-above .hero .hero__nav li button:focus {
     outline: none;
+  }
+  .content-above .hero .hero__nav li.slick-active button {
+    background-color: #66ADB1;
   }
 }
 .content .main {
