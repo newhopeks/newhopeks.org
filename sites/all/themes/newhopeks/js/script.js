@@ -73,8 +73,8 @@ if (showSlideshow == true) {
 */
 
 $('.hero').slick({
-	autoplay: false,
-	autoplaySpeed: 5000,
+	autoplay: true,
+	autoplaySpeed: 6000,
 	arrows: false,
 	dots: true,
 	dotsClass: 'hero__nav'
