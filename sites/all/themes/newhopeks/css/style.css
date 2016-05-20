@@ -6990,7 +6990,7 @@ table > tbody > tr:hover {
   min-height: 1px;
   padding-left: 10px;
   padding-right: 10px;
-  margin: 0 0 20px 0;
+  margin: 0 0 10px 0;
 }
 .content-above .hero .hero__item {
   position: relative;
@@ -7080,6 +7080,7 @@ table > tbody > tr:hover {
 @media (min-width: 768px) {
   .content-above .hero {
     margin-top: -21px;
+    margin-bottom: 20px;
   }
   .content-above .hero .hero__item {
     padding: 0;
