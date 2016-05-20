@@ -373,112 +373,151 @@
 
 .content-above {
 
-    .hero {
-        display: none;
-    }
+	.hero {
+		display: block;
+		.make-xs-column(12);
+		margin: 0 0 (@grid-gutter-width / 2) 0;
 
-    @media (min-width: @screen-sm) {
+		.hero__item {
+			position: relative;
+			padding-bottom: 2.2rem;
+			background-color: white;
+			border: 1px solid fade(@nh-brown, 20%);
+			.transition(all 0.2s linear);
 
-        .hero {
-			display: block;
-			.make-xs-column(12);
-			margin: -(@grid-gutter-width + 1) 0 @grid-gutter-width 0;
+			// When JavaScript is disabled, show only the first item
+			.no-js & {
+				display: none;
 
-            .hero__item {
-	            position: relative;
-				background-color: white;
-				border: 1px solid fade(@nh-brown, 20%);
-				.transition(all 0.2s linear);
-
-	            &:hover,
-	            &:focus {
-		            border-color: @link-hover-color;
-	            }
-
-	            .no-js & {
-		            display: none;
-
-		            &:first-child {
-			            display: block;
-		            }
-
-	            }
-
-	            a {
+				&:first-child {
 					display: block;
-					color: fade(white, 80%);
-
-		            &:hover,
-		            &:focus {
-			            color: white;
-			            border-color: @link-hover-color;
-		            }
-
-	            }
-
-	            .hero__title {
-	                display: none;
-	            }
-
-	            .hero__img {
-	                margin: 0;
-
-					img {
-						width: 100%;
-						height: auto;
-					}
-
-				}
-
-				.hero__body {
-					position: absolute;
-					bottom: 0;
-					width: 100%;
-					margin: 0;
-					padding: 10px;
-					background-color: fade(black, 80%);
-					font-style: italic;
 				}
 
 			}
 
-			.hero__nav {
+			a {
 				display: block;
-				height: 10px;
-				margin: 10px 0 0;
-				padding: 0;
-				list-style-type: none;
-				text-align: center;
+				color: fade(white, 80%);
+
+				&:hover,
+				&:focus {
+					color: white;
+					border-color: @link-hover-color;
+				}
+
+			}
+
+			.hero__title {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+				margin: 0;
+				padding: 5px 10px; padding: 0.5rem 1.0rem;
+				color: white;
+				background-color: @nh-brown-dark;
+				.font-size(12);
+				font-weight: normal;
+				font-style: italic;
 				line-height: 1;
+				white-space: nowrap;
+			}
 
-				li {
-					display: inline-block;
-					margin: 0 2px;
-					padding: 0;
+			.hero__img {
+				margin: 0;
+
+				img {
+					width: 100%;
+					height: auto;
+				}
+
+			}
+
+	 		.hero__body {
+				display: none;
+			}
+
+           &:hover,
+            &:focus {
+	            border-color: @link-hover-color;
+            }
+
+		}
+
+		.hero__nav {
+			display: block;
+			height: 10px;
+			margin: 10px 0 0;
+			padding: 0;
+			list-style-type: none;
+			text-align: center;
+			line-height: 1;
+
+			li {
+				display: inline-block;
+				margin: 0 2px;
+				padding: 0;
+				width: 10px;
+				height: 10px;
+
+				button {
 					width: 10px;
-					height: 10px;
+					height: 0;
+					margin: 0;
+					padding: 10px 0 0;
+					overflow: hidden;
+					background-color: @nh-brown-light;
+					border: none;
+					border-radius: 10px;
 
-					button {
-						width: 10px;
-						height: 0;
-						margin: 0;
-						padding: 10px 0 0;
-						overflow: hidden;
-						background-color: @nh-brown-light;
-						border: none;
-						border-radius: 10px;
-
-						&:focus {
-							outline: none;
-						}
-
-					}
-
-					&.slick-active button {
-						background-color: @nh-blue;
+					&:focus {
+						outline: none;
 					}
 
 				}
+
+				&.slick-active button {
+					background-color: @nh-blue;
+				}
+
+			}
+
+		}
+
+	}
+
+    @media (min-width: @screen-sm) {
+
+        .hero {
+	        margin-top: -(@grid-gutter-width + 1);
+	        margin-bottom: @grid-gutter-width;
+
+            .hero__item {
+	            padding: 0;
+
+				.hero__title {
+					display: none;
+				}
+
+				.hero__body {
+					display: block;
+					position: absolute;
+					bottom: 0;
+					width: 100%;
+					margin: 0;
+					padding: 5px 10px;
+					background-color: fade(@nh-brown-dark, 60%);
+					font-style: italic;
+					.transition(all 0.2s linear);
+				}
+
+	            &:hover,
+	            &:focus {
+
+		            .hero__body {
+						background-color: fade(@nh-brown-dark, 80%);
+		            }
+
+	            }
 
 			}
 
