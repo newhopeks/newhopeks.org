@@ -390,11 +390,6 @@
 				border: 1px solid fade(@nh-brown, 20%);
 				.transition(all 0.2s linear);
 
-	            &:hover,
-	            &:focus {
-		            border-color: @link-hover-color;
-	            }
-
 	            .no-js & {
 		            display: none;
 
@@ -435,10 +430,21 @@
 					bottom: 0;
 					width: 100%;
 					margin: 0;
-					padding: 10px;
-					background-color: fade(black, 80%);
+					padding: 5px 10px;
+					background-color: fade(black, 50%);
 					font-style: italic;
+					.transition(all 0.2s linear);
 				}
+
+	            &:hover,
+	            &:focus {
+		            border-color: @link-hover-color;
+
+		            .hero__body {
+						background-color: fade(black, 70%);
+		            }
+
+	            }
 
 			}
 

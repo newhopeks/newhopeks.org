@@ -7003,10 +7003,6 @@ table > tbody > tr:hover {
     -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear;
   }
-  .content-above .hero .hero__item:hover,
-  .content-above .hero .hero__item:focus {
-    border-color: #448386;
-  }
   .no-js .content-above .hero .hero__item {
     display: none;
   }
@@ -7037,9 +7033,19 @@ table > tbody > tr:hover {
     bottom: 0;
     width: 100%;
     margin: 0;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.8);
+    padding: 5px 10px;
+    background-color: rgba(0, 0, 0, 0.5);
     font-style: italic;
+    -webkit-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+  }
+  .content-above .hero .hero__item:hover,
+  .content-above .hero .hero__item:focus {
+    border-color: #448386;
+  }
+  .content-above .hero .hero__item:hover .hero__body,
+  .content-above .hero .hero__item:focus .hero__body {
+    background-color: rgba(0, 0, 0, 0.7);
   }
   .content-above .hero .hero__nav {
     display: block;
