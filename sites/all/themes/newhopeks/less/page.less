@@ -390,14 +390,15 @@
 				border: 1px solid fade(@nh-brown, 20%);
 				.transition(all 0.2s linear);
 
-	            .no-js & {
-		            display: none;
+				// When JavaScript is disabled, show only the first item
+				.no-js & {
+					display: none;
 
-		            &:first-child {
-			            display: block;
-		            }
+					&:first-child {
+						display: block;
+					}
 
-	            }
+				}
 
 	            a {
 					display: block;
