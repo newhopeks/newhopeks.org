@@ -59,7 +59,7 @@ if (showSlideshow == true) {
 
 $('.hero').removeClass('js-hide').slick({
 	autoplay: true,
-	autoplaySpeed: 8000,
+	autoplaySpeed: 6000,
 	arrows: false,
 	dots: true,
 	dotsClass: 'hero__nav'
