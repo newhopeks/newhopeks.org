@@ -7132,6 +7132,10 @@ table > tbody > tr:hover {
     padding: 20px;
   }
 }
+.content .main ul,
+.content .main ol {
+  overflow: hidden;
+}
 .content .main img {
   max-width: 100%;
   height: auto;
