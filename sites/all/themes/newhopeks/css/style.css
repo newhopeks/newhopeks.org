@@ -6641,6 +6641,12 @@ h2,
 .h2 {
   color: #78944A;
 }
+blockquote {
+  padding: 0;
+  margin: 10px 20px;
+  border: none;
+  font-style: italic;
+}
 cite {
   font-style: italic;
 }
