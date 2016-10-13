@@ -7291,13 +7291,13 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
 .alignright {
   position: relative;
   float: right;
-  max-width: 50% !important;
+  max-width: 50%;
   margin: 0 0 20px 20px;
 }
 .alignleft {
   position: relative;
   float: left;
-  max-width: 50% !important;
+  max-width: 50%;
   margin: 0 20px 20px 0;
 }
 .aligncenter {
@@ -7789,23 +7789,22 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
   .field-name-field-image {
     position: relative;
     float: right;
-    max-width: 50% !important;
+    max-width: 50%;
     margin: 0 0 20px 20px;
-    max-width: 47% !important;
+    max-width: 47%;
     margin: 0 0 3% 3%;
   }
   .field-name-field-image--left {
     position: relative;
     float: left;
-    max-width: 50% !important;
+    max-width: 50%;
     margin: 0 20px 20px 0;
   }
   .field-name-field-image--center,
   .field-name-field-image--full {
     float: none;
     display: block;
-    width: 100%;
-    max-width: none;
+    max-width: 100%;
     margin: 0 0 20px 0;
     text-align: center;
   }
@@ -7870,7 +7869,7 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
 .article-footer img {
   position: relative;
   float: right;
-  max-width: 50% !important;
+  max-width: 50%;
   margin: 0 0 20px 20px;
   max-width: 33%;
   margin-bottom: 10px;
