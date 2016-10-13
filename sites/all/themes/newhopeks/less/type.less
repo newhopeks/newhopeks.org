@@ -39,6 +39,16 @@ blockquote {
 	margin: (@line-height-computed / 2) @line-height-computed;
 	border: none;
 	font-style: italic;
+
+	footer {
+		color: inherit;
+		font-size: inherit;
+		font-style: normal;
+
+		&:before {
+			content: "";
+		}
+	}
 }
 
 cite {
