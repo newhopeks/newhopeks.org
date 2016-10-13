@@ -6647,6 +6647,14 @@ blockquote {
   border: none;
   font-style: italic;
 }
+blockquote footer {
+  color: inherit;
+  font-size: inherit;
+  font-style: normal;
+}
+blockquote footer:before {
+  content: "";
+}
 cite {
   font-style: italic;
 }
