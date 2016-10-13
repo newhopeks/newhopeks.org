@@ -6642,6 +6642,7 @@ h2,
   color: #78944A;
 }
 blockquote {
+  clear: both;
   padding: 0;
   margin: 10px 20px;
   border: none;
