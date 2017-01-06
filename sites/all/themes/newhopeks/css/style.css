@@ -7822,12 +7822,22 @@ ul.child-page-listing li {
      -moz-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  width: 33.33333333%;
+  width: 100%;
   padding: 10px;
   font-size: 18px;
   font-size: 1.8rem;
   line-height: normal;
   text-align: center;
+}
+@media (min-width: 768px) {
+  ul.child-page-listing li {
+    width: 50%;
+  }
+}
+@media (min-width: 992px) {
+  ul.child-page-listing li {
+    width: 33.33333333%;
+  }
 }
 ul.child-page-listing li a {
   display: -webkit-box;
