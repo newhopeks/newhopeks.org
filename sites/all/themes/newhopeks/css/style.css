@@ -7788,6 +7788,78 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
 .newsletter-listing .newsletter-listing-list .newsletter-listing-item a:focus .name {
   background-color: #4d9397;
 }
+ul.child-page-listing {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-right: -10px;
+  padding-left: 0;
+  margin: -10px -10px 20px;
+  list-style-type: none;
+}
+ul.child-page-listing:after {
+  content: "";
+  display: block;
+  width: 100%;
+  margin: 10px 10px 0;
+  border-bottom: 1px solid rgba(99, 91, 76, 0.2);
+}
+ul.child-page-listing li {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+     -moz-box-orient: vertical;
+     -moz-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 33.33333333%;
+  padding: 10px;
+  font-size: 18px;
+  font-size: 1.8rem;
+  line-height: normal;
+  text-align: center;
+}
+ul.child-page-listing li a {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+     -moz-box-orient: vertical;
+     -moz-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+     -moz-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -webkit-box-pack: center;
+     -moz-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 20px;
+  background-color: rgba(102, 173, 177, 0.1);
+  border-top: 1px solid rgba(102, 173, 177, 0.1);
+  border-bottom: 5px solid rgba(102, 173, 177, 0.1);
+  text-decoration: none;
+}
+ul.child-page-listing li a:hover,
+ul.child-page-listing li a:focus {
+  background-color: rgba(102, 173, 177, 0.15);
+  border-top-color: rgba(102, 173, 177, 0.2);
+  border-bottom-color: rgba(102, 173, 177, 0.2);
+}
 .field-name-field-image {
   clear: both;
   display: block;
