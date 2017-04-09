@@ -6545,8 +6545,7 @@ button.close {
   .footer {
     display: none;
   }
-  .header .logo a[href]:after,
-  .content .main .main__header a[href]:after {
+  a[href]:after {
     content: "";
   }
   .header {
