@@ -6836,11 +6836,11 @@ table > tbody > tr:hover {
   }
   .header .navbar-main .navbar-collapse .main-menu li a:hover,
   .header .navbar-main .navbar-collapse .main-menu li a:focus {
-    color: #66ADB1;
+    color: #876c24;
   }
   .header .navbar-main .navbar-collapse .main-menu li.active a,
   .header .navbar-main .navbar-collapse .main-menu li.active-trail a {
-    border-bottom-color: #66ADB1;
+    border-bottom-color: #CDA844;
   }
 }
 @media (min-width: 992px) {
