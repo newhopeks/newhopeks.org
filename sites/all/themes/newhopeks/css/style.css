@@ -1096,12 +1096,12 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #66ADB1;
+  color: #333;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #448386;
+  color: #876c24;
   text-decoration: underline;
 }
 a:focus {
@@ -3291,7 +3291,7 @@ fieldset[disabled] .btn-danger.active {
   background-color: #fff;
 }
 .btn-link {
-  color: #66ADB1;
+  color: #333;
   font-weight: normal;
   border-radius: 0;
 }
@@ -3311,7 +3311,7 @@ fieldset[disabled] .btn-link {
 }
 .btn-link:hover,
 .btn-link:focus {
-  color: #448386;
+  color: #876c24;
   text-decoration: underline;
   background-color: transparent;
 }
@@ -3878,7 +3878,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav .open > a:hover,
 .nav .open > a:focus {
   background-color: #ddd;
-  border-color: #66ADB1;
+  border-color: #333;
 }
 .nav .nav-divider {
   height: 1px;
@@ -4593,7 +4593,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   padding: 6px 12px;
   line-height: 1.42857143;
   text-decoration: none;
-  color: #66ADB1;
+  color: #333;
   background-color: #fff;
   border: 1px solid #ddd;
   margin-left: -1px;
@@ -4613,7 +4613,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > li > span:hover,
 .pagination > li > a:focus,
 .pagination > li > span:focus {
-  color: #448386;
+  color: #876c24;
   background-color: #ddd;
   border-color: #ddd;
 }
@@ -4809,7 +4809,7 @@ a.badge:focus {
 }
 .list-group-item.active > .badge,
 .nav-pills > .active > a > .badge {
-  color: #66ADB1;
+  color: #333;
   background-color: #fff;
 }
 .list-group-item > .badge {
@@ -4879,7 +4879,7 @@ a.badge:focus {
 a.thumbnail:hover,
 a.thumbnail:focus,
 a.thumbnail.active {
-  border-color: #66ADB1;
+  border-color: #333;
 }
 .thumbnail .caption {
   padding: 9px;
@@ -6580,8 +6580,22 @@ html {
   background: #e6e6e6;
 }
 a {
+  color: #333;
+  text-decoration: none;
   -webkit-transition: all 0.2s linear;
   transition: all 0.2s linear;
+}
+a:hover,
+a:focus {
+  color: #876c24;
+  text-decoration: none;
+}
+body:not(.section-home) .main a {
+  border-bottom: 1px solid #CDA844;
+}
+body:not(.section-home) .main a:hover,
+body:not(.section-home) .main a:focus {
+  color: #876c24;
 }
 h1 > a,
 h2 > a,
@@ -7030,7 +7044,7 @@ table > tbody > tr:hover {
 .content-above .hero .hero__item a:hover,
 .content-above .hero .hero__item a:focus {
   color: white;
-  border-color: #448386;
+  border-color: #876c24;
 }
 .content-above .hero .hero__item .hero__title {
   position: absolute;
@@ -7060,7 +7074,7 @@ table > tbody > tr:hover {
 }
 .content-above .hero .hero__item:hover,
 .content-above .hero .hero__item:focus {
-  border-color: #448386;
+  border-color: #876c24;
 }
 .content-above .hero .hero__nav {
   display: block;
@@ -7671,7 +7685,7 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
 }
 .directory-listing li a:hover img,
 .directory-listing li a:focus img {
-  border-color: #448386;
+  border-color: #876c24;
 }
 .message-series-listing .item {
   margin-bottom: 20px;
@@ -7680,7 +7694,7 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
   clear: left;
 }
 .message-series-listing .item a {
-  color: #66ADB1;
+  color: #333;
 }
 .message-series-listing .item .item__img {
   width: 100%;
@@ -7861,16 +7875,16 @@ ul.child-page-listing li a {
       -ms-flex-pack: center;
           justify-content: center;
   padding: 20px;
-  background-color: rgba(102, 173, 177, 0.1);
-  border-top: 1px solid rgba(102, 173, 177, 0.1);
-  border-bottom: 5px solid rgba(102, 173, 177, 0.1);
+  background-color: rgba(51, 51, 51, 0.1);
+  border-top: 1px solid rgba(51, 51, 51, 0.1);
+  border-bottom: 5px solid rgba(51, 51, 51, 0.1);
   text-decoration: none;
 }
 ul.child-page-listing li a:hover,
 ul.child-page-listing li a:focus {
-  background-color: rgba(102, 173, 177, 0.15);
-  border-top-color: rgba(102, 173, 177, 0.2);
-  border-bottom-color: rgba(102, 173, 177, 0.2);
+  background-color: rgba(51, 51, 51, 0.15);
+  border-top-color: rgba(51, 51, 51, 0.2);
+  border-bottom-color: rgba(51, 51, 51, 0.2);
 }
 .field-name-field-image {
   clear: both;
