@@ -11,15 +11,14 @@
 @nh-blue:         #66ADB1;
 @nh-blue-light:   lighten(@nh-blue, 30%);
 @nh-blue-dark:    darken(@nh-blue, 10%);
-@nh-brown:        #635B4C;
-@nh-brown-light:  lighten(@nh-brown, 30%);
-@nh-brown-dark:   darken(@nh-brown, 20%);   // #292620
+@nh-gray:         #646464;
 
-@gray-darker:     lighten(@nh-brown, 13.5%);
-@gray-dark:       lighten(@nh-brown, 20%);
-@gray:            lighten(@nh-brown, 33.5%);
-@gray-light:      lighten(@nh-brown, 60%);
-@gray-lighter:    lighten(@nh-brown, 93.5%);
+@gray-darker:     #222;
+@gray-dark:       #333;
+@gray:            @nh-gray;
+@gray-light:      #777;
+@gray-lighter:    #ddd;
+@gray-lightest:   #f5f5f5;
 
 @brand-primary:   @nh-green;
 @brand-success:   @nh-green;
@@ -32,15 +31,15 @@
 // Scaffolding
 // -------------------------
 
-@html-bg: #EBE8E3; // fade(@nh-brown, 5%) on top of @body-bg
-@body-bg: #F3F0EB;
-@text-color: @nh-brown;
-@link-color: @nh-blue;
+@html-bg:     #e6e6e6; // fade(@nh-gray, 10%) on top of @body-bg
+@body-bg:     @gray-lightest;
+@text-color:  @gray-dark;
+@link-color:  @nh-blue;
 
 // Sidebar
-@sidebar-block-color: @text-color;
-@sidebar-block-bg: fade(@nh-brown, 10%);
-@sidebar-block-border-color: fade(@nh-brown-dark, 10%);
+@sidebar-block-color:         @text-color;
+@sidebar-block-bg:            fade(@gray, 10%);
+@sidebar-block-border-color:  fade(@gray-dark, 10%);
 
 
 // Typography
