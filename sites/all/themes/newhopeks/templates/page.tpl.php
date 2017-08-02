@@ -2,13 +2,15 @@
   <div class="container">
     <div class="wrapper">
       <div class="row">
-        <div class="logo col-xs-9 col-sm-3">
+        <div class="logo col-xs-9 col-sm-8 col-sm-offset-2 col-md-5">
           <?php if (!$is_front) { echo '<a href="/">'; } ?>
-            <h1 class="logo__title"><img src="/<?= path_to_theme(); ?>/img/logo@2x.png" width="270" alt="<?php print $site_name; ?>" /></h1>
+            <h1 class="logo__title">
+              <img src="/<?= path_to_theme(); ?>/img/logo.svg" alt="<?php print $site_name; ?>" />
+            </h1>
           <?php if (!$is_front) { echo '</a>'; } ?>
         </div> <!-- end .logo -->
 
-        <nav role="navigation" class="navbar navbar-main col-xs-12 col-sm-9">
+        <nav role="navigation" class="navbar navbar-main col-xs-12 col-sm-12 col-md-7">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
