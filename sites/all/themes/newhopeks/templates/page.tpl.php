@@ -1,41 +1,26 @@
 <header role="banner" class="header">
   <div class="container">
     <div class="wrapper">
-      <div class="row">
-        <div class="logo col-xs-9 col-sm-8 col-sm-offset-2 col-md-5">
-          <?php if (!$is_front) { echo '<a href="/">'; } ?>
-            <h1 class="logo__title">
-              <img src="/<?= path_to_theme(); ?>/img/logo.svg" alt="<?php print $site_name; ?>" />
-            </h1>
-          <?php if (!$is_front) { echo '</a>'; } ?>
-        </div><!-- .logo -->
+      <div class="logo">
+        <?php if (!$is_front) { echo '<a href="/">'; } ?>
+          <h1 class="logo__title">
+            <img src="/<?= path_to_theme(); ?>/img/logo.svg" alt="<?php print $site_name; ?>" />
+          </h1>
+        <?php if (!$is_front) { echo '</a>'; } ?>
+      </div><!-- .logo -->
 
-        <nav role="navigation" class="navbar navbar-main col-xs-12 col-sm-12 col-md-7">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="main-navbar-collapse">
-            <?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('class' => 'nav navbar-nav main-menu'))); ?>
-            <div class="top-bar">
-              <div class="container">
-                <div class="row">
-                  <div class="secondary-menu-container col-sm-8 col-md-9">
-                    <?php if ($secondary_menu) : ?>
-                      <?php print theme('links__menu_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('class' => 'nav navbar-nav secondary-menu'))); ?>
-                    <?php endif; ?>
-                  </div>
-                  <div class="search-form-container col-sm-4 col-md-3">
-                    <?php print $search_form; ?>
-                  </div>
-                </div><!-- .row -->
-              </div><!-- .container -->
-            </div><!-- .top-bar -->
-          </div><!-- .navbar-collapse -->
-        </nav><!-- .navbar-main -->
-      </div><!-- .row -->
+      <nav role="navigation" class="nav">
+        <?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('class' => 'main-menu'))); ?>
+        <div class="top-bar">
+          <div class="container">
+            <?php if ($secondary_menu) : ?>
+              <?php print theme('links__menu_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('class' => 'secondary-menu'))); ?>
+            <?php endif; ?>
+
+            <?php print $search_form; ?>
+          </div><!-- .container -->
+        </div><!-- .top-bar -->
+      </nav><!-- .navbar-main -->
     </div><!-- .wrapper -->
   </div><!-- .container -->
 </header><!-- .header -->
