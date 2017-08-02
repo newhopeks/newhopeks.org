@@ -10,5 +10,4 @@
   <?php print $drupal_render_children ?>
 <?php endif; ?>
 
-
 <?php //newhopeks_get_page_children($node->nid); ?>

@@ -5,95 +5,87 @@
 
 @media print {
 
-	// Change font size
+  // Change font size
   // -------------------------
 
-	// TODO: Need a better way to do this for all elements
-	body {
-		font-size: 12pt;
-		line-height: 1.5;
-	}
+  // TODO: Need a better way to do this for all elements
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
 
-	// Hide elements
+  // Hide elements
   // -------------------------
 
-	.breadcrumbs,
-	#toolbar,
-	.content .main .tabs,
-	.content .sidebar,
-	.footer {
-		display: none;
-	}
+  .breadcrumbs,
+  #toolbar,
+  .content .main .tabs,
+  .content .sidebar,
+  .footer {
+    display: none;
+  }
 
 
-	// Remove URLs from printing next to links
+  // Remove URLs from printing next to links
   // -------------------------
 
-	a[href]:after {
-		content: "";
-	}
+  a[href]:after {
+    content: "";
+  }
 
 
-	// Page
+  // Page
   // -------------------------
 
-	.header {
-		padding-top: 0 !important;
-		border: none !important;
+  .header {
+    padding-top: 0 !important;
+    border: none !important;
 
-		.logo {
-			display: none;
+    .logo {
+      display: none;
 
-			.logo__title img {
-				width: auto;
-				max-height: 1em;
-			}
+      .logo__title img {
+        width: auto;
+        max-height: 1em;
+      }
+    }
+  }
 
-		}
+  .content .main {
+    left: 0;
+    width: 100%;
 
-	}
+    .wrapper {
+      padding: 0 !important;
+      border: none !important;
 
-	.content .main {
-		left: 0;
-		width: 100%;
+      .main__header {}
+    }
+  }
 
-		.wrapper {
-			padding: 0 !important;
-			border: none !important;
+  .field-name-field-image {
+    float: right;
+    max-width: 47% !important;
+    margin: 0 0 3% 3% !important;
+  }
 
-			.main__header {
+  blockquote {
+    margin: 1em 2em;
+    padding: 0;
+    border: none;
+    .font-size(16);
+    page-break-inside: auto;
+  }
 
-			}
-
-		}
-
-	}
-
-
-	.field-name-field-image {
-		float: right;
-		max-width: 47% !important;
-		margin: 0 0 3% 3% !important;
-	}
-
-	blockquote {
-		margin: 1em 2em;
-		padding: 0;
-		border: none;
-		.font-size(16);
-		page-break-inside: auto;
-	}
-
-	.field-name-field-footer {
-		page-break-inside: avoid;
-	}
+  .field-name-field-footer {
+    page-break-inside: avoid;
+  }
 
 
-	// Drupal toolbar
+  // Drupal toolbar
   // -------------------------
 
-	body.toolbar-drawer {
-		padding-top: 0 !important;
-	}
-
+  body.toolbar-drawer {
+    padding-top: 0 !important;
+  }
 }

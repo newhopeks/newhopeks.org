@@ -9,25 +9,22 @@
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
 
-    > a {
-    	color: @nh-green;
-    	text-decoration: none;
+  > a {
+    color: @nh-green;
+    text-decoration: none;
 
-    	&:hover,
-    	&:focus {
-        	color: @nh-green-dark;
-        	text-decoration: none;
-    	}
-
-	}
-
+    &:hover,
+    &:focus {
+      color: @nh-green-dark;
+      text-decoration: none;
+    }
+  }
 }
 
-h1, .h1 {
-}
+h1, .h1 {}
 
 h2, .h2 {
-    color: @nh-green;
+  color: @nh-green;
 }
 
 
@@ -35,23 +32,23 @@ h2, .h2 {
 // -------------------------
 
 blockquote {
-	clear: both;
-	padding: 0;
-	margin: (@line-height-computed / 2) @line-height-computed;
-	border: none;
-	font-style: italic;
+  clear: both;
+  padding: 0;
+  margin: (@line-height-computed / 2) @line-height-computed;
+  border: none;
+  font-style: italic;
 
-	footer {
-		color: inherit;
-		font-size: inherit;
-		font-style: normal;
+  footer {
+    color: inherit;
+    font-size: inherit;
+    font-style: normal;
 
-		&:before {
-			content: "";
-		}
-	}
+    &:before {
+      content: "";
+    }
+  }
 }
 
 cite {
-    font-style: italic;
+  font-style: italic;
 }
