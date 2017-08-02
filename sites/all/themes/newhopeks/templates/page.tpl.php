@@ -8,7 +8,7 @@
               <img src="/<?= path_to_theme(); ?>/img/logo.svg" alt="<?php print $site_name; ?>" />
             </h1>
           <?php if (!$is_front) { echo '</a>'; } ?>
-        </div> <!-- end .logo -->
+        </div><!-- .logo -->
 
         <nav role="navigation" class="navbar navbar-main col-xs-12 col-sm-12 col-md-7">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar-collapse">
@@ -30,15 +30,15 @@
                   <div class="search-form-container col-sm-4 col-md-3">
                     <?php print $search_form; ?>
                   </div>
-                </div> <!-- end .row -->
-              </div>
-            </div>
-          </div>
-        </nav>
-      </div> <!-- end .row -->
-    </div> <!-- end .wrapper -->
-  </div> <!-- end .container -->
-</header> <!-- end .header -->
+                </div><!-- .row -->
+              </div><!-- .container -->
+            </div><!-- .top-bar -->
+          </div><!-- .navbar-collapse -->
+        </nav><!-- .navbar-main -->
+      </div><!-- .row -->
+    </div><!-- .wrapper -->
+  </div><!-- .container -->
+</header><!-- .header -->
 
 <?php if ($breadcrumb) : ?>
   <div class="breadcrumbs">
@@ -48,9 +48,9 @@
           <nav class="col-xs-12">
             <p><?php print $breadcrumb; ?><span class="current"> &raquo; <span class="title"><?php print $title; ?></span></span></p>
           </nav>
-        </div> <!-- end .row -->
-      </div> <!-- end .wrapper -->
-    </div> <!-- end .container -->
+        </div><!-- .row -->
+      </div><!-- .wrapper -->
+    </div><!-- .container -->
   </div>
 <?php endif; ?>
 
@@ -63,9 +63,9 @@
         <?php else : ?>
           <?php print render($page['content_above']); ?>
         <?php endif; ?>
-      </div> <!-- end .row -->
-    </div> <!-- end .container -->
-  </div> <!-- end .content-above -->
+      </div><!-- .row -->
+    </div><!-- .container -->
+  </div><!-- .content-above -->
 <?php endif; ?>
 
 <div id="content" class="content">
@@ -114,27 +114,27 @@
             <div class="content-below">
               <div class="row">
                 <?php print render($page['content_below']); ?>
-              </div> <!-- end .row -->
-            </div> <!-- end .content-below -->
+              </div><!-- .row -->
+            </div><!-- .content-below -->
           <?php endif; ?>
-        </div> <!-- end .wrapper -->
-      </main> <!-- end .main -->
+        </div><!-- .wrapper -->
+      </main><!-- .main -->
 
       <?php if (!$is_front && $page['content_sidebar']) : ?>
         <div class="sidebar col-xs-12 col-sm-3 col-sm-pull-9">
           <?php print render($page['content_sidebar']); ?>
-        </div> <!-- end .sidebar -->
+        </div><!-- .sidebar -->
       <?php endif; ?>
-    </div> <!-- end .row -->
-  </div> <!-- end .container -->
-</div> <!-- end .content -->
+    </div><!-- .row -->
+  </div><!-- .container -->
+</div><!-- .content -->
 
 <footer role="contentinfo" class="footer">
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
         <?php print render($page['footer']); ?>
-      </div> <!-- end .grid_12 -->
-    </div> <!-- end .row -->
-  </div> <!-- end .container -->
-</footer> <!-- end .footer -->
+      </div><!-- .grid_12 -->
+    </div><!-- .row -->
+  </div><!-- .container -->
+</footer><!-- .footer -->
