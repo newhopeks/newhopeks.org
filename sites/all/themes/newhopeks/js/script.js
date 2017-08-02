@@ -64,21 +64,4 @@ Copyright:  (c) 2014 New Hope Church
     dotsClass: 'hero__nav'
   });
 
-
-  /*
-   * Fix icon fonts for Internet Explorer by forcing IE8 to redraw before and after pseudo elements
-   * http://stackoverflow.com/questions/9809351/ie8-css-font-face-fonts-only-working-for-before-content-on-over-and-sometimes
-   * -------------------------------------------------------------------------------------------------
-   */
-
-  if ($.browser.msie && 8 === parseInt($.browser.version)) {
-    var head = document.getElementsByTagName('head')[0], style = document.createElement('style');
-    style.type = 'text/css';
-    style.styleSheet.cssText = ':before,:after{content:none !important';
-    head.appendChild(style);
-    setTimeout(function(){
-      head.removeChild(style);
-    }, 0);
-  }
-
 }); })(jQuery);
