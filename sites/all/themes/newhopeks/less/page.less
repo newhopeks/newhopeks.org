@@ -11,9 +11,6 @@
   position: relative;
   padding-top: @grid-gutter-width;
   border-top: 5px solid @gray-dark;
-  font-family: @CooperHewitt;
-  font-weight: 700;
-  text-transform: uppercase;
 
   @media (min-width: @screen-sm) {
     padding-top: 7.7rem;
@@ -40,6 +37,9 @@
 // Logo
 .header .logo {
   margin: 0 auto @grid-gutter-width auto;
+  font-family: @CooperHewitt;
+  font-weight: 700;
+  text-transform: uppercase;
 
   .logo__title {
     margin: 0;
@@ -73,16 +73,21 @@
   width: 100%;
   margin: 0;
   padding: 10px;
-  color: white;
-  background-color: @gray-dark;
-  border: none;
-  font-family: @font-family-base;
+  color: @gray-dark;
+  background: transparent;
+  border: 1px solid fade(@gray, 20%);
   .font-size(18);
   font-weight: bold;
   line-height: @line-height-base;
 
   &:focus {
     outline: none;
+  }
+
+  &[data-nav-toggle-status="open"] {
+    color: white;
+    background-color: @gray-dark;
+    border-color: @gray-dark;
   }
 
   @media (min-width: @screen-sm) {
@@ -134,8 +139,11 @@
 .header .main-menu {
   margin: 0;
   padding: 10px 0;
-  .font-size(24);
+  font-family: @CooperHewitt;
+  .font-size(28);
+  font-weight: 400;
   line-height: @line-height-base;
+  text-transform: uppercase;
 
   li {
 
@@ -183,6 +191,11 @@
   @media (min-width: @screen-md) {
     text-align: left;
   }
+
+  @media (min-width: @screen-lg) {
+    .font-size(18);
+    line-height: @line-height-base;
+  }
 }
 
 // Top bar layout
@@ -213,7 +226,7 @@
   padding: 10px 0 0 0;
   border-top: 1px solid fade(white, 20%);
   font-family: @font-family-serif;
-  .font-size(16);
+  .font-size(21);
   font-style: italic;
   font-weight: normal;
   line-height: @line-height-base;

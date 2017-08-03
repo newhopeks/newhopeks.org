@@ -16,23 +16,30 @@ Copyright:  (c) 2014 New Hope Church
   // Navigation
   // -------------------------
 
+  // Store the navigation as a variable
+  var $nav = $('.header .nav');
+
   // Add the navigation toggle button
-  $('.header .nav').before('<button type="button" class="nav-toggle"><i class="fa fa-bars"></i> Menu</button>');
+  $nav.before('<button type="button" class="nav-toggle"><i class="fa fa-bars"></i> Menu</button>');
+
+  // Store navigation toggle button as a variable
+  var $navToggle = $('.header .nav-toggle');
 
   // Prepare the navigation
-  $('.header .nav').attr('data-nav-status', 'closed');
+  $nav.attr('data-nav-status', 'closed');
+  $navToggle.attr('data-nav-toggle-status', 'closed');
 
   // Toggle the navigation
-  $('.header .nav-toggle').on('click', function() {
-    if ($('.header .nav').attr('data-nav-status') !== 'open') {
-      $('.header .nav-toggle i.fa').removeClass('fa-bars').addClass('fa-times');
-      $('.header .nav').slideDown(200, function() {
-        $(this).attr('data-nav-status', 'open').removeAttr('style');
+  $navToggle.on('click', function() {
+    if ($nav.attr('data-nav-status') !== 'open') {
+      $navToggle.attr('data-nav-toggle-status', 'open').find('i.fa').removeClass('fa-bars').addClass('fa-times');
+      $nav.slideDown(200, function() {
+        $nav.attr('data-nav-status', 'open').removeAttr('style');
       });
     } else {
-      $('.header .nav-toggle i.fa').removeClass('fa-times').addClass('fa-bars');
-      $('.header .nav').slideUp(200, function() {
-        $(this).attr('data-nav-status', 'closed').removeAttr('style');
+      $nav.slideUp(200, function() {
+        $nav.attr('data-nav-status', 'closed').removeAttr('style');
+        $navToggle.attr('data-nav-toggle-status', 'closed').find('i.fa').removeClass('fa-times').addClass('fa-bars');
       });
     }
   });
