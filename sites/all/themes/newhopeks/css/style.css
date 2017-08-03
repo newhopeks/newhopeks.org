@@ -4345,7 +4345,7 @@ table > tbody > tr:hover {
 }
 @font-face {
   font-family: 'Cooper Hewitt';
-  src: url(../fonts/CooperHewitt-Book.woff);
+  src: url(../fonts/CooperHewitt-Medium.woff);
   font-weight: 400;
   font-style: normal;
 }
