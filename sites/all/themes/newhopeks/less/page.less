@@ -276,13 +276,24 @@
   .form-item {
     margin: 0;
     flex-grow: 1;
+  }
 
-    input {
-      width: 100%;
-    }
+  .form-text,
+  .form-submit {
+    height: auto;
+    padding: 0.3rem 10px;
+    border: none;
+    .font-size(14);
+    line-height: @line-height-base;
+  }
+
+  .form-text {
+    width: 100%;
+    box-shadow: none;
   }
 
   .form-submit {
+    min-width: 3em;
     margin-left: 5px;
   }
 
@@ -294,15 +305,6 @@
 
     .form-wrapper {
       width: ((4/12) * @container-sm) - @grid-gutter-width;
-    }
-
-    .form-text,
-    .form-submit {
-      height: auto;
-      padding: 0.3rem 7px;
-      border: none;
-      .font-size(14);
-      line-height: @line-height-base;
     }
   }
 

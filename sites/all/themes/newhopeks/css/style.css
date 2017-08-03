@@ -4624,10 +4624,21 @@ table > tbody > tr:hover {
       -ms-flex-positive: 1;
           flex-grow: 1;
 }
-.header .search-form .form-item input {
+.header .search-form .form-text,
+.header .search-form .form-submit {
+  height: auto;
+  padding: 0.3rem 10px;
+  border: none;
+  font-size: 14px;
+  font-size: 1.4rem;
+  line-height: 1.5;
+}
+.header .search-form .form-text {
   width: 100%;
+  box-shadow: none;
 }
 .header .search-form .form-submit {
+  min-width: 3em;
   margin-left: 5px;
 }
 @media (min-width: 768px) {
@@ -4639,15 +4650,6 @@ table > tbody > tr:hover {
   }
   .header .search-form .form-wrapper {
     width: 226.66666667px;
-  }
-  .header .search-form .form-text,
-  .header .search-form .form-submit {
-    height: auto;
-    padding: 0.3rem 7px;
-    border: none;
-    font-size: 14px;
-    font-size: 1.4rem;
-    line-height: 1.5;
   }
 }
 @media (min-width: 992px) {
