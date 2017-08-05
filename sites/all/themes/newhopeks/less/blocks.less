@@ -49,11 +49,11 @@
   .block-title {
     margin: 0 0 10px 0;
     color: @nh-green-dark;
-    font-family: @font-family-serif;
-    font-style: italic;
+    font-family: @font-family-sans-serif;
     .font-size(18);
-    font-weight: bold;
+    font-weight: normal;
     line-height: normal;
+    text-transform: uppercase;
   }
 
   img {
@@ -66,16 +66,15 @@
 .sidebar .subnav {
   padding-bottom: 0;
   color: fade(white, 80%);
-  background-color: @nh-green;
-  border-top-color: @nh-green-dark;
-  border-bottom-color: @nh-green-dark;
+  background-color: @nh-green-dark;
+
+  a {
+    color: inherit;
+    border: none;
+  }
 
   .block-title {
     color: white;
-
-    a {
-      color: inherit;
-    }
   }
 
   ul {
@@ -89,7 +88,6 @@
       border-top: 1px solid fade(white, 20%);
 
       a {
-        color: inherit;
 
         &:hover,
         &:focus {
@@ -98,8 +96,8 @@
       }
 
       &.active-trail {
-        color: white;
-        background-color: fade(@nh-green-dark, 20%);
+        background-color: @gray-lighter-alpha;
+        border-top: 1px solid fade(white, 35%);
       }
 
       ul {
@@ -148,12 +146,12 @@
   .block-title {
     margin: 0 0 10px 0;
     color: @nh-green-dark;
-    font-family: @font-family-serif;
-    font-style: italic;
+    color: @nh-green-dark;
+    font-family: @font-family-sans-serif;
     .font-size(18);
+    font-weight: normal;
     line-height: normal;
-    font-weight: bold;
-    line-height: normal;
+    text-transform: uppercase;
   }
 
   img {

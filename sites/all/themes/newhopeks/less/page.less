@@ -60,7 +60,7 @@
   @media (min-width: @screen-md) {
     width: ((5/12) * @container-md) - @grid-gutter-width;
     margin: 0;
-    padding-bottom: 5px;
+    padding-bottom: 7px;
   }
 
   @media (min-width: @screen-lg) {
@@ -132,6 +132,7 @@
 
   a {
     color: inherit;
+    border: none;
   }
 }
 
@@ -168,9 +169,9 @@
 
       a {
         display: inline-block;
-        margin-bottom: -3px;
+        margin-bottom: -1px;
         padding: 0;
-        border-bottom: 3px solid transparent;
+        border-bottom: 1px solid transparent;
 
         &:hover,
         &:focus {
@@ -367,6 +368,7 @@
     }
 
     a {
+      border: none;
       white-space: nowrap;
     }
 
@@ -483,7 +485,7 @@
         }
 
         &.slick-active button {
-          background-color: @nh-blue;
+          background-color: @nh-yellow;
         }
       }
     }
@@ -539,8 +541,8 @@
       padding: 10px;
       overflow: hidden;
       background-color: white;
-      border-top: 1px solid @nh-blue-light;
-      border-bottom: 5px solid @nh-blue-light;
+      border-top: 1px solid @gray-lighter;
+      border-bottom: 5px solid @gray-lighter;
 
       @media (min-width: @screen-sm) {
         margin: 0;
@@ -575,9 +577,9 @@
       }
 
       .main__header__subtitle {
-        margin: 3px 0 0 0;
-        color: @nh-green;
-        .font-size(16);
+        margin: 0;
+        color: @nh-green-dark;
+        .font-size(21);
         line-height: 1;
         font-family: @font-family-serif;
         font-style: italic;
@@ -587,13 +589,13 @@
       .main__header__pre-title,
       .main__header__post-title {
         margin: 0;
-        color: @gray-light;
+        color: @gray;
         .font-size(14);
         line-height: normal;
       }
 
       .main__header__pre-title {
-        margin-bottom: 5px;
+        margin-bottom: 10px;
       }
 
       .main__header__post-title {
@@ -634,6 +636,7 @@
 .footer {
   padding: 20px 0;
   background-color: @html-bg;
+  .font-size(14);
 
   @media (min-width: @screen-sm) {
     margin-top: 40px;

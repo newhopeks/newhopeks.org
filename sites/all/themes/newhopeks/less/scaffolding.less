@@ -8,6 +8,7 @@
 
 html {
   background: @html-bg;
+  font-size: 62.5%;
 }
 
 
@@ -16,21 +17,14 @@ html {
 
 a {
   color: @link-color;
+  border-bottom: 1px solid @gray-lighter;
   text-decoration: none;
   .transition(all 0.2s linear);
 
   &:hover,
   &:focus {
     color: @link-hover-color;
+    border-bottom-color: @link-hover-color;
     text-decoration: none;
-  }
-}
-
-body:not(.section-home) .main a {
-  border-bottom: 1px solid @nh-yellow;
-
-  &:hover,
-  &:focus {
-    color: @link-hover-color;
   }
 }

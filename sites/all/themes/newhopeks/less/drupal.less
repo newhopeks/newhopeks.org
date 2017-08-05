@@ -37,32 +37,33 @@
 // System Tabs
 // -------------------------
 
-@tabsBackgroundColor: fade(@text-color, 20%);
+@tabsBackgroundColor: fade(@tabsBorderColor, 50%);
 @tabsTextColor: fade(@text-color, 80%);
 
 @tabsBackgroundColorActive: @body-bg;
 @tabsTextColorActive: @text-color;
 
-@tabsBorderColor: fade(@text-color, 40%);
+@tabsBorderColor: @gray-lighter;
 
 .tabs {
   margin: -20px -20px 20px -20px;
   padding: 0;
   list-style-type: none;
-  background-color: fade(@nh-blue-light, 50%);
-  border-bottom: 1px solid @nh-blue-light;
+  background-color: @tabsBackgroundColor;
+  border-bottom: 1px solid @tabsBorderColor;
 
   li {
     display: inline-block;
     margin: 0;
     padding: 0;
-    border-right: 1px solid @nh-blue-light;
+    border-right: 1px solid @tabsBorderColor;
 
     a:link,
     a:visited {
       display: inline-block;
       padding: 10px 20px;
-      color: @nh-blue;
+      color: @tabsTextColor;
+      border: none;
     }
 
     a:hover,

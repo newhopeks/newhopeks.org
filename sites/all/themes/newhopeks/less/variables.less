@@ -6,27 +6,32 @@
 // Colors
 // -------------------------
 
-@nh-green:        #78944a;
-@nh-green-dark:   darken(@nh-green, 10%);
-@nh-blue:         #66adb1;
-@nh-blue-light:   lighten(@nh-blue, 30%);
-@nh-blue-dark:    darken(@nh-blue, 10%);
-@nh-yellow:       #cda844;
-@nh-yellow-dark:  darken(@nh-yellow, 20%);
-@nh-gray:         #646464;
+@nh-green:              #b6c18f;
+@nh-green-dark:         darken(@nh-green, 20%);
+@nh-yellow:             #cda844;
+@nh-yellow-dark:        darken(@nh-yellow, 20%);
+@nh-yellow-light:       lighten(@nh-yellow, 20%);
+@nh-gray:               #646464;
 
-@gray-darker:     #222;
-@gray-dark:       #333;
-@gray:            @nh-gray;
-@gray-light:      #777;
-@gray-lighter:    #ddd;
-@gray-lightest:   #f5f5f5;
+@gray-darker:           #222;
+@gray-dark:             #333;
+@gray:                  @nh-gray;
+@gray-light:            #777;
+@gray-lighter:          #ddd;
+@gray-lightest:         #f5f5f5;
 
-@brand-primary:   @nh-green;
-@brand-success:   @nh-green;
-@brand-info:      @nh-blue;
-@brand-warning:   #f0ad4e;
-@brand-danger:    #d9534f;
+@gray-darker-alpha:     rgba(0, 0, 0, 0.865); // #222
+@gray-dark-alpha:       rgba(0, 0, 0, 0.8);   // #333
+@gray-alpha:            rgba(0, 0, 0, 0.607); // #646464
+@gray-light-alpha:      rgba(0, 0, 0, 0.535); // #777
+@gray-lighter-alpha:    rgba(0, 0, 0, 0.135); // #ddd
+@gray-lightest-alpha:   rgba(0, 0, 0, 0.04);  // #f5f5f5
+
+@brand-primary:         @nh-green-dark;
+@brand-success:         @nh-green-dark;
+@brand-info:            #5bc0de;
+@brand-warning:         @nh-yellow-dark;
+@brand-danger:          #d9534f;
 
 
 // Scaffolding
@@ -42,7 +47,7 @@
 // Sidebar
 @sidebar-block-color:         @text-color;
 @sidebar-block-bg:            fade(@gray, 10%);
-@sidebar-block-border-color:  fade(@gray-dark, 10%);
+@sidebar-block-border-color:  fade(@gray-dark, 20%);
 
 
 // Typography
@@ -54,6 +59,10 @@
 @font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
 @font-family-serif: Georgia, "Times New Roman", Times, serif;
 @font-family-base: @font-family-sans-serif;
+
+@font-size-base: 1.6rem;
+@font-size-large: 1.8rem;
+@font-size-small: 1.2rem;
 
 @line-height-base: 1.5;
 
