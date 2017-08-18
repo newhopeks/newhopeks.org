@@ -7,22 +7,15 @@
 /**
  * Checks if a specific taxonomy term is set in the node.
  *
- * @param array $variables
+ * @param $variables
  *   An array containing each of the variables saved in the database necessary
  *   to evaluate this condition of the rule.
- *
- * @return bool
+ * @return
  *   TRUE if condition applies successfully. Otherwise FALSE.
  */
-function menu_position_menu_position_condition_taxonomy(array $variables) {
+function menu_position_menu_position_condition_taxonomy($variables) {
   // We can only check for taxonomy terms on an "entity" page.
   if ($variables['context']['entity_type']) {
-
-    // Fallback for legacy configuration.
-    if (empty($variables['match_types'])) {
-      $variables['match_types'] = array('terms' => '', 'content' => 'content');
-    }
-    $match_types = $variables['match_types'];
 
     // Grab the variables stored statically in the rule.
     $vid = $variables['vid'];
@@ -33,62 +26,36 @@ function menu_position_menu_position_condition_taxonomy(array $variables) {
     $bundle_name = $variables['context']['bundle_name'];
     $entity = $variables['context'][$entity_type];
 
-    if ($match_types['content']) {
-      // Build a list of each taxonomy reference fields.
-      $taxonomy_fields = &drupal_static(__FUNCTION__, NULL);
-      if (!isset($taxonomy_fields)) {
-        $taxonomy_fields = array();
-        $field_info = field_info_fields();
-        foreach (array_keys(field_info_instances($entity_type, $bundle_name)) as $key) {
-          if ($field_info[$key]['type'] == 'taxonomy_term_reference') {
-            $taxonomy_fields[$key] = $field_info[$key]['translatable'];
-          }
-        }
-      }
-
-      $tids = array();
-      foreach ($taxonomy_fields as $field => $translatable) {
-        $language = $translatable ? $entity->language : LANGUAGE_NONE;
-        if (!empty($entity->{$field}[$language])) {
-          // Check for matching terms.
-          if (!empty($tid)) {
-            foreach ($entity->{$field}[$language] as $term) {
-              if (in_array($term['tid'], $tid)) {
-                return TRUE;
-              }
-            }
-          }
-          // Check for any terms from a matching vocabulary.
-          else {
-            foreach ($entity->{$field}[$language] as $term) {
-              $tids[] = $term['tid'];
-            }
-          }
-        }
-      }
-      if (count($tids)) {
-        $count = db_query("SELECT count(tid) FROM {taxonomy_term_data} WHERE tid IN (:tids) AND vid = :vid", array(
-          ':tids' => $tids,
-          ':vid' => $vid,
-        ))->fetchField();
-        if ($count > 0) {
-          return TRUE;
+    // Build a list of each taxonomy reference fields.
+    $taxonomy_fields = &drupal_static(__FUNCTION__, NULL);
+    if (!isset($taxonomy_fields)) {
+      $taxonomy_fields = array();
+      $field_info = field_info_fields();
+      foreach (array_keys(field_info_instances($entity_type, $bundle_name)) as $key) {
+        if ($field_info[$key]['type'] == 'taxonomy_term_reference') {
+          $taxonomy_fields[$key] = $field_info[$key]['translatable'];
         }
       }
     }
 
-    // Taxonomy terms.
-    if ($entity_type == 'taxonomy_term' && $match_types['terms']) {
-      // Check for matching terms.
-      if (!empty($tid)) {
-        if (isset($entity->tid) && in_array($entity->tid, $tid)) {
-          return TRUE;
+    foreach ($taxonomy_fields as $field => $translatable) {
+      $language = $translatable ? $entity->language : LANGUAGE_NONE;
+      if (!empty($entity->{$field}[$language])) {
+        // Check for matching terms.
+        if (!empty($tid)) {
+          foreach ($entity->{$field}[$language] as $term) {
+            if (in_array($term['tid'], $tid)) {
+              return TRUE;
+            }
+          }
         }
-      }
-      // Check for any terms from a matching vocabulary.
-      else {
-        if (isset($entity->vid) && $entity->vid === $vid) {
-          return TRUE;
+        // Check for any terms from a matching vocabulary.
+        else {
+          foreach ($entity->{$field}[$language] as $term) {
+            if (isset($term['taxonomy_term']->vid) && $term['taxonomy_term']->vid === $vid) {
+              return TRUE;
+            }
+          }
         }
       }
     }
@@ -99,21 +66,15 @@ function menu_position_menu_position_condition_taxonomy(array $variables) {
 /**
  * Adds form elements for the "taxonomy" plugin to the rule configuration form.
  *
- * @param array $form
+ * @param $form
  *   A reference to the "add/edit rule" form array. New form elements should be
  *   added directly to this array.
- * @param array $form_state
+ * @param $form_state
  *   A reference to the current form state.
  */
-function menu_position_menu_position_rule_taxonomy_form(array &$form, array &$form_state) {
-  // If this is an existing rule, load the variables stored in the rule for this
-  // plugin.
+function menu_position_menu_position_rule_taxonomy_form(&$form, &$form_state) {
+  // If this is an existing rule, load the variables stored in the rule for this plugin.
   $variables = !empty($form_state['#menu-position-rule']['conditions']['taxonomy']) ? $form_state['#menu-position-rule']['conditions']['taxonomy'] : array();
-
-  // Fallback for legacy configuration.
-  if (empty($variables['match_types'])) {
-    $variables['match_types'] = array('terms' => '', 'content' => 'content');
-  }
 
   // Load the taxonomy terms.
   if (!empty($variables['tid'])) {
@@ -140,15 +101,6 @@ function menu_position_menu_position_rule_taxonomy_form(array &$form, array &$fo
     '#type' => 'item',
     '#description' => t('Apply this rule only on pages that display content having the given vocabulary or taxonomy term.'),
   );
-  $form['conditions']['taxonomy']['match_types'] = array(
-    '#type' => 'checkboxes',
-    '#title' => t('Type of match'),
-    '#default_value' => !empty($variables['match_types']) ? $variables['match_types'] : array('terms' => '', 'content' => 'content'),
-    '#options' => array(
-      'terms' => t('Match when viewing term pages'),
-      'content' => t('Match when viewing content tagged with the term'),
-    ),
-  );
   $vocabularies = taxonomy_vocabulary_get_names();
   $vocabulary_options = array();
   foreach ($vocabularies as $vocabulary) {
@@ -170,6 +122,7 @@ function menu_position_menu_position_rule_taxonomy_form(array &$form, array &$fo
       'tid' => t('only a selected taxonomy term'),
     ),
     '#states' => array(
+      //'disabled' => array(
       'invisible' => array(
         ':input[name=vid]' => array('value' => '0'),
       ),
@@ -190,6 +143,7 @@ function menu_position_menu_position_rule_taxonomy_form(array &$form, array &$fo
     '#states' => array(
       'visible' => array(
         ':input[name=vid_or_tid]' => array('value' => 'tid'),
+        //':input[name=vid_or_tid]' => array('enabled' => TRUE),
       ),
     ),
   );
@@ -201,17 +155,16 @@ function menu_position_menu_position_rule_taxonomy_form(array &$form, array &$fo
 /**
  * Prepares the "taxonomy" variables to be stored in the rule.
  *
- * @param array $form
+ * @param $form
  *   A reference to the "add/edit rule" form array.
- * @param array $form_state
+ * @param $form_state
  *   A reference to the current form state, including submitted values.
  */
-function menu_position_menu_position_rule_taxonomy_form_submit(array &$form, array &$form_state) {
+function menu_position_menu_position_rule_taxonomy_form_submit(&$form, &$form_state) {
   if (!empty($form_state['values']['term']) || $form_state['values']['vid'] != 0) {
     $variables = array(
       'vid' => $form_state['values']['vid'],
       'tid' => array(),
-      'match_types' => $form_state['values']['match_types'],
     );
     // Determine if a taxonomy term has been selected.
     if ($form_state['values']['vid_or_tid'] == 'tid' && !empty($form_state['values']['term'])) {
@@ -224,7 +177,7 @@ function menu_position_menu_position_rule_taxonomy_form_submit(array &$form, arr
 }
 
 /**
- * Helper function for auto-completion.
+ * Helper function for autocompletion
  */
 function menu_position_taxonomy_autocomplete($vocabulary, $tags_typed = '') {
   // Don't query for terms if no vocabulary is selected.
@@ -233,12 +186,11 @@ function menu_position_taxonomy_autocomplete($vocabulary, $tags_typed = '') {
     return;
   }
 
-  // The user enters a comma-separated list of tags. We only auto-complete the
-  // last tag.
+  // The user enters a comma-separated list of tags. We only autocomplete the last tag.
   $tags_typed = drupal_explode_tags($tags_typed);
   $tag_last = drupal_strtolower(array_pop($tags_typed));
 
-  $term_matches = array();
+  $matches = array();
   if ($tag_last != '') {
 
     $query = db_select('taxonomy_term_data', 't');
@@ -290,12 +242,10 @@ function menu_position_taxonomy_autocomplete_validate($element, &$form_state) {
       // otherwise, create a new 'autocreate' term for insert/update.
       if ($possibilities = taxonomy_term_load_multiple(array(), array('name' => trim($typed_term), 'vid' => array($form_state['values']['vid'])))) {
         $term = array_pop($possibilities);
-        $value[] = (array) $term;
+        $value[] = (array)$term;
       }
       else {
-        form_set_error('term', t('%term is not a valid taxonomy term.', array(
-          '%term' => $typed_term,
-        )));
+        form_set_error('term', t('%term is not a valid taxonomy term.', array('%term' => $typed_term)));
       }
     }
   }

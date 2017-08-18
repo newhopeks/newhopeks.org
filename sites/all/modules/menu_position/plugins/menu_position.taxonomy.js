@@ -16,16 +16,16 @@ Drupal.behaviors.menuPositionTaxonomy = {
         return Drupal.t('Any vocabulary or taxonomy');
       }
     });
-    // Reset the taxonomy term auto-complete object when the vocabulary changes.
+    // Reset the taxonomy term autocomplete object when the vocabulary changes.
     $('fieldset#edit-taxonomy #edit-vid', context).change(function () {
       $input = $('#edit-term');
       // Remove old terms.
       $input.val('');
-      // Unbind the original auto-complete handlers.
+      // Unbind the original autocomplete handlers.
       $input.unbind('keydown');
       $input.unbind('keyup');
       $input.unbind('blur');
-      // Set new auto-complete handlers.
+      // Set new autocomplete handlers.
       uri = Drupal.settings.menu_position_taxonomy_url + '/' + $(this).val();
       $('#edit-term-autocomplete').val(uri);
       new Drupal.jsAC($input, new Drupal.ACDB(uri));
