@@ -1,57 +1,50 @@
 //
 // Typography
-// ====================================================================================================
+// --------------------------------------------------
 
 
 // Headings
-// --------------------------------------------------
+// -------------------------
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
+  color: @nh-green-dark;
 
-    > a {
-    	color: @nh-green;
-    	text-decoration: none;
+  > a {
+    color: inherit;
+    text-decoration: none;
+    border: none;
 
-    	&:hover,
-    	&:focus {
-        	color: @nh-green-dark;
-        	text-decoration: none;
-    	}
-
-	}
-
-}
-
-h1, .h1 {
-}
-
-h2, .h2 {
-    color: @nh-green;
+    &:hover,
+    &:focus {
+      color: @link-hover-color;
+      text-decoration: none;
+    }
+  }
 }
 
 
 // Misc
-// --------------------------------------------------
+// -------------------------
 
 blockquote {
-	clear: both;
-	padding: 0;
-	margin: (@line-height-computed / 2) @line-height-computed;
-	border: none;
-	font-style: italic;
+  clear: both;
+  padding: 0;
+  margin: (@line-height-computed / 2) @line-height-computed;
+  border: none;
+  font-style: italic;
 
-	footer {
-		color: inherit;
-		font-size: inherit;
-		font-style: normal;
+  footer {
+    color: inherit;
+    font-size: inherit;
+    font-style: normal;
 
-		&:before {
-			content: "";
-		}
-	}
+    &:before {
+      content: "";
+    }
+  }
 }
 
 cite {
-    font-style: italic;
+  font-style: italic;
 }
