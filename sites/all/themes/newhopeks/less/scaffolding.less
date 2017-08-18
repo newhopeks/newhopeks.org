@@ -1,13 +1,14 @@
 //
 // Scaffolding
-// ====================================================================================================
+// --------------------------------------------------
 
 
 // Body reset
 // -------------------------
 
 html {
-	background: @html-bg;
+  background: @html-bg;
+  font-size: 62.5%;
 }
 
 
@@ -15,10 +16,15 @@ html {
 // -------------------------
 
 a {
-	.transition(all 0.2s linear);
+  color: @link-color;
+  border-bottom: 1px solid @gray-lighter;
+  text-decoration: none;
+  .transition(all 0.2s linear);
 
-	&:hover,
-	&:focus {
-	}
-
+  &:hover,
+  &:focus {
+    color: @link-hover-color;
+    border-bottom-color: @link-hover-color;
+    text-decoration: none;
+  }
 }

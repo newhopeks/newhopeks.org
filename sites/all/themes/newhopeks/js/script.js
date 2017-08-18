@@ -1,87 +1,59 @@
 /*
-====================================================================================================
+=====================================================
 
-Title:		New Hope Church
-Authors: 	Kyle Beyer
-            D. Nathan Dillon, http://natedillon.com
-            Kyle Gach, http://kylegach.com
-Copyright:	(c) 2014 New Hope Church
+Title:      New Hope Church
+Authors:    Kyle Beyer
+            D. Nathan Dillon, https://natedillon.com
+            Kyle Gach, https://kylegach.com
+Copyright:  (c) 2014 New Hope Church
 
-====================================================================================================
+=====================================================
 */
-
 
 
 (function ($) { $(document).ready(function() {
 
-/*
- * Slideshow
- * -------------------------------------------------------------------------------------------------
- */
+  // Navigation
+  // -------------------------
 
-/*
-// turn the slideshow on or off
-var showSlideshow = false;
+  // Store the navigation as a variable
+  var $nav = $('.header .nav');
 
-// choose the slideshow script to use ('slides' or 'nivoSlider')
-var slideshowScript = 'slides';
+  // Add the navigation toggle button
+  $nav.before('<button type="button" class="nav-toggle"><i class="fa fa-bars"></i> Menu</button>');
 
-if (showSlideshow == true) {
+  // Store navigation toggle button as a variable
+  var $navToggle = $('.header .nav-toggle');
 
-	if (typeof slideshowItems !== 'undefined') {
+  // Prepare the navigation
+  $nav.attr('data-nav-status', 'closed');
+  $navToggle.attr('data-nav-toggle-status', 'closed');
 
-		// get the images source code
-		var items = slideshowItems;
-
-		// clear the div and add the images
-		$('.slideshow .slides-container').empty().append(items);
-
-	}
-
-	// start the slideshow
-	if (slideshowScript === 'slides') {
-		$('.slideshow').slides({
-			container: 'slides-container',
-			pagination: false,
-			generatePagination: false,
-			effect: 'fade',
-			fadeSpeed: 2000,
-			crossfade: true,
-			play: 7000
-		});
-	}
-	if (slideshowScript === 'nivoSlider') {
-		$('.slideshow').nivoSlider();
-	}
-
-}
-*/
-
-$('.hero').removeClass('js-hide').slick({
-	autoplay: true,
-	autoplaySpeed: 6000,
-	arrows: false,
-	dots: true,
-	dotsClass: 'hero__nav'
-});
+  // Toggle the navigation
+  $navToggle.on('click', function() {
+    if ($nav.attr('data-nav-status') !== 'open') {
+      $navToggle.attr('data-nav-toggle-status', 'open').find('i.fa').removeClass('fa-bars').addClass('fa-times');
+      $nav.slideDown(200, function() {
+        $nav.attr('data-nav-status', 'open').removeAttr('style');
+      });
+    } else {
+      $nav.slideUp(200, function() {
+        $nav.attr('data-nav-status', 'closed').removeAttr('style');
+        $navToggle.attr('data-nav-toggle-status', 'closed').find('i.fa').removeClass('fa-times').addClass('fa-bars');
+      });
+    }
+  });
 
 
-/*
- * Fix icon fonts for Internet Explorer by forcing IE8 to redraw before and after pseudo elements
- * http://stackoverflow.com/questions/9809351/ie8-css-font-face-fonts-only-working-for-before-content-on-over-and-sometimes
- * -------------------------------------------------------------------------------------------------
- */
+  // Home page hero slideshow
+  // -------------------------
 
-if ($.browser.msie && 8 === parseInt($.browser.version)) {
-	var head = document.getElementsByTagName('head')[0], style = document.createElement('style');
-	style.type = 'text/css';
-	style.styleSheet.cssText = ':before,:after{content:none !important';
-	head.appendChild(style);
-	setTimeout(function(){
-		head.removeChild(style);
-	}, 0);
-}
-
-
+  $('.hero').removeClass('js-hide').slick({
+    autoplay: true,
+    autoplaySpeed: 6000,
+    arrows: false,
+    dots: true,
+    dotsClass: 'hero__nav'
+  });
 
 }); })(jQuery);
