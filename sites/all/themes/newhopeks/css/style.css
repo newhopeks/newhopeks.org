@@ -4160,6 +4160,7 @@ button.close {
     font-size: 12pt;
     line-height: 1.5;
   }
+  .header,
   .breadcrumbs,
   #toolbar,
   .content .main .tabs,
@@ -4169,17 +4170,6 @@ button.close {
   }
   a[href]:after {
     content: "";
-  }
-  .header {
-    padding-top: 0 !important;
-    border: none !important;
-  }
-  .header .logo {
-    display: none;
-  }
-  .header .logo .logo__title img {
-    width: auto;
-    max-height: 1em;
   }
   .content .main {
     left: 0;
