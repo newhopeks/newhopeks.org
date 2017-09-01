@@ -121,39 +121,6 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/img-src\/apple-touch-icon.fw.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 212616,
-		"inputAbbreviatedPath": "\/img-src\/apple-touch-icon.fw.png",
-		"outputAbbreviatedPath": "\/img-src\/apple-touch-icon.fw.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/img-src\/favicon.fw.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 53565,
-		"inputAbbreviatedPath": "\/img-src\/favicon.fw.png",
-		"outputAbbreviatedPath": "\/img-src\/favicon.fw.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/img-src\/screenshot.fw.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 239219,
-		"inputAbbreviatedPath": "\/img-src\/screenshot.fw.png",
-		"outputAbbreviatedPath": "\/img-src\/screenshot.fw.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
 	"\/img\/content-below-bg.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -176,28 +143,6 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
-	"\/img\/logo.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 9407,
-		"inputAbbreviatedPath": "\/img\/logo.png",
-		"outputAbbreviatedPath": "\/img\/logo.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/img\/logo@2x.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 19793,
-		"inputAbbreviatedPath": "\/img\/logo@2x.png",
-		"outputAbbreviatedPath": "\/img\/logo@2x.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
 	"\/img\/message-series-image-default.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -205,17 +150,6 @@
 		"initialSize": 25895,
 		"inputAbbreviatedPath": "\/img\/message-series-image-default.png",
 		"outputAbbreviatedPath": "\/img\/message-series-image-default.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/img\/NoisyTile.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 3748,
-		"inputAbbreviatedPath": "\/img\/NoisyTile.png",
-		"outputAbbreviatedPath": "\/img\/NoisyTile.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
