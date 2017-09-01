@@ -1101,7 +1101,7 @@ a {
 }
 a:hover,
 a:focus {
-  color: #876c24;
+  color: #a38623;
   text-decoration: underline;
 }
 a:focus {
@@ -1334,10 +1334,10 @@ mark,
   color: #777;
 }
 .text-primary {
-  color: #889753;
+  color: #7f8949;
 }
 a.text-primary:hover {
-  color: #6a7641;
+  color: #606837;
 }
 .text-success {
   color: #3c763d;
@@ -1365,10 +1365,10 @@ a.text-danger:hover {
 }
 .bg-primary {
   color: #fff;
-  background-color: #889753;
+  background-color: #7f8949;
 }
 a.bg-primary:hover {
-  background-color: #6a7641;
+  background-color: #606837;
 }
 .bg-success {
   background-color: #dff0d8;
@@ -3065,8 +3065,8 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-primary {
   color: #fff;
-  background-color: #889753;
-  border-color: #79864a;
+  background-color: #7f8949;
+  border-color: #707940;
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -3075,8 +3075,8 @@ fieldset[disabled] .btn-default.active {
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
   color: #fff;
-  background-color: #6a7641;
-  border-color: #565f34;
+  background-color: #606837;
+  border-color: #4b512b;
 }
 .btn-primary:active,
 .btn-primary.active,
@@ -3101,17 +3101,17 @@ fieldset[disabled] .btn-primary:active,
 .btn-primary.disabled.active,
 .btn-primary[disabled].active,
 fieldset[disabled] .btn-primary.active {
-  background-color: #889753;
-  border-color: #79864a;
+  background-color: #7f8949;
+  border-color: #707940;
 }
 .btn-primary .badge {
-  color: #889753;
+  color: #7f8949;
   background-color: #fff;
 }
 .btn-success {
   color: #fff;
-  background-color: #889753;
-  border-color: #79864a;
+  background-color: #7f8949;
+  border-color: #707940;
 }
 .btn-success:hover,
 .btn-success:focus,
@@ -3120,8 +3120,8 @@ fieldset[disabled] .btn-primary.active {
 .btn-success.active,
 .open > .dropdown-toggle.btn-success {
   color: #fff;
-  background-color: #6a7641;
-  border-color: #565f34;
+  background-color: #606837;
+  border-color: #4b512b;
 }
 .btn-success:active,
 .btn-success.active,
@@ -3146,11 +3146,11 @@ fieldset[disabled] .btn-success:active,
 .btn-success.disabled.active,
 .btn-success[disabled].active,
 fieldset[disabled] .btn-success.active {
-  background-color: #889753;
-  border-color: #79864a;
+  background-color: #7f8949;
+  border-color: #707940;
 }
 .btn-success .badge {
-  color: #889753;
+  color: #7f8949;
   background-color: #fff;
 }
 .btn-info {
@@ -3200,8 +3200,8 @@ fieldset[disabled] .btn-info.active {
 }
 .btn-warning {
   color: #fff;
-  background-color: #876c24;
-  border-color: #735c1f;
+  background-color: #a38623;
+  border-color: #8e741e;
 }
 .btn-warning:hover,
 .btn-warning:focus,
@@ -3210,8 +3210,8 @@ fieldset[disabled] .btn-info.active {
 .btn-warning.active,
 .open > .dropdown-toggle.btn-warning {
   color: #fff;
-  background-color: #5f4c19;
-  border-color: #433512;
+  background-color: #79631a;
+  border-color: #5c4b14;
 }
 .btn-warning:active,
 .btn-warning.active,
@@ -3236,11 +3236,11 @@ fieldset[disabled] .btn-warning:active,
 .btn-warning.disabled.active,
 .btn-warning[disabled].active,
 fieldset[disabled] .btn-warning.active {
-  background-color: #876c24;
-  border-color: #735c1f;
+  background-color: #a38623;
+  border-color: #8e741e;
 }
 .btn-warning .badge {
-  color: #876c24;
+  color: #a38623;
   background-color: #fff;
 }
 .btn-danger {
@@ -3309,7 +3309,7 @@ fieldset[disabled] .btn-link {
 }
 .btn-link:hover,
 .btn-link:focus {
-  color: #876c24;
+  color: #a38623;
   text-decoration: underline;
   background-color: transparent;
 }
@@ -3417,7 +3417,7 @@ tbody.collapse.in {
 .pagination > li > span:hover,
 .pagination > li > a:focus,
 .pagination > li > span:focus {
-  color: #876c24;
+  color: #a38623;
   background-color: #ddd;
   border-color: #ddd;
 }
@@ -3429,8 +3429,8 @@ tbody.collapse.in {
 .pagination > .active > span:focus {
   z-index: 2;
   color: #fff;
-  background-color: #889753;
-  border-color: #889753;
+  background-color: #7f8949;
+  border-color: #7f8949;
   cursor: default;
 }
 .pagination > .disabled > span,
@@ -4212,8 +4212,8 @@ a {
 }
 a:hover,
 a:focus {
-  color: #876c24;
-  border-bottom-color: #876c24;
+  color: #a38623;
+  border-bottom-color: #a38623;
   text-decoration: none;
 }
 h1,
@@ -4228,7 +4228,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  color: #889753;
+  color: #7f8949;
 }
 h1 > a,
 h2 > a,
@@ -4270,7 +4270,7 @@ h6 > a:focus,
 .h4 > a:focus,
 .h5 > a:focus,
 .h6 > a:focus {
-  color: #876c24;
+  color: #a38623;
   text-decoration: none;
 }
 blockquote {
@@ -4518,11 +4518,11 @@ table > tbody > tr:hover {
   }
   .header .main-menu li a:hover,
   .header .main-menu li a:focus {
-    color: #876c24;
+    color: #a38623;
   }
   .header .main-menu li.active a,
   .header .main-menu li.active-trail a {
-    border-bottom-color: #cda844;
+    border-bottom-color: #cda82c;
   }
 }
 @media (min-width: 992px) {
@@ -4729,7 +4729,7 @@ table > tbody > tr:hover {
 .content-above .hero .hero__item a:hover,
 .content-above .hero .hero__item a:focus {
   color: white;
-  border-color: #876c24;
+  border-color: #a38623;
 }
 .content-above .hero .hero__item .hero__title {
   position: absolute;
@@ -4759,7 +4759,7 @@ table > tbody > tr:hover {
 }
 .content-above .hero .hero__item:hover,
 .content-above .hero .hero__item:focus {
-  border-color: #876c24;
+  border-color: #a38623;
 }
 .content-above .hero .hero__nav {
   display: block;
@@ -4791,7 +4791,7 @@ table > tbody > tr:hover {
   outline: none;
 }
 .content-above .hero .hero__nav li.slick-active button {
-  background-color: #cda844;
+  background-color: #cda82c;
 }
 @media (min-width: 768px) {
   .content-above .hero {
@@ -4857,7 +4857,7 @@ table > tbody > tr:hover {
 }
 .content .main .main__header .main__header__title {
   margin: 0;
-  color: #889753;
+  color: #7f8949;
   font-family: "Cooper Hewitt", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 42px;
   font-size: 4.2rem;
@@ -4867,7 +4867,7 @@ table > tbody > tr:hover {
 }
 .content .main .main__header .main__header__subtitle {
   margin: 0;
-  color: #889753;
+  color: #7f8949;
   font-size: 21px;
   font-size: 2.1rem;
   line-height: 1;
@@ -5149,7 +5149,7 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
   padding: 0;
 }
 .article-listing__footer .article-listing__footer__links li a {
-  color: #876c24;
+  color: #a38623;
   border: none;
 }
 .article-listing__footer .article-listing__footer__links li.browse {
@@ -5376,7 +5376,7 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
 }
 .directory-listing li a:hover img,
 .directory-listing li a:focus img {
-  border-color: #876c24;
+  border-color: #a38623;
 }
 .message-series-listing .item {
   margin-bottom: 20px;
@@ -5408,7 +5408,7 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
   margin-top: 2rem;
   margin-bottom: 1rem;
   font-size: 3rem;
-  color: #889753;
+  color: #7f8949;
   margin-top: 0;
 }
 .bible-books-listing .bible-books-listing__title small,
@@ -5428,7 +5428,7 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
 }
 .bible-books-listing .bible-books-listing__title > a:hover,
 .bible-books-listing .bible-books-listing__title > a:focus {
-  color: #876c24;
+  color: #a38623;
   text-decoration: none;
 }
 .bible-books-listing .bible-books-listing__list {
@@ -5472,7 +5472,7 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
   margin-right: 5px;
   padding: 10px 5px;
   color: white;
-  background-color: #cda844;
+  background-color: #cda82c;
   border-radius: 100%;
   font-size: 16px;
   font-size: 1.6rem;
@@ -5496,7 +5496,7 @@ div.contextual-links-wrapper ul.contextual-links li a:hover {
 }
 .newsletter-listing .newsletter-listing-list .newsletter-listing-item a:hover .name,
 .newsletter-listing .newsletter-listing-list .newsletter-listing-item a:focus .name {
-  background-color: #876c24;
+  background-color: #a38623;
 }
 ul.child-page-listing {
   display: -webkit-box;
@@ -5569,17 +5569,17 @@ ul.child-page-listing li a {
       -ms-flex-pack: center;
           justify-content: center;
   padding: 20px;
-  color: #876c24;
-  background-color: rgba(135, 108, 36, 0.1);
-  border-top: 1px solid rgba(135, 108, 36, 0.1);
-  border-bottom: 5px solid rgba(135, 108, 36, 0.1);
+  color: #a38623;
+  background-color: rgba(163, 134, 35, 0.1);
+  border-top: 1px solid rgba(163, 134, 35, 0.1);
+  border-bottom: 5px solid rgba(163, 134, 35, 0.1);
   text-decoration: none;
 }
 ul.child-page-listing li a:hover,
 ul.child-page-listing li a:focus {
-  background-color: rgba(135, 108, 36, 0.15);
-  border-top-color: rgba(135, 108, 36, 0.2);
-  border-bottom-color: rgba(135, 108, 36, 0.2);
+  background-color: rgba(163, 134, 35, 0.15);
+  border-top-color: rgba(163, 134, 35, 0.2);
+  border-bottom-color: rgba(163, 134, 35, 0.2);
 }
 .field-name-field-image {
   clear: both;
@@ -5684,7 +5684,7 @@ ul.child-page-listing li a:focus {
   margin-bottom: 0;
   padding: 10px;
   color: white;
-  background-color: #cda844;
+  background-color: #cda82c;
   font-size: 16px;
   font-size: 1.6rem;
   line-height: 1.5;
@@ -5697,11 +5697,11 @@ ul.child-page-listing li a:focus {
   display: block;
   margin: 0;
   padding: 10px;
-  background-color: rgba(227, 205, 148, 0.5);
+  background-color: rgba(227, 203, 124, 0.5);
   border-top: 1px solid white;
 }
 .field-file-upload .field-file-upload__list .field-file-upload__list__item:nth-child(even) {
-  background-color: rgba(227, 205, 148, 0.7);
+  background-color: rgba(227, 203, 124, 0.7);
 }
 .field-file-upload .field-file-upload__list .field-file-upload__list__item a {
   border: none;
@@ -5735,7 +5735,7 @@ ul.child-page-listing li a:focus {
   background: rgba(255, 255, 255, 0.2);
 }
 .mejs-container .mejs-inner .mejs-controls .mejs-time-rail .mejs-time-total .mejs-time-loaded {
-  background: #cda844;
+  background: #cda82c;
 }
 .mejs-container .mejs-inner .mejs-controls .mejs-time-rail .mejs-time-total .mejs-time-current {
   background: rgba(255, 255, 255, 0.8);
@@ -5771,7 +5771,7 @@ div.addressfield-container-inline:after {
 }
 .sidebar .block .block-title {
   margin: 0 0 10px 0;
-  color: #889753;
+  color: #7f8949;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 18px;
   font-size: 1.8rem;
@@ -5786,7 +5786,7 @@ div.addressfield-container-inline:after {
 .sidebar .subnav {
   padding-bottom: 0;
   color: rgba(255, 255, 255, 0.8);
-  background-color: #889753;
+  background-color: #7f8949;
 }
 .sidebar .subnav a {
   color: inherit;
@@ -5844,7 +5844,7 @@ div.addressfield-container-inline:after {
 }
 .content-below .block .block-title {
   margin: 0 0 10px 0;
-  color: #889753;
+  color: #7f8949;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 18px;
   font-size: 1.8rem;
