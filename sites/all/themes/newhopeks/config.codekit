@@ -187,17 +187,6 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
-	"\/img\/NoisyTile.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 3748,
-		"inputAbbreviatedPath": "\/img\/NoisyTile.png",
-		"outputAbbreviatedPath": "\/img\/NoisyTile.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
 	"\/js\/facebook-like.js": {
 		"fileType": 64,
 		"ignore": 0,
