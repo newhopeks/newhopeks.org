@@ -121,39 +121,6 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/img-src\/apple-touch-icon.fw.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 212616,
-		"inputAbbreviatedPath": "\/img-src\/apple-touch-icon.fw.png",
-		"outputAbbreviatedPath": "\/img-src\/apple-touch-icon.fw.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/img-src\/favicon.fw.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 53565,
-		"inputAbbreviatedPath": "\/img-src\/favicon.fw.png",
-		"outputAbbreviatedPath": "\/img-src\/favicon.fw.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/img-src\/screenshot.fw.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 239219,
-		"inputAbbreviatedPath": "\/img-src\/screenshot.fw.png",
-		"outputAbbreviatedPath": "\/img-src\/screenshot.fw.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
 	"\/img\/content-below-bg.png": {
 		"fileType": 32768,
 		"ignore": 0,
